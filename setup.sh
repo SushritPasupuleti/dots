@@ -25,12 +25,21 @@ function info {
 
 # --- Script start ---
 
+read -p "Did you perform the prerequisite actions? Refer to the README for context. (y/n): " -n 1 -r
+echo    # (optional) move to a new line
+if [[ ! $REPLY =~ ^[Yy]$ ]]
+then
+    exit 1
+fi
+
 echo $(info "Creating Symlinks...")
 
 #nvim
 ln -s "$(pwd -P)"/nvim ~/.config/
 #fish
 ln -s "$(pwd -P)"/fish ~/.config/
+#tmux
+ln -s "$(pwd -P)"/tmux.conf.local ~/.tmux/tmux.conf.local
 
 echo $(success "Symlinks created.")
 
