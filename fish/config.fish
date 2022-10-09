@@ -21,3 +21,7 @@ set fzf_preview_file_cmd bat
 set fzf_fd_opts --hidden --exclude=.git
 
 fzf_configure_bindings --directory=\cf --git_log=\cl --git_status=\cs --processes=\cp
+
+# ggl - for googling
+
+alias gg="ggl -b='Microsoft Edge'"

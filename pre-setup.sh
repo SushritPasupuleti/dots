@@ -43,7 +43,7 @@ fi
 
 brew install git gh bat nvm tmux nvim ctags lazygit ranger
 brew install --cask iterm2 visual-studio-code keycastr
-brew install fzt czg add-gitignore grex undollar has grip tldr how2 exa get-port epy timg mdlt luarocks jira-cli newman oha gping gtm gnu-sed jq glow fd cmatrix pipes-sh neofetch openjdk ruby
+brew install fzt czg add-gitignore grex undollar has grip tldr how2 exa get-port epy timg mdlt luarocks jira-cli newman oha gping gtm gnu-sed jq glow fd cmatrix pipes-sh neofetch openjdk ruby terminal-notifier
 
 echo $(success "Done installing packages.")
 
