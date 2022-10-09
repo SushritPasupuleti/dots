@@ -149,6 +149,7 @@ Plug 'rcarriga/nvim-dap-ui'
 "===Motions
 " Plug 'easymotion/vim-easymotion'
 Plug 'phaazon/hop.nvim'
+Plug 'fedepujol/move.nvim'
 
 "===Manage and view Keybindings
 Plug 'FeiyouG/command_center.nvim'
@@ -163,6 +164,9 @@ Plug 'gaborvecsei/memento.nvim'
 
 " CHADTree
 Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
+
+" Rust
+Plug 'simrat39/rust-tools.nvim'
 
 set encoding=UTF-8
 
@@ -290,10 +294,12 @@ xmap        S   <Plug>(vsnip-cut-text)
 " let g:move_key_modifier_visualmode = 'S'
 
 " Move 1 more lines up or down in normal and visual selection modes.
-nnoremap K :m .-2<CR>==
-nnoremap J :m .+1<CR>==
-vnoremap K :m '<-2<CR>gv=gv
-vnoremap J :m '>+1<CR>gv=gv
+" nnoremap K :m .-2<CR>==
+" nnoremap J :m .+1<CR>==
+" inoremap J <Esc>:m .+1<CR>==gi
+" inoremap K <Esc>:m .-2<CR>==gi
+" vnoremap K :m '<-2<CR>gv=gv
+" vnoremap J :m '>+1<CR>gv=gv
 
 " Easy Motion
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
@@ -317,3 +323,15 @@ let g:EasyMotion_smartcase = 1
 " Move to word
 " map  <Leader>w <Plug>(easymotion-bd-w)
 " nmap <Leader>w <Plug>(easymotion-overwin-w)
+
+" Normal-mode commands
+nnoremap <silent> J :MoveLine(1)<CR>
+nnoremap <silent> K :MoveLine(-1)<CR>
+" nnoremap <silent>  :MoveHChar(1)<CR>
+" nnoremap <silent> <A-h> :MoveHChar(-1)<CR>
+
+" Visual-mode commands
+vnoremap <silent> J :MoveBlock(1)<CR>
+vnoremap <silent> K :MoveBlock(-1)<CR>
+" vnoremap <silent> <A-l> :MoveHBlock(1)<CR>
+" vnoremap <silent> <A-h> :MoveHBlock(-1)<CR>
