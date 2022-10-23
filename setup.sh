@@ -40,6 +40,10 @@ ln -s "$(pwd -P)"/nvim ~/.config/
 ln -s "$(pwd -P)"/fish ~/.config/
 #tmux
 ln -s "$(pwd -P)"/tmux.conf.local ~/.tmux/tmux.conf.local
+#kitty
+ln -s "$(pwd -P)"/kitty ~/.config/
+#wezterm
+ln -s "$(pwd -P)"/wezterm ~/.config/
 
 echo $(success "Symlinks created.")
 
