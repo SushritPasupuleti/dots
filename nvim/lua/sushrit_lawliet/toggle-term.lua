@@ -18,6 +18,9 @@ local Terminal  = require('toggleterm.terminal').Terminal
 -- For czg the commit tool
 local czg = Terminal:new({ cmd = "czg", hidden = true, direction="float" })
 
+-- For lazygit
+local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction="float" })
+
 -- General purpose floating terminal
 local floating_term = Terminal:new({hidden=true, direction="float", size=60})
 
@@ -29,6 +32,10 @@ end
 function _floating_term_toggle()
 	floating_term:toggle()
 end
+
+function _lazygit_toggle()
+  lazygit:toggle()
+end
 ------------------------------------------
 
 -------------Key Mappings-----------------
@@ -36,3 +43,4 @@ vim.api.nvim_set_keymap("n", "<leader>gz", "<cmd>lua _czg_toggle()<CR>", {norema
 
 vim.api.nvim_set_keymap("n", "<leader>ft", "<cmd>lua _floating_term_toggle()<CR>", {noremap = true, silent = true})
 
+vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})

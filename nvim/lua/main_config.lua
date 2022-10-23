@@ -20,9 +20,9 @@ require("sushrit_lawliet.motions")
 
 require("sushrit_lawliet.gitsigns")
 --One Dark Theme
-require("sushrit_lawliet.colors")
+-- require("sushrit_lawliet.colors")
 --Catppuccin
--- require("sushrit_lawliet.catppuccin")
+require("sushrit_lawliet.catppuccin")
 
 -- require 'sushrit_lawliet.nav-config'
 
@@ -48,7 +48,7 @@ require("zen-mode").setup({
 
 -- CHADTree config
 local chad_settings = {
-	["theme.text_color_set"] = "solarized_universal",
+	-- ["theme.text_color_set"] = "solarized_universal",
 }
 
 vim.api.nvim_set_var("chadtree_settings", local_chad_settings)
