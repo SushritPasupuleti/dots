@@ -4,7 +4,7 @@ end
 
 # EXPORTS
 
-set -gx TERM xterm-kitty
+# set -gx TERM xterm-kitty
 set -gx EDITOR vim
 set -gx PATH /opt/homebrew/bin $PATH
 set ANDROID_HOME $HOME/Library/Android/sdk
