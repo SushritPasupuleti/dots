@@ -54,7 +54,6 @@ function __done_windows_notification -a title -a message
     __done_run_powershell_script "
 [Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime] | Out-Null
 [Windows.UI.Notifications.ToastNotification, Windows.UI.Notifications, ContentType = WindowsRuntime] | Out-Null
-
 \$toast_xml_source = @\"
     <toast>
         $soundopt
@@ -66,12 +65,9 @@ function __done_windows_notification -a title -a message
         </visual>
     </toast>
 \"@
-
 \$toast_xml = New-Object Windows.Data.Xml.Dom.XmlDocument
 \$toast_xml.loadXml(\$toast_xml_source)
-
 \$toast = New-Object Windows.UI.Notifications.ToastNotification \$toast_xml
-
 [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier(\"fish\").Show(\$toast)
 "
 end
@@ -227,6 +223,9 @@ if set -q __done_enabled
                 if test "$__done_notify_sound" -eq 1
                     echo -e "\a" # bell sound
                 end
+            else if set -q KITTY_WINDOW_ID
+                printf "\x1b]99;i=done:d=0;$title\x1b\\"
+                printf "\x1b]99;i=done:d=1:p=body;$message\x1b\\"
             else if type -q terminal-notifier # https://github.com/julienXX/terminal-notifier
                 if test "$__done_notify_sound" -eq 1
                     terminal-notifier -message "$message" -title "$title" -sender "$__done_initial_window_id" -sound default
