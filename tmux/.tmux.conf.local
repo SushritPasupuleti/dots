@@ -97,27 +97,90 @@ tmux_conf_24b_colour=auto
 # tmux_conf_theme_colour_20="#ff79c6"   # pink
 
 # monokai soda theme
-tmux_conf_theme_colour_0="#1a1a1a"
-tmux_conf_theme_colour_1="#282a36"
-tmux_conf_theme_colour_2="#303030"
-tmux_conf_theme_colour_3="#f6f6ef"
-tmux_conf_theme_colour_4="#58d1eb"
-tmux_conf_theme_colour_5="#ffb86c"
-tmux_conf_theme_colour_6="#282a36"
-tmux_conf_theme_colour_7="#f6f6ef"
-tmux_conf_theme_colour_8="#282a36"
-tmux_conf_theme_colour_9="#98e024"
-tmux_conf_theme_colour_10="#9d65ff"
-tmux_conf_theme_colour_11="#98e024"
-tmux_conf_theme_colour_12="#f6f6ef"
-tmux_conf_theme_colour_13="#f6f6ef"
-tmux_conf_theme_colour_14="#282a36"
-tmux_conf_theme_colour_15="#44475a"
-tmux_conf_theme_colour_16="#9d65ff"
-tmux_conf_theme_colour_17="#98e024"
-tmux_conf_theme_colour_18="#f4005f"
-tmux_conf_theme_colour_19="#ffb86c"
-tmux_conf_theme_colour_20="#f4005f"
+# tmux_conf_theme_colour_0="#1a1a1a"
+# tmux_conf_theme_colour_1="#282a36"
+# tmux_conf_theme_colour_2="#303030"
+# tmux_conf_theme_colour_3="#f6f6ef"
+# tmux_conf_theme_colour_4="#58d1eb"
+# tmux_conf_theme_colour_5="#ffb86c"
+# tmux_conf_theme_colour_6="#282a36"
+# tmux_conf_theme_colour_7="#f6f6ef"
+# tmux_conf_theme_colour_8="#282a36"
+# tmux_conf_theme_colour_9="#98e024"
+# tmux_conf_theme_colour_10="#9d65ff"
+# tmux_conf_theme_colour_11="#98e024"
+# tmux_conf_theme_colour_12="#f6f6ef"
+# tmux_conf_theme_colour_13="#f6f6ef"
+# tmux_conf_theme_colour_14="#282a36"
+# tmux_conf_theme_colour_15="#44475a"
+# tmux_conf_theme_colour_16="#9d65ff"
+# tmux_conf_theme_colour_17="#98e024"
+# tmux_conf_theme_colour_18="#f4005f"
+# tmux_conf_theme_colour_19="#ffb86c"
+# tmux_conf_theme_colour_20="#f4005f"
+
+# catppuccin mocha
+
+tmux_conf_theme_colour_0="default"    # background
+tmux_conf_theme_colour_1="#1E1E2E"    # background
+tmux_conf_theme_colour_2="#303030"    # gray
+tmux_conf_theme_colour_3="#CDD6F4"    # foreground
+tmux_conf_theme_colour_4="#89DCEB"    # cyan
+tmux_conf_theme_colour_5="#F9E2AF"    # yellow
+tmux_conf_theme_colour_6="#1E1E2E"    # background
+tmux_conf_theme_colour_7="#CDD6F4"    # foreground
+tmux_conf_theme_colour_8="#1E1E2E"    # background
+tmux_conf_theme_colour_9="#CBA6F7"    # purple
+tmux_conf_theme_colour_10="#6272a4"   # comment
+tmux_conf_theme_colour_11="#50fa7b"   # green
+tmux_conf_theme_colour_12="#CDD6F4"   # foreground
+tmux_conf_theme_colour_13="#CDD6F4"   # foreground
+tmux_conf_theme_colour_14="#1E1E2E"   # background
+tmux_conf_theme_colour_15="#36374A"   # selection
+tmux_conf_theme_colour_16="#AEB7D9"   # comment
+tmux_conf_theme_colour_17="#CBA6F7"   # purple
+tmux_conf_theme_colour_18="#F38BA8"   # red
+tmux_conf_theme_colour_19="#FAB387"   # orange
+tmux_conf_theme_colour_20="#F5C2E7"   # pink
+
+# thm_bg="#1e1e2e"
+# thm_fg="#cdd6f4"
+# thm_cyan="#89dceb"
+# thm_black="#181825"
+# thm_gray="#313244"
+# thm_magenta="#cba6f7"
+# thm_pink="#f5c2e7"
+# thm_red="#f38ba8"
+# thm_green="#a6e3a1"
+# thm_yellow="#f9e2af"
+# thm_blue="#89b4fa"
+# thm_orange="#fab387"
+# thm_black4="#585b70"
+
+# rosewater = "#F5E0DC",
+# 	flamingo = "#F2CDCD",
+# 	pink = "#F5C2E7",
+# 	mauve = "#CBA6F7",
+# 	red = "#F38BA8",
+# 	maroon = "#EBA0AC",
+# 	peach = "#FAB387",
+# 	yellow = "#F9E2AF",
+# 	green = "#A6E3A1",
+# 	teal = "#94E2D5",
+# 	sky = "#89DCEB",
+# 	blue = "#90C1FB",
+# 	sapphire = "#74C7EC",
+# 	lavender = "#B4BEFE",
+# 	text = "#C6D0F5",
+# 	overlay2 = "#AEB7D9",
+# 	overlay1 = "#969DBC",
+# 	overlay0 = "#7E84A0",
+# 	surface2 = "#666A83",
+# 	surface1 = "#4E5167",
+# 	surface0 = "#36374A",
+# 	base2 = "#1E1E2E",
+# 	base1 = "#12121C",
+# 	base0 = "#07070A",
 
 # default theme (ansi)
 #tmux_conf_theme_colour_1="colour0"
@@ -301,7 +364,7 @@ tmux_conf_theme_status_left_attr="bold,none,none"
 
 # status right style
 tmux_conf_theme_status_right_fg="$tmux_conf_theme_colour_12,$tmux_conf_theme_colour_13,$tmux_conf_theme_colour_14"
-tmux_conf_theme_status_right_bg="$tmux_conf_theme_colour_15,$tmux_conf_theme_colour_16,$tmux_conf_theme_colour_17"
+tmux_conf_theme_status_right_bg="$tmux_conf_theme_colour_15,$tmux_conf_theme_colour_10,$tmux_conf_theme_colour_17"
 tmux_conf_theme_status_right_attr="none,none,bold"
 
 # pairing indicator
