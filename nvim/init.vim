@@ -221,6 +221,7 @@ nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>fu <cmd>Telescope urlview theme=dropdown<cr>
 nnoremap <leader>fk <CMD>Telescope command_center<CR>
+nnoremap <leader>fs <CMD>SearchSession<CR>
 
 " LSPSaga
 " nnoremap <leader>rn <cmd>Lspsaga rename<cr>
@@ -335,3 +336,9 @@ vnoremap <silent> J :MoveBlock(1)<CR>
 vnoremap <silent> K :MoveBlock(-1)<CR>
 " vnoremap <silent> <A-l> :MoveHBlock(1)<CR>
 " vnoremap <silent> <A-h> :MoveHBlock(-1)<CR>
+
+if exists("g:neovide")
+	let g:neovide_transparency = 0.0
+	let g:transparency = 0.95
+	let g:neovide_background_color = '#0f1117'.printf('%x', float2nr(255 * g:transparency))
+endif

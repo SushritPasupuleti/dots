@@ -18,6 +18,8 @@ require("sushrit_lawliet.statusline")
 require("sushrit_lawliet.command-center")
 require("sushrit_lawliet.motions")
 
+require("sushrit_lawliet.neovide")
+
 require("sushrit_lawliet.gitsigns")
 --One Dark Theme
 -- require("sushrit_lawliet.colors")

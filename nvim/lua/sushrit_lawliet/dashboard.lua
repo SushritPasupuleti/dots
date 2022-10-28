@@ -125,7 +125,8 @@ dashboard.section.footer.val = {
 
 -- Set menu
 dashboard.section.buttons.val = {
-	dashboard.button( "S", "🚀 > Restore Session" , ":RestoreSession <CR>"),
+	dashboard.button( "R", "🚀 > Restore Session" , ":RestoreSession <CR>"),
+	dashboard.button( "S", "📗 > Browse Sessions" , ":SearchSession <CR>"),
     dashboard.button( "e", "  > New file" , ":ene <BAR> startinsert <CR>"),
     dashboard.button( "f", "  > Browse Files", ":Telescope find_files<CR>"),
     dashboard.button( "r", "  > Recent"   , ":Telescope oldfiles<CR>"),
