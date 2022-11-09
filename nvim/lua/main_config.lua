@@ -249,3 +249,12 @@ require("icon-picker").setup({ disable_legacy_commands = true })
 -- vim.keymap.set("n", "<Leader><Leader>i", "<cmd>IconPickerNormal alt_font symbols nerd_font emoji<cr>", opts)
 -- vim.keymap.set("n", "<Leader><Leader>y", "<cmd>IconPickerYank alt_font symbols nerd_font emoji<cr>", opts) --> Yank the selected icon into register
 vim.keymap.set("n", "<Leader>e", "<cmd>IconPickerInsert emoji<cr>", opts)
+
+require('glow').setup({
+  -- glow_path = "", -- will be filled automatically with your glow bin in $PATH, if any
+  -- install_path = "~/.local/bin", -- default path for installing glow binary
+  border = "shadow", -- floating window border config
+  style = "dark", -- filled automatically with your current editor background, you can override using glow json style
+  pager = true,
+  width = 80,
+})

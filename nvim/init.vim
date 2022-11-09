@@ -168,6 +168,9 @@ Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 " Rust
 Plug 'simrat39/rust-tools.nvim'
 
+" Games
+Plug 'ThePrimeagen/vim-be-good'
+
 set encoding=UTF-8
 
 call plug#end()
@@ -215,10 +218,11 @@ let g:gtm_plugin_status_enabled = 1
 "telescope
 " Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fc <cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<cr>
+nnoremap <leader>fc <cmd>Telescope current_buffer_fuzzy_find<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+" nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>fh <cmd>Telescope <find_files find_command=rg,--ignore,--hidden,--filescr>
 nnoremap <leader>fu <cmd>Telescope urlview theme=dropdown<cr>
 nnoremap <leader>fk <CMD>Telescope command_center<CR>
 nnoremap <leader>fs <CMD>SearchSession<CR>
@@ -341,4 +345,13 @@ if exists("g:neovide")
 	let g:neovide_transparency = 0.0
 	let g:transparency = 0.95
 	let g:neovide_background_color = '#0f1117'.printf('%x', float2nr(255 * g:transparency))
+	" nnoremap <D-v> "+p
+	" use <D-x> on Mac and <C-x> on other platforms
+	nmap <D-c> "+y
+	vmap <D-c> "+y
+	nmap <D-v> "+p
+	inoremap <D-v> <D-r>+
+	cnoremap <D-v> <D-r>+
+	" use <c-r> to insert original character without triggering things like auto-pairs
+	inoremap <D-r> <D-v>
 endif

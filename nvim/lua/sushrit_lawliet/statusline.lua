@@ -94,7 +94,7 @@ require("lualine").setup({
 		},
 		lualine_c = {},
 		lualine_x = {},
-		lualine_y = { "windows" },
+		lualine_y = { "tabs" },
 		lualine_z = {
 			{
 				"filename",
