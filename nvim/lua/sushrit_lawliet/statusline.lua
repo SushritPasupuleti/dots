@@ -83,7 +83,8 @@ require("lualine").setup({
 			"branch",
 		},
 		lualine_b = {
-			"buffers",
+			"windows",
+			-- "buffers",
 			-- {
 			-- 	"diff",
 			-- 	-- colored = true,
