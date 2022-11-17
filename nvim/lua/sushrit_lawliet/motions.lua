@@ -27,9 +27,9 @@ require("hop").setup()
 
 local keymap = vim.keymap.set
 
-vim.api.nvim_set_keymap("", "<Leader>w", ":HopWordMW<CR>", {})
-vim.api.nvim_set_keymap("", "<Leader>W", ":HopWord<CR>", {})
-vim.api.nvim_set_keymap("", "<Leader>q", ":HopWordCurrentLine<CR>", {})
+vim.api.nvim_set_keymap("", "<Leader>m", ":HopWordMW<CR>", {})
+vim.api.nvim_set_keymap("", "<Leader>w", ":HopWord<CR>", {})
+-- vim.api.nvim_set_keymap("", "<Leader>q", ":HopWordCurrentLine<CR>", {})
 vim.api.nvim_set_keymap("", "<Leader>j", ":HopLineMW<CR>", {})
 vim.api.nvim_set_keymap("", "<Leader>J", ":HopLine<CR>", {})
 vim.api.nvim_set_keymap("", "<Leader>t", ":HopPattern<CR>", {})
