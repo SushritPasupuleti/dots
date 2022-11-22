@@ -223,7 +223,7 @@ nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 " nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>fh <cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<cr>
-nnoremap <leader>fu <cmd>Telescope urlview theme=dropdown<cr>
+nnoremap <leader>fu <cmd>UrlView<cr>
 nnoremap <leader>fk <CMD>Telescope command_center<CR>
 nnoremap <leader>fs <CMD>SearchSession<CR>
 
