@@ -45,6 +45,17 @@ require("zen-mode").setup({
 	window = {
 		width = 0.95, -- width will be 85% of the editor width
 		backdrop = 0,
+		options={
+			signcolumn="yes",
+			number=true,
+			relativenumber=true,
+			cursorline=true,
+			cursorcolumn=true,
+			-- wrap=false,
+			-- linebreak=false,
+			-- spell=false,
+			-- list=false,
+		},
 	},
 })
 
