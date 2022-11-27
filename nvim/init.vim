@@ -171,6 +171,9 @@ Plug 'simrat39/rust-tools.nvim'
 " Games
 Plug 'ThePrimeagen/vim-be-good'
 
+" Yank History
+Plug 'AckslD/nvim-neoclip.lua'
+
 set encoding=UTF-8
 
 call plug#end()
@@ -226,6 +229,7 @@ nnoremap <leader>fh <cmd>Telescope find_files find_command=rg,--ignore,--hidden,
 nnoremap <leader>fu <cmd>UrlView<cr>
 nnoremap <leader>fk <CMD>Telescope command_center<CR>
 nnoremap <leader>fs <CMD>SearchSession<CR>
+nnoremap <leader>fv <CMD>Telescope neoclip<CR>
 
 " LSPSaga
 " nnoremap <leader>rn <cmd>Lspsaga rename<cr>

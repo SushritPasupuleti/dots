@@ -31,3 +31,4 @@ require("telescope").setup({
 require("telescope").load_extension("ui-select")
 --require("telescope").load_extension("urlview")
 require("telescope").load_extension("command_center")
+require('telescope').load_extension('neoclip')

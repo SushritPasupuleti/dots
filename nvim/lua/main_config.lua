@@ -59,6 +59,9 @@ require("zen-mode").setup({
 	},
 })
 
+-- Yank History
+require('neoclip').setup()
+
 -- CHADTree config
 local chad_settings = {
 	-- ["theme.text_color_set"] = "solarized_universal",
