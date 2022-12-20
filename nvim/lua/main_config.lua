@@ -1,4 +1,5 @@
 require("sushrit_lawliet.options")
+require("sushrit_lawliet.remaps")
 require("sushrit_lawliet.tree_sitter")
 require("sushrit_lawliet.browse_config")
 require("sushrit_lawliet.dashboard")
