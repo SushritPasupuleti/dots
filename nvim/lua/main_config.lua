@@ -44,7 +44,7 @@ require("Comment").setup()
 
 require("zen-mode").setup({
 	window = {
-		width = 0.95, -- width will be 85% of the editor width
+		width = 0.85, -- width will be 85% of the editor width
 		backdrop = 0,
 		options={
 			signcolumn="yes",
@@ -58,17 +58,18 @@ require("zen-mode").setup({
 			-- list=false,
 		},
 	},
+	plugins = {
+		options = {
+			enabled = true,
+			ruler = false, -- disables the ruler text in the cmd line area
+			showcmd = false, -- disables the command in the last line of the screen
+		},
+		tmux = { enabled = false },
+	}
 })
 
 -- Yank History
 require('neoclip').setup()
-
--- CHADTree config
-local chad_settings = {
-	-- ["theme.text_color_set"] = "solarized_universal",
-}
-
-vim.api.nvim_set_var("chadtree_settings", local_chad_settings)
 
 -- require('neoscroll').setup()
 

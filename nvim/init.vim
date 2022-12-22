@@ -116,7 +116,9 @@ Plug 'mbbill/undotree'
 Plug 'tanvirtin/vgit.nvim' "Visual Git
 Plug 'kdheepak/lazygit.nvim'
 
+" Zen Mode
 Plug 'folke/zen-mode.nvim'
+
 Plug 'windwp/nvim-spectre'
 Plug 'axieax/urlview.nvim'
 Plug 'lalitmee/browse.nvim' " Browse things
@@ -145,7 +147,6 @@ Plug 'catppuccin/nvim', {'as': 'catppuccin'}
 Plug 'mfussenegger/nvim-dap'
 Plug 'rcarriga/nvim-dap-ui'
 
-
 "===Motions
 " Plug 'easymotion/vim-easymotion'
 Plug 'phaazon/hop.nvim'
@@ -161,9 +162,6 @@ Plug 'nkakouros-original/numbers.nvim'
 Plug 'git-time-metric/gtm-vim-plugin'
 
 Plug 'gaborvecsei/memento.nvim'
-
-" CHADTree
-Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 
 " Rust
 Plug 'simrat39/rust-tools.nvim'
@@ -184,6 +182,7 @@ nmap <C-b> :NERDTreeToggle<CR>
 filetype on
 filetype plugin on
 filetype indent on
+let g:do_filetype_lua = 1
  
 syntax on
 

@@ -4,6 +4,16 @@
 
 Go to [Snippets File](Snippets.md)
 
+## Performance Tuning
+
+Measure Performance
+
+```bash
+nvim --startuptime startup.log -c exit && tail -100 startup.log
+```
+
+Outputs will be logged to `startup.log` file.
+
 ## Keybindings
 
 All keyboard shortcuts so far.
