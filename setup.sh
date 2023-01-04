@@ -39,11 +39,14 @@ ln -s "$(pwd -P)"/nvim ~/.config/
 #fish
 ln -s "$(pwd -P)"/fish ~/.config/
 #tmux
-ln -s "$(pwd -P)"/tmux.conf.local ~/.tmux/tmux.conf.local
+# ln -s "$(pwd -P)"/.tmux.conf.local ~/.tmux/tmux.conf.local
+ln -s "$(pwd -P)"/.tmux.conf.local ~/.tmux.conf.local
 #kitty
 ln -s "$(pwd -P)"/kitty ~/.config/
 #wezterm
 ln -s "$(pwd -P)"/wezterm ~/.config/
+#lazygit
+ln -s "$(pwd -P)"/lazygit ~/.config/
 
 echo $(success "Symlinks created.")
 
