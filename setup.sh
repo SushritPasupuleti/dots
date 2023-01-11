@@ -32,23 +32,31 @@ then
     exit 1
 fi
 
-echo $(info "Creating Symlinks...")
+if [[ "$OSTYPE" =~ ^darwin ]] || [[ "$OSTYPE" =~ ^linux ]];
+then
 
-#nvim
-ln -s "$(pwd -P)"/nvim ~/.config/
-#fish
-ln -s "$(pwd -P)"/fish ~/.config/
-#tmux
-# ln -s "$(pwd -P)"/.tmux.conf.local ~/.tmux/tmux.conf.local
-ln -s "$(pwd -P)"/.tmux.conf.local ~/.tmux.conf.local
-#kitty
-ln -s "$(pwd -P)"/kitty ~/.config/
-#wezterm
-ln -s "$(pwd -P)"/wezterm ~/.config/
-#lazygit
-ln -s "$(pwd -P)"/lazygit ~/.config/
+	echo $(info "Creating Symlinks...")
 
-echo $(success "Symlinks created.")
+	#nvim
+	ln -s "$(pwd -P)"/nvim ~/.config/
+	#fish
+	ln -s "$(pwd -P)"/fish ~/.config/
+	#tmux
+	# ln -s "$(pwd -P)"/.tmux.conf.local ~/.tmux/tmux.conf.local
+	ln -s "$(pwd -P)"/.tmux.conf.local ~/.tmux.conf.local
+	#kitty
+	ln -s "$(pwd -P)"/kitty ~/.config/
+	#wezterm
+	ln -s "$(pwd -P)"/wezterm ~/.config/
+	#lazygit
+	ln -s "$(pwd -P)"/lazygit ~/.config/
 
-echo "Fish shell has been setup, make sure you add the exports.fish file to conf.d/ with secrets."
+	echo $(success "Symlinks created.")
 
+	echo "Fish shell has been setup, make sure you add the exports.fish file to conf.d/ with secrets."
+
+else
+	echo $(error "Unsupported OS. Please use Linux or MacOS.")
+	echo $(error "Note For Windows Users: No Plans to support Windows")
+	exit 1
+fi
