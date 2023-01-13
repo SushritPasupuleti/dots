@@ -49,11 +49,24 @@ then
 	#wezterm
 	ln -s "$(pwd -P)"/wezterm ~/.config/
 	#lazygit
-	ln -s "$(pwd -P)"/lazygit ~/.config/
+	# ln -s "$(pwd -P)"/lazygit ~/.config/
+	cp -fr "$(pwd -P)"/lazygit/config.yml ~/Library/'Application Support'/lazygit
+	# rm ~/Library/Application\ Support/lazygit/config.yml 
+	# ls -s "$(pwd -P)"/lazygit/config.yml ~/Library/"Application\ Support"/lazygit/config.yml
+	#bat
+	ln -s "$(pwd -P)"/bat ~/.config/
+
+	#.gitconfig
+	rm ~/.gitconfig
+	ln -s "$(pwd -P)"/.gitconfig ~/.gitconfig
 
 	echo $(success "Symlinks created.")
 
 	echo "Fish shell has been setup, make sure you add the exports.fish file to conf.d/ with secrets."
+
+	echo "Rebuilding bat cache."
+
+	bat cache --build
 
 else
 	echo $(error "Unsupported OS. Please use Linux or MacOS.")
