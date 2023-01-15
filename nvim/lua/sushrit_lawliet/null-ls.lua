@@ -19,7 +19,7 @@ require("null-ls").setup({
 })
 
 -- For v8
-vim.cmd('map <space>l :lua vim.lsp.buf.format()<CR>')
+vim.cmd("map <space>l :lua vim.lsp.buf.format({ timeout_ms = 2000 })<CR>")
 
 -- For < v8
 -- vim.cmd("map <Leader>lf :lua vim.lsp.buf.formatting()<CR>")

@@ -54,6 +54,7 @@ require("lualine").setup({
 				"diagnostics",
 				sources = {
 					"nvim_diagnostic",
+					-- "nvim",
 				},
 			},
 		},
@@ -74,9 +75,11 @@ require("lualine").setup({
 		lualine_x = { "location" },
 		lualine_y = {},
 		lualine_z = {
-			"diagnostics",
-			sources = {
-				"nvim_diagnostic",
+			{
+				"diagnostics",
+				sources = {
+					"nvim_diagnostic",
+				},
 			},
 		},
 	},
