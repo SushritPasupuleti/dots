@@ -26,3 +26,4 @@ fzf_configure_bindings --directory=\cf --git_log=\cl --git_status=\cs --processe
 # ggl - for googling
 
 alias gg="ggl -b='Microsoft Edge'"
+starship init fish | source

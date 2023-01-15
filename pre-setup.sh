@@ -44,8 +44,8 @@ then
 	fi
 
 
-	brew install git gh bat nvm tmux nvim ctags lazygit ranger emacs git-delta
-	brew install --cask iterm2 visual-studio-code keycastr
+	brew install git gh bat nvm tmux nvim ctags lazygit ranger emacs git-delta starship
+	brew install --cask iterm2 visual-studio-code keycastr obs
 	brew install fzt czg add-gitignore grex undollar has grip tldr how2 exa get-port epy timg mdlt luarocks jira-cli newman oha gping gtm gnu-sed jq glow fd cmatrix pipes-sh neofetch openjdk ruby terminal-notifier rust rust-analyzer ffmpeg prettier wget shellcheck urlview
 	brew tap jabley/homebrew-wrk2
 	brew install --HEAD wrk2

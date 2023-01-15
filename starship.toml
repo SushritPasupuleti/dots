@@ -1,0 +1,182 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Use custom format
+# format = '''
+# [┌───────────────────>](bold green)
+# [│](bold green)$directory$rust$package
+# [└─>](bold green) '''
+# format = '$all'
+format = '$env_var$os$directory$all$character'
+right_format = """$cmd_duration$memory_usage$battery$time"""
+
+[env_var.TMUX]
+# default = 'tmux'
+format = '  '
+
+[sudo]
+
+[battery]
+full_symbol = "🔋"
+charging_symbol = "🔌"
+discharging_symbol = "⚡"
+
+[[battery.display]]
+threshold = 30
+style = "bold red"
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+# Replace the '❯' symbol in the prompt with '➜'
+# [character] # The name of the module we are configuring is 'character'
+# success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
+# error_symbol = "[✖](bold red) "
+
+[character]
+# success_symbol = " [λ](bold green) "
+# success_symbol = " [ ](bold green) "
+# success_symbol = " [ ❯](bold green) "
+# success_symbol = " [ ](bold green) "
+success_symbol = " [ ](bold green) "
+error_symbol = " [ ](bold red)"
+# continuation_prompt = "▶▶"
+
+[fill]
+symbol = '-'
+style = 'bold green'
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = true
+
+[cmd_duration]
+min_time = 10_000  # Show command duration over 10,000 milliseconds (=10 sec)
+format = " took [$duration]($style)"
+
+[directory]
+truncation_length = 5
+format = "[$path]($style)[$lock_symbol]($lock_style) "
+
+[git_branch]
+# symbol = ""
+# style = "bold white"
+# format = '[\($symbol$branch\)]($style) '
+format = '[$symbol$branch]($style) '
+# style = "bg:#394260"
+# format = '[[ $symbol $branch ](fg:#769ff0 bg:#394260)]($style)'
+
+# [git_status]
+# untracked = ""
+# staged = '[++\($count\)](green)'
+# format = '([\[$conflicted$deleted$renamed$modified$staged$behind\]]($style) )'
+# modified = '*'
+
+# [status]
+# disabled = false
+# format = '[\[$status - $common_meaning\]](green)'
+
+[git_status]
+# format = "[$all_status$ahead_behind]($style)"
+format='([\[ $all_status$ahead_behind\]]($style) )'
+# style='bright-purple'
+# format='([](fg:$style)[ $all_status$ahead_behind](bg:$style bold black)[](fg:$style))'
+# ahead = "⇡ $count "
+# behind = "⇣ $count "
+# deleted = "🗑 $count "
+# diverged = " $count "
+# stashed = "📦 $count "
+# modified = "פֿ $count "
+# staged = '[ $count ](green)'
+# renamed = " $count "
+# untracked = "🤷 ‍$count "
+# style = "bold red"
+conflicted	= '~$count '
+ahead='⇡$count '
+behind='⇣$count '
+diverged='⇕ $count '
+up_to_date=' '
+untracked=' $count '
+# untracked='?$count '
+# stashed='\$$count '
+stashed=' $count '
+# modified='!$count '
+modified=' $count '
+# staged='+$count '
+staged=' $count '
+# renamed='»$count '
+renamed=' $count '
+deleted=' $count'
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+style = "bright-black"
+
+[git_metrics]
+added_style = 'bold blue'
+format = '[+ $added]($added_style)/[- $deleted]($deleted_style) '
+
+
+[nodejs]
+# symbol = ""
+# style = "bg:#212736"
+# format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+
+[rust]
+# symbol = ""
+# style = "bg:#212736"
+# format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+
+[golang]
+# symbol = "ﳑ"
+# style = "bg:#212736"
+# format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+
+[python]
+# format = "[$symbol$version]($style) "
+# style = "bold green"
+
+[lua]
+
+[os]
+# disabled=false
+
+[os.symbols]
+Macos=" "
+
+[hostname]
+ssh_only = false
+format = "<[$hostname]($style)>"
+trim_at = "-"
+style = "bold dimmed white"
+disabled = true
+
+[memory_usage]
+# symbol = " ﬙ "
+symbol = "  "
+format = " using$symbol[${ram}( | ${swap})]($style) "
+threshold = 70
+# style = "bold dimmed green"
+style = 'bold dimmed yellow'
+disabled = false
+
+[jobs]
+symbol = '+'
+threshold = 1
+number_threshold = 2
+symbol_threshold = 0
+format='[$symbol$number]($style) '
+disabled = true
+
+[time]
+# time_format = "%T"
+# format = "🕙 $time($style) "
+style = "bold dimmed blue"
+disabled = false
+
+[username]
+style_user = 'blue bold'
+style_root = 'black bold'
+format = 'as [$user]($style) '
+disabled = false
+# show_always = true

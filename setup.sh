@@ -56,6 +56,9 @@ then
 	#bat
 	ln -s "$(pwd -P)"/bat ~/.config/
 
+	#starship
+	ln -s "$(pwd -P)"/starship.toml ~/.config/
+
 	#.gitconfig
 	rm ~/.gitconfig
 	ln -s "$(pwd -P)"/.gitconfig ~/.gitconfig

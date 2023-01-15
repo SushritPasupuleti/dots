@@ -13,8 +13,18 @@
     diffFilter = delta --color-only --features=interactive
 
 [delta]
-    features = decorations
-
+    ; features = decorations
+	features = Catppuccin-mocha decorations
+	navigate = true
+	line-numbers = true
+	side-by-side = true
+	; line-numbers-left-format = ""
+    ; line-numbers-right-format = "│ "
+	map-styles = bold purple => syntax magenta, bold cyan => syntax blue
+[merge]
+    conflictstyle = diff3
+[diff]
+    colorMoved = default
 [delta "interactive"]
     keep-plus-minus-markers = false
 
