@@ -12,7 +12,8 @@ right_format = """$cmd_duration$memory_usage$battery$time"""
 
 [env_var.TMUX]
 # default = 'tmux'
-format = '  '
+style = 'bold green'
+format = '[ ]($style)'
 
 [sudo]
 
@@ -47,8 +48,6 @@ symbol = '-'
 style = 'bold green'
 
 # Disable the package module, hiding it from the prompt completely
-[package]
-disabled = true
 
 [cmd_duration]
 min_time = 10_000  # Show command duration over 10,000 milliseconds (=10 sec)
@@ -116,6 +115,7 @@ style = "bright-black"
 added_style = 'bold blue'
 format = '[+ $added]($added_style)/[- $deleted]($deleted_style) '
 
+[package]
 
 [nodejs]
 # symbol = ""
