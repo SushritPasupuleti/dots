@@ -50,8 +50,9 @@ style = 'bold green'
 # Disable the package module, hiding it from the prompt completely
 
 [cmd_duration]
-min_time = 10_000  # Show command duration over 10,000 milliseconds (=10 sec)
-format = " took [$duration]($style)"
+min_time = 10_000                     # Show command duration over 10,000 milliseconds (=10 sec)
+format = " took [$duration]($style) "
+# disabled = false 
 
 [directory]
 truncation_length = 5
@@ -77,7 +78,7 @@ format = '[$symbol$branch]($style) '
 
 [git_status]
 # format = "[$all_status$ahead_behind]($style)"
-format='([\[ $all_status$ahead_behind\]]($style) )'
+format = '([\[ $all_status$ahead_behind\]]($style) )'
 # style='bright-purple'
 # format='([](fg:$style)[ $all_status$ahead_behind](bg:$style bold black)[](fg:$style))'
 # ahead = "⇡ $count "
@@ -90,22 +91,22 @@ format='([\[ $all_status$ahead_behind\]]($style) )'
 # renamed = " $count "
 # untracked = "🤷 ‍$count "
 # style = "bold red"
-conflicted	= '~$count '
-ahead='⇡$count '
-behind='⇣$count '
-diverged='⇕ $count '
-up_to_date=' '
-untracked=' $count '
+conflicted = '~$count '
+ahead = '⇡$count '
+behind = '⇣$count '
+diverged = '⇕ $count '
+up_to_date = ' '
+untracked = ' $count '
 # untracked='?$count '
 # stashed='\$$count '
-stashed=' $count '
+stashed = ' $count '
 # modified='!$count '
-modified=' $count '
+modified = ' $count '
 # staged='+$count '
-staged=' $count '
+staged = ' $count '
 # renamed='»$count '
-renamed=' $count '
-deleted=' $count'
+renamed = ' $count '
+deleted = ' $count'
 
 [git_state]
 format = '\([$state( $progress_current/$progress_total)]($style)\) '
@@ -142,7 +143,7 @@ format = '[+ $added]($added_style)/[- $deleted]($deleted_style) '
 # disabled=false
 
 [os.symbols]
-Macos=" "
+Macos = " "
 
 [hostname]
 ssh_only = false
@@ -165,7 +166,7 @@ symbol = '+'
 threshold = 1
 number_threshold = 2
 symbol_threshold = 0
-format='[$symbol$number]($style) '
+format = '[$symbol$number]($style) '
 disabled = true
 
 [time]
