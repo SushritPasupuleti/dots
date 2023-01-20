@@ -9,7 +9,7 @@ require("sushrit_lawliet.toggle-term")
 require("sushrit_lawliet.notify")
 
 require("sushrit_lawliet.lspconfig")
-require("sushrit_lawliet.lspsaga")
+-- require("sushrit_lawliet.lspsaga")
 require("sushrit_lawliet.lspkind")
 require("sushrit_lawliet.null-ls")
 require("sushrit_lawliet.copilot")

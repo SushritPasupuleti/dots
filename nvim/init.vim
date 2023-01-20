@@ -49,7 +49,8 @@ Plug 'yamatsum/nvim-cursorline' " For line/keyword highlighting
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'tpope/vim-fugitive'
 Plug 'maxmellon/vim-jsx-pretty'
-Plug 'github/copilot.vim'
+" Plug 'github/copilot.vim'
+Plug 'zbirenbaum/copilot.lua'
 
 " For nvim autocomplete
 Plug 'neovim/nvim-lspconfig'
@@ -141,7 +142,7 @@ Plug 'onsails/lspkind.nvim'
 Plug 'jose-elias-alvarez/null-ls.nvim'
 
 "====Catppuccin
-Plug 'catppuccin/nvim', {'as': 'catppuccin'}
+Plug 'catppuccin/nvim', { 'as': 'catppuccin', } " 'tag': 'v0.2.8' }
 
 "===DAP===
 Plug 'mfussenegger/nvim-dap'
