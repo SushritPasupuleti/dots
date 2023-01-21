@@ -11,7 +11,17 @@ local servers = {
 	"pyright",
 	"vimls",
 	"yamlls",
+	"lemminx",
+	"tailwindcss",
+	"taplo",
+	"sqlls",
+	"html",
+	"dotls",
+	"cssls",
+	"ansiblels",
+	"arduino_language_server",
 	"rust_analyzer",
+	"sumneko_lua",
 }
 
 require("mason").setup()
@@ -56,22 +66,25 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set("n", "<space>f", vim.lsp.buf.format, bufopts)
 end
 
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
 for _, lsp in ipairs(servers) do
 	nvim_lsp[lsp].setup({
 		on_attach = on_attach,
-		root_dir = require('lspconfig.util').root_pattern('.git'),
+		root_dir = require("lspconfig.util").root_pattern(".git"),
+		capabilities = capabilities,
 	})
 end
 
 local rt = require("rust-tools")
 
 rt.setup({
-  server = {
-    on_attach = function(_, bufnr)
-      -- Hover actions
-      -- vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
-      -- Code action groups
-      vim.keymap.set("n", "<Leader>rca", rt.code_action_group.code_action_group, { buffer = bufnr })
-    end,
-  },
+	server = {
+		on_attach = function(_, bufnr)
+			-- Hover actions
+			-- vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+			-- Code action groups
+			vim.keymap.set("n", "<Leader>rca", rt.code_action_group.code_action_group, { buffer = bufnr })
+		end,
+	},
 })

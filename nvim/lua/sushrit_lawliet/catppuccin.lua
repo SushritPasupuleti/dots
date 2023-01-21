@@ -37,7 +37,6 @@ require("catppuccin").setup({
         telescope = true,
         treesitter = true,
 		lsp_saga = true,
-		cmp = true,
 		mason = true,
 		notify = true,
 		which_key = true,

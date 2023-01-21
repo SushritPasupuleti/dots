@@ -99,8 +99,18 @@ require("lualine").setup({
 			-- "buffers",
 		},
 		lualine_c = {},
-		lualine_x = {},
-		lualine_y = { "tabs" },
+		lualine_x = {
+			{
+				"diagnostics",
+				sources = {
+					"nvim_diagnostic",
+					-- "nvim",
+				},
+			},
+		},
+		lualine_y = {
+			"tabs",
+		},
 		lualine_z = {
 			{
 				"filename",

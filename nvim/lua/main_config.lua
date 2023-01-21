@@ -9,7 +9,7 @@ require("sushrit_lawliet.toggle-term")
 require("sushrit_lawliet.notify")
 
 require("sushrit_lawliet.lspconfig")
--- require("sushrit_lawliet.lspsaga")
+require("sushrit_lawliet.lspsaga")
 require("sushrit_lawliet.lspkind")
 require("sushrit_lawliet.null-ls")
 require("sushrit_lawliet.copilot")
@@ -25,7 +25,7 @@ require("sushrit_lawliet.gitsigns")
 --One Dark Theme
 -- require("sushrit_lawliet.colors")
 --Catppuccin
-require("sushrit_lawliet.catppuccin")
+-- require("sushrit_lawliet.catppuccin")
 
 -- require 'sushrit_lawliet.nav-config'
 
