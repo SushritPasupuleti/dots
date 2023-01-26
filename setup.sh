@@ -44,6 +44,8 @@ then
 	#tmux
 	# ln -s "$(pwd -P)"/.tmux.conf.local ~/.tmux/tmux.conf.local
 	ln -s "$(pwd -P)"/.tmux.conf.local ~/.tmux.conf.local
+	ln -s "$(pwd -P)"/.tmux.conf ~/.tmux.conf
+
 	#kitty
 	ln -s "$(pwd -P)"/kitty ~/.config/
 	#wezterm
