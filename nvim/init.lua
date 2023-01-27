@@ -94,149 +94,149 @@ require("lazy").setup({
 			vim.cmd([[colorscheme catppuccin]])
 		end,
 	}, --tag = "v0.2.7" },
-{ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" },
-"nvim-lualine/lualine.nvim",
-{ "preservim/nerdtree", dependencies = {
-	"Xuyuanp/nerdtree-git-plugin",
-} },
-"http://github.com/tpope/vim-surround",
-"ap/vim-css-color",
-"ryanoasis/vim-devicons", -- Developer Icons
-"tc50cal/vim-terminal", -- Vim Terminal
-"preservim/tagbar", -- Tagbar for code navigation
-"rafi/awesome-vim-colorschemes", -- Retro Scheme
-"yamatsum/nvim-cursorline", -- For line/keyword highlighting
-{ "mg979/vim-visual-multi", branch = "master" },
-"windwp/nvim-autopairs",
-"tpope/vim-fugitive", -- git
-"lewis6991/gitsigns.nvim", -- git signs
-"maxmellon/vim-jsx-pretty",
--- "github/copilot.vim",
-"zbirenbaum/copilot.lua",
--- for auto completion
-"neovim/nvim-lspconfig",
-"hrsh7th/cmp-nvim-lsp",
-"hrsh7th/cmp-buffer",
-"hrsh7th/cmp-path",
-"hrsh7th/cmp-cmdline",
-"hrsh7th/nvim-cmp",
+	{ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" },
+	"nvim-lualine/lualine.nvim",
+	{ "preservim/nerdtree", dependencies = {
+		"Xuyuanp/nerdtree-git-plugin",
+	} },
+	"http://github.com/tpope/vim-surround",
+	"ap/vim-css-color",
+	"ryanoasis/vim-devicons", -- Developer Icons
+	"tc50cal/vim-terminal", -- Vim Terminal
+	"preservim/tagbar", -- Tagbar for code navigation
+	"rafi/awesome-vim-colorschemes", -- Retro Scheme
+	"yamatsum/nvim-cursorline", -- For line/keyword highlighting
+	{ "mg979/vim-visual-multi", branch = "master" },
+	"windwp/nvim-autopairs",
+	"tpope/vim-fugitive", -- git
+	"lewis6991/gitsigns.nvim", -- git signs
+	"maxmellon/vim-jsx-pretty",
+	-- "github/copilot.vim",
+	"zbirenbaum/copilot.lua",
+	-- for auto completion
+	"neovim/nvim-lspconfig",
+	"hrsh7th/cmp-nvim-lsp",
+	"hrsh7th/cmp-buffer",
+	"hrsh7th/cmp-path",
+	"hrsh7th/cmp-cmdline",
+	"hrsh7th/nvim-cmp",
 	--
--- For luasnip users.
-"L3MON4D3/LuaSnip",
-"saadparwaiz1/cmp_luasnip",
+	-- For luasnip users.
+	"L3MON4D3/LuaSnip",
+	"saadparwaiz1/cmp_luasnip",
 	--
--- Bufferline for tabs
-"kyazdani42/nvim-web-devicons", -- Recommended (for coloured icons)
-"kyazdani42/nvim-tree.lua",
-"akinsho/bufferline.nvim",
+	-- Bufferline for tabs
+	"kyazdani42/nvim-web-devicons", -- Recommended (for coloured icons)
+	"kyazdani42/nvim-tree.lua",
+	"akinsho/bufferline.nvim",
 	--
-"lukas-reineke/indent-blankline.nvim", -- indent lines
+	"lukas-reineke/indent-blankline.nvim", -- indent lines
 	--
--- Telescope
-"nvim-lua/plenary.nvim",
-"nvim-telescope/telescope.nvim",
-"nvim-telescope/telescope-ui-select.nvim",
+	-- Telescope
+	"nvim-lua/plenary.nvim",
+	"nvim-telescope/telescope.nvim",
+	"nvim-telescope/telescope-ui-select.nvim",
 	--
-"folke/which-key.nvim",
+	"folke/which-key.nvim",
 	--
--- Markdown Preview
-{ "ellisonleao/glow.nvim", branch = "main" },
+	-- Markdown Preview
+	{ "ellisonleao/glow.nvim", branch = "main" },
 	--
--- Sessions
-"rmagatti/auto-session",
-"rmagatti/session-lens",
+	-- Sessions
+	"rmagatti/auto-session",
+	"rmagatti/session-lens",
 	--
-{
-	"glepnir/lspsaga.nvim",
-	event = "BufRead",
-	config = function()
-		require("lspsaga").setup({})
-	end,
-},
+	{
+		"glepnir/lspsaga.nvim",
+		event = "BufRead",
+		config = function()
+			require("lspsaga").setup({})
+		end,
+	},
 	--
-"petertriho/nvim-scrollbar",
+	"petertriho/nvim-scrollbar",
 	--
-"hrsh7th/vim-vsnip",
-"hrsh7th/vim-vsnip-integ",
+	"hrsh7th/vim-vsnip",
+	"hrsh7th/vim-vsnip-integ",
 	--
--- Snippets
-{
-	"dsznajder/vscode-es7-javascript-react-snippets",
-	run = "yarn install --frozen-lockfile && yarn compile",
-},
-{
-	"vscodeshift/material-ui-snippets",
-	run = "yarn install --frozen-lockfile && yarn build",
-},
+	-- Snippets
+	{
+		"dsznajder/vscode-es7-javascript-react-snippets",
+		run = "yarn install --frozen-lockfile && yarn compile",
+	},
+	{
+		"vscodeshift/material-ui-snippets",
+		run = "yarn install --frozen-lockfile && yarn build",
+	},
 	--
-"folke/lsp-colors.nvim",
+	"folke/lsp-colors.nvim",
 	--
-"folke/trouble.nvim",
+	"folke/trouble.nvim",
 	--
-"numToStr/Comment.nvim", -- Comment things
--- 'karb94/neoscroll.nvim' -- Smooth Scroll
--- 'ahmedkhalf/project.nvim' --Project Manager
-"gennaro-tedesco/nvim-jqx",
+	"numToStr/Comment.nvim", -- Comment things
+	-- 'karb94/neoscroll.nvim' -- Smooth Scroll
+	-- 'ahmedkhalf/project.nvim' --Project Manager
+	"gennaro-tedesco/nvim-jqx",
 	--
-"goolord/alpha-nvim", --Dashboard
--- 'nvim-neo-tree/neo-tree.nvim' -- Neo Tree
--- 'MunifTanjim/nui.nvim' --NUI
-"mbbill/undotree",
-"tanvirtin/vgit.nvim", --Visual Git
-"kdheepak/lazygit.nvim",
+	"goolord/alpha-nvim", --Dashboard
+	-- 'nvim-neo-tree/neo-tree.nvim' -- Neo Tree
+	-- 'MunifTanjim/nui.nvim' --NUI
+	"mbbill/undotree",
+	"tanvirtin/vgit.nvim", --Visual Git
+	"kdheepak/lazygit.nvim",
 	--
--- Zen Mode
-"folke/zen-mode.nvim",
+	-- Zen Mode
+	"folke/zen-mode.nvim",
 	--
-"windwp/nvim-spectre",
-"axieax/urlview.nvim",
-"lalitmee/browse.nvim", -- Browse things
+	"windwp/nvim-spectre",
+	"axieax/urlview.nvim",
+	"lalitmee/browse.nvim", -- Browse things
 	--
---====Color Schemes====
-"rebelot/kanagawa.nvim",
-"cpea2506/one_monokai.nvim",
-"tiagovla/tokyodark.nvim",
-"olimorris/onedarkpro.nvim",
+	--====Color Schemes====
+	"rebelot/kanagawa.nvim",
+	"cpea2506/one_monokai.nvim",
+	"tiagovla/tokyodark.nvim",
+	"olimorris/onedarkpro.nvim",
 	--
-"akinsho/toggleterm.nvim", -- Toggle Terminal
-"rcarriga/nvim-notify", -- Notification Manager
-"stevearc/dressing.nvim",
-"ziontee113/icon-picker.nvim", -- Icon Picker
+	"akinsho/toggleterm.nvim", -- Toggle Terminal
+	"rcarriga/nvim-notify", -- Notification Manager
+	"stevearc/dressing.nvim",
+	"ziontee113/icon-picker.nvim", -- Icon Picker
 	--
---====LSP Config====
-"williamboman/mason.nvim",
-"williamboman/mason-lspconfig.nvim",
-"onsails/lspkind.nvim",
-"jose-elias-alvarez/null-ls.nvim",
+	--====LSP Config====
+	"williamboman/mason.nvim",
+	"williamboman/mason-lspconfig.nvim",
+	"onsails/lspkind.nvim",
+	"jose-elias-alvarez/null-ls.nvim",
 	--
---===DAP===
-"mfussenegger/nvim-dap",
-"rcarriga/nvim-dap-ui",
+	--===DAP===
+	"mfussenegger/nvim-dap",
+	"rcarriga/nvim-dap-ui",
 	--
---===Motions
--- 'easymotion/vim-easymotion'
-"phaazon/hop.nvim",
-"ur4ltz/move.nvim",
+	--===Motions
+	-- 'easymotion/vim-easymotion'
+	"phaazon/hop.nvim",
+	"ur4ltz/move.nvim",
 	--
---===Manage and view Keybindings
-"FeiyouG/command_center.nvim",
+	--===Manage and view Keybindings
+	"FeiyouG/command_center.nvim",
 	--
---===Auto Relative Numbers
-"nkakouros-original/numbers.nvim",
+	--===Auto Relative Numbers
+	"nkakouros-original/numbers.nvim",
 	--
---===Time Tracking Needs other Setup(https://github.com/git-time-metric/gtm)
-"git-time-metric/gtm-vim-plugin",
+	--===Time Tracking Needs other Setup(https://github.com/git-time-metric/gtm)
+	"git-time-metric/gtm-vim-plugin",
 	--
-"gaborvecsei/memento.nvim",
+	"gaborvecsei/memento.nvim",
 	--
--- Rust
-"simrat39/rust-tools.nvim",
+	-- Rust
+	"simrat39/rust-tools.nvim",
 	--
--- Games
-"ThePrimeagen/vim-be-good",
+	-- Games
+	"ThePrimeagen/vim-be-good",
 	--
--- Yank History
-"AckslD/nvim-neoclip.lua",
+	-- Yank History
+	"AckslD/nvim-neoclip.lua",
 })
 
 -- Essential Configs
