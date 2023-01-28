@@ -35,6 +35,7 @@
   "material-ui-snippets": { "branch": "master", "commit": "e54f7d301186c94c059bfbc6311b5ec4c9aecfc1" },
   "memento.nvim": { "branch": "master", "commit": "7e5e5a86ccaec2892fc2d8197fc01a25d1cf8951" },
   "move.nvim": { "branch": "main", "commit": "13a812850de42bb0339b033b4ec64c5ed8622560" },
+  "neodev.nvim": { "branch": "main", "commit": "8fd21037453f4306f500e437c5cbdf6e8b6c2f99" },
   "nerdtree": { "branch": "master", "commit": "fc85a6f07c2cd694be93496ffad75be126240068" },
   "nerdtree-git-plugin": { "branch": "master", "commit": "e1fe727127a813095854a5b063c15e955a77eafb" },
   "null-ls.nvim": { "branch": "main", "commit": "33cfeb7a761f08e8535dca722d4b237cabadd371" },

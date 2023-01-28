@@ -23,6 +23,7 @@ require("sushrit_lawliet.neovide")
 
 require("sushrit_lawliet.gitsigns")
 require("sushrit_lawliet.jupyter")
+require("sushrit_lawliet.diagnostics")
 --One Dark Theme
 -- require("sushrit_lawliet.colors")
 --Catppuccin
@@ -271,7 +272,9 @@ require('glow').setup({
   -- glow_path = "", -- will be filled automatically with your glow bin in $PATH, if any
   -- install_path = "~/.local/bin", -- default path for installing glow binary
   border = "shadow", -- floating window border config
-  style = "dark", -- filled automatically with your current editor background, you can override using glow json style
-  pager = true,
-  width = 80,
+  -- style = "dark", -- filled automatically with your current editor background, you can override using glow json style
+  -- pager = true,
+  -- width = 80,
+  height_ratio = 0.8,
+  width_ratio = 0.8,
 })

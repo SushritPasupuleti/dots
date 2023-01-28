@@ -9,15 +9,15 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
 -- yank to system clipboard
-vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
 -- search in selection in visual mode
-vim.keymap.set('v', '<leader>/', '<esc>/\\%V')
+vim.keymap.set("v", "<leader>/", "<esc>/\\%V")
 
 -- line navigations
-vim.keymap.set({"n", "v"}, "gh", "<Home>")
-vim.keymap.set({"n", "v"}, "gl", "<End>")
+vim.keymap.set({ "n", "v" }, "gh", "<Home>")
+vim.keymap.set({ "n", "v" }, "gl", "<End>")
 
 -- replace current word
 -- vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
@@ -28,6 +28,8 @@ vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
 vim.keymap.set("n", "<leader>fc", "<cmd>Telescope current_buffer_fuzzy_find<cr>")
 vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>")
 vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
+vim.keymap.set("n", "<leader>fd", require("telescope.builtin").diagnostics)
+vim.keymap.set("n", "<leader>fD", ":lua require'telescope.builtin'.diagnostics{ bufnr = 0 }<cr>")
 -- vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>")
 -- vim.keymap.set("n", "<leader>fh", "<cmd>Telescope command_history<cr>")
 vim.keymap.set("n", "<leader>fh", "<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<cr>")
@@ -39,7 +41,7 @@ vim.keymap.set("n", "<leader>fv", "<cmd>Telescope neoclip<cr>")
 -- Spectre for Find and Replace
 vim.keymap.set("n", "<leader>S", "<cmd>lua require('spectre').open()<CR>")
 vim.keymap.set("n", "<leader>sw", "<cmd>lua require('spectre').open_visual({select_word=true})<CR>")
-vim.keymap.set({"n","v"}, "<leader>s", "<esc>:lua require('spectre').open_visual()<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>s", "<esc>:lua require('spectre').open_visual()<CR>")
 -- GLow Preview
 vim.keymap.set("n", "<leader>p", ":Glow<CR>")
 
@@ -77,13 +79,16 @@ vim.keymap.set("n", "<leader>hc", "<cmd>lua require('memento').clear_history()<C
 
 local opts = { noremap = true, silent = true }
 
-vim.keymap.set('n', 'J', ':MoveLine(1)<CR>', opts)
-vim.keymap.set('n', 'K', ':MoveLine(-1)<CR>', opts)
+vim.keymap.set("n", "J", ":MoveLine(1)<CR>", opts)
+vim.keymap.set("n", "K", ":MoveLine(-1)<CR>", opts)
 -- vim.keymap.set('n', '<A-h>', ':MoveHChar(-1)<CR>', opts)
 -- vim.keymap.set('n', '<A-l>', ':MoveHChar(1)<CR>', opts)
 
 -- Visual-mode commands
-vim.keymap.set('v', 'J', ':MoveBlock(1)<CR>', opts)
-vim.keymap.set('v', 'K', ':MoveBlock(-1)<CR>', opts)
+vim.keymap.set("v", "J", ":MoveBlock(1)<CR>", opts)
+vim.keymap.set("v", "K", ":MoveBlock(-1)<CR>", opts)
 -- vim.keymap.set('v', '<A-h>', ':MoveHBlock(-1)<CR>', opts)
 -- vim.keymap.set('v', '<A-l>', ':MoveHBlock(1)<CR>', opts)
+
+-- DAP-UI --
+

@@ -150,7 +150,14 @@ require("lazy").setup({
 		"glepnir/lspsaga.nvim",
 		event = "BufRead",
 		config = function()
-			require("lspsaga").setup({})
+			require("lspsaga").setup({
+				theme = "round",
+				-- colors = M.custom_colors(),
+				-- kind = M.custom_kind(),
+				-- toggle these in the future when the bugs stop
+				colors = require("catppuccin.groups.integrations.lsp_saga").custom_colors(),
+				kind = require("catppuccin.groups.integrations.lsp_saga").custom_kind(),
+			})
 		end,
 	},
 	--
@@ -209,6 +216,7 @@ require("lazy").setup({
 	"onsails/lspkind.nvim",
 	"jose-elias-alvarez/null-ls.nvim",
 	--
+	"folke/neodev.nvim",
 	--===DAP===
 	"mfussenegger/nvim-dap",
 	"rcarriga/nvim-dap-ui",
@@ -245,11 +253,9 @@ require("lazy").setup({
 	},
 	-- JUPYTER
 	-- "luk400/vim-jukit",
-	  "hkupty/iron.nvim",
-	  "kana/vim-textobj-user",
-	  "kana/vim-textobj-line",
-	  "GCBallesteros/vim-textobj-hydrogen",
-	  "GCBallesteros/jupytext.vim",
+	"hkupty/iron.nvim",
+	{ "GCBallesteros/vim-textobj-hydrogen", dependencies = { "kana/vim-textobj-user", "kana/vim-textobj-line" } },
+	"GCBallesteros/jupytext.vim",
 })
 
 -- Essential Configs
