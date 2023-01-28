@@ -12,6 +12,8 @@ local colors = {
 	red = "#ec5f67",
 }
 
+local wpm = require("wpm")
+
 require("lualine").setup({
 	options = {
 		icons_enabled = true,
@@ -100,6 +102,8 @@ require("lualine").setup({
 		},
 		lualine_c = {},
 		lualine_x = {
+			wpm.wpm,
+			wpm.historic_graph,
 			{
 				"diagnostics",
 				sources = {

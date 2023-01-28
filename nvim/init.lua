@@ -237,6 +237,19 @@ require("lazy").setup({
 	--
 	-- Yank History
 	"AckslD/nvim-neoclip.lua",
+	{
+		"jcdickinson/wpm.nvim",
+		config = function()
+			require("wpm").setup({})
+		end,
+	},
+	-- JUPYTER
+	-- "luk400/vim-jukit",
+	  "hkupty/iron.nvim",
+	  "kana/vim-textobj-user",
+	  "kana/vim-textobj-line",
+	  "GCBallesteros/vim-textobj-hydrogen",
+	  "GCBallesteros/jupytext.vim",
 })
 
 -- Essential Configs

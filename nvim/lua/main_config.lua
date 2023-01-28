@@ -22,6 +22,7 @@ require("sushrit_lawliet.motions")
 require("sushrit_lawliet.neovide")
 
 require("sushrit_lawliet.gitsigns")
+require("sushrit_lawliet.jupyter")
 --One Dark Theme
 -- require("sushrit_lawliet.colors")
 --Catppuccin
