@@ -73,6 +73,19 @@ then
 
 	bat cache --build
 
+	read -p "Install Doom Emacs? (This will reinstall any existing version) (y/n): " -n 1 -r
+
+	if [[ $REPLY =~ ^[Yy]$ ]]
+	then
+		echo $(info "Installing Doom Emacs...")
+		rm -rf ~/.emacs.d
+		git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.emacs.d
+		~/.emacs.d/bin/doom install
+	elif [[ ! $REPLY =~ ^[Yy]$ ]]
+	then
+		exit 1
+	fi
+
 else
 	echo $(error "Unsupported OS. Please use Linux or MacOS.")
 	echo $(error "Note For Windows Users: No Plans to support Windows")
