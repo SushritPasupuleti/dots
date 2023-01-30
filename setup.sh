@@ -61,6 +61,8 @@ then
 	#starship
 	ln -s "$(pwd -P)"/starship.toml ~/.config/
 
+	ln -s "$(pwd -P)"/scripts ~/.my-scripts
+
 	#.gitconfig
 	rm ~/.gitconfig
 	ln -s "$(pwd -P)"/.gitconfig ~/.gitconfig
