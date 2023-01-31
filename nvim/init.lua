@@ -130,7 +130,15 @@ require("lazy").setup({
 	"kyazdani42/nvim-tree.lua",
 	"akinsho/bufferline.nvim",
 	--
-	"lukas-reineke/indent-blankline.nvim", -- indent lines
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		config = function()
+			require("indent_blankline").setup({
+				show_current_context = true,
+				show_current_context_start = true,
+			})
+		end,
+	}, -- indent lines
 	--
 	-- Telescope
 	"nvim-lua/plenary.nvim",
@@ -256,6 +264,14 @@ require("lazy").setup({
 	"hkupty/iron.nvim",
 	{ "GCBallesteros/vim-textobj-hydrogen", dependencies = { "kana/vim-textobj-user", "kana/vim-textobj-line" } },
 	"GCBallesteros/jupytext.vim",
+
+	-- GitHub
+	{
+		"pwntester/octo.nvim",
+		config = function()
+			require("octo").setup()
+		end,
+	},
 })
 
 -- Essential Configs
@@ -270,6 +286,8 @@ vim.opt.smarttab = true
 vim.opt.softtabstop = 4
 vim.opt.mouse = "a"
 vim.opt.cursorline = true
+-- vim.opt.list = true
+-- vim.opt.listchars:append("eol:↴")
 -- vim.opt.cursorcolumn
 vim.opt.wildmenu = true
 vim.opt.wildmode = "list:longest"
