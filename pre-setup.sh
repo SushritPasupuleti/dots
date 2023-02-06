@@ -23,7 +23,7 @@ function info {
 	printf "${BLUE}$@${NC}\n"
 }
 
-if [[ "$OSTYPE" =~ ^darwin ]];
+if [[ "$OSTYPE" =~ ^darwin ]] || [[ "$OSTYPE" =~ ^linux ]];
 then
 	if ! command -v brew &> /dev/null
 	then
@@ -44,11 +44,13 @@ then
 	fi
 
 
-	brew install git gh bat nvm tmux nvim ctags lazygit ranger vifm emacs git-delta starship
+	brew install git gh bat nvm tmux nvim ctags lazygit ranger vifm emacs git-delta starship fish
 	brew install --cask iterm2 visual-studio-code keycastr obs kicad
-	brew install fzt czg add-gitignore grex undollar has grip tldr how2 exa fd zoxide get-port epy timg mdlt luarocks jira-cli newman oha gping gtm gnu-sed jq glow fd cmatrix pipes-sh neofetch openjdk ruby terminal-notifier rust rust-analyzer ffmpeg prettier wget shellcheck urlview go gum
+	brew install fzf czg add-gitignore grex undollar has grip tldr how2 exa fd zoxide get-port epy timg mdlt luarocks jira-cli newman oha gping gnu-sed jq glow fd cmatrix pipes-sh neofetch openjdk ruby terminal-notifier rust rust-analyzer ffmpeg prettier wget shellcheck urlview go gum
 	brew tap jabley/homebrew-wrk2
 	brew install --HEAD wrk2
+	brew tap git-time-metric/gtm
+	brew install gtm
 
 	echo $(success "Done installing packages.")
 
@@ -58,18 +60,7 @@ then
 		   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 else
-	if [[ "$OSTYPE" =~ ^linux ]]
-
-	# Get Distro (debian, arch, etc)
-	# For future reference
-	# awk '/^ID=/' /etc/*-release | awk -F'=' '{ print tolower($2) }'
-	
-	then
-		echo $(error "Linux is not supported yet.")
-		exit 1
-	else
-		echo $(error "Unsupported OS. Please use Linux or MacOS.")
-		echo $(error "Note For Windows Users: No Plans to support Windows")
-		exit 1
-	fi
+	echo $(error "Unsupported OS. Please use Linux or MacOS.")
+	echo $(error "Note For Windows Users: No Plans to support Windows")
+	exit 1
 fi
