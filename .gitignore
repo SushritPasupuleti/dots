@@ -2,3 +2,4 @@
 
 fish/conf.d/exports.fish
 .watchman.*.*
+lazygit/state.yml
