@@ -98,7 +98,7 @@ require("lazy").setup({
 	"nvim-lualine/lualine.nvim",
 	{ "preservim/nerdtree", dependencies = {
 		"Xuyuanp/nerdtree-git-plugin",
-	} },
+	}, enabled = false },
 	"http://github.com/tpope/vim-surround",
 	"ap/vim-css-color",
 	"ryanoasis/vim-devicons", -- Developer Icons
@@ -193,7 +193,7 @@ require("lazy").setup({
 	-- 'ahmedkhalf/project.nvim' --Project Manager
 	"gennaro-tedesco/nvim-jqx",
 	--
-	"goolord/alpha-nvim", --Dashboard
+	{ "goolord/alpha-nvim", name = "alpha", commit = "21a0f2520ad3a7c32c0822f943368dc063a569fb" }, --Dashboard
 	-- 'nvim-neo-tree/neo-tree.nvim' -- Neo Tree
 	-- 'MunifTanjim/nui.nvim' --NUI
 	"mbbill/undotree",
