@@ -53,6 +53,12 @@ then
 	brew tap git-time-metric/gtm
 	brew install gtm
 
+	# brew install koekeishiya/formulae/yabai
+
+	# brew install koekeishiya/formulae/skhd
+
+	brew services stop yabai
+
 	echo $(success "Done installing packages.")
 
 	echo $(info "Installing vim-plug")

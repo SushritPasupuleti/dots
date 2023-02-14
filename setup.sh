@@ -58,6 +58,9 @@ then
 	#bat
 	ln -s "$(pwd -P)"/bat ~/.config/
 
+	#yabai
+	ln -s "$(pwd -P)"/yabai ~/.config/
+
 	#starship
 	ln -s "$(pwd -P)"/starship.toml ~/.config/
 

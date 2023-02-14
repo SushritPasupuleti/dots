@@ -1,0 +1,81 @@
+#!/usr/bin/env sh
+# default layout (can be bsp, stack or float)
+yabai -m config layout bsp
+
+# New window spawns to the right if vertical split, or bottom if horizontal split
+yabai -m config window_placement second_child
+
+# padding set to 12px
+yabai -m config top_padding 12
+yabai -m config bottom_padding 12
+yabai -m config left_padding 12
+yabai -m config right_padding 12
+yabai -m config window_gap 12
+
+# window borders
+# yabai -m config insert_feedback_color 0xffd75f5f
+yabai -m config insert_feedback_color 0xff89DCEB
+# yabai -m config active_window_border_color 0xff775759
+yabai -m config active_window_border_color 0xffCBA6F7
+# yabai -m config normal_window_border_color 0xff555555
+yabai -m config normal_window_border_color 0xff6272a4
+yabai -m config window_border_width 4
+yabai -m config window_border_radius 12
+yabai -m config window_border on
+yabai -m config window_border_hidpi on
+yabai -m window_shadow on
+yabai -m window_border_blur on
+# yabai -m window_animation_duration 0.0
+# yabai -m window_animation_frame_rate 120
+
+# center mouse on window with focus
+yabai -m config mouse_follows_focus on
+
+# modifier for clicking and dragging with mouse
+yabai -m config mouse_modifier alt
+# set modifier + left-click drag to move window
+yabai -m config mouse_action1 move
+# set modifier + right-click drag to resize window
+yabai -m config mouse_action2 resize
+
+
+# when window is dropped in center of another window, swap them (on edges it will split it)
+yabai -m mouse_drop_action swap
+
+#Exceptions - Will Float
+## MacOS Utilities & First Party Apps
+yabai -m rule --add app="^System Settings$" manage=off
+yabai -m rule --add app="^Mail$" manage=off
+yabai -m rule --add app="^Messages$" manage=off
+yabai -m rule --add app="^Notes$" manage=off
+yabai -m rule --add app="^Reminders$" manage=off
+yabai -m rule --add app="^Calendar$" manage=off
+yabai -m rule --add app="^Preview$" manage=off
+yabai -m rule --add app="^Finder$" manage=off
+yabai -m rule --add app="^Calculator$" manage=off
+yabai -m rule --add app="^Music$" manage=off
+yabai -m rule --add app="^Safari$" manage=off
+
+## Entertainment
+yabai -m rule --add app="^IINA$" manage=off
+yabai -m rule --add app="^VLC$" manage=off
+yabai -m rule --add app="^Spotify$" manage=off
+
+## Utilities
+yabai -m rule --add app="^OBS$" manage=off
+yabai -m rule --add app="^Karabiner-Elements$" manage=off
+
+##Communication & Social
+yabai -m rule --add app="^Twitter$" manage=off
+yabai -m rule --add app="^Discord$" manage=off
+yabai -m rule --add app="^Telegram$" manage=off
+yabai -m rule --add app="^Slack$" manage=off
+yabai -m rule --add app="^Microsoft Teams$" manage=off
+yabai -m rule --add app="^Microsoft Outlook$" manage=off
+yabai -m rule --add app="^WhatsApp$" manage=off
+
+##Productivity & Development
+yabai -m rule --add app="^GitHub Desktop$" manage=off
+yabai -m rule --add app="^Brave Browser$" manage=off
+yabai -m rule --add app="^Any Desk$" manage=off
+yabai -m rule --add app="^Zoom.us$" manage=off
