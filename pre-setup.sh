@@ -53,9 +53,12 @@ then
 	brew tap git-time-metric/gtm
 	brew install gtm
 
-	# brew install koekeishiya/formulae/yabai
+	brew install koekeishiya/formulae/yabai
 
-	# brew install koekeishiya/formulae/skhd
+	brew install koekeishiya/formulae/skhd
+
+	# brew tap FelixKratz/formulae
+	# brew install sketchybar
 
 	brew services stop yabai
 

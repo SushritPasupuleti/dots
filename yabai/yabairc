@@ -22,7 +22,7 @@ yabai -m config normal_window_border_color 0xff6272a4
 yabai -m config window_border_width 4
 yabai -m config window_border_radius 12
 yabai -m config window_border on
-yabai -m config window_border_hidpi on
+# yabai -m config window_border_hidpi on
 yabai -m window_shadow on
 yabai -m window_border_blur on
 # yabai -m window_animation_duration 0.0
@@ -45,6 +45,7 @@ yabai -m mouse_drop_action swap
 #Exceptions - Will Float
 ## MacOS Utilities & First Party Apps
 yabai -m rule --add app="^System Settings$" manage=off
+yabai -m rule --add app="^App Store$" manage=off
 yabai -m rule --add app="^Mail$" manage=off
 yabai -m rule --add app="^Messages$" manage=off
 yabai -m rule --add app="^Notes$" manage=off
@@ -55,6 +56,9 @@ yabai -m rule --add app="^Finder$" manage=off
 yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^Music$" manage=off
 yabai -m rule --add app="^Safari$" manage=off
+yabai -m rule --add app="^Activity Monitor$" manage=off
+yabai -m rule --add app="^FaceTime$" manage=off
+yabai -m rule --add app="^Freeform$" manage=off
 
 ## Entertainment
 yabai -m rule --add app="^IINA$" manage=off
@@ -64,9 +68,12 @@ yabai -m rule --add app="^Spotify$" manage=off
 ## Utilities
 yabai -m rule --add app="^OBS$" manage=off
 yabai -m rule --add app="^Karabiner-Elements$" manage=off
+yabai -m rule --add app="^DaVinci Resolve$" manage=off
 
 ##Communication & Social
 yabai -m rule --add app="^Twitter$" manage=off
+yabai -m rule --add app="^TweetDeck$" manage=off
+yabai -m rule --add app="^Apollo$" manage=off
 yabai -m rule --add app="^Discord$" manage=off
 yabai -m rule --add app="^Telegram$" manage=off
 yabai -m rule --add app="^Slack$" manage=off
@@ -79,3 +86,5 @@ yabai -m rule --add app="^GitHub Desktop$" manage=off
 yabai -m rule --add app="^Brave Browser$" manage=off
 yabai -m rule --add app="^Any Desk$" manage=off
 yabai -m rule --add app="^Zoom.us$" manage=off
+yabai -m rule --add app="^Docker Desktop$" manage=off
+

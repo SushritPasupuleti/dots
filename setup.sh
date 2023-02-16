@@ -60,6 +60,8 @@ then
 
 	#yabai
 	ln -s "$(pwd -P)"/yabai ~/.config/
+	#sketchybar
+	ln -s "$(pwd -P)"/sketchybar ~/.config/
 
 	#starship
 	ln -s "$(pwd -P)"/starship.toml ~/.config/
