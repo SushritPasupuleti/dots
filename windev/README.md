@@ -14,4 +14,16 @@ This is a collection of scripts and configuration files to setup a Windows for D
 
 - Windows Applications Installation using winget
 
+## Setup
 
+### Changing shells
+
+```bash
+vim /etc/shells
+```
+
+Add `/home/linuxbrew/.linuxbrew/bin/fish` to EOF.
+
+```bash
+chsh -s $(which fish)
+```
