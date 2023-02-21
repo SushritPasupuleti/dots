@@ -69,6 +69,7 @@ yabai -m rule --add app="^Spotify$" manage=off
 yabai -m rule --add app="^OBS$" manage=off
 yabai -m rule --add app="^Karabiner-Elements$" manage=off
 yabai -m rule --add app="^DaVinci Resolve$" manage=off
+yabai -m rule --add app="^Elgato Stream Deck$" manage=off
 
 ##Communication & Social
 yabai -m rule --add app="^Twitter$" manage=off
