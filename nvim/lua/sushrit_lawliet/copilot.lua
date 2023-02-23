@@ -3,6 +3,19 @@ vim.g.copilot_node_command = "/Users/sushrit_lawliet/.nvm/versions/node/v16.17.1
 
 vim.g.copilot_filetypes = {
 	markdown = true,
+	typescript = true,
+	javascript = true,
+	typescriptreact = true,
+	javascriptreact = true,
+	rust = true,
+	go = true,
+	python = true,
+	lua = true,
+	vim = true,
+	css = true,
+	html = true,
+	json = true,
+	yaml = true,
 }
 
 require("copilot").setup({
