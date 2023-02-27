@@ -16,6 +16,16 @@ All my dot files in one place. Best experience in order:
 
 > **Note**: Check [WinDev](/windev/README.md) for a Windows specific setup.
 
+### Scripts
+
+Apart from the setup scripts, there are a few scripts that I created to make my life easier.
+
+- `./scripts/sp.sh` - fuzzy find and navigate to a given TMUX session.
+
+- `./scripts/sims.sh` - fuzzy find and start an iOS simulator.
+
+- `./scripts/emus.sh` - fuzzy find and start an Android simulator.
+
 ## Setup
 
 Follow these steps in sequence:
