@@ -3,3 +3,4 @@
 fish/conf.d/exports.fish
 .watchman.*.*
 lazygit/state.yml
+fish/fish_variables

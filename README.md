@@ -37,6 +37,14 @@ chmod +x pre-setup.sh
 ./setup.sh
 ```
 
+### Exports
+
+Export Environment Variables in fish by creating a file at: `~/.config/fish/conf.d/exports.fish`
+
+```fish
+set -gx ENV_VAR "value"
+```
+
 ### Misc Setup
 
 Slack

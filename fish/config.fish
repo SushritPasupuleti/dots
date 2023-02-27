@@ -25,11 +25,13 @@ set fzf_preview_file_cmd bat --color=always
 set fzf_fd_opts --hidden --exclude=.git
 
 # Alias
-alias ls='exa --all --color=always'
+alias ls='exa -l -g --icons --git --color=always'
+alias ll='exa -1 --icons --tree --git-ignore --color=always'
 alias lg='lazygit'
 alias nv='nvim'
 # ggl - for googling
-alias gg="ggl -b='Microsoft Edge'"
+alias gge="ggl -b='Microsoft Edge'"
+alias gg="ggl"
 
 # custom scripts
 alias c='clear'
