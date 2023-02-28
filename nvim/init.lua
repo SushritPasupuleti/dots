@@ -235,6 +235,19 @@ require("lazy").setup({
             require("sushrit_lawliet.command-center")
         end,
     },
+	{
+		"dimaportenko/telescope-simulators.nvim",
+		-- event={"BufReadPost", "BufNewFile"},
+		event="VimEnter",
+		name="simulators",
+		config = function()
+			require("simulators").setup({
+			  android_emulator = true,
+			  apple_simulator = true,
+			})
+			require("telescope").load_extension("simulators")
+		end,
+	},
     {
         "petertriho/nvim-scrollbar",
         event = { "BufRead", "BufNewFile" },
@@ -516,9 +529,9 @@ require("lazy").setup({
     {
         "numToStr/Comment.nvim", -- Comment things
         event = "bufReadPost",
-		config = function()
-			require("Comment").setup()
-		end,
+        config = function()
+            require("Comment").setup()
+        end,
     },
     {
         "gennaro-tedesco/nvim-jqx",
@@ -707,6 +720,10 @@ require("lazy").setup({
                 },
             })
         end,
+    },
+    {
+        "jose-elias-alvarez/typescript.nvim",
+        event = { "BufRead", "BufNewFile" },
     },
 })
 

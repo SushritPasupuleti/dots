@@ -38,6 +38,8 @@ alias c='clear'
 alias pomo='pomo.sh' #pomodoro timer
 alias sp='sp.sh' #pick between tmux sessions
 alias nvh='nvim.sh' #help with nvim
+alias sims='sims.sh' #start an iOS simulator
+alias emus='emus.sh' #start an android emulator
 
 fzf_configure_bindings --directory=\cf --git_log=\cl --git_status=\cs --processes=\cp
 
