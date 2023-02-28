@@ -40,7 +40,7 @@ Key:
 
 - <kbd>c</kbd> <kbd>w</kbd> Delete rest of the word and enter *Insert* mode. It accepts `$` just like delete.
 
-- <kbd><</kbd> Unindent line.
+- <kbd></kbd> Unindent line.
 
 - <kbd>></kbd> Indent line.
 
