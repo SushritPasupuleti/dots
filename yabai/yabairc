@@ -24,12 +24,12 @@ yabai -m config window_border_radius 12
 yabai -m config window_border on
 # yabai -m config window_border_hidpi on
 yabai -m window_shadow on
-yabai -m window_border_blur on
+yabai -m window_border_blur off
 # yabai -m window_animation_duration 0.0
 # yabai -m window_animation_frame_rate 120
 
 # center mouse on window with focus
-yabai -m config mouse_follows_focus on
+# yabai -m config mouse_follows_focus on
 
 # modifier for clicking and dragging with mouse
 yabai -m config mouse_modifier alt
@@ -88,4 +88,15 @@ yabai -m rule --add app="^Brave Browser$" manage=off
 yabai -m rule --add app="^Any Desk$" manage=off
 yabai -m rule --add app="^Zoom.us$" manage=off
 yabai -m rule --add app="^Docker Desktop$" manage=off
+yabai -m rule --add app="^Xcode$" manage=off
+yabai -m rule --add app="^Simulator$" manage=off
+yabai -m rule --add app="^Android Studio$" manage=off
+yabai -m rule --add app="^Android Emulator$" manage=off
+yabai -m rule --add app="^qemu-system-aarch64$" manage=off
 
+# yabai -m signal --add event=application_activated \
+                      # app="^Simulator$"               \
+                      # action="yabai -m config border_blur off window_border off"
+# yabai -m signal --add event=application_deactivated \
+                      # app="^Simulator$"               \
+                      # action="yabai -m config border_blur off window_border on"
