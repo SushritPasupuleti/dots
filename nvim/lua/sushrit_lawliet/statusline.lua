@@ -54,15 +54,18 @@ require("lualine").setup({
                 source = nil,
             },
             "gtmstatus",
-            {
-                "diagnostics",
-                sources = {
-                    "nvim_diagnostic",
-                    -- "nvim",
-                },
-            },
+			{
+				"diagnostics",
+				sources = {
+					"nvim_diagnostic",
+					-- "nvim",
+				},
+			},
         },
-        lualine_c = { "filename" },
+        lualine_c = { 
+			-- "tabs",
+			"filename",
+		},
         lualine_x = { "filesize", "encoding", "fileformat", "filetype" },
         lualine_y = { "progress" },
         lualine_z = { "location" },
