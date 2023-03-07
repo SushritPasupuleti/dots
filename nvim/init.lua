@@ -349,6 +349,11 @@ require("lazy").setup({
             "hrsh7th/cmp-cmdline",
             "L3MON4D3/LuaSnip",
             "saadparwaiz1/cmp_luasnip",
+			-- Additional Sources:
+			"kdheepak/cmp-latex-symbols",
+			"andersevenrud/cmp-tmux",
+			"mtoohey31/cmp-fish",
+			"hrsh7th/cmp-nvim-lua",
         },
         event = {
             "InsertEnter",
