@@ -55,6 +55,7 @@ yabai -m rule --add app="^Preview$" manage=off
 yabai -m rule --add app="^Finder$" manage=off
 yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^Music$" manage=off
+yabai -m rule --add app="^Podcasts$" manage=off
 yabai -m rule --add app="^Safari$" manage=off
 yabai -m rule --add app="^Activity Monitor$" manage=off
 yabai -m rule --add app="^FaceTime$" manage=off
@@ -93,6 +94,7 @@ yabai -m rule --add app="^Simulator$" manage=off
 yabai -m rule --add app="^Android Studio$" manage=off
 yabai -m rule --add app="^Android Emulator$" manage=off
 yabai -m rule --add app="^qemu-system-aarch64$" manage=off
+# yabai -m rule --add app="^Arc$" manage=off
 
 # yabai -m signal --add event=application_activated \
                       # app="^Simulator$"               \
