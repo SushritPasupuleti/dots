@@ -26,6 +26,7 @@ local servers = {
 	"cssls",
 	"ansiblels",
 	"arduino_language_server",
+	"omnisharp",
 	-- "rust_analyzer",
 	-- "sumneko_lua",
 	-- "nginx-language-server",

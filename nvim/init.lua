@@ -175,7 +175,7 @@ require("lazy").setup({
                 ["<leader>s"] = { name = "+search" },
                 ["<leader>sn"] = { name = "+noice" },
                 ["<leader>u"] = { name = "+ui" },
-                ["<leader>w"] = { name = "+windows" },
+                -- ["<leader>w"] = { name = "+windows" },
                 ["<leader>x"] = { name = "+diagnostics/quickfix" },
             })
         end,

@@ -16,6 +16,8 @@ vim.g.copilot_filetypes = {
 	html = true,
 	json = true,
 	yaml = true,
+	cs = true,
+	xml = true,
 }
 
 require("copilot").setup({
