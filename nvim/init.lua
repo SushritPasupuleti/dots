@@ -111,9 +111,23 @@ require("lazy").setup({
     {
         "glepnir/lspsaga.nvim",
         event = "BufRead",
+		-- enabled = false,
         config = function()
             require("lspsaga").setup({
-                theme = "round",
+				ui = {
+					border = 'rounded',
+				},
+				-- *NOTE*: Disabled inline diagnostics for now
+				-- as it causes a lot of issues
+				diagnostic = {
+					on_insert = false,--true,
+					on_insert_follow = true, --false,
+					-- insert_winblend = 0,
+					show_virt_line = false, --true,
+					-- show_code_action = false, --true,
+					-- show_source = false, --true,
+					-- jump_num_shortcut = false, --true,
+				},
                 -- colors = M.custom_colors(),
                 -- kind = M.custom_kind(),
                 -- toggle these in the future when the bugs stop
@@ -235,19 +249,19 @@ require("lazy").setup({
             require("sushrit_lawliet.command-center")
         end,
     },
-	{
-		"dimaportenko/telescope-simulators.nvim",
-		-- event={"BufReadPost", "BufNewFile"},
-		event="VimEnter",
-		name="simulators",
-		config = function()
-			require("simulators").setup({
-			  android_emulator = true,
-			  apple_simulator = true,
-			})
-			require("telescope").load_extension("simulators")
-		end,
-	},
+    {
+        "dimaportenko/telescope-simulators.nvim",
+        -- event={"BufReadPost", "BufNewFile"},
+        event = "VimEnter",
+        name = "simulators",
+        config = function()
+            require("simulators").setup({
+                android_emulator = true,
+                apple_simulator = true,
+            })
+            require("telescope").load_extension("simulators")
+        end,
+    },
     {
         "petertriho/nvim-scrollbar",
         event = { "BufRead", "BufNewFile" },
@@ -349,11 +363,11 @@ require("lazy").setup({
             "hrsh7th/cmp-cmdline",
             "L3MON4D3/LuaSnip",
             "saadparwaiz1/cmp_luasnip",
-			-- Additional Sources:
-			"kdheepak/cmp-latex-symbols",
-			"andersevenrud/cmp-tmux",
-			"mtoohey31/cmp-fish",
-			"hrsh7th/cmp-nvim-lua",
+            -- Additional Sources:
+            "kdheepak/cmp-latex-symbols",
+            "andersevenrud/cmp-tmux",
+            "mtoohey31/cmp-fish",
+            "hrsh7th/cmp-nvim-lua",
         },
         event = {
             "InsertEnter",
