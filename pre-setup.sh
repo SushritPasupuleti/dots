@@ -23,7 +23,8 @@ function info {
 	printf "${BLUE}$@${NC}\n"
 }
 
-if [[ "$OSTYPE" =~ ^darwin ]] || [[ "$OSTYPE" =~ ^linux ]];
+# if [[ "$OSTYPE" =~ ^linux ]];
+if [[ "$OSTYPE" =~ ^darwin ]];
 then
 	if ! command -v brew &> /dev/null
 	then
@@ -53,14 +54,22 @@ then
 	brew tap git-time-metric/gtm
 	brew install gtm
 
-	brew install koekeishiya/formulae/yabai
+	if [[ "$OSTYPE" =~ ^darwin ]];
+	then
+		# setup key repeats
+		defaults write -g InitialKeyRepeat -int 12
+		defaults write -g KeyRepeat -int 1
 
-	brew install koekeishiya/formulae/skhd
+		brew install koekeishiya/formulae/yabai
 
-	# brew tap FelixKratz/formulae
-	# brew install sketchybar
+		brew install koekeishiya/formulae/skhd
 
-	brew services stop yabai
+
+		# brew tap FelixKratz/formulae
+		# brew install sketchybar
+
+		brew services stop yabai
+	fi
 
 	echo $(success "Done installing packages.")
 
@@ -68,6 +77,21 @@ then
 
 	sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
 		   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+
+# elif [[ "$OSTYPE" =~ ^darwin ]];
+elif [[ "$OSTYPE" =~ ^linux ]];
+then 
+	echo $(info "Installing Nix")
+
+	curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+
+	echo $(info "Nix installed successfully")
+
+	echo $(info "Installing Packages")
+
+	/bin/bash ./nix-packages.sh
+
+	echo "Not yet implemented"
 
 else
 	echo $(error "Unsupported OS. Please use Linux or MacOS.")
