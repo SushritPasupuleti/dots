@@ -81,11 +81,26 @@ then
 # elif [[ "$OSTYPE" =~ ^darwin ]];
 elif [[ "$OSTYPE" =~ ^linux ]];
 then 
-	echo $(info "Installing Nix")
+	if ! command -v nix &> /dev/null
+		then
+			echo $(error "Nix could not be found")
+			
+			echo $(info "Would you like to install it? (y/n): ")
 
-	curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+			read -p "Would you like to install it? (y/n): " -n 1 -r
+			echo    # (optional) move to a new line
+			if [[ ! $REPLY =~ ^[Yy]$ ]]
+			then
+				echo $(error "Cannont continue without Nix. Exiting.")
+				exit 1
+			fi
+			echo $(info "Installing Nix")
 
-	echo $(info "Nix installed successfully")
+			curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+
+			echo $(info "Nix installed successfully")
+		exit
+	fi
 
 	echo $(info "Installing Packages")
 
