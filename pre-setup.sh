@@ -85,10 +85,10 @@ then
 		then
 			echo $(error "Nix could not be found")
 			
-			echo $(info "Would you like to install it? (y/n): ")
-
 			read -p "Would you like to install it? (y/n): " -n 1 -r
+			
 			echo    # (optional) move to a new line
+			
 			if [[ ! $REPLY =~ ^[Yy]$ ]]
 			then
 				echo $(error "Cannont continue without Nix. Exiting.")

@@ -29,4 +29,4 @@ nix-env -iA nixpkgs.{bat, btop, ctags, czg, exa, fish, fd, fzf, gh, git-extras, 
 
 echo $(info "Finished Installing Nix Packages...")
 
-echo $(info "Run `setup.sh` to finish setup...")
+echo $(info "Run setup.sh to finish setup...")
