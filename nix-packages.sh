@@ -27,6 +27,8 @@ echo $(info "Installing Nix Packages...")
 
 nix-env -iA nixpkgs.bat nixpkgs.btop nixpkgs.ctags nixpkgs.exa nixpkgs.fish nixpkgs.fd nixpkgs.fzf nixpkgs.gh nixpkgs.git-extras nixpkgs.delta nixpkgs.glow nixpkgs.gnused nixpkgs.gping nixpkgs.gum nixpkgs.htop nixpkgs.lazygit nixpkgs.neofetch nixpkgs.neovim nixpkgs.fnm nixpkgs.ranger nixpkgs.ripgrep nixpkgs.starship nixpkgs.terminal-notifier nixpkgs.timg nixpkgs.tmux nixpkgs.urlview nixpkgs.wget nixpkgs.zoxide
 
+nix-env -iA nixpkgs.jira-cli-go nixpkgs.jq nixpkgs.rustc nixpkgs.rust-analyzer nixpkgs.ffmpeg nixpkgs.shellcheck nixpkgs.go nixpkgs.wrk2
+
 echo $(info "Finished Installing Nix Packages...")
 
 echo $(info "Run setup.sh to finish setup...")
