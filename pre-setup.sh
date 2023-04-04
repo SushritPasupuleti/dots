@@ -23,8 +23,8 @@ function info {
 	printf "${BLUE}$@${NC}\n"
 }
 
-if [[ "$OSTYPE" =~ ^linux ]];
-# if [[ "$OSTYPE" =~ ^darwin ]];
+#if [[ "$OSTYPE" =~ ^linux ]];
+if [[ "$OSTYPE" =~ ^darwin ]];
 then
 	if ! command -v brew &> /dev/null
 	then
@@ -78,8 +78,8 @@ then
 	sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
 		   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
-elif [[ "$OSTYPE" =~ ^darwin ]];
-# elif [[ "$OSTYPE" =~ ^linux ]];
+#elif [[ "$OSTYPE" =~ ^darwin ]];
+elif [[ "$OSTYPE" =~ ^linux ]];
 then 
 	if ! command -v nix &> /dev/null
 		then
