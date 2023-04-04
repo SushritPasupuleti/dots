@@ -25,19 +25,23 @@ function info {
 
 echo $(info "Installing Packages...")
 
-sudo dnf install bat btop ctags exa fish fd-find fzf gh git-extras git-delta sed lazygit neofetch neovim ranger ripgrep starship tmux urlview wget zoxide cmatrix
+sudo dnf install bat btop ctags exa fish fd-find fzf gh git-extras git-delta sed lazygit neofetch neovim ranger ripgrep tmux urlview wget zoxide cmatrix
 
 echo $(success "Done Installing Core Packages...")
 
 echo $(info "Installing Tools...")
 
-sudo dnf install tldr luarocks jq ruby rust rust-analyzer ffmpeg ShellCheck go git-time-metric 
+sudo dnf install tldr luarocks jq ruby rust rust-analyzer ShellCheck go git-time-metric nodejs powerline-fonts
 
 # missing: gping fnm newman prettier
 
 echo $(info "Installing fnm...")
 
 cargo install fnm
+
+echo $(info "Installing starship... ")
+dnf copr enable atim/starship
+dnf install starship
 
 echo $(info "Follow Post-Install Instructions for fnm: https://github.com/Schniz/fnm")
 

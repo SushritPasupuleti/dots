@@ -53,6 +53,7 @@ then
 	#lazygit
 	# ln -s "$(pwd -P)"/lazygit ~/.config/
 	cp -fr "$(pwd -P)"/lazygit/config.yml ~/Library/'Application Support'/lazygit
+	ln -s "$(pwd -P)"/lazygit/config.yml ~/.config/lazygit/
 	# rm ~/Library/Application\ Support/lazygit/config.yml 
 	# ls -s "$(pwd -P)"/lazygit/config.yml ~/Library/"Application\ Support"/lazygit/config.yml
 	#bat
