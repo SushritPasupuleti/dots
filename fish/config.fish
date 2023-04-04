@@ -46,3 +46,4 @@ fzf_configure_bindings --directory=\cf --git_log=\cl --git_status=\cs --processe
 
 zoxide init fish | source
 starship init fish | source
+fnm env --use-on-cd | source
