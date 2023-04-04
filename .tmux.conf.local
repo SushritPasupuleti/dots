@@ -557,4 +557,4 @@ set -g @plugin 'spywhere/tmux-now-playing'
 run-shell ~/clone/path/continuum.tmux
 run-shell ~/clone/path/resurrect.tmux
 run-shell ~/target/path/now-playing.tmux
-
+set -g default-shell /usr/bin/fish
