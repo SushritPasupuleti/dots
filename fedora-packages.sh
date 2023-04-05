@@ -85,6 +85,10 @@ echo $(info "Installing Pop Shell...")
 sudo dnf install gnome-shell-extension-pop-shell xprop
 echo $(success "Done Installing Pop Shell...")
 
+echo $(info "Configuring npm and yarn")
+sudo chown -R $(whoami) ~/.npm
+npm install --global yarn
+
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
 	echo $(info "Installing nVidia Drivers...")
