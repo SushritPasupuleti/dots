@@ -31,11 +31,17 @@ require("catppuccin").setup({
     color_overrides = {},
     custom_highlights = {},
     integrations = {
-        cmp = true,
+        cmp = {
+            enabled = true,
+            border = {
+                completion = true,
+                documentation = true,
+            },
+        },
         hop = true,
         gitsigns = true,
         nvimtree = true,
-        telescope = true,
+        telescope = true, 
         treesitter = true,
         lsp_saga = true,
         mason = true,

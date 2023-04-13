@@ -111,23 +111,23 @@ require("lazy").setup({
     {
         "glepnir/lspsaga.nvim",
         event = "BufRead",
-		-- enabled = false,
+        -- enabled = false,
         config = function()
             require("lspsaga").setup({
-				ui = {
-					border = 'rounded',
-				},
-				-- *NOTE*: Disabled inline diagnostics for now
-				-- as it causes a lot of issues
-				diagnostic = {
-					on_insert = false,--true,
-					on_insert_follow = true, --false,
-					-- insert_winblend = 0,
-					show_virt_line = false, --true,
-					-- show_code_action = false, --true,
-					-- show_source = false, --true,
-					-- jump_num_shortcut = false, --true,
-				},
+                ui = {
+                    border = "rounded",
+                },
+                -- *NOTE*: Disabled inline diagnostics for now
+                -- as it causes a lot of issues
+                diagnostic = {
+                    on_insert = false, --true,
+                    on_insert_follow = true, --false,
+                    -- insert_winblend = 0,
+                    show_virt_line = false, --true,
+                    -- show_code_action = false, --true,
+                    -- show_source = false, --true,
+                    -- jump_num_shortcut = false, --true,
+                },
                 -- colors = M.custom_colors(),
                 -- kind = M.custom_kind(),
                 -- toggle these in the future when the bugs stop
@@ -368,6 +368,18 @@ require("lazy").setup({
             "andersevenrud/cmp-tmux",
             "mtoohey31/cmp-fish",
             "hrsh7th/cmp-nvim-lua",
+            -- opts = {
+            --     window = {
+            --         completion = {
+            --             border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+            --             winhighlight = "Normal:CmpPmenu,FloatBorder:CmpBorder,CursorLine:PmenuSel,Search:None",
+            --         },
+            --         documentation = {
+            --             border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+            --             winhighlight = "Normal:CmpPmenu,FloatBorder:CmpBorder,CursorLine:PmenuSel,Search:None",
+            --         },
+            --     },
+            -- },
         },
         event = {
             "InsertEnter",

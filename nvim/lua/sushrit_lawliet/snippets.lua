@@ -155,8 +155,14 @@ require("cmp").setup({
             -- winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
             col_offset = -3,
             side_padding = 0,
+            -- border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+            -- winhighlight = "Normal:CmpPmenu,FloatBorder:CmpBorder,CursorLine:PmenuSel,Search:None",
         },
     },
+    -- documentation = {
+    --     border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    --     winhighlight = "Normal:CmpPmenu,FloatBorder:CmpBorder,CursorLine:PmenuSel,Search:None",
+    -- },
     formatting = {
         fields = { "kind", "abbr", "menu" },
         format = function(entry, vim_item)

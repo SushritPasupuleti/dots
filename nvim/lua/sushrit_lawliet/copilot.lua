@@ -18,6 +18,7 @@ vim.g.copilot_filetypes = {
 	yaml = true,
 	cs = true,
 	xml = true,
+	mdx = true,
 }
 
 require("copilot").setup({
