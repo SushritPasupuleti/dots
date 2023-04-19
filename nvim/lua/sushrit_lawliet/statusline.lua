@@ -1,23 +1,24 @@
-local colors = {
-    bg = "#202328",
-    fg = "#bbc2cf",
-    yellow = "#ECBE7B",
-    cyan = "#008080",
-    darkblue = "#081633",
-    green = "#98be65",
-    orange = "#FF8800",
-    violet = "#a9a1e1",
-    magenta = "#c678dd",
-    blue = "#51afef",
-    red = "#ec5f67",
-}
+-- local colors = {
+--     bg = "#202328",
+--     fg = "#bbc2cf",
+--     yellow = "#ECBE7B",
+--     cyan = "#008080",
+--     darkblue = "#081633",
+--     green = "#98be65",
+--     orange = "#FF8800",
+--     violet = "#a9a1e1",
+--     magenta = "#c678dd",
+--     blue = "#51afef",
+--     red = "#ec5f67",
+-- }
 
 local wpm = require("wpm")
 
 require("lualine").setup({
     options = {
         icons_enabled = true,
-        theme = "auto",
+        -- theme = "auto",
+		theme = "catppuccin",
         -- component_separators = { left = "", right = "" },
         component_separators = { left = "", right = "" },
         -- section_separators = { left = "", right = "" },

@@ -756,6 +756,15 @@ require("lazy").setup({
         "jose-elias-alvarez/typescript.nvim",
         event = { "BufRead", "BufNewFile" },
     },
+    {
+        "wintermute-cell/gitignore.nvim",
+        event = { "BufRead", "BufNewFile" },
+    },
+    {
+        "chrisgrieser/nvim-early-retirement",
+        config = true,
+        event = "VeryLazy",
+    },
 })
 
 --options
