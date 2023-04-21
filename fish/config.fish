@@ -7,16 +7,34 @@ end
 # set -gx TERM xterm-kitty
 set -gx EDITOR vim
 set -gx PATH /opt/homebrew/bin $PATH
-set ANDROID_HOME $HOME/Library/Android/sdk
-set PATH $ANDROID_HOME/emulator $PATH
-set PATH $ANDROID_HOME/tools $PATH
-set PATH $ANDROID_HOME/tools/bin $PATH
-set PATH $ANDROID_HOME/platform-tools $PATH
+
 set PATH /usr/local/opt/libpq/bin $PATH
 set PATH $HOME/.cargo/bin $PATH
 set PATH $HOME/.my-scripts $PATH
 set PATH $HOME/.emacs.d/bin: $PATH
+set DENO_INSTALL "/home/sushrit_lawliet/.deno"
+set PATH $DENO_INSTALL/bin: $PATH
+
 fish_add_path /opt/homebrew/sbin
+
+# OS-specific settings
+switch (uname)
+    case Linux
+		set NODE_PATH /usr/lib/node_modules
+		set -Ux ANDROID_HOME $HOME/Android/Sdk
+		set PATH $HOME/apps $PATH
+		set -Ux JAVA_HOME /usr/lib/jvm/java-11-openjdk
+    case Darwin
+		set -Ux ANDROID_HOME $HOME/Library/Android/sdk
+    case '*'
+	 	echo "Unsupported OS: (uname)" >&2
+		# exit 1
+end
+
+set PATH $ANDROID_HOME/platform-tools $PATH
+set PATH $ANDROID_HOME/emulator $PATH
+set PATH $ANDROID_HOME/tools $PATH
+set PATH $ANDROID_HOME/tools/bin $PATH
 
 # fzf
 
@@ -42,7 +60,6 @@ alias sims='sims.sh' #start an iOS simulator
 alias emus='emus.sh' #start an android emulator
 
 fzf_configure_bindings --directory=\cf --git_log=\cl --git_status=\cs --processes=\cp
-
 
 zoxide init fish | source
 starship init fish | source
