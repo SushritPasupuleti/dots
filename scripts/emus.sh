@@ -6,7 +6,12 @@
 #OPTION=$(emulator -list-avds | gum filter --limit 1)
 
 # patch to work on my mac
-OPTION=$(~/Library/Android/sdk/emulator/emulator -list-avds | gum filter --limit 1)
+if [[ "$OSTYPE" =~ ^darwin ]];
+then
+	OPTION=$(~/Library/Android/sdk/emulator/emulator -list-avds | gum filter --limit 1)
+else
+	OPTION=$(~/Android/Sdk/emulator/emulator -list-avds | gum filter --limit 1)
+fi
 
 if [ -z "$OPTION" ]; then
 	echo "No AVD found"
@@ -19,4 +24,9 @@ echo "Starting $OPTION"
 #emulator -avd "$OPTION"
 
 # patch to work on my mac
-~/Library/Android/sdk/emulator/emulator -avd "$OPTION"
+if [[ "$OSTYPE" =~ ^darwin ]];
+then
+	~/Library/Android/sdk/emulator/emulator -avd "$OPTION"
+else
+	~/Android/Sdk/emulator/emulator -avd "$OPTION"
+fi
