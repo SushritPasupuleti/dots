@@ -79,6 +79,14 @@ require("lazy").setup({
         end,
     },
     {
+        "freddiehaddad/feline.nvim",
+        event = "VimEnter",
+        enabled = false,
+        config = function()
+            require("sushrit_lawliet.statusline")
+        end,
+    },
+    {
         "preservim/nerdtree",
         dependencies = {
             "Xuyuanp/nerdtree-git-plugin",
@@ -764,6 +772,16 @@ require("lazy").setup({
         "chrisgrieser/nvim-early-retirement",
         config = true,
         event = "VeryLazy",
+    },
+    {
+        "toppair/peek.nvim",
+        event = { "BufRead", "BufNewFile" },
+        build = "deno task --quiet build:fast",
+        config = function()
+            require("peek").setup()
+            vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
+            vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
+        end,
     },
 })
 
