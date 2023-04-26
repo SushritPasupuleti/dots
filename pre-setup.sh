@@ -54,6 +54,8 @@ then
 	brew tap git-time-metric/gtm
 	brew install gtm
 
+	curl -fsSL https://deno.land/x/install/install.sh | sh
+
 	if [[ "$OSTYPE" =~ ^darwin ]];
 	then
 		# setup key repeats
@@ -103,6 +105,8 @@ then
 	fi
 
 	echo $(info "Installing Packages")
+
+	curl -fsSL https://deno.land/x/install/install.sh | sh
 
 	read -p "Confirm if you are on fedora (y/n)" -n 1 -r
 

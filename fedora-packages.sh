@@ -54,6 +54,8 @@ echo $(info "Installing Gum & Glow")
 go install github.com/charmbracelet/gum@latest
 go install github.com/charmbracelet/glow@latest
 
+go install github.com/saltfishpr/redis-viewer@latest
+
 echo $(success "Done Installing Fedora-specific Packages...")
 
 echo $(info "Installing Nix Packages from ./nix-fedora.sh")
