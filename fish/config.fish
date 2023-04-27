@@ -24,6 +24,8 @@ switch (uname)
 		set -Ux ANDROID_HOME $HOME/Android/Sdk
 		set PATH $HOME/apps $PATH
 		set -Ux JAVA_HOME /usr/lib/jvm/java-11-openjdk
+		set -gx PIP_HOME "/home/$USER/.local/bin"
+		set -gx PATH "$PIP_HOME" $PATH
     case Darwin
 		set -Ux ANDROID_HOME $HOME/Library/Android/sdk
     case '*'
