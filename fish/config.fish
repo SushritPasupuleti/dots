@@ -26,6 +26,8 @@ switch (uname)
 		set -Ux JAVA_HOME /usr/lib/jvm/java-11-openjdk
 		set -gx PIP_HOME "/home/$USER/.local/bin"
 		set -gx PATH "$PIP_HOME" $PATH
+		set -gx GOPATH $HOME/go
+		set -gx PATH $PATH $GOPATH/bin
     case Darwin
 		set -Ux ANDROID_HOME $HOME/Library/Android/sdk
     case '*'
