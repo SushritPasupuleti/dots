@@ -55,6 +55,12 @@ go install github.com/charmbracelet/gum@latest
 go install github.com/charmbracelet/glow@latest
 
 go install github.com/saltfishpr/redis-viewer@latest
+go install go.k6.io/xk6/cmd/xk6@latest
+xk6 build --with github.com/szkiba/xk6-dashboard@latest
+xk6 build --with github.com/szkiba/xk6-dotenv@latest
+
+sudo dnf install https://dl.k6.io/rpm/repo.rpm
+sudo dnf install k6
 
 echo $(success "Done Installing Fedora-specific Packages...")
 
