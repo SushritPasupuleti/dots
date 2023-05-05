@@ -1,6 +1,5 @@
 gui:
   showIcons: true
-  border: "hidden"
   theme:
     lightTheme: false
     activeBorderColor:
