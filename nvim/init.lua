@@ -224,13 +224,25 @@ require("lazy").setup({
         end,
     },
     -- Sessions
+    -- {
+    --     "rmagatti/session-lens",
+    --     dependencies = { "rmagatti/auto-session", "nvim-telescope/telescope.nvim" },
+    --     config = function()
+    --         require("session-lens").setup({--[[your custom config--]]
+    --         })
+    --     end,
+    --     -- event="VeryLazy",
+    --     event = "VimEnter",
+    -- },
     {
-        "rmagatti/session-lens",
-        dependencies = {
-            "rmagatti/auto-session",
-        },
-        -- event="VeryLazy",
-        event = "VimEnter",
+        "rmagatti/auto-session",
+        config = function()
+            require("auto-session").setup({
+                log_level = "error",
+                -- auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+            })
+        end,
+		event = "VimEnter",
     },
     -- {
     --     "nvim-lua/plenary.nvim",
@@ -782,6 +794,12 @@ require("lazy").setup({
             vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
             vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
         end,
+    },
+    {
+        "m4xshen/hardtime.nvim",
+        event = "VeryLazy",
+        opts = {},
+        enabled = false,
     },
 })
 

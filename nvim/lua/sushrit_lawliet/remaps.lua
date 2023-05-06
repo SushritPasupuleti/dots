@@ -35,7 +35,7 @@ vim.keymap.set("n", "<leader>fD", ":lua require'telescope.builtin'.diagnostics{ 
 vim.keymap.set("n", "<leader>fh", "<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<cr>")
 vim.keymap.set("n", "<leader>fu", "<cmd>UrlView<cr>")
 vim.keymap.set("n", "<leader>fk", "<cmd>command_center<cr>")
-vim.keymap.set("n", "<leader>fs", "<cmd>SearchSession<cr>")
+vim.keymap.set("n", "<leader>fs", "<cmd>Autosession search<cr>")
 vim.keymap.set("n", "<leader>fv", "<cmd>Telescope neoclip<cr>")
 
 -- Spectre for Find and Replace
@@ -183,3 +183,6 @@ keymap("n", "<A-d>", "<cmd>Lspsaga open_floaterm<CR>", { silent = true })
 keymap("n", "<A-d>", "<cmd>Lspsaga open_floaterm lazygit<CR>", { silent = true })
 -- close floaterm
 keymap("t", "<A-d>", [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], { silent = true })
+
+-- Session Management
+keymap("n", "<C-s>", "<cmd>SessionSave<CR>", { silent = true })

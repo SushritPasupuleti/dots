@@ -66,6 +66,7 @@ require("lualine").setup({
         lualine_c = {
 			-- "tabs",
 			"filename",
+			require('auto-session.lib').current_session_name,
 		},
         lualine_x = { "filesize", "encoding", "fileformat", "filetype" },
         lualine_y = { "progress" },

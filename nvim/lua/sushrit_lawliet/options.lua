@@ -8,6 +8,7 @@ vim.opt.shiftwidth = 4
 vim.opt.smarttab = true
 vim.opt.softtabstop = 4
 vim.opt.mouse = "a"
+-- vim.opt.mouse ="c"
 vim.opt.cursorline = true
 -- vim.opt.list = true
 -- vim.opt.listchars:append("eol:↴")
