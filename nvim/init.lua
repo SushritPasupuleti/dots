@@ -242,7 +242,7 @@ require("lazy").setup({
                 -- auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
             })
         end,
-		event = "VimEnter",
+        event = "VimEnter",
     },
     -- {
     --     "nvim-lua/plenary.nvim",
@@ -545,7 +545,8 @@ require("lazy").setup({
     },
     {
         "zbirenbaum/copilot.lua",
-        event = "BufReadPost",
+        cmd = "Copilot",
+        event = "InsertEnter",
         config = function()
             require("sushrit_lawliet.copilot")
         end,
