@@ -28,6 +28,7 @@ switch (uname)
 		set -gx PATH "$PIP_HOME" $PATH
 		set -gx GOPATH $HOME/go
 		set -gx PATH $PATH $GOPATH/bin
+		set -gx DOCKER_HOST $HOME/.docker/desktop/docker.sock
     case Darwin
 		set -Ux ANDROID_HOME $HOME/Library/Android/sdk
     case '*'
