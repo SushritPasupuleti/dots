@@ -62,6 +62,12 @@ xk6 build --with github.com/szkiba/xk6-dotenv@latest
 sudo dnf install https://dl.k6.io/rpm/repo.rpm
 sudo dnf install k6
 
+echo $(info "Installing Terraform...")
+
+sudo dnf install -y dnf-plugins-core
+sudo dnf config-manager --add-repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
+sudo dnf -y install terraform
+
 echo $(success "Done Installing Fedora-specific Packages...")
 
 echo $(info "Installing Nix Packages from ./nix-fedora.sh")
