@@ -25,7 +25,7 @@ function info {
 
 echo $(info "Installing Packages...")
 
-sudo dnf install bat btop ctags exa fish fd-find fzf gh git-extras git-delta sed lazygit neofetch neovim ranger ripgrep tmux urlview wget zoxide cmatrix
+sudo dnf install bat btop ctags exa fish fd-find fzf gh git-extras git-delta sed lazygit neofetch vim neovim ranger ripgrep tmux urlview wget zoxide cmatrix
 
 echo $(success "Done Installing Core Packages...")
 
@@ -76,9 +76,6 @@ echo $(info "Installing Nix Packages from ./nix-fedora.sh")
 
 echo $(success "Done Installing Nix Packages...")
 
-read -p "Would you like to install nVidia Drivers? (y/n) " -n 1 -r
-echo
-
 echo $(info "Downloading Nerd Fonts...")
 mkdir -p ~/.local/share/fonts
 cd ~/.local/share/fonts
@@ -102,6 +99,12 @@ echo $(success "Done Installing Pop Shell...")
 echo $(info "Configuring npm and yarn")
 sudo chown -R $(whoami) ~/.npm
 npm install --global yarn
+
+echo $(info "Installing Pass...")
+sudo yum install pass
+
+read -p "Would you like to install nVidia Drivers? (y/n) " -n 1 -r
+echo
 
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
