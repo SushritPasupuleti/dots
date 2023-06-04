@@ -50,6 +50,7 @@ vim.keymap.set("n", "<leader>z", ":UndotreeToggle<CR>")
 
 -- Zen Mode
 vim.keymap.set("n", "<space>z", ":ZenMode<CR>")
+vim.keymap.set("n", "<space>n", ":NoNeckPain<CR>")
 
 -- setup mapping to call :LazyGit
 vim.keymap.set("n", "<silent> <leader>gg", ":LazyGit<CR>")

@@ -743,6 +743,53 @@ require("lazy").setup({
         end,
     },
     {
+        "shortcuts/no-neck-pain.nvim",
+        event = "VimEnter",
+        config = function()
+            require("no-neck-pain").setup({
+				width = 100,
+                buffers = {
+                    -- blend = 0.3,
+                    left = {
+						-- width = 60,
+                        bo = {
+                            filetype = "md",
+                        },
+                        scratchPad = {
+                            enabled = true,
+                            fileName = "notes-left",
+                            location = "~/Documents/Notes/",
+                        },
+                    },
+                    right = {
+						-- width = 60,
+                        bo = {
+                            filetype = "md",
+                        },
+                        scratchPad = {
+                            enabled = true,
+                            fileName = "notes-right",
+                            location = "~/Documents/Notes/",
+                        },
+                    },
+                },
+                integrations = {
+                    -- NvimTree = {
+                    --     position = "left",
+                    --     reopen = true,
+                    -- },
+                    -- NeoTree = {
+                    --     position = "left",
+                    --     reopen = true,
+                    -- },
+                    undotree = {
+                        position = "left",
+                    },
+                },
+            })
+        end,
+    },
+    {
         "folke/zen-mode.nvim",
         event = { "BufRead", "BufNewFile" },
         config = function()
