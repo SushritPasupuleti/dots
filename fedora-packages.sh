@@ -98,7 +98,7 @@ echo $(success "Done Installing Pop Shell...")
 
 echo $(info "Configuring npm and yarn")
 sudo chown -R $(whoami) ~/.npm
-npm install --global yarn
+npm install --global yarn vercel
 
 echo $(info "Installing Pass...")
 sudo yum install pass
