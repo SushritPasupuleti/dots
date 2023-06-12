@@ -556,7 +556,7 @@ require("lazy").setup({
         dependencies = {
             "hrsh7th/vim-vsnip-integ",
         },
-        enabled = false,
+        -- enabled = false,
     },
     -- Snippets
     {
