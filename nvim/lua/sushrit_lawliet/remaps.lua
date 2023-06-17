@@ -92,6 +92,7 @@ vim.keymap.set("v", "K", ":MoveBlock(-1)<CR>", opts)
 -- vim.keymap.set('v', '<A-l>', ':MoveHBlock(1)<CR>', opts)
 
 -- DAP-UI --
+vim.keymap.set("n", "<leader>cd", ":lua require'dapui'.toggle()<CR>")
 
 vim.keymap.set("n", "<leader>de", ":Dirbuf<CR>")
 
