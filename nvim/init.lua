@@ -113,6 +113,44 @@ require("lazy").setup({
         end,
     },
     {
+        "j-hui/fidget.nvim",
+        event = "VimEnter",
+        config = function()
+            require("fidget").setup({
+				text = {
+					spinner = "dots_negative",
+				},
+                window = {
+                    relative = "win", -- where to anchor, either "win" or "editor"
+                    blend = 0, -- &winblend for the window
+                    zindex = nil, -- the zindex value for the window
+                    border = "none", -- style of border for the fidget window
+                },
+            })
+        end,
+    },
+    {
+        "saecki/crates.nvim",
+        event = { "BufRead Cargo.toml" },
+        dependencies = { "nvim-lua/plenary.nvim" },
+        config = function()
+            require("crates").setup({
+                null_ls = {
+                    enabled = true,
+                    name = "crates.nvim",
+                },
+            })
+        end,
+    },
+    {
+        "dnlhc/glance.nvim",
+        config = function()
+            require("glance").setup({
+                -- your configuration
+            })
+        end,
+    },
+    {
         "folke/lsp-colors.nvim",
         event = { "BufReadPre", "BufNewFile" },
     },
@@ -747,11 +785,11 @@ require("lazy").setup({
         event = "VimEnter",
         config = function()
             require("no-neck-pain").setup({
-				width = 100,
+                width = 100,
                 buffers = {
                     -- blend = 0.3,
                     left = {
-						-- width = 60,
+                        -- width = 60,
                         bo = {
                             filetype = "md",
                         },
@@ -762,7 +800,7 @@ require("lazy").setup({
                         },
                     },
                     right = {
-						-- width = 60,
+                        -- width = 60,
                         bo = {
                             filetype = "md",
                         },

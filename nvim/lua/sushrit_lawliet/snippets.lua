@@ -73,6 +73,7 @@ cmp.setup({
         -- { name = "fish" },
         -- { name = "tmux" },
         { name = "nvim_lua" },
+        { name = "crates" },
     }),
 })
 

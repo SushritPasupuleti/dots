@@ -188,3 +188,31 @@ keymap("t", "<A-d>", [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], { silent = t
 
 -- Session Management
 keymap("n", "<C-s>", "<cmd>SessionSave<CR>", { silent = true })
+
+local function show_documentation()
+    local filetype = vim.bo.filetype
+    if vim.tbl_contains({ 'vim','help' }, filetype) then
+        vim.cmd('h '..vim.fn.expand('<cword>'))
+    elseif vim.tbl_contains({ 'man' }, filetype) then
+        vim.cmd('Man '..vim.fn.expand('<cword>'))
+    elseif vim.fn.expand('%:t') == 'Cargo.toml' and require('crates').popup_available() then
+        require('crates').show_popup()
+    else
+        vim.lsp.buf.hover()
+    end
+end
+
+local crates = require('crates')
+local opts = { silent = true }
+
+vim.keymap.set('n', '<leader>ck', show_documentation, { silent = true })
+vim.keymap.set('n', '<leader>cv', crates.show_versions_popup, opts)
+vim.keymap.set('n', '<leader>cf', crates.show_features_popup, opts)
+vim.keymap.set('n', '<leader>cd', crates.show_dependencies_popup, opts)
+vim.keymap.set('n', '<leader>ct', crates.toggle, opts)
+vim.keymap.set('n', '<leader>cr', crates.reload, opts)
+
+vim.keymap.set('n', 'gD', '<CMD>Glance definitions<CR>')
+vim.keymap.set('n', 'gR', '<CMD>Glance references<CR>')
+vim.keymap.set('n', 'gY', '<CMD>Glance type_definitions<CR>')
+vim.keymap.set('n', 'gM', '<CMD>Glance implementations<CR>')
