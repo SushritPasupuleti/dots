@@ -117,9 +117,9 @@ require("lazy").setup({
         event = "VimEnter",
         config = function()
             require("fidget").setup({
-				text = {
-					spinner = "dots_negative",
-				},
+                text = {
+                    spinner = "dots_negative",
+                },
                 window = {
                     relative = "win", -- where to anchor, either "win" or "editor"
                     blend = 0, -- &winblend for the window
@@ -886,6 +886,16 @@ require("lazy").setup({
         event = "VeryLazy",
         opts = {},
         enabled = false,
+    },
+    {
+        "folke/todo-comments.nvim",
+		event = "VeryLazy",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        opts = {
+            -- your configuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
+        },
     },
 })
 

@@ -37,6 +37,7 @@ vim.keymap.set("n", "<leader>fu", "<cmd>UrlView<cr>")
 vim.keymap.set("n", "<leader>fk", "<cmd>command_center<cr>")
 vim.keymap.set("n", "<leader>fs", "<cmd>Autosession search<cr>")
 vim.keymap.set("n", "<leader>fv", "<cmd>Telescope neoclip<cr>")
+vim.keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<cr>")
 
 -- Spectre for Find and Replace
 vim.keymap.set("n", "<leader>S", "<cmd>lua require('spectre').open()<CR>")
