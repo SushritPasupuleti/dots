@@ -696,6 +696,7 @@ require("lazy").setup({
     {
         "git-time-metric/gtm-vim-plugin",
         event = "BufReadPost",
+		enabled = false;
     },
     {
         "gaborvecsei/memento.nvim",

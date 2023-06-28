@@ -31,6 +31,9 @@ require("nvim-treesitter.configs").setup({
 		"vim",
 		"yaml",
 	},
+	ignore_install = {
+"help"
+	},
 	highlight = {
 		-- enable = true,
 		enable = true,
