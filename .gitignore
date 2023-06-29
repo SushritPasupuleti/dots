@@ -5,3 +5,4 @@ fish/conf.d/exports.fish
 lazygit/state.yml
 fish/fish_variables
 scripts/devices.txt
+backup

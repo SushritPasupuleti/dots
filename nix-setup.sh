@@ -44,3 +44,6 @@ sudo ln -s "$(pwd -P)"/nixos/hardware-configuration.nix /etc/nixos/hardware-conf
 echo $(success "Done!")
 
 echo $(info "Run sudo nixos-rebuild switch to apply changes")
+
+echo $(info "Installing riff for rust development")
+nix profile install github:DeterminateSystems/riff
