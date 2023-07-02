@@ -44,7 +44,7 @@
     };
   };
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "nixy-zangetsu"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -122,7 +122,6 @@
       vim
       neovim
       tmux
-      fish
       kitty
       starship
       nerdfonts
@@ -138,7 +137,10 @@
       postman
       microsoft-edge
       google-chrome
+	  brave
 	  pika-backup
+	  transmission
+	  vlc
       #langs
       go
       python39
@@ -178,6 +180,7 @@
 	  pkgconfig
 	  openssl
 	  libiconv
+	  turbo
       #terminal-notifier
       wget
       urlview
@@ -198,6 +201,10 @@
       #themes
       catppuccin-gtk
     #  thunderbird
+	  # fish
+	  fish
+	  fishPlugins.done
+	  fishPlugins.fzf-fish
     ];
   };
 
@@ -316,5 +323,5 @@
   '';
   nix.package = pkgs.nixUnstable;
 
-  system.nixos.label = "Add-Flakes-Support";
+  system.nixos.label = "Add-Fish-Plugins";
 }

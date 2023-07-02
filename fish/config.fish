@@ -21,9 +21,12 @@ fish_add_path /opt/homebrew/sbin
 switch (uname)
     case Linux
 		set NODE_PATH /usr/lib/node_modules
-		set -Ux ANDROID_HOME $HOME/Android/Sdk
+		# set -Ux ANDROID_HOME $HOME/Android/Sdk
+		set -Ux ANDROID_HOME $HOME/AndroidSDK-Custom #For NixOS
+		# set -Ux ANDROID_HOME /etc/profiles/per-user/sushrit_lawliet/bin
 		set PATH $HOME/apps $PATH
-		set -Ux JAVA_HOME /usr/lib/jvm/java-11-openjdk
+		# set -Ux JAVA_HOME /usr/lib/jvm/java-11-openjdk
+		set -Ux JAVA_HOME /etc/profiles/per-user/sushrit_lawliet/bin/java
 		set -gx PIP_HOME "/home/$USER/.local/bin"
 		set -gx PATH "$PIP_HOME" $PATH
 		set -gx GOPATH $HOME/go
@@ -55,6 +58,9 @@ alias nv='nvim'
 # ggl - for googling
 alias gge="ggl -b='Microsoft Edge'"
 alias gg="ggl"
+alias ns="nix-shell"
+alias rs="riff shell"
+alias e="exit"
 
 # custom scripts
 alias c='clear'
