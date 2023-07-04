@@ -115,7 +115,7 @@
   users.users.sushrit_lawliet = {
     isNormalUser = true;
     description = "Sushrit Pasupuleti";
-    extraGroups = [ "networkmanager" "wheel" "adbusers" "libvirtd"];
+    extraGroups = [ "networkmanager" "wheel" "adbusers" "libvirtd" "docker"];
     packages = with pkgs; [
       firefox
       git
@@ -151,6 +151,9 @@
       lua
       stylua
       openjdk17
+	  podman
+	  podman-tui
+	  podman-desktop
       #dbs
       postgresql_15
       pgadmin4-desktopmode
@@ -316,6 +319,17 @@
   ## OpenRGB
   boot.kernelModules = [ "i2c-dev" "i2c-piix4" ];
 
+  ## Docker
+  virtualisation.docker = {
+	enable = true;
+	enableOnBoot = true;
+  };
+  virtualisation.docker.rootless = {
+	enable = true;
+	setSocketVariable = true;
+  };
+  # users.extraGroups.docker.members = [ "sushrit_lawliet" ];
+
   ## Flakes
     # Use edge NixOS.
   nix.extraOptions = ''
@@ -323,5 +337,5 @@
   '';
   nix.package = pkgs.nixUnstable;
 
-  system.nixos.label = "Add-Fish-Plugins";
+  system.nixos.label = "Add-Podman";
 }
