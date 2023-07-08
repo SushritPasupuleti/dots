@@ -148,6 +148,7 @@
       yarn
       gcc
       rustup
+	  rust-analyzer
       lua
       stylua
       openjdk17
@@ -189,6 +190,7 @@
       urlview
       jq
       openrgb-with-all-plugins
+	  nyxt
       #gnome-extensions
       gnomeExtensions.pop-shell
       gnome.gnome-tweaks
@@ -330,6 +332,9 @@
   };
   # users.extraGroups.docker.members = [ "sushrit_lawliet" ];
 
+  #Enable unpatched binaries
+  programs.nix-ld.enable = true;
+
   ## Flakes
     # Use edge NixOS.
   nix.extraOptions = ''
@@ -337,5 +342,5 @@
   '';
   nix.package = pkgs.nixUnstable;
 
-  system.nixos.label = "Add-Podman";
+  system.nixos.label = "Add-Nyxt";
 }

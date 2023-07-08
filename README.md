@@ -14,6 +14,8 @@ All my dot files in one place. Best experience in order:
 
 - Installation scripts via Homebrew for MacOS and Linux (partially).
 
+- Best experienced on a system with `nix` installed or `NixOS`.
+
 > **Note**: Check [WinDev](/windev/README.md) for a Windows specific setup.
 
 ### Scripts
