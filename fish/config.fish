@@ -14,6 +14,8 @@ set PATH $HOME/.my-scripts $PATH
 set PATH $HOME/.emacs.d/bin: $PATH
 set DENO_INSTALL "/home/sushrit_lawliet/.deno"
 set PATH $DENO_INSTALL/bin: $PATH
+set PATH $(which yarn) $PATH
+set PATH $(which arduino-cli) $PATH
 
 fish_add_path /opt/homebrew/sbin
 
