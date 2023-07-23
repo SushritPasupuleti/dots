@@ -61,7 +61,7 @@ local on_attach = function(client, bufnr)
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-    vim.keymap.set("n", "gq", vim.lsp.buf.hover, bufopts)
+    vim.keymap.set("n", "gk", vim.lsp.buf.hover, bufopts)
     vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
     vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
     vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, bufopts)
@@ -77,6 +77,13 @@ local on_attach = function(client, bufnr)
 end
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
+-- Enable additional completion for HTML/JSON/CSS
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+-- Add additional capabilities supported by UFO
+capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true,
+}
 
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup({
@@ -110,8 +117,34 @@ rt.setup({
             -- Code action groups
             vim.keymap.set("n", "<Leader>rca", rt.code_action_group.code_action_group, { buffer = bufnr })
         end,
+        capabilities = capabilities,
+        settings = {
+            ["rust-analyzer"] = {
+                checkOnSave = {
+                    command = "clippy",
+                },
+            },
+        },
+    },
+    tools = {
+        hover_actions = {
+            -- auto_focus = true,
+        },
     },
     dap = {
         adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
     },
+})
+
+require("rust-tools").inlay_hints.enable()
+
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+    border = "single",
+	-- title = "FloatTitle",
+	style = "minimal",
+})
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+    border = "single",
+    focusable = true,
+    relative = "cursor",
 })

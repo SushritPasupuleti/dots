@@ -146,6 +146,7 @@ require("lualine").setup({
             },
             "diff",
             "searchcount",
+			-- require(lspsaga.symbol.winbar).get_bar(),
         },
         lualine_c = {},
         lualine_x = {},
@@ -178,12 +179,18 @@ require("lualine").setup({
     extensions = {
         "toggleterm",
         "nvim-dap-ui",
+		"lazy",
+		"trouble",
+		"quickfix",
+		"man",
+		"fzf",
     },
 })
 
 -- local clrs = require("catppuccin.palettes").get_palette()
 -- local ctp_feline = require("catppuccin.groups.integrations.feline")
 -- local U = require("catppuccin.utils.colors")
+-- local mocha = require("catppuccin.palettes").get_palette "mocha"
 --
 -- ctp_feline.setup({
 --     assets = {
@@ -249,4 +256,15 @@ require("lualine").setup({
 --
 -- feline.winbar.setup({
 --     -- components = ctp_feline.get_winbar(),
+-- })
+--
+-- vim.api.nvim_create_autocmd("ColorScheme", {
+--     pattern = "*",
+--     callback = function()
+--         package.loaded["feline"] = nil
+--         package.loaded["catppuccin.groups.integrations.feline"] = nil
+--         require("feline").setup {
+--             components = require("catppuccin.groups.integrations.feline").get(),
+--         }
+--     end,
 -- })

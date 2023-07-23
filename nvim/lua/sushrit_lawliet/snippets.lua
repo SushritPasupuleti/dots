@@ -48,8 +48,8 @@ cmp.setup({
         -- documentation = cmp.config.window.bordered(),
     },
     mapping = cmp.mapping.preset.insert({
-        ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        ["<C-u>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-d>"] = cmp.mapping.scroll_docs(4),
         ["<C-Space>"] = cmp.mapping.complete(),
         ["<C-e>"] = cmp.mapping.abort(),
         ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
@@ -63,6 +63,7 @@ cmp.setup({
         -- { name = 'snippy' }, -- For snippy users.
     }, {
         { name = "buffer" },
+		-- { name = "copilot.lua" },
         -- Additonal Sources:
         {
             name = "latex_symbols",
@@ -74,6 +75,7 @@ cmp.setup({
         -- { name = "tmux" },
         { name = "nvim_lua" },
         { name = "crates" },
+		{ name = 'npm', keyword_length = 4 },
     }),
 })
 
@@ -154,16 +156,21 @@ require("cmp").setup({
     window = {
         completion = {
             -- winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
-            col_offset = -3,
+            -- col_offset = -3,
             side_padding = 0,
             -- border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+			border = "solid",
+            -- winhighlight = "Normal:CmpPmenu,FloatBorder:CmpBorder,CursorLine:PmenuSel,Search:None",
+            winhighlight = "Normal:CmpPmenu,FloatBorder:CmpBorder,CursorLine:PmenuSel",
+        },
+        documentation = {
+            -- border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+			border = "solid",
+            winhighlight = "Normal:CmpDoc,FloatBorder:CmpDocBorder",
+            -- winhighlight = "CmpDocBorder",
             -- winhighlight = "Normal:CmpPmenu,FloatBorder:CmpBorder,CursorLine:PmenuSel,Search:None",
         },
     },
-    -- documentation = {
-    --     border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-    --     winhighlight = "Normal:CmpPmenu,FloatBorder:CmpBorder,CursorLine:PmenuSel,Search:None",
-    -- },
     formatting = {
         fields = { "kind", "abbr", "menu" },
         format = function(entry, vim_item)

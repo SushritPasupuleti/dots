@@ -45,3 +45,8 @@ if vim.g.neovide then
 	vim.g.neovide_floating_blur_amount_y = 4.0
 	-- vim.g.neovide_input_use_logo = true	
 end
+
+-- Folds
+-- UFO requires a large value for these settings
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99

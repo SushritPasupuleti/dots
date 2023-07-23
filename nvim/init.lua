@@ -73,6 +73,7 @@ require("lazy").setup({
     },
     {
         "nvim-lualine/lualine.nvim",
+        -- enabled=false,
         event = "VimEnter",
         config = function()
             require("sushrit_lawliet.statusline")
@@ -110,6 +111,12 @@ require("lazy").setup({
         },
         config = function()
             require("sushrit_lawliet.lspconfig")
+        end,
+    },
+    {
+        "JASONews/glow-hover",
+        config = function()
+            require("glow-hover").setup({})
         end,
     },
     {
@@ -155,13 +162,21 @@ require("lazy").setup({
         event = { "BufReadPre", "BufNewFile" },
     },
     {
-        "glepnir/lspsaga.nvim",
-        event = "BufRead",
+        "nvimdev/lspsaga.nvim",
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter", -- optional
+            "nvim-tree/nvim-web-devicons", -- optional
+        },
+        event = "LspAttach",
         -- enabled = false,
         config = function()
             require("lspsaga").setup({
+                lightbulb = {
+                    virtual_text = false,
+                    -- enable = false,
+                },
                 ui = {
-                    border = "rounded",
+                    border = "single",
                 },
                 -- *NOTE*: Disabled inline diagnostics for now
                 -- as it causes a lot of issues
@@ -179,6 +194,9 @@ require("lazy").setup({
                 -- toggle these in the future when the bugs stop
                 colors = require("catppuccin.groups.integrations.lsp_saga").custom_colors(),
                 kind = require("catppuccin.groups.integrations.lsp_saga").custom_kind(),
+                breadcrumbs = {
+                    enable = false,
+                },
             })
         end,
     },
@@ -447,6 +465,22 @@ require("lazy").setup({
             require("sushrit_lawliet.snippets")
         end,
     },
+    {
+        "zbirenbaum/copilot-cmp",
+        enabled = false,
+        event = { "BufRead" },
+        config = function()
+            require("copilot_cmp").setup()
+        end,
+    },
+    {
+        "David-Kunz/cmp-npm",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        ft = "json",
+        config = function()
+            require("cmp-npm").setup({})
+        end,
+    },
     -- Yank History
     {
         "AckslD/nvim-neoclip.lua",
@@ -526,6 +560,7 @@ require("lazy").setup({
     },
     {
         "akinsho/bufferline.nvim",
+        enabled = false,
         event = "VeryLazy",
     },
     {
@@ -696,7 +731,7 @@ require("lazy").setup({
     {
         "git-time-metric/gtm-vim-plugin",
         event = "BufReadPost",
-		enabled = false;
+        enabled = false,
     },
     {
         "gaborvecsei/memento.nvim",
@@ -717,6 +752,25 @@ require("lazy").setup({
     -- "hkupty/iron.nvim",
     -- { "GCBallesteros/vim-textobj-hydrogen", dependencies = { "kana/vim-textobj-user", "kana/vim-textobj-line" } },
     -- "GCBallesteros/jupytext.vim",
+    {
+        "linux-cultist/venv-selector.nvim",
+        dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
+        config = true,
+        event = "VeryLazy", -- Optional: needed only if you want to type `:VenvSelect` without a keymapping
+        keys = {
+            {
+                "<leader>vs",
+                "<cmd>:VenvSelect<cr>",
+                "<leader>vc",
+                "<cmd>:VenvSelectCached<cr>",
+            },
+        },
+        opts = {
+            -- search = false,
+            search_workspace = true,
+            name = { "venv", ".venv" },
+        },
+    },
     {
         "elihunter173/dirbuf.nvim",
         event = "VeryLazy",
@@ -890,13 +944,126 @@ require("lazy").setup({
     },
     {
         "folke/todo-comments.nvim",
-		event = "VeryLazy",
+        event = "VeryLazy",
         dependencies = { "nvim-lua/plenary.nvim" },
         opts = {
             -- your configuration comes here
             -- or leave it empty to use the default settings
             -- refer to the configuration section below
         },
+    },
+    {
+        "edKotinsky/Arduino.nvim",
+        name = "arduino",
+        event = "BufRead filetype=ino",
+        config = function()
+            require("arduino").setup({
+                clangd = require("mason-core.path").bin_prefix("clangd"),
+                default_fqbn = "arduino:avr:uno",
+            })
+            local arduino_cmd = require("arduino").configure(vim.fn.getcwd())
+        end,
+        -- enabled = false,
+    },
+    {
+        "stevearc/vim-arduino",
+        name = "vim-arduino",
+        event = "BufRead filetype=ino",
+        config = function()
+            require("vim-arduino").setup({})
+            vim.g.arduino_use_cli = 1
+        end,
+        enabled = false,
+    },
+    {
+        "NeogitOrg/neogit",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "sindrets/diffview.nvim",
+        },
+        event = "VimEnter",
+        config = function()
+            require("neogit").setup({
+                use_telescope = true,
+                integrations = {
+                    diffview = true,
+                },
+            })
+        end,
+    },
+    {
+        "pmizio/typescript-tools.nvim",
+        enabled = false,
+        dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+        opts = {},
+        config = function()
+            require("sushrit_lawliet.typescript")
+        end,
+    },
+    {
+        "folke/flash.nvim",
+        event = "VeryLazy",
+        enabled = false,
+        ---@type Flash.Config
+        opts = {},
+		  -- stylua: ignore
+		  keys = {
+			{ "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+			{ "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+			{ "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+			{ "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+			{ "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+		  },
+    },
+    {
+        "kevinhwang91/nvim-ufo",
+        enabled = false,
+        dependencies = { "kevinhwang91/promise-async" },
+        config = function()
+            require("ufo").setup()
+        end,
+    },
+    {
+        "NvChad/nvim-colorizer.lua",
+        config = function()
+            require("colorizer").setup()
+        end,
+    },
+    {
+        "folke/noice.nvim",
+        event = "VeryLazy",
+        opts = {
+            -- add any options here
+        },
+        dependencies = {
+            -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+            "MunifTanjim/nui.nvim",
+            -- OPTIONAL:
+            --   `nvim-notify` is only needed, if you want to use the notification view.
+            --   If not available, we use `mini` as the fallback
+            "rcarriga/nvim-notify",
+        },
+		enabled = false,
+        config = function()
+            require("noice").setup({
+                lsp = {
+                    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+                    override = {
+                        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+                        ["vim.lsp.util.stylize_markdown"] = true,
+                        ["cmp.entry.get_documentation"] = true,
+                    },
+                },
+                -- you can enable a preset for easier configuration
+                presets = {
+                    bottom_search = false, -- use a classic bottom cmdline for search
+                    command_palette = false, -- position the cmdline and popupmenu together
+                    long_message_to_split = true, -- long messages will be sent to a split
+                    inc_rename = false, -- enables an input dialog for inc-rename.nvim
+                    lsp_doc_border = false, -- add a border to hover docs and signature help
+                },
+            })
+        end,
     },
 })
 
