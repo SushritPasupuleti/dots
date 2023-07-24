@@ -16,6 +16,7 @@ style = 'bold green'
 format = '[ ]($style)'
 
 [sudo]
+disabled = false
 
 [battery]
 full_symbol = "🔋"
@@ -27,7 +28,7 @@ threshold = 30
 style = "bold red"
 
 # Inserts a blank line between shell prompts
-add_newline = true
+# add_newline = true
 
 # Replace the '❯' symbol in the prompt with '➜'
 # [character] # The name of the module we are configuring is 'character'
@@ -140,7 +141,7 @@ format = '[+ $added]($added_style)/[- $deleted]($deleted_style) '
 [lua]
 
 [os]
-# disabled=false
+disabled=false
 
 [os.symbols]
 Macos = " "
@@ -181,3 +182,14 @@ style_root = 'black bold'
 format = 'as [$user]($style) '
 disabled = false
 # show_always = true
+
+[nix_shell]
+disabled = false
+impure_msg = '[impure shell](bold red)'
+pure_msg = '[pure shell](bold green)'
+unknown_msg = '[default shell](bold yellow)'
+format = 'via [❄️ $state( \($name\))](bold blue) '
+heuristic = true
+
+[line_break]
+disabled = false
