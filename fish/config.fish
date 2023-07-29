@@ -16,6 +16,7 @@ set DENO_INSTALL "/home/sushrit_lawliet/.deno"
 set PATH $DENO_INSTALL/bin: $PATH
 set PATH $(which yarn) $PATH
 set PATH $(which arduino-cli) $PATH
+set PATH $HOME/.npm-global $PATH
 
 fish_add_path /opt/homebrew/sbin
 
@@ -28,8 +29,8 @@ switch (uname)
 		# set -Ux ANDROID_HOME /etc/profiles/per-user/sushrit_lawliet/bin
 		set PATH $HOME/apps $PATH
 		# set -Ux JAVA_HOME /usr/lib/jvm/java-11-openjdk
-		set -Ux JAVA_HOME /etc/profiles/per-user/sushrit_lawliet/bin/java
-		set -gx PIP_HOME "/home/$USER/.local/bin"
+		# set -Ux JAVA_HOME /etc/profiles/per-user/sushrit_lawliet/bin/java
+		set -Ux JAVA_HOME /run/current-system/sw
 		set -gx PATH "$PIP_HOME" $PATH
 		set -gx GOPATH $HOME/go
 		set -gx PATH $PATH $GOPATH/bin
