@@ -123,12 +123,20 @@
       neovim
       tmux
       kitty
+	  wezterm
+	  ranger
       starship
       nerdfonts
       fira-code
       gh
       lazygit
       delta
+	  docker
+	  # k3s
+	  datree
+	  kind #local docker clusters
+	  kubectl
+	  # minikube
       #github-desktop
       vscode
       android-studio
@@ -141,10 +149,13 @@
 	  pika-backup
 	  transmission
 	  vlc
+	  rpi-imager
       #langs
       go
       python39
       nodejs_18
+	  # nodePackages.eas-cli
+	  bun
       yarn
       gcc
       rustup
@@ -157,6 +168,10 @@
 	  podman-desktop
       #dbs
       postgresql_15
+	  prometheus
+	  prometheus-node-exporter
+	  grafana
+	  # postgresql15Packages.timescaledb
       pgadmin4-desktopmode
       #utilties
       gum
@@ -185,12 +200,18 @@
 	  openssl
 	  libiconv
 	  turbo
+	  arduino
+	  arduino-cli
       #terminal-notifier
       wget
       urlview
+	  mqttui
+	  mosquitto
       jq
       openrgb-with-all-plugins
 	  nyxt
+	  obs-studio
+	  ripdrag
       #gnome-extensions
       gnomeExtensions.pop-shell
       gnome.gnome-tweaks
@@ -232,7 +253,32 @@
   services.postgresql = {
   enable = true;
   package = pkgs.postgresql_15;
+  extraPlugins = [ pkgs.postgresql15Packages.timescaledb ];
+  settings.shared_preload_libraries = "timescaledb";
   #dataDir = "/data/postgresql";
+  # authentication = pkgs.lib.mkOverride 10 ''
+  #   #...
+  #   #type database DBuser origin-address auth-method
+  #   # ipv4
+  #   host  all      all     127.0.0.1/32   trust
+  #   # ipv6
+  #   host all       all     ::1/128        trust
+  # '';
+};
+
+services.grafana = {
+  enable = true;
+  settings = {
+    server = {
+      # Listening Address
+      http_addr = "127.0.0.1";
+      # and Port
+      http_port = 9001;
+      # Grafana needs to know on which domain and URL it's running
+      # domain = "your.domain";
+      # root_url = "https://your.domain/grafana/"; # Not needed if it is `https://your.domain/`
+    };
+  };
 };
 
   programs.adb.enable = true;
@@ -260,7 +306,7 @@
   # services.openssh.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [ 6443 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
@@ -332,6 +378,20 @@
   };
   # users.extraGroups.docker.members = [ "sushrit_lawliet" ];
 
+  ## Kubernetes
+  services.k3s.enable = true;
+  services.k3s.role = "server";
+  # services.k3s.docker = true;
+  services.k3s.extraFlags = toString [
+    # "--kubelet-arg=v=4" # Optionally add additional args to k3s
+  ];
+
+  # Hyprland
+  programs.hyprland.enable = true;
+
+  # Enable Java
+  programs.java.enable = true;
+
   #Enable unpatched binaries
   programs.nix-ld.enable = true;
 
@@ -342,5 +402,20 @@
   '';
   nix.package = pkgs.nixUnstable;
 
-  system.nixos.label = "Add-Nyxt";
+    # pin docker to older nixpkgs: https://github.com/NixOS/nixpkgs/issues/244159
+  nixpkgs.overlays = [
+    (let
+      pinnedPkgs = import(pkgs.fetchFromGitHub {
+        owner = "NixOS";
+        repo = "nixpkgs";
+        rev = "b6bbc53029a31f788ffed9ea2d459f0bb0f0fbfc";
+        sha256 = "sha256-JVFoTY3rs1uDHbh0llRb1BcTNx26fGSLSiPmjojT+KY=";
+      }) {};
+    in
+    final: prev: {
+      docker = pinnedPkgs.docker;
+    })
+  ];
+
+  system.nixos.label = "Add-Datree";
 }
