@@ -339,6 +339,11 @@ require("lazy").setup({
         end,
     },
     {
+        "Marskey/telescope-sg",
+        event = "VimEnter",
+        name = "ast_grep",
+    },
+    {
         "petertriho/nvim-scrollbar",
         event = { "BufRead", "BufNewFile" },
         opts = {
@@ -582,6 +587,7 @@ require("lazy").setup({
     },
     {
         "preservim/tagbar", -- Tagbar for code navigation
+        enabled = false,
         event = { "BufRead", "BufNewFile" },
     },
     {
@@ -1043,7 +1049,7 @@ require("lazy").setup({
             --   If not available, we use `mini` as the fallback
             "rcarriga/nvim-notify",
         },
-		enabled = false,
+        enabled = false,
         config = function()
             require("noice").setup({
                 lsp = {
@@ -1064,6 +1070,23 @@ require("lazy").setup({
                 },
             })
         end,
+    },
+    {
+        "richardbizik/nvim-toc",
+        event = "filetype markdown",
+        config = function()
+            require("nvim-toc").setup({})
+        end,
+    },
+    {
+        "MaximilianLloyd/tw-values.nvim",
+        keys = {
+            { "<leader>sv", "<cmd>TWValues<cr>", desc = "Show tailwind CSS values" },
+        },
+        opts = {
+            border = "rounded", -- Valid window border style,
+            show_unknown_classes = true, -- Shows the unknown classes popup
+        },
     },
 })
 
