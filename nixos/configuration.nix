@@ -31,7 +31,7 @@
       efiSupport = true;
       enable = true;
       extraEntries = ''
-        menuentry "Windows" {
+        menuentry "Micros**t Windows 11" {
           insmod part_gpt
           insmod fat
           insmod search_fs_uuid
@@ -40,7 +40,7 @@
           chainloader /EFI/Microsoft/Boot/bootmgfw.efi
         }
       '';
-      version = 2;
+      # version = 2;
     };
   };
 
@@ -121,6 +121,7 @@
       git
       vim
       neovim
+	  emacs
       tmux
       kitty
 	  wezterm
@@ -133,9 +134,13 @@
       delta
 	  docker
 	  # k3s
+	  ktunnel
 	  datree
 	  kind #local docker clusters
 	  kubectl
+	  kubectx
+	  k9s
+	  kubernetes-helm
 	  # minikube
       #github-desktop
       vscode
@@ -149,6 +154,7 @@
 	  pika-backup
 	  transmission
 	  vlc
+	  zoom-us
 	  rpi-imager
       #langs
       go
@@ -183,6 +189,7 @@
       ctags
       gnused
       ripgrep
+	  # ast-grep
       bat
       btop
       htop
@@ -194,7 +201,9 @@
       #cli
       aws-sam-cli
       awscli2
+	  aws-iam-authenticator
       terraform
+	  terraform-ls
       k6
 	  pkgconfig
 	  openssl
@@ -417,5 +426,5 @@ services.grafana = {
     })
   ];
 
-  system.nixos.label = "Add-Datree";
+  system.nixos.label = "Add-zoom";
 }
