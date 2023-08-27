@@ -7,6 +7,7 @@ end
 # set -gx TERM xterm-kitty
 set -gx EDITOR vim
 set -gx PATH /opt/homebrew/bin $PATH
+# set -gx KUBECONFIG /etc/rancher/k3s/k3s.yaml
 
 set PATH /usr/local/opt/libpq/bin $PATH
 set PATH $HOME/.cargo/bin $PATH
@@ -57,6 +58,7 @@ set fzf_fd_opts --hidden --exclude=.git
 alias ls='exa -l -g --icons --git --color=always'
 alias ll='exa -1 --icons --tree --git-ignore --color=always'
 alias lg='lazygit'
+alias lzd='lazydocker'
 alias nv='nvim'
 # ggl - for googling
 alias gge="ggl -b='Microsoft Edge'"

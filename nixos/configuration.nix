@@ -131,6 +131,7 @@
       fira-code
       gh
       lazygit
+	  lazydocker
       delta
 	  docker
 	  # k3s
@@ -160,7 +161,10 @@
       go
       python39
       nodejs_18
+	  # grpc-tools
+	  protobuf3_20
 	  # nodePackages.eas-cli
+	  nodePackages.tailwindcss
 	  bun
       yarn
       gcc
@@ -180,6 +184,7 @@
 	  # postgresql15Packages.timescaledb
       pgadmin4-desktopmode
       #utilties
+	  lsof
       gum
       glow
       exa
@@ -193,6 +198,7 @@
       bat
       btop
       htop
+	  python310Packages.gpustat
       sqlite
       neofetch
       timg
@@ -204,6 +210,7 @@
 	  aws-iam-authenticator
       terraform
 	  terraform-ls
+	  terraform-docs
       k6
 	  pkgconfig
 	  openssl
@@ -426,5 +433,5 @@ services.grafana = {
     })
   ];
 
-  system.nixos.label = "Add-zoom";
+  system.nixos.label = "Add-grpc-tools";
 }
