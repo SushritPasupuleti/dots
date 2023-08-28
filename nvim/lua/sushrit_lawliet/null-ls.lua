@@ -3,7 +3,7 @@ require("null-ls").setup({
 		--Formatters Start--
 		require("null-ls").builtins.formatting.stylua,
 		require("null-ls").builtins.formatting.prettier.with({
-			filetypes = { "html", "json", "yaml", "markdown" },
+			filetypes = { "html", "json", "yaml", "markdown", "go", "python" },
 		}),
 		--Formatters End--
 		--Diagnotics Start--

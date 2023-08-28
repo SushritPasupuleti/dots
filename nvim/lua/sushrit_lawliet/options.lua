@@ -18,6 +18,7 @@ vim.opt.wildmode = "list:longest"
 vim.opt.wildignore = "*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx"
 
 vim.g.do_filetype_lua = 1
+vim.opt.filetype = "on"
 
 -- vim.api.nvim_set_hl(0, "Normal", { ctermbg = none, guibg = none })
 
