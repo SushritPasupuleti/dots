@@ -144,6 +144,7 @@
 	  kubernetes-helm
 	  # minikube
       #github-desktop
+	  gnumake
       vscode
       android-studio
       android-tools
@@ -161,10 +162,13 @@
       go
       python39
       nodejs_18
+	  elixir_1_15
+	  elixir-ls
 	  # grpc-tools
 	  protobuf3_20
 	  # nodePackages.eas-cli
 	  nodePackages.tailwindcss
+	  nodePackages.pnpm
 	  bun
       yarn
       gcc
@@ -433,5 +437,5 @@ services.grafana = {
     })
   ];
 
-  system.nixos.label = "Add-grpc-tools";
+  system.nixos.label = "Add-elixir";
 }
