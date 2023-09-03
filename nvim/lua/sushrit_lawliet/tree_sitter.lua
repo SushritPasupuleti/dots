@@ -30,6 +30,9 @@ require("nvim-treesitter.configs").setup({
 		"tsx",
 		"vim",
 		"yaml",
+		"elixir",
+		"heex",
+		"eex",
 	},
 	ignore_install = {
 "help"

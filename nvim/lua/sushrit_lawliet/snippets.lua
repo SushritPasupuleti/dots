@@ -75,7 +75,7 @@ cmp.setup({
         -- { name = "tmux" },
         { name = "nvim_lua" },
         { name = "crates" },
-		{ name = 'npm', keyword_length = 4 },
+		-- { name = 'npm', keyword_length = 4 },
     }),
 })
 

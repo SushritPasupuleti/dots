@@ -26,6 +26,7 @@ local servers = {
     "cssls",
     "ansiblels",
     "arduino_language_server",
+	-- "elixirls",
     -- "omnisharp",
     -- "rust_analyzer",
     -- "sumneko_lua",
@@ -148,3 +149,9 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
     focusable = true,
     relative = "cursor",
 })
+
+require('lspconfig').elixirls.setup {
+  cmd = { "elixir-ls" },
+  on_attach = on_attach,
+  capabilities = capabilities
+}

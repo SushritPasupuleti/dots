@@ -81,10 +81,23 @@ require("lazy").setup({
     },
     {
         "freddiehaddad/feline.nvim",
-        event = "VimEnter",
+        -- version = "1.1.1",
+        branch = "main",
+        --event = "VimEnter",
+        lazy = false,
         enabled = false,
         config = function()
-            require("sushrit_lawliet.statusline")
+            -- require("sushrit_lawliet.statusline")
+            require("feline").setup({})
+            --require('feline').statuscolumn.setup()
+            -- require("feline").winbar.setup()
+            -- local ctp_feline = require("catppuccin.groups.integrations.feline")
+            --
+            -- ctp_feline.setup()
+            --
+            -- require("feline").setup({
+            --     components = ctp_feline.get(),
+            -- })
         end,
     },
     {
@@ -292,6 +305,7 @@ require("lazy").setup({
     -- },
     {
         "rmagatti/auto-session",
+        -- enabled = false,
         config = function()
             require("auto-session").setup({
                 log_level = "error",
@@ -988,6 +1002,7 @@ require("lazy").setup({
             "sindrets/diffview.nvim",
         },
         event = "VimEnter",
+        -- enabled = false,
         config = function()
             require("neogit").setup({
                 use_telescope = true,
@@ -1086,6 +1101,111 @@ require("lazy").setup({
         opts = {
             border = "rounded", -- Valid window border style,
             show_unknown_classes = true, -- Shows the unknown classes popup
+        },
+    },
+    {
+        "Velrok/pr_status.nvim",
+        event = "BufRead",
+        config = function()
+            require("pr_status").setup(
+                { auto_start = true } -- if you want it to just start
+            )
+        end,
+    },
+    {
+        "luckasRanarison/nvim-devdocs",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope.nvim",
+            "nvim-treesitter/nvim-treesitter",
+        },
+        opts = {
+            telescope = {
+                enable = true,
+                keymaps = {
+                    search = "<leader>dd",
+                },
+            },
+            wrap = true,
+            ensure_installed = {
+                "python-3.11",
+                "go",
+                "rust",
+                "lua-5.4",
+                "javascript",
+                "typescript",
+                "react",
+                "react_native",
+                "elixir-1.15",
+                "fish-3.6",
+                "latex",
+                "markdown",
+                "matplotlib-3.7",
+                "nginx",
+                "nix",
+                "node",
+                "numpy-1.23",
+                "pandas-1",
+                "phoenix",
+                "postgresql-15",
+                "pytorch",
+                "redis",
+                "redux",
+                "sequelize-6",
+                "socketio-4",
+                "tailwindcss",
+                "tensorflow-2.9",
+                "terraform",
+                "vagrant",
+                "yarn-berry",
+                "kubernetes",
+                "kubectl",
+                "jsdoc",
+                "jq",
+                "jest",
+                "git",
+                "flask-2.3",
+                "fastapi",
+                "express",
+                "docker",
+                "cypress",
+                "bash",
+                "axios",
+                "ansible",
+            },
+            previewer_cmd = "glow",
+            picker_cmd = true,
+            cmd_args = { "-s", "dark", "-w", "80" },
+            picker_cmd_args = { "-p" },
+        },
+        {
+            "GCBallesteros/NotebookNavigator.nvim",
+            keys = {
+                {
+                    "]h",
+                    function()
+                        require("notebook-navigator").move_cell("d")
+                    end,
+                },
+                {
+                    "[h",
+                    function()
+                        require("notebook-navigator").move_cell("u")
+                    end,
+                },
+                { "<leader>xp", "<cmd>lua require('notebook-navigator').run_cell()<cr>" },
+                { "<leader>xP", "<cmd>lua require('notebook-navigator').run_and_move()<cr>" },
+            },
+            dependencies = {
+                "echasnovski/mini.comment",
+                "hkupty/iron.nvim",
+                "anuvyklack/hydra.nvim",
+            },
+            event = "VeryLazy",
+            config = function()
+                local nn = require("notebook-navigator")
+                nn.setup({ activate_hydra_keys = "<leader>h" })
+            end,
         },
     },
 })

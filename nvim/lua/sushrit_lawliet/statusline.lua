@@ -1,16 +1,37 @@
--- local colors = {
---     bg = "#202328",
---     fg = "#bbc2cf",
---     yellow = "#ECBE7B",
---     cyan = "#008080",
---     darkblue = "#081633",
---     green = "#98be65",
---     orange = "#FF8800",
---     violet = "#a9a1e1",
---     magenta = "#c678dd",
---     blue = "#51afef",
---     red = "#ec5f67",
--- }
+local colors = {
+    bg = "#202328",
+    fg = "#bbc2cf",
+    yellow = "#ECBE7B",
+    cyan = "#008080",
+    darkblue = "#081633",
+    green = "#98be65",
+    orange = "#FF8800",
+    violet = "#a9a1e1",
+    magenta = "#c678dd",
+    blue = "#51afef",
+    red = "#ec5f67",
+}
+
+local assets = {
+    left_separator = "",
+    right_separator = "",
+    mode_icon = " ",
+    dir = "󰉖",
+    file = "󰈙",
+    lsp = {
+        server = "󰅡",
+        error = "",
+        warning = "",
+        info = "",
+        hint = "",
+    },
+    git = {
+        branch = " ",
+        added = " ",
+        changed = " ",
+        removed = " ",
+    },
+}
 
 local wpm = require("wpm")
 
@@ -18,7 +39,7 @@ require("lualine").setup({
     options = {
         icons_enabled = true,
         -- theme = "auto",
-		theme = "catppuccin",
+        theme = "catppuccin",
         -- component_separators = { left = "", right = "" },
         component_separators = { left = "", right = "" },
         -- section_separators = { left = "", right = "" },
@@ -26,8 +47,8 @@ require("lualine").setup({
         disabled_filetypes = {
             statusline = {},
             winbar = {
-				"alpha",
-			},
+                "alpha",
+            },
         },
         ignore_focus = {},
         always_divide_middle = true,
@@ -39,35 +60,41 @@ require("lualine").setup({
         },
     },
     sections = {
-        lualine_a = { "mode" },
+        lualine_a = {
+            {
+                "mode",
+                icons_enabled = true,
+                icon = {
+                    assets.mode_icon,
+                    align = "left",
+                },
+            },
+        },
         lualine_b = {
             "branch",
             {
+                require("pr_status").get_last_result_string() or "pr_status failed",
+            },
+            {
                 "diff",
-                -- colored = true,
-                -- diff_color = {
-                -- 	-- Same color values as the general color option can be used here.
-                -- 	added = "DiffAdd", -- Changes the diff's added color
-                -- 	modified = "DiffChange", -- Changes the diff's modified color
-                -- 	removed = "DiffDelete", -- Changes the diff's removed color you
-                -- },
-                symbols = { added = "+", modified = "~", removed = "-" }, -- Changes the symbols used by the diff.
+
+                symbols = { added = assets.git.added, modified = assets.git.changed, removed = assets.git.removed }, -- Changes the symbols used by the diff.
                 source = nil,
             },
             "gtmstatus",
-			{
-				"diagnostics",
-				sources = {
-					"nvim_diagnostic",
-					-- "nvim",
-				},
-			},
+            {
+                "diagnostics",
+                sources = {
+                    "nvim_diagnostic",
+                    -- "nvim",
+                },
+            },
         },
         lualine_c = {
-			-- "tabs",
-			"filename",
-			require('auto-session.lib').current_session_name,
-		},
+            -- "tabs",
+            "filename",
+            require("auto-session.lib").current_session_name,
+        },
         lualine_x = { "filesize", "encoding", "fileformat", "filetype" },
         lualine_y = { "progress" },
         lualine_z = { "location" },
@@ -133,7 +160,7 @@ require("lualine").setup({
         lualine_a = {
             {
                 "filename",
-				path=1,
+                path = 1,
             },
         },
         lualine_b = {
@@ -144,9 +171,14 @@ require("lualine").setup({
                     -- "nvim",
                 },
             },
-            "diff",
+            {
+                "diff",
+
+                symbols = { added = assets.git.added, modified = assets.git.changed, removed = assets.git.removed }, -- Changes the symbols used by the diff.
+                source = nil,
+            },
             "searchcount",
-			-- require(lspsaga.symbol.winbar).get_bar(),
+            -- require(lspsaga.symbol.winbar).get_bar(),
         },
         lualine_c = {},
         lualine_x = {},
@@ -157,7 +189,7 @@ require("lualine").setup({
         lualine_a = {
             {
                 "filename",
-				path=1,
+                path = 1,
             },
         },
         lualine_b = {
@@ -168,8 +200,14 @@ require("lualine").setup({
                     -- "nvim",
                 },
             },
-            "diff",
+            {
+                "diff",
+
+                symbols = { added = assets.git.added, modified = assets.git.changed, removed = assets.git.removed }, -- Changes the symbols used by the diff.
+                source = nil,
+            },
             "searchcount",
+            "selectioncount",
         },
         lualine_c = {},
         lualine_x = {},
@@ -179,11 +217,11 @@ require("lualine").setup({
     extensions = {
         "toggleterm",
         "nvim-dap-ui",
-		"lazy",
-		"trouble",
-		"quickfix",
-		"man",
-		"fzf",
+        "lazy",
+        "trouble",
+        "quickfix",
+        "man",
+        "fzf",
     },
 })
 
@@ -202,11 +240,11 @@ require("lualine").setup({
 --         dir = "",
 --         file = "",
 --         lsp = {
---             server = "",
---             error = "",
---             warning = "",
---             info = "",
---             hint = "",
+--             -- server = "",
+--             -- error = "",
+--             -- warning = "",
+--             -- info = "",
+--             -- hint = "",
 --         },
 --         git = {
 --             branch = "",
@@ -216,8 +254,8 @@ require("lualine").setup({
 --         },
 --     },
 --     sett = {
---         -- text = U.vary_color({ mocha = mocha.base }, clrs.surface0),
---         -- bkg = U.vary_color({ mocha = mocha.crust }, clrs.surface0),
+--         text = U.vary_color({ mocha = mocha.base }, clrs.surface0),
+--         bkg = U.vary_color({ mocha = mocha.crust }, clrs.surface0),
 --         diffs = clrs.mauve,
 --         extras = clrs.overlay1,
 --         curr_file = clrs.maroon,
@@ -254,9 +292,9 @@ require("lualine").setup({
 --
 -- feline.setup({ components = components })
 --
--- feline.winbar.setup({
---     -- components = ctp_feline.get_winbar(),
--- })
+-- -- feline.winbar.setup({
+-- --     components = ctp_feline.get_winbar(),
+-- -- })
 --
 -- vim.api.nvim_create_autocmd("ColorScheme", {
 --     pattern = "*",

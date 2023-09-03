@@ -24,6 +24,7 @@ vim.keymap.set({ "n", "v" }, "gl", "<End>")
 
 -- Telescope
 
+-- vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
 vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
 vim.keymap.set("n", "<leader>fw", "<cmd>Telescope ast_grep<cr>")
 vim.keymap.set("n", "<leader>fc", "<cmd>Telescope current_buffer_fuzzy_find<cr>")
@@ -99,20 +100,26 @@ vim.keymap.set("n", "<leader>cd", ":lua require'dapui'.toggle()<CR>")
 vim.keymap.set("n", "<leader>de", ":Dirbuf<CR>")
 
 --hlslens
-local kopts = {noremap = true, silent = true}
+local kopts = { noremap = true, silent = true }
 
-vim.api.nvim_set_keymap('n', 'n',
+vim.api.nvim_set_keymap(
+    "n",
+    "n",
     [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
-    kopts)
-vim.api.nvim_set_keymap('n', 'N',
+    kopts
+)
+vim.api.nvim_set_keymap(
+    "n",
+    "N",
     [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
-    kopts)
-vim.api.nvim_set_keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-vim.api.nvim_set_keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
-vim.api.nvim_set_keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-vim.api.nvim_set_keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+    kopts
+)
+vim.api.nvim_set_keymap("n", "*", [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+vim.api.nvim_set_keymap("n", "#", [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+vim.api.nvim_set_keymap("n", "g*", [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+vim.api.nvim_set_keymap("n", "g#", [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
 
-vim.api.nvim_set_keymap('n', '<Leader>l', '<Cmd>noh<CR>', kopts)
+vim.api.nvim_set_keymap("n", "<Leader>l", "<Cmd>noh<CR>", kopts)
 
 vim.keymap.set("n", "<Leader>e", "<cmd>IconPickerInsert emoji<cr>", opts)
 
@@ -135,7 +142,7 @@ keymap("n", "<leader>gr", "<cmd>Lspsaga lsp_finder<CR>", { silent = true })
 -- 	action.range_code_action()
 -- end, { silent = true })
 
-keymap({"n","v"}, "<leader>ca", "<cmd>Lspsaga code_action<CR>")
+keymap({ "n", "v" }, "<leader>ca", "<cmd>Lspsaga code_action<CR>")
 
 -- Rename
 keymap("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", { silent = true })
@@ -163,15 +170,14 @@ keymap("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", { silent = true })
 -- Only jump to error
 -- Diagnostic jump with filter like Only jump to error
 keymap("n", "[E", function()
-  require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR })
+    require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR })
 end)
 keymap("n", "]E", function()
-  require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR })
+    require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR })
 end)
 
-
 -- Outline
-keymap("n","<leader>o", "<cmd>Lspsaga outline<CR>")
+keymap("n", "<leader>o", "<cmd>Lspsaga outline<CR>")
 
 -- Hover Doc
 keymap("n", "<leader>k", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
@@ -193,31 +199,31 @@ keymap("n", "<C-s>", "<cmd>SessionSave<CR>", { silent = true })
 
 local function show_documentation()
     local filetype = vim.bo.filetype
-    if vim.tbl_contains({ 'vim','help' }, filetype) then
-        vim.cmd('h '..vim.fn.expand('<cword>'))
-    elseif vim.tbl_contains({ 'man' }, filetype) then
-        vim.cmd('Man '..vim.fn.expand('<cword>'))
-    elseif vim.fn.expand('%:t') == 'Cargo.toml' and require('crates').popup_available() then
-        require('crates').show_popup()
+    if vim.tbl_contains({ "vim", "help" }, filetype) then
+        vim.cmd("h " .. vim.fn.expand("<cword>"))
+    elseif vim.tbl_contains({ "man" }, filetype) then
+        vim.cmd("Man " .. vim.fn.expand("<cword>"))
+    elseif vim.fn.expand("%:t") == "Cargo.toml" and require("crates").popup_available() then
+        require("crates").show_popup()
     else
         vim.lsp.buf.hover()
     end
 end
 
-local crates = require('crates')
+local crates = require("crates")
 local opts = { silent = true }
 
-vim.keymap.set('n', '<leader>ck', show_documentation, { silent = true })
-vim.keymap.set('n', '<leader>cv', crates.show_versions_popup, opts)
-vim.keymap.set('n', '<leader>cf', crates.show_features_popup, opts)
-vim.keymap.set('n', '<leader>cd', crates.show_dependencies_popup, opts)
-vim.keymap.set('n', '<leader>ct', crates.toggle, opts)
-vim.keymap.set('n', '<leader>cr', crates.reload, opts)
+vim.keymap.set("n", "<leader>ck", show_documentation, { silent = true })
+vim.keymap.set("n", "<leader>cv", crates.show_versions_popup, opts)
+vim.keymap.set("n", "<leader>cf", crates.show_features_popup, opts)
+vim.keymap.set("n", "<leader>cd", crates.show_dependencies_popup, opts)
+vim.keymap.set("n", "<leader>ct", crates.toggle, opts)
+vim.keymap.set("n", "<leader>cr", crates.reload, opts)
 
-vim.keymap.set('n', 'gD', '<CMD>Glance definitions<CR>')
-vim.keymap.set('n', 'gR', '<CMD>Glance references<CR>')
-vim.keymap.set('n', 'gY', '<CMD>Glance type_definitions<CR>')
-vim.keymap.set('n', 'gM', '<CMD>Glance implementations<CR>')
+vim.keymap.set("n", "gD", "<CMD>Glance definitions<CR>")
+vim.keymap.set("n", "gR", "<CMD>Glance references<CR>")
+vim.keymap.set("n", "gY", "<CMD>Glance type_definitions<CR>")
+vim.keymap.set("n", "gM", "<CMD>Glance implementations<CR>")
 
 -- vim.keymap.set("n", "zR", require("ufo").openAllFolds)
 -- vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
