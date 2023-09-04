@@ -49,6 +49,8 @@ then
 	ln -s "$(pwd -P)"/kitty ~/.config/
 	#wezterm
 	ln -s "$(pwd -P)"/wezterm ~/.config/
+	#k9s
+	ln -s "$(pwd -P)"/k9s ~/.config/
 	#lazygit
 	# ln -s "$(pwd -P)"/lazygit ~/.config/
 	cp -fr "$(pwd -P)"/lazygit/config.yml ~/Library/'Application Support'/lazygit
