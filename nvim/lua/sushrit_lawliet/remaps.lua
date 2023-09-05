@@ -227,3 +227,7 @@ vim.keymap.set("n", "gM", "<CMD>Glance implementations<CR>")
 
 -- vim.keymap.set("n", "zR", require("ufo").openAllFolds)
 -- vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
+
+-- vim.keymap.set("n", "<space>f", "<cmd>Format<CR>", opts)
+vim.keymap.set("n", "<space>F", "<cmd>Format<CR>", opts)
+vim.keymap.set("n", "<space>l", "<cmd>lua require('lint').try_lint()<CR>", opts)

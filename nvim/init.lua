@@ -87,8 +87,8 @@ require("lazy").setup({
         lazy = false,
         enabled = false,
         config = function()
-            -- require("sushrit_lawliet.statusline")
-            require("feline").setup({})
+            require("sushrit_lawliet.statusline")
+            -- require("feline").setup({})
             --require('feline').statuscolumn.setup()
             -- require("feline").winbar.setup()
             -- local ctp_feline = require("catppuccin.groups.integrations.feline")
@@ -1208,6 +1208,20 @@ require("lazy").setup({
             end,
         },
     },
+	{
+		'mhartington/formatter.nvim',
+		event = { "BufRead", "BufNewFile" },
+		config = function()
+			require('sushrit_lawliet.formatter')
+		end,
+	},
+	{
+		'mfussenegger/nvim-lint',
+		event = { "BufRead", "BufNewFile" },
+		config = function()
+			require('sushrit_lawliet.nvim_lint')
+		end,
+	},
 })
 
 --options

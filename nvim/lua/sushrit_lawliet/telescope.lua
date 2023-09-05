@@ -62,6 +62,6 @@ end
 -- load_extension, somewhere after setup function:
 require("telescope").load_extension("ui-select")
 --require("telescope").load_extension("urlview")
-require("telescope").load_extension("command_center")
+-- require("telescope").load_extension("command_center")
 require("telescope").load_extension("neoclip")
 require("telescope").load_extension("ast_grep")

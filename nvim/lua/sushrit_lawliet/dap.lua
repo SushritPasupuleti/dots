@@ -41,8 +41,8 @@ require("dapui").setup({
 		},
 	},
 	floating = {
-		max_height = nil, -- These can be integers or a float between 0 and 1.
-		max_width = nil, -- Floats will be treated as percentage of your screen.
+		max_height = nil,  -- These can be integers or a float between 0 and 1.
+		max_width = nil,   -- Floats will be treated as percentage of your screen.
 		border = "single", -- Border style. Can be "single", "double" or "rounded"
 		mappings = {
 			close = { "q", "<Esc>" },
@@ -53,3 +53,32 @@ require("dapui").setup({
 		max_type_length = nil, -- Can be integer or nil.
 	},
 })
+
+local dap = require("dap")
+
+dap.adapters["pwa-node"] = {
+	type = "server",
+	host = "127.0.0.1",
+	port = 8123,
+	executable = {
+		command = "js-debug-adapter",
+	},
+}
+
+for _, language in ipairs({ "javascript", "javascriptreact", "typescript", "typescriptreact" }) do
+	dap.configurations[language] = {
+		{
+			type = "pwa-node",
+			request = "launch",
+			name = "Launch file",
+			program = "${file}",
+			-- cwd = vim.fn.getcwd(),
+			cwd = "${workspaceFolder}",
+			runtimeExecutable = "node",
+			-- sourceMaps = true,
+			-- smartStep = true,
+			-- protocol = "inspector",
+			-- console = "integratedTerminal",
+		},
+	}
+end
