@@ -5,10 +5,10 @@
 { config, pkgs, lib, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.supportedFilesystems = [ "ntfs" ];
@@ -115,36 +115,36 @@
   users.users.sushrit_lawliet = {
     isNormalUser = true;
     description = "Sushrit Pasupuleti";
-    extraGroups = [ "networkmanager" "wheel" "adbusers" "libvirtd" "docker"];
+    extraGroups = [ "networkmanager" "wheel" "adbusers" "libvirtd" "docker" ];
     packages = with pkgs; [
       firefox
       git
       vim
       neovim
-	  emacs
+      emacs
       tmux
       kitty
-	  wezterm
-	  ranger
+      wezterm
+      ranger
       starship
       nerdfonts
       fira-code
       gh
       lazygit
-	  lazydocker
+      lazydocker
       delta
-	  docker
-	  # k3s
-	  ktunnel
-	  datree
-	  kind #local docker clusters
-	  kubectl
-	  kubectx
-	  k9s
-	  kubernetes-helm
-	  # minikube
+      docker
+      # k3s
+      ktunnel
+      datree
+      kind # local docker clusters
+      kubectl
+      kubectx
+      k9s
+      kubernetes-helm
+      # minikube
       #github-desktop
-	  gnumake
+      gnumake
       vscode
       android-studio
       android-tools
@@ -152,43 +152,45 @@
       postman
       microsoft-edge
       google-chrome
-	  brave
-	  pika-backup
-	  transmission
-	  vlc
-	  zoom-us
-	  rpi-imager
+      brave
+      pika-backup
+      transmission
+      vlc
+      zoom-us
+      rpi-imager
+	  libreoffice
       #langs
       go
       python39
       nodejs_18
-	  elixir_1_15
-	  elixir-ls
-	  # grpc-tools
-	  protobuf3_20
-	  # nodePackages.eas-cli
-	  nodePackages.tailwindcss
-	  nodePackages.pnpm
-	  bun
+      elixir_1_15
+      elixir-ls
+      # grpc-tools
+      protobuf3_20
+      # nodePackages.eas-cli
+      nodePackages.tailwindcss
+      nodePackages.pnpm
+      nodePackages_latest.eslint
+      bun
       yarn
       gcc
       rustup
-	  rust-analyzer
+      rust-analyzer
       lua
       stylua
       openjdk17
-	  podman
-	  podman-tui
-	  podman-desktop
+      podman
+      podman-tui
+      podman-desktop
       #dbs
       postgresql_15
-	  prometheus
-	  prometheus-node-exporter
-	  grafana
-	  # postgresql15Packages.timescaledb
+      prometheus
+      prometheus-node-exporter
+      grafana
+      # postgresql15Packages.timescaledb
       pgadmin4-desktopmode
       #utilties
-	  lsof
+      lsof
       gum
       glow
       exa
@@ -198,40 +200,44 @@
       ctags
       gnused
       ripgrep
-	  # ast-grep
+      nixfmt
+	  unzip
+      # ast-grep
       bat
       btop
       htop
-	  python310Packages.gpustat
+      python310Packages.gpustat
       sqlite
       neofetch
       timg
       appeditor
-	  git-ignore
+      git-ignore
       #cli
       aws-sam-cli
       awscli2
-	  aws-iam-authenticator
+      aws-iam-authenticator
       terraform
-	  terraform-ls
-	  terraform-docs
+      terraform-ls
+      terraform-docs
       k6
-	  pkgconfig
-	  openssl
-	  libiconv
-	  turbo
-	  arduino
-	  arduino-cli
+      pkgconfig
+      openssl
+      libiconv
+      turbo
+      arduino
+      arduino-cli
       #terminal-notifier
       wget
       urlview
-	  mqttui
-	  mosquitto
+      mqttui
+      mosquitto
       jq
       openrgb-with-all-plugins
-	  nyxt
-	  obs-studio
-	  ripdrag
+      nyxt
+      obs-studio
+      ripdrag
+	  #gnome
+	  gnome.gnome-boxes
       #gnome-extensions
       gnomeExtensions.pop-shell
       gnome.gnome-tweaks
@@ -246,11 +252,12 @@
       gnomeExtensions.vitals
       #themes
       catppuccin-gtk
-    #  thunderbird
-	  # fish
-	  fish
-	  fishPlugins.done
-	  fishPlugins.fzf-fish
+      #  thunderbird
+      nushell
+      # fish
+      fish
+      fishPlugins.done
+      fishPlugins.fzf-fish
     ];
   };
 
@@ -259,58 +266,59 @@
 
   # Allow unfree packages
   nixpkgs.config = {
-	allowUnfree = true;
-	microsoft-edge = {
-		proprietaryCodecs = true;
-		enableWidevine = true;
-	};
-	chromium.commandLineArgs = "--enable-features=UseOzonePlatform --ozone-platform=wayland";
-	packageOverrides = pkgs: {
-	  vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
-	};
+    allowUnfree = true;
+    microsoft-edge = {
+      proprietaryCodecs = true;
+      enableWidevine = true;
+    };
+    chromium.commandLineArgs = "--enable-features=UseOzonePlatform --ozone-platform=wayland";
+    packageOverrides = pkgs: {
+      vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
+    };
   };
 
   services.postgresql = {
-  enable = true;
-  package = pkgs.postgresql_15;
-  extraPlugins = [ pkgs.postgresql15Packages.timescaledb ];
-  settings.shared_preload_libraries = "timescaledb";
-  #dataDir = "/data/postgresql";
-  # authentication = pkgs.lib.mkOverride 10 ''
-  #   #...
-  #   #type database DBuser origin-address auth-method
-  #   # ipv4
-  #   host  all      all     127.0.0.1/32   trust
-  #   # ipv6
-  #   host all       all     ::1/128        trust
-  # '';
-};
+    enable = true;
+    package = pkgs.postgresql_15;
+    extraPlugins = [ pkgs.postgresql15Packages.timescaledb ];
+    settings.shared_preload_libraries = "timescaledb";
+    #dataDir = "/data/postgresql";
+    # authentication = pkgs.lib.mkOverride 10 ''
+    #   #...
+    #   #type database DBuser origin-address auth-method
+    #   # ipv4
+    #   host  all      all     127.0.0.1/32   trust
+    #   # ipv6
+    #   host all       all     ::1/128        trust
+    # '';
+  };
 
-services.grafana = {
-  enable = true;
-  settings = {
-    server = {
-      # Listening Address
-      http_addr = "127.0.0.1";
-      # and Port
-      http_port = 9001;
-      # Grafana needs to know on which domain and URL it's running
-      # domain = "your.domain";
-      # root_url = "https://your.domain/grafana/"; # Not needed if it is `https://your.domain/`
+  services.grafana = {
+    enable = true;
+    settings = {
+      server = {
+        # Listening Address
+        http_addr = "127.0.0.1";
+        # and Port
+        http_port = 9001;
+        # Grafana needs to know on which domain and URL it's running
+        # domain = "your.domain";
+        # root_url = "https://your.domain/grafana/"; # Not needed if it is `https://your.domain/`
+      };
     };
   };
-};
 
   programs.adb.enable = true;
   #users.users.sushrit_lawliet.extraGroups = ["adbusers"];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
-    virt-manager
-  ];
+  environment.systemPackages = with pkgs;
+    [
+      #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+      #  wget
+      virt-manager
+    ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -341,17 +349,19 @@ services.grafana = {
 
   ## NVIDIA drivers are unfree.
   nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [
-      "nvidia-x11"
-    ];
+    builtins.elem (lib.getName pkg) [ "nvidia-x11" ];
 
   # Tell Xorg to use the nvidia driver
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
 
     # Modesetting is needed for most wayland compositors
     modesetting.enable = true;
+
+    # Enable power management (do not disable this unless you have a reason to).
+    # Likely to cause problems on laptops and with screen tearing if disabled.
+    powerManagement.enable = true;
 
     # Use the open source version of the kernel module
     # Only available on driver 515.43.04+
@@ -369,13 +379,15 @@ services.grafana = {
 
   ## Hardware Acceleration for video
   hardware.opengl = {
-	enable = true;
+    enable = true;
     extraPackages = with pkgs; [
       intel-media-driver # LIBVA_DRIVER_NAME=iHD
-      vaapiIntel         # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+      vaapiIntel # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
       vaapiVdpau
       libvdpau-va-gl
     ];
+    driSupport = true;
+    driSupport32Bit = true;
   };
 
   ## Virtualization
@@ -389,12 +401,12 @@ services.grafana = {
 
   ## Docker
   virtualisation.docker = {
-	enable = true;
-	enableOnBoot = true;
+    enable = true;
+    enableOnBoot = true;
   };
   virtualisation.docker.rootless = {
-	enable = true;
-	setSocketVariable = true;
+    enable = true;
+    setSocketVariable = true;
   };
   # users.extraGroups.docker.members = [ "sushrit_lawliet" ];
 
@@ -416,26 +428,28 @@ services.grafana = {
   programs.nix-ld.enable = true;
 
   ## Flakes
-    # Use edge NixOS.
+  # Use edge NixOS.
   nix.extraOptions = ''
     experimental-features = nix-command flakes
   '';
   nix.package = pkgs.nixUnstable;
 
-    # pin docker to older nixpkgs: https://github.com/NixOS/nixpkgs/issues/244159
+  # pin docker to older nixpkgs: https://github.com/NixOS/nixpkgs/issues/244159
   nixpkgs.overlays = [
-    (let
-      pinnedPkgs = import(pkgs.fetchFromGitHub {
-        owner = "NixOS";
-        repo = "nixpkgs";
-        rev = "b6bbc53029a31f788ffed9ea2d459f0bb0f0fbfc";
-        sha256 = "sha256-JVFoTY3rs1uDHbh0llRb1BcTNx26fGSLSiPmjojT+KY=";
-      }) {};
-    in
-    final: prev: {
-      docker = pinnedPkgs.docker;
-    })
+    (
+      let
+        pinnedPkgs = import
+          (pkgs.fetchFromGitHub {
+            owner = "NixOS";
+            repo = "nixpkgs";
+            rev = "b6bbc53029a31f788ffed9ea2d459f0bb0f0fbfc";
+            sha256 = "sha256-JVFoTY3rs1uDHbh0llRb1BcTNx26fGSLSiPmjojT+KY=";
+          })
+          { };
+      in
+      final: prev: { docker = pinnedPkgs.docker; }
+    )
   ];
 
-  system.nixos.label = "Add-elixir";
+  system.nixos.label = "Add-Gnome-Boxes";
 }
