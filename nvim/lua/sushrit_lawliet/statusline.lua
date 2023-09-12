@@ -72,9 +72,9 @@ require("lualine").setup({
         },
         lualine_b = {
             "branch",
-            {
-                require("pr_status").get_last_result_string() or "pr_status failed",
-            },
+            -- {
+                -- require("pr_status").get_last_result_string() or "pr_status failed",
+            -- },
             {
                 "diff",
 

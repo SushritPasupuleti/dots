@@ -44,6 +44,7 @@ require("catppuccin").setup({
         nvimtree = true,
         telescope = true,
         treesitter = true,
+		treesitter_context = true,
         lsp_trouble = true,
         lsp_saga = true,
         mason = true,
@@ -61,6 +62,8 @@ require("catppuccin").setup({
             enabled = true,
             colored_indent_levels = true,
         },
+		markdown = true,
+		semantic_tokens = true,
         -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
         native_lsp = {
             enabled = true,

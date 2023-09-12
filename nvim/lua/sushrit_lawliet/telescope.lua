@@ -34,6 +34,9 @@ require("telescope").setup({
             grep_open_files = false, -- search in opened files
             lang = nil, -- string value, specify language for ast-grep `nil` for default
         },
+		import = {
+			insert_at_top = true,
+		},
     },
 })
 

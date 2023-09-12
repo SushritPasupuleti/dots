@@ -24,7 +24,7 @@ vim.keymap.set({ "n", "v" }, "gl", "<End>")
 
 -- Telescope
 
--- vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
+vim.keymap.set("n", "<leader>fi", "<cmd>Telescope import<cr>")
 vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
 vim.keymap.set("n", "<leader>fw", "<cmd>Telescope ast_grep<cr>")
 vim.keymap.set("n", "<leader>fc", "<cmd>Telescope current_buffer_fuzzy_find<cr>")
@@ -231,3 +231,4 @@ vim.keymap.set("n", "gM", "<CMD>Glance implementations<CR>")
 -- vim.keymap.set("n", "<space>f", "<cmd>Format<CR>", opts)
 vim.keymap.set("n", "<space>F", "<cmd>Format<CR>", opts)
 vim.keymap.set("n", "<space>l", "<cmd>lua require('lint').try_lint()<CR>", opts)
+vim.api.nvim_set_keymap("n", "<Leader>dd", ":lua require('neogen').generate()<CR>", opts)

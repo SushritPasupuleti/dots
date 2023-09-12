@@ -19,7 +19,7 @@ local servers = {
 	"yamlls",
 	-- "lemminx",
 	"tailwindcss",
-	"taplo",
+	-- "taplo",
 	"sqlls",
 	"html",
 	"dotls",
@@ -40,19 +40,19 @@ local servers = {
 	"terraformls",
 	-- "tflint",
 	"graphql",
-	"denols",
+	-- "denols",
 	"awk_ls",
 }
 
 local other_servers = {
-	"eslint",
+	-- "eslint",
 	-- "js-debug-adapter",
 	-- "prettier",
 }
 
 local mason_ensure_installed = servers
 
-table.insert(mason_ensure_installed, table.concat(other_servers, ", "))
+-- table.insert(mason_ensure_installed, table.concat(other_servers, ", "))
 
 require("mason").setup({
 	PATH = "append",
