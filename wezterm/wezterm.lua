@@ -1,6 +1,7 @@
 local wezterm = require("wezterm")
 
 return {
+	-- enable_wayland = true,
 	--macos
 	macos_window_background_blur = 20,
 	--macOS End
@@ -66,7 +67,7 @@ return {
 	freetype_load_target = "Light",
 	use_fancy_tab_bar = false,
 	enable_tab_bar = true,
-	-- hide_tab_bar_if_only_one_tab = true,
+	hide_tab_bar_if_only_one_tab = true,
 	tab_bar_at_bottom = true,
 	tab_max_width = 128,
 	window_background_opacity = 0.95,
