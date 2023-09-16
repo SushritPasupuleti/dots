@@ -74,6 +74,10 @@ then
 	rm ~/.gitconfig
 	ln -s "$(pwd -P)"/.gitconfig ~/.gitconfig
 
+	# Home Manager for Nix
+	rm -rf ~/.config/nixpkgs
+	ln -s "$(pwd -P)"/nixpkgs ~/.config/nixpkgs
+
 	echo $(success "Symlinks created.")
 
 	echo "Fish shell has been setup, make sure you add the exports.fish file to conf.d/ with secrets."
