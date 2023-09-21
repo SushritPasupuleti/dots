@@ -4,10 +4,25 @@
 
 { config, pkgs, lib, ... }:
 
+# let
+#   # unstable = import unstable {};
+#   unstableTarball =
+#     fetchTarball
+#       https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz;
+# in
+let
+  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz";
+  unstable = import <unstable> {
+    config.allowUnfree = true;
+  };
+in
+
 {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    # <home-manager/nixos>
+    (import "${home-manager}/nixos")
   ];
 
   # Bootloader.
@@ -79,6 +94,19 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
+  # Enable QTile as window manager
+  services.xserver.windowManager.qtile.enable = true;
+  services.xserver.windowManager.awesome = {
+    enable = false;
+    luaModules = with pkgs.luaPackages; [
+      luarocks # is the package manager for Lua modules
+      luadbi-mysql # Database abstraction layer
+    ];
+    # extraPackages = with pkgs; [ kitty ];
+  };
+  # services.xserver.windowManager.qtile.configFile = ./qtile/config.py;
+  services.xserver.windowManager.qtile.configFile = /home/sushrit_lawliet/.config/qtile/config.py;
+
   # Configure keymap in X11
   services.xserver = {
     layout = "gb";
@@ -108,6 +136,19 @@
     #media-session.enable = true;
   };
 
+  ## Allow specific unfree packages
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "nvidia-x11"
+      "nvidia-settings"
+      "microsoft-edge-stable"
+      "google-chrome"
+      "zoom"
+      "vscode"
+      "android-studio-stable"
+      "postman"
+    ];
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -130,7 +171,7 @@
       nerdfonts
       fira-code
       gh
-      lazygit
+      unstable.lazygit # <--- use latest
       lazydocker
       delta
       docker
@@ -145,20 +186,25 @@
       # minikube
       #github-desktop
       gnumake
-      vscode
+      # vscode # <--- use latest
+      unstable.vscode # <--- use latest
       android-studio
       android-tools
       fnm
       postman
-      microsoft-edge
-      google-chrome
+      # microsoft-edge
+      unstable.microsoft-edge # <--- use latest
+      # google-chrome
+      unstable.google-chrome
       brave
       pika-backup
       transmission
       vlc
+      ytfzf
+      ueberzugpp
       zoom-us
       rpi-imager
-	  libreoffice
+      libreoffice
       #langs
       go
       python39
@@ -171,7 +217,8 @@
       nodePackages.tailwindcss
       nodePackages.pnpm
       nodePackages_latest.eslint
-      bun
+      # bun
+      unstable.bun # <--- use latest
       yarn
       gcc
       rustup
@@ -201,7 +248,7 @@
       gnused
       ripgrep
       nixfmt
-	  unzip
+      unzip
       # ast-grep
       bat
       btop
@@ -235,9 +282,10 @@
       openrgb-with-all-plugins
       nyxt
       obs-studio
+      boatswain #Stream Deck support
       ripdrag
-	  #gnome
-	  gnome.gnome-boxes
+      #gnome
+      gnome.gnome-boxes
       #gnome-extensions
       gnomeExtensions.pop-shell
       gnome.gnome-tweaks
@@ -258,7 +306,23 @@
       fish
       fishPlugins.done
       fishPlugins.fzf-fish
+      # Awesome
+      # awesome
+      # Gnome+Qtile
+      qtile
+      picom
+      rofi
+      nitrogen
+      # mandatory 
+      xorg.libxcb
     ];
+  };
+
+  home-manager.users.sushrit_lawliet = { pkgs, unstable, ... }: {
+    home.packages = [
+      # pkgs.bun
+    ];
+    home.stateVersion = "23.05";
   };
 
   programs.fish.enable = true;
@@ -266,14 +330,23 @@
 
   # Allow unfree packages
   nixpkgs.config = {
-    allowUnfree = true;
+    # allowUnfree = true;
     microsoft-edge = {
       proprietaryCodecs = true;
       enableWidevine = true;
     };
+    google-chrome = {
+      proprietaryCodecs = true;
+      enableWidevine = true;
+    };
+    # chromium.commandLineArgs =
+    # "--enable-features=VaapiVideoEncoder,VaapiVideoDecoder";
     chromium.commandLineArgs = "--enable-features=UseOzonePlatform --ozone-platform=wayland";
     packageOverrides = pkgs: {
       vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
+      # unstable = import unstableTarball {
+      # config = config.nixpkgs.config;
+      # };
     };
   };
 
@@ -292,6 +365,9 @@
     #   host all       all     ::1/128        trust
     # '';
   };
+
+  services.redis.servers."redis".enable = true;
+  services.redis.servers."redis".port = 6379;
 
   services.grafana = {
     enable = true;
@@ -313,11 +389,13 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
   environment.systemPackages = with pkgs;
     [
       #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
       #  wget
       virt-manager
+      # unstable.lazygit
     ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -346,10 +424,6 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
-
-  ## NVIDIA drivers are unfree.
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [ "nvidia-x11" ];
 
   # Tell Xorg to use the nvidia driver
   services.xserver.videoDrivers = [ "nvidia" ];
@@ -382,9 +456,9 @@
     enable = true;
     extraPackages = with pkgs; [
       intel-media-driver # LIBVA_DRIVER_NAME=iHD
-      vaapiIntel # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+      # vaapiIntel # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
       vaapiVdpau
-      libvdpau-va-gl
+      # libvdpau-va-gl
     ];
     driSupport = true;
     driSupport32Bit = true;
@@ -451,5 +525,6 @@
     )
   ];
 
-  system.nixos.label = "Add-Gnome-Boxes";
+  system.nixos.label = "Add-Proper-Unstable-Package-Support";
 }
+
