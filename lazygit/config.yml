@@ -2,24 +2,27 @@ gui:
   # showIcons: true
   nerdFontsVersion: "3"
   theme:
-    lightTheme: false
     activeBorderColor:
-      - "#a6e3a1" # Green
+      - "#89b4fa"
       - bold
     inactiveBorderColor:
-      - "#cdd6f4" # Text
+      - "#a6adc8"
     optionsTextColor:
-      - "#89b4fa" # Blue
+      - "#89b4fa"
     selectedLineBgColor:
-      - "#313244" # Surface0
+      - "#313244"
     selectedRangeBgColor:
-      - "#313244" # Surface0
+      - "#313244"
     cherryPickedCommitBgColor:
-      - "#94e2d5" # Teal
+      - "#45475a"
     cherryPickedCommitFgColor:
-      - "#89b4fa" # Blue
+      - "#89b4fa"
     unstagedChangesColor:
-      - red # Red
+      - "#f38ba8"
+    defaultFgColor:
+      - "#cdd6f4"
+    searchingActiveBorderColor:
+      - "#f9e2af"
 git:
   paging:
     colorArg: always
