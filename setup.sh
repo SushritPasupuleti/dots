@@ -55,6 +55,7 @@ then
 	# ln -s "$(pwd -P)"/lazygit ~/.config/
 	cp -fr "$(pwd -P)"/lazygit/config.yml ~/Library/'Application Support'/lazygit
 	ln -s "$(pwd -P)"/lazygit/config.yml ~/.config/lazygit/
+	ln -s "$(pwd -P)"/lazygit/config.yml ~/.config/jesseduffield/lazygit/ # For older versions of lazygit
 	# rm ~/Library/Application\ Support/lazygit/config.yml 
 	# ls -s "$(pwd -P)"/lazygit/config.yml ~/Library/"Application\ Support"/lazygit/config.yml
 	#bat
@@ -77,6 +78,8 @@ then
 	# Home Manager for Nix
 	rm -rf ~/.config/nixpkgs
 	ln -s "$(pwd -P)"/nixpkgs ~/.config/nixpkgs
+	rm -rf ~/.config/home-manager
+	ln -s "$(pwd -P)"/home-manager ~/.config/home-manager
 
 	echo $(success "Symlinks created.")
 
