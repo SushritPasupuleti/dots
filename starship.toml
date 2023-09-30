@@ -97,17 +97,20 @@ ahead = '⇡$count '
 behind = '⇣$count '
 diverged = '⇕ $count '
 up_to_date = ' '
-untracked = ' $count '
-# untracked='?$count '
+# untracked = ' $count '
+untracked = '󰝦 $count '
 # stashed='\$$count '
 stashed = ' $count '
 # modified='!$count '
-modified = ' $count '
+# modified = ' $count '
+modified = ' $count '
 # staged='+$count '
-staged = ' $count '
+# staged = ' $count '
+staged = ' $count '
 # renamed='»$count '
 renamed = ' $count '
-deleted = ' $count'
+# deleted = ' $count'
+deleted = ' $count'
 
 [git_state]
 format = '\([$state( $progress_current/$progress_total)]($style)\) '
@@ -116,6 +119,10 @@ style = "bright-black"
 [git_metrics]
 added_style = 'bold blue'
 format = '[+ $added]($added_style)/[- $deleted]($deleted_style) '
+
+# [git_commit]
+# commit_hash_length = 4
+# tag_symbol = '🔖 '
 
 [package]
 
@@ -138,10 +145,13 @@ format = '[+ $added]($added_style)/[- $deleted]($deleted_style) '
 # format = "[$symbol$version]($style) "
 # style = "bold green"
 
+[elixir]
+
 [lua]
+disabled = false
 
 [os]
-disabled=false
+disabled = false
 
 [os.symbols]
 Macos = " "
@@ -189,7 +199,19 @@ impure_msg = '[impure shell](bold red)'
 pure_msg = '[pure shell](bold green)'
 unknown_msg = '[default shell](bold yellow)'
 format = 'via [❄️ $state( \($name\))](bold blue) '
-heuristic = true
+# heuristic = true
 
 [line_break]
 disabled = false
+
+[kubernetes]
+symbol = "⎈ "
+disabled = false
+# format = 'on [⎈ ($user on )($cluster in )$context \($namespace\)](dimmed blue) '
+format = 'on [⎈ $context \($namespace\)](bold blue) '
+# detect_files=['yml', 'yaml', 'json']
+
+[docker_context]
+# detect_files = ['docker-compose.yml', 'docker-compose.yaml', 'Dockerfile']
+# detect_files = []
+# only_with_files = false
