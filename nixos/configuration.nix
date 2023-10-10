@@ -95,7 +95,15 @@ in
   services.xserver.desktopManager.gnome.enable = true;
 
   # Enable QTile as window manager
-  services.xserver.windowManager.qtile.enable = true;
+  services.xserver.windowManager.qtile = {
+    enable = true;
+    # package = pkgs.stable.qtile;
+    # configFile = ./qtile/config.py;
+    configFile = /home/sushrit_lawliet/.config/qtile/config.py;
+    extraPackages = python3Packages: with python3Packages; [
+      qtile-extras
+    ];
+  };
   services.xserver.windowManager.awesome = {
     enable = false;
     luaModules = with pkgs.luaPackages; [
@@ -104,8 +112,6 @@ in
     ];
     # extraPackages = with pkgs; [ kitty ];
   };
-  # services.xserver.windowManager.qtile.configFile = ./qtile/config.py;
-  services.xserver.windowManager.qtile.configFile = /home/sushrit_lawliet/.config/qtile/config.py;
 
   # Configure keymap in X11
   services.xserver = {
@@ -192,11 +198,13 @@ in
       android-tools
       fnm
       postman
+	  unstable.bruno
       # microsoft-edge
       unstable.microsoft-edge # <--- use latest
       # google-chrome
       unstable.google-chrome
       brave
+      tuir
       pika-backup
       transmission
       vlc
@@ -313,6 +321,8 @@ in
       picom
       rofi
       nitrogen
+      rofi
+      # rofi-wayland
       # mandatory 
       xorg.libxcb
     ];
@@ -525,6 +535,6 @@ in
     )
   ];
 
-  system.nixos.label = "Add-Proper-Unstable-Package-Support";
+  system.nixos.label = "Add-Unstable-Bruno";
 }
 
