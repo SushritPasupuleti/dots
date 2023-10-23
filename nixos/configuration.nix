@@ -92,6 +92,7 @@ in
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
+  # disable gnome
   services.xserver.desktopManager.gnome.enable = true;
 
   # Enable QTile as window manager
@@ -111,6 +112,13 @@ in
       luadbi-mysql # Database abstraction layer
     ];
     # extraPackages = with pkgs; [ kitty ];
+  };
+
+  # configure xdg portal
+  xdg.portal = {
+    # gtkUsePortal = true;
+    enable = true;
+    # extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
   # Configure keymap in X11
@@ -173,7 +181,7 @@ in
       kitty
       wezterm
       ranger
-      starship
+      unstable.starship # <--- use latest
       nerdfonts
       fira-code
       gh
@@ -198,13 +206,14 @@ in
       android-tools
       fnm
       postman
-	  unstable.bruno
+      unstable.bruno
       # microsoft-edge
       unstable.microsoft-edge # <--- use latest
       # google-chrome
       unstable.google-chrome
       brave
       tuir
+      jira-cli-go
       pika-backup
       transmission
       vlc
@@ -213,6 +222,7 @@ in
       zoom-us
       rpi-imager
       libreoffice
+      onlyoffice-bin
       #langs
       go
       python39
@@ -257,6 +267,7 @@ in
       ripgrep
       nixfmt
       unzip
+      fselect
       # ast-grep
       bat
       btop
@@ -287,6 +298,7 @@ in
       mqttui
       mosquitto
       jq
+      fx
       openrgb-with-all-plugins
       nyxt
       obs-studio
@@ -320,11 +332,21 @@ in
       qtile
       picom
       rofi
+	  waybar
       nitrogen
       rofi
       # rofi-wayland
       # mandatory 
       xorg.libxcb
+      libsForQt5.dolphin
+	  gnome.nautilus
+	  gnome.sushi
+	  gnome.gnome-settings-daemon43
+	  xfce.xfce4-settings
+	  pavucontrol
+	  wlogout
+	  hyprpaper
+      # xdg-desktop-portal-gtk
     ];
   };
 
@@ -504,6 +526,8 @@ in
 
   # Hyprland
   programs.hyprland.enable = true;
+  programs.hyprland.xwayland.enable = true;
+  # programs.hyprland.enableNvidiaPatches = true;
 
   # Enable Java
   programs.java.enable = true;
@@ -535,6 +559,6 @@ in
     )
   ];
 
-  system.nixos.label = "Add-Unstable-Bruno";
+  system.nixos.label = "Add-Waybar";
 }
 
