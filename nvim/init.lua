@@ -73,7 +73,7 @@ require("lazy").setup({
 	},
 	{
 		"nvim-lualine/lualine.nvim",
-		-- enabled=false,
+		-- enabled = false,
 		event = "VimEnter",
 		config = function()
 			require("sushrit_lawliet.statusline")
@@ -83,11 +83,11 @@ require("lazy").setup({
 		"freddiehaddad/feline.nvim",
 		-- version = "1.1.1",
 		branch = "main",
-		-- event = "VimEnter",
+		event = "VimEnter",
 		lazy = false,
 		enabled = false,
 		config = function()
-			require("sushrit_lawliet.feline")
+			-- require("sushrit_lawliet.feline")
 			-- require("feline").setup({})
 			--require('feline').statuscolumn.setup()
 			-- require("feline").winbar.setup()
@@ -96,8 +96,26 @@ require("lazy").setup({
 			-- ctp_feline.setup()
 			--
 			-- require("feline").setup({
-			--     components = ctp_feline.get(),
+			-- 	components = ctp_feline.get(),
 			-- })
+		end,
+	},
+	{
+		"jonahgoldwastaken/copilot-status.nvim",
+		dependencies = { "zbirenbaum/copilot.lua" }, -- or "zbirenbaum/copilot.lua"
+		lazy = true,
+		event = "BufReadPost",
+		config = function()
+			require("copilot_status").setup({
+				icons = {
+					idle = " ",
+					error = " ",
+					offline = " ",
+					warning = " ",
+					loading = " ",
+				},
+				debug = false,
+			})
 		end,
 	},
 	{
@@ -516,16 +534,6 @@ require("lazy").setup({
 		"AckslD/nvim-neoclip.lua",
 		event = { "BufRead", "BufNewFile" },
 	},
-	-- indent lines
-	{
-		"lukas-reineke/indent-blankline.nvim",
-		config = function()
-			require("indent_blankline").setup({
-				show_current_context = true,
-				-- show_current_context_start = true,
-			})
-		end,
-	},
 	{
 		"kyazdani42/nvim-tree.lua",
 		event = { "BufRead", "BufNewFile" },
@@ -741,9 +749,10 @@ require("lazy").setup({
 	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
 		event = { "BufReadPost", "BufNewFile" },
 		opts = {
-			show_current_context = true,
+			-- show_current_context = true,
 		},
 	}, -- indent lines
 	{
@@ -853,7 +862,7 @@ require("lazy").setup({
 		end,
 	},
 	{
-		"phaazon/hop.nvim",
+		"smoka7/hop.nvim",
 		enabled = true,
 		event = { "BufRead", "BufNewFile" },
 		config = function()
@@ -1275,6 +1284,14 @@ require("lazy").setup({
 				},
 			})
 		end,
+	},
+	{
+		"vidocqh/data-viewer.nvim",
+		opts = {},
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"kkharji/sqlite.lua", -- Optional, sqlite support
+		},
 	},
 })
 

@@ -1,228 +1,241 @@
 local colors = {
-    bg = "#202328",
-    fg = "#bbc2cf",
-    yellow = "#ECBE7B",
-    cyan = "#008080",
-    darkblue = "#081633",
-    green = "#98be65",
-    orange = "#FF8800",
-    violet = "#a9a1e1",
-    magenta = "#c678dd",
-    blue = "#51afef",
-    red = "#ec5f67",
+	bg = "#202328",
+	fg = "#bbc2cf",
+	yellow = "#ECBE7B",
+	cyan = "#008080",
+	darkblue = "#081633",
+	green = "#98be65",
+	orange = "#FF8800",
+	violet = "#a9a1e1",
+	magenta = "#c678dd",
+	blue = "#51afef",
+	red = "#ec5f67",
 }
 
 local assets = {
-    left_separator = "",
-    right_separator = "",
-    mode_icon = " ",
-    dir = "󰉖",
-    file = "󰈙",
-    lsp = {
-        server = "󰅡",
-        error = "",
-        warning = "",
-        info = "",
-        hint = "",
-    },
-    git = {
-        branch = " ",
-        added = " ",
-        changed = " ",
-        removed = " ",
-    },
+	left_separator = "",
+	right_separator = "",
+	mode_icon = " ",
+	dir = "󰉖",
+	file = "󰈙",
+	lsp = {
+		server = "󰅡",
+		error = "",
+		warning = "",
+		info = "",
+		hint = "",
+	},
+	git = {
+		branch = " ",
+		added = " ",
+		changed = " ",
+		removed = " ",
+	},
 }
 
 local wpm = require("wpm")
 
 require("lualine").setup({
-    options = {
-        icons_enabled = true,
-        -- theme = "auto",
-        theme = "catppuccin",
-        -- component_separators = { left = "", right = "" },
-        component_separators = { left = "", right = "" },
-        -- section_separators = { left = "", right = "" },
-        section_separators = { left = "", right = "" },
-        disabled_filetypes = {
-            statusline = {},
-            winbar = {
-                "alpha",
-            },
-        },
-        ignore_focus = {},
-        always_divide_middle = true,
-        globalstatus = true,
-        refresh = {
-            statusline = 1000,
-            tabline = 1000,
-            winbar = 1000,
-        },
-    },
-    sections = {
-        lualine_a = {
-            {
-                "mode",
-                icons_enabled = true,
-                icon = {
-                    assets.mode_icon,
-                    align = "left",
-                },
-            },
-        },
-        lualine_b = {
-            "branch",
-            -- {
-                -- require("pr_status").get_last_result_string() or "pr_status failed",
-            -- },
-            {
-                "diff",
+	options = {
+		icons_enabled = true,
+		-- theme = "auto",
+		theme = "catppuccin",
+		-- component_separators = { left = "", right = "" },
+		component_separators = { left = "", right = "" },
+		-- section_separators = { left = "", right = "" },
+		section_separators = { left = "", right = "" },
+		disabled_filetypes = {
+			statusline = {},
+			winbar = {
+				"alpha",
+			},
+		},
+		ignore_focus = {},
+		always_divide_middle = true,
+		globalstatus = true,
+		refresh = {
+			statusline = 1000,
+			tabline = 1000,
+			winbar = 1000,
+		},
+	},
+	sections = {
+		lualine_a = {
+			{
+				"mode",
+				icons_enabled = true,
+				icon = {
+					assets.mode_icon,
+					align = "left",
+				},
+			},
+		},
+		lualine_b = {
+			"branch",
+			-- {
+			-- require("pr_status").get_last_result_string() or "pr_status failed",
+			-- },
+			{
+				"diff",
 
-                symbols = { added = assets.git.added, modified = assets.git.changed, removed = assets.git.removed }, -- Changes the symbols used by the diff.
-                source = nil,
-            },
-            "gtmstatus",
-            {
-                "diagnostics",
-                sources = {
-                    "nvim_diagnostic",
-                    -- "nvim",
-                },
-            },
-        },
-        lualine_c = {
-            -- "tabs",
-            "filename",
-            require("auto-session.lib").current_session_name,
-        },
-        lualine_x = { "filesize", "encoding", "fileformat", "filetype" },
-        lualine_y = { "progress" },
-        lualine_z = { "location" },
-    },
-    inactive_sections = {
-        lualine_a = { "filename" },
-        lualine_b = { "filesize" },
-        lualine_c = {
-            {
-                "filename",
-                path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
-            },
-        },
-        lualine_x = { "location" },
-        lualine_y = {},
-        lualine_z = {
-            {
-                "diagnostics",
-                sources = {
-                    "nvim_diagnostic",
-                },
-            },
-        },
-    },
-    tabline = {
-        lualine_a = {
-            -- "branch",
-        },
-        lualine_b = {
-            "windows",
-            -- "buffers",
-            -- {
-            -- 	"diff",
-            -- 	-- colored = true,
-            -- 	sym = { added = "+", modified = "~", removed = "-" },
-            -- 	source = nil,
-            -- },
-            -- "buffers",
-        },
-        lualine_c = {},
-        lualine_x = {
-            wpm.wpm,
-            wpm.historic_graph,
-            {
-                "diagnostics",
-                sources = {
-                    "nvim_diagnostic",
-                    -- "nvim",
-                },
-            },
-        },
-        lualine_y = {
-            "tabs",
-        },
-        lualine_z = {
-            {
-                "filename",
-                path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
-            },
-        },
-    },
-    winbar = {
-        lualine_a = {
-            {
-                "filename",
-                path = 1,
-            },
-        },
-        lualine_b = {
-            {
-                "diagnostics",
-                sources = {
-                    "nvim_diagnostic",
-                    -- "nvim",
-                },
-            },
-            {
-                "diff",
+				symbols = { added = assets.git.added, modified = assets.git.changed, removed = assets.git.removed }, -- Changes the symbols used by the diff.
+				source = nil,
+			},
+			"gtmstatus",
+			{
+				"diagnostics",
+				sources = {
+					"nvim_diagnostic",
+					-- "nvim",
+				},
+			},
+		},
+		lualine_c = {
+			-- "tabs",
+			"filename",
+			require("auto-session.lib").current_session_name,
+		},
+		lualine_x = {
+			"filesize",
+			"encoding",
+			"fileformat",
+			"filetype",
+			{
+				function()
+					return require("copilot_status").status_string()
+				end,
+				cnd = function()
+					return require("copilot_status").enabled()
+				end,
+			},
+		},
+		lualine_y = { "progress" },
+		lualine_z = { "location" },
+	},
+	inactive_sections = {
+		lualine_a = { "filename" },
+		lualine_b = { "filesize" },
+		lualine_c = {
+			{
+				"filename",
+				path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
+			},
+		},
+		lualine_x = { "location" },
+		lualine_y = {},
+		lualine_z = {
+			{
+				"diagnostics",
+				sources = {
+					"nvim_diagnostic",
+				},
+			},
+		},
+	},
+	tabline = {
+		lualine_a = {
+			-- "branch",
+		},
+		lualine_b = {
+			"windows",
+			-- "buffers",
+			-- {
+			-- 	"diff",
+			-- 	-- colored = true,
+			-- 	sym = { added = "+", modified = "~", removed = "-" },
+			-- 	source = nil,
+			-- },
+			-- "buffers",
+		},
+		lualine_c = {},
+		lualine_x = {
+			wpm.wpm,
+			wpm.historic_graph,
+			{
+				"diagnostics",
+				sources = {
+					"nvim_diagnostic",
+					-- "nvim",
+				},
+			},
+		},
+		lualine_y = {
+			"tabs",
+		},
+		lualine_z = {
+			{
+				"filename",
+				path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
+			},
+		},
+	},
+	winbar = {
+		lualine_a = {
+			{
+				"filename",
+				path = 1,
+			},
+		},
+		lualine_b = {
+			{
+				"diagnostics",
+				sources = {
+					"nvim_diagnostic",
+					-- "nvim",
+				},
+			},
+			{
+				"diff",
 
-                symbols = { added = assets.git.added, modified = assets.git.changed, removed = assets.git.removed }, -- Changes the symbols used by the diff.
-                source = nil,
-            },
-            "searchcount",
-            -- require(lspsaga.symbol.winbar).get_bar(),
-        },
-        lualine_c = {},
-        lualine_x = {},
-        lualine_y = {},
-        lualine_z = {},
-    },
-    inactive_winbar = {
-        lualine_a = {
-            {
-                "filename",
-                path = 1,
-            },
-        },
-        lualine_b = {
-            {
-                "diagnostics",
-                sources = {
-                    "nvim_diagnostic",
-                    -- "nvim",
-                },
-            },
-            {
-                "diff",
+				symbols = { added = assets.git.added, modified = assets.git.changed, removed = assets.git.removed }, -- Changes the symbols used by the diff.
+				source = nil,
+			},
+			"searchcount",
+			-- require(lspsaga.symbol.winbar).get_bar(),
+		},
+		lualine_c = {},
+		lualine_x = {},
+		lualine_y = {},
+		lualine_z = {},
+	},
+	inactive_winbar = {
+		lualine_a = {
+			{
+				"filename",
+				path = 1,
+			},
+		},
+		lualine_b = {
+			{
+				"diagnostics",
+				sources = {
+					"nvim_diagnostic",
+					-- "nvim",
+				},
+			},
+			{
+				"diff",
 
-                symbols = { added = assets.git.added, modified = assets.git.changed, removed = assets.git.removed }, -- Changes the symbols used by the diff.
-                source = nil,
-            },
-            "searchcount",
-            "selectioncount",
-        },
-        lualine_c = {},
-        lualine_x = {},
-        lualine_y = {},
-        lualine_z = {},
-    },
-    extensions = {
-        "toggleterm",
-        "nvim-dap-ui",
-        "lazy",
-        "trouble",
-        "quickfix",
-        "man",
-        "fzf",
-    },
+				symbols = { added = assets.git.added, modified = assets.git.changed, removed = assets.git.removed }, -- Changes the symbols used by the diff.
+				source = nil,
+			},
+			"searchcount",
+			"selectioncount",
+		},
+		lualine_c = {},
+		lualine_x = {},
+		lualine_y = {},
+		lualine_z = {},
+	},
+	extensions = {
+		"toggleterm",
+		"nvim-dap-ui",
+		"lazy",
+		"trouble",
+		"quickfix",
+		"man",
+		"fzf",
+	},
 })
 
 -- local clrs = require("catppuccin.palettes").get_palette()

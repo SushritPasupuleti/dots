@@ -14,6 +14,8 @@ require("nvim-treesitter.configs").setup({
 		"help",
 		"html",
 		"http",
+		"java",
+		"kotlin",
 		"javascript",
 		"json",
 		"jsonc",

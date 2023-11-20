@@ -26,9 +26,11 @@ local servers = {
 	"cssls",
 	"ansiblels",
 	"arduino_language_server",
+	"kotlin_language_server",
 	-- "lua-language-server",
 	-- "elixirls",
-	-- "omnisharp",
+	"omnisharp",
+	-- "csharp-language-server",
 	-- "rust_analyzer",
 	-- "sumneko_lua", --deprecated
 	"lua_ls",
@@ -42,6 +44,7 @@ local servers = {
 	"graphql",
 	-- "denols",
 	"awk_ls",
+	"buf",
 }
 
 local other_servers = {
