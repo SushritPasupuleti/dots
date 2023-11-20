@@ -1,15 +1,6 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
+# Declare all settings and configuration options that are to be commonly used by all `hosts`.
 { config, pkgs, lib, ... }:
 
-# let
-#   # unstable = import unstable {};
-#   unstableTarball =
-#     fetchTarball
-#       https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz;
-# in
 let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz";
   unstable = import <unstable> {
@@ -19,58 +10,13 @@ in
 
 {
   imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-    # <home-manager/nixos>
     (import "${home-manager}/nixos")
   ];
 
-  # Bootloader.
   boot.supportedFilesystems = [ "ntfs" ];
-  # boot.loader.systemd-boot.enable = true;
-  #boot.loader.efi.canTouchEfiVariables = true;
-  #boot.loader.efiSysMountPoint = "/boot";
-  boot.loader = {
-    efi = {
-      canTouchEfiVariables = true;
-      # assuming /boot is the mount point of the  EFI partition in NixOS (as the installation section recommends).
-      efiSysMountPoint = "/boot";
-    };
-    grub = {
-      # despite what the configuration.nix manpage seems to indicate,
-      # as of release 17.09, setting device to "nodev" will still call
-      # `grub-install` if efiSupport is true
-      # (the devices list is not used by the EFI grub install,
-      # but must be set to some value in order to pass an assert in grub.nix)
-      devices = [ "nodev" ];
-      efiSupport = true;
-      enable = true;
-      extraEntries = ''
-        menuentry "Micros**t Windows 11" {
-          insmod part_gpt
-          insmod fat
-          insmod search_fs_uuid
-          insmod chain
-          search --fs-uuid --set=root FE9B-2B5C #<--UUID of Windows /efi
-          chainloader /EFI/Microsoft/Boot/bootmgfw.efi
-        }
-      '';
-      # version = 2;
-    };
-  };
-
-  networking.hostName = "nixy-zangetsu"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
   networking.networkmanager.enable = true;
-
-  # Set your time zone.
-  time.timeZone = "Asia/Kolkata";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_GB.UTF-8";
@@ -96,23 +42,23 @@ in
   services.xserver.desktopManager.gnome.enable = true;
 
   # Enable QTile as window manager
-  services.xserver.windowManager.qtile = {
-    enable = true;
-    # package = pkgs.stable.qtile;
-    # configFile = ./qtile/config.py;
-    configFile = /home/sushrit_lawliet/.config/qtile/config.py;
-    extraPackages = python3Packages: with python3Packages; [
-      qtile-extras
-    ];
-  };
-  services.xserver.windowManager.awesome = {
-    enable = false;
-    luaModules = with pkgs.luaPackages; [
-      luarocks # is the package manager for Lua modules
-      luadbi-mysql # Database abstraction layer
-    ];
-    # extraPackages = with pkgs; [ kitty ];
-  };
+  # services.xserver.windowManager.qtile = {
+  #   enable = true;
+  #   # package = pkgs.stable.qtile;
+  #   # configFile = ./qtile/config.py;
+  #   configFile = /home/sushrit_lawliet/.config/qtile/config.py;
+  #   extraPackages = python3Packages: with python3Packages; [
+  #     qtile-extras
+  #   ];
+  # };
+  # services.xserver.windowManager.awesome = {
+  #   enable = false;
+  #   luaModules = with pkgs.luaPackages; [
+  #     luarocks # is the package manager for Lua modules
+  #     luadbi-mysql # Database abstraction layer
+  #   ];
+  #   # extraPackages = with pkgs; [ kitty ];
+  # };
 
   # configure xdg portal
   xdg.portal = {
@@ -133,8 +79,12 @@ in
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  # Enable PolKit for Wayland
+  security.polkit.enable = true;
+
   # Enable sound with pipewire.
   sound.enable = true;
+  nixpkgs.config.pulseaudio = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -174,15 +124,16 @@ in
     packages = with pkgs; [
       firefox
       git
+      unstable.github-desktop # <--- use latest
       vim
-      neovim
+      unstable.neovim # <--- use latest
       emacs
       tmux
       kitty
       wezterm
       ranger
       unstable.starship # <--- use latest
-      nerdfonts
+      unstable.nerdfonts # <--- use latest
       fira-code
       gh
       unstable.lazygit # <--- use latest
@@ -202,6 +153,7 @@ in
       gnumake
       # vscode # <--- use latest
       unstable.vscode # <--- use latest
+      jetbrains.idea-community
       android-studio
       android-tools
       fnm
@@ -216,20 +168,36 @@ in
       jira-cli-go
       pika-backup
       transmission
+      transmission-gtk
       vlc
+      libvlc
+      mpv
       ytfzf
       ueberzugpp
       zoom-us
       rpi-imager
       libreoffice
       onlyoffice-bin
+      unstable.halloy # <--- use latest
+      unstable.localsend # <--- use latest
       #langs
       go
+      golangci-lint
       python39
       nodejs_18
       elixir_1_15
       elixir-ls
+      kotlin
+      kotlin-native
+      kotlin-language-server
+      ktlint
+      spring-boot-cli
+      dotnet-sdk_7
+      dotnet-runtime_7
+      dotnet-aspnetcore_7
       # grpc-tools
+      grpcurl
+      grpcui
       protobuf3_20
       # nodePackages.eas-cli
       nodePackages.tailwindcss
@@ -299,9 +267,12 @@ in
       mosquitto
       jq
       fx
+      cloc
       openrgb-with-all-plugins
       nyxt
       obs-studio
+      # obs plugins
+      obs-studio-plugins.wlrobs
       boatswain #Stream Deck support
       ripdrag
       #gnome
@@ -320,32 +291,36 @@ in
       gnomeExtensions.vitals
       #themes
       catppuccin-gtk
-      #  thunderbird
+      thunderbird
       nushell
       # fish
       fish
       fishPlugins.done
       fishPlugins.fzf-fish
+      # Fancy Eye Candy
+      pipes-rs
+      cbonsai
+      cmatrix
       # Awesome
       # awesome
       # Gnome+Qtile
-      qtile
+      unstable.qtile
       picom
       rofi
-	  waybar
+      waybar
       nitrogen
       rofi
       # rofi-wayland
       # mandatory 
       xorg.libxcb
       libsForQt5.dolphin
-	  gnome.nautilus
-	  gnome.sushi
-	  gnome.gnome-settings-daemon43
-	  xfce.xfce4-settings
-	  pavucontrol
-	  wlogout
-	  hyprpaper
+      gnome.nautilus
+      gnome.sushi
+      gnome.gnome-settings-daemon43
+      xfce.xfce4-settings
+      pavucontrol
+      wlogout
+      hyprpaper
       # xdg-desktop-portal-gtk
     ];
   };
@@ -360,7 +335,6 @@ in
   programs.fish.enable = true;
   users.defaultUserShell = pkgs.fish;
 
-  # Allow unfree packages
   nixpkgs.config = {
     # allowUnfree = true;
     microsoft-edge = {
@@ -417,10 +391,7 @@ in
   };
 
   programs.adb.enable = true;
-  #users.users.sushrit_lawliet.extraGroups = ["adbusers"];
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
   environment.systemPackages = with pkgs;
     [
@@ -455,55 +426,12 @@ in
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.05"; # Did you read the comment?
-
-  # Tell Xorg to use the nvidia driver
-  services.xserver.videoDrivers = [ "nvidia" ];
-
-  hardware.nvidia = {
-
-    # Modesetting is needed for most wayland compositors
-    modesetting.enable = true;
-
-    # Enable power management (do not disable this unless you have a reason to).
-    # Likely to cause problems on laptops and with screen tearing if disabled.
-    powerManagement.enable = true;
-
-    # Use the open source version of the kernel module
-    # Only available on driver 515.43.04+
-    open = false;
-
-    # Enable the nvidia settings menu
-    nvidiaSettings = true;
-
-    # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
-
-  #fix blank screen with intel iGPU
-  #boot.kernelParams = [ "module_blacklist=i915" ];
-
-  ## Hardware Acceleration for video
-  hardware.opengl = {
-    enable = true;
-    extraPackages = with pkgs; [
-      intel-media-driver # LIBVA_DRIVER_NAME=iHD
-      # vaapiIntel # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
-      vaapiVdpau
-      # libvdpau-va-gl
-    ];
-    driSupport = true;
-    driSupport32Bit = true;
-  };
+  system.stateVersion = "23.05";
 
   ## Virtualization
 
   virtualisation.libvirtd.enable = true;
   programs.dconf.enable = true;
-  #environment.systemPackages = with pkgs; [ virt-manager ];
-
-  ## OpenRGB
-  boot.kernelModules = [ "i2c-dev" "i2c-piix4" ];
 
   ## Docker
   virtualisation.docker = {
@@ -528,6 +456,8 @@ in
   programs.hyprland.enable = true;
   programs.hyprland.xwayland.enable = true;
   # programs.hyprland.enableNvidiaPatches = true;
+
+  programs.sway.enable = true;
 
   # Enable Java
   programs.java.enable = true;
@@ -559,6 +489,5 @@ in
     )
   ];
 
-  system.nixos.label = "Add-Waybar";
+  system.nixos.label = "Add-gRPC-Tools";
 }
-
