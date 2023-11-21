@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=Microsoft Edge (Wayland)
+Exec=microsoft-edge --enable-features=UseOzonePlatform --ozone-platform=wayland
+Icon=microsoft-edge

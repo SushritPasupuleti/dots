@@ -6,15 +6,29 @@
   home.username = "sushrit_lawliet";
   home.homeDirectory = "/home/sushrit_lawliet";
 
+  targets.genericLinux.enable = true;
+
+  # xdg.desktopEntries =
+  #   {
+  #     microsoft-edge = {
+  #       name = "Microsoft Edge (Wayland)";
+  #       genericName = "Web Browser";
+  #       exec = "microsoft-edge --enable-features=UseOzonePlatform --ozone-platform=wayland";
+  #       terminal = false;
+  #       categories = [ "Application" "Network" "WebBrowser" ];
+  #       mimeType = [ "text/html" "text/xml" ];
+  #     };
+  #   };
+
   # gtk = {
   #   enable = true;
   #   theme = {
-  #     name = "Catppuccin-Macchiato-Compact-Pink-Dark";
+  #     name = "Catppuccin-Mocha-Standard-Blue-Dark";
   #     package = pkgs.catppuccin-gtk.override {
-  #       accents = [ "pink" ];
-  #       size = "compact";
+  #       accents = [ "blue" ];
+  #       size = "standard";
   #       tweaks = [ "rimless" "black" ];
-  #       variant = "macchiato";
+  #       variant = "mocha";
   #     };
   #   };
   # };
