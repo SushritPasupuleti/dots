@@ -33,6 +33,8 @@ in
     LC_TIME = "en_IN";
   };
 
+  time.timeZone = "Asia/Kolkata";
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
