@@ -55,7 +55,7 @@
   "neogen": { "branch": "main", "commit": "cb1f384df804c1bf729332c4f728253fe17962d4" },
   "neogit": { "branch": "master", "commit": "01dc0a7e237a4d6d053cea2503f5dd1a81c1e310" },
   "no-neck-pain.nvim": { "branch": "main", "commit": "7a16c73d3f0142746a3f7346bf73e0e761c91dd5" },
-  "null-ls.nvim": { "branch": "main", "commit": "0010ea927ab7c09ef0ce9bf28c2b573fc302f5a7" },
+  "null-ls": { "branch": "main", "commit": "fa9be1679db7bf57d44128a018db43da5488a07f" },
   "numbers.nvim": { "branch": "master", "commit": "d1f95879a4cdf339f59e6a2dc6aef26912cf554c" },
   "nvim-autopairs": { "branch": "master", "commit": "0f04d78619cce9a5af4f355968040f7d675854a1" },
   "nvim-cmp": { "branch": "main", "commit": "51260c02a8ffded8e16162dcf41a23ec90cfba62" },

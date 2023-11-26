@@ -206,7 +206,7 @@ require("lazy").setup({
 			require("lspsaga").setup({
 				lightbulb = {
 					virtual_text = false,
-					-- enable = false,
+					enable = false,
 				},
 				ui = {
 					border = "single",
@@ -241,8 +241,9 @@ require("lazy").setup({
 		end,
 	},
 	{
-		"jose-elias-alvarez/null-ls.nvim",
+		"nvimtools/none-ls.nvim",
 		event = { "BufReadPre", "BufNewFile" },
+		name = "null-ls",
 		config = function()
 			require("sushrit_lawliet.null-ls")
 		end,
