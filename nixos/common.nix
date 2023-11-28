@@ -189,6 +189,10 @@ in
       nodejs_18
       elixir_1_15
       elixir-ls
+	  ocaml
+	  opam
+	  ocamlPackages.findlib
+	  ocamlformat
       kotlin
       kotlin-native
       kotlin-language-server
@@ -238,10 +242,12 @@ in
       nixfmt
       unzip
       fselect
+	  nixos-generators
       # ast-grep
       bat
       btop
       htop
+	  nvitop
       python310Packages.gpustat
       sqlite
       neofetch
@@ -280,6 +286,7 @@ in
       #gnome
       gnome.gnome-boxes
       #gnome-extensions
+	  gnomeExtensions.paperwm
       gnomeExtensions.pop-shell
       gnome.gnome-tweaks
       gnomeExtensions.clipman
@@ -323,6 +330,7 @@ in
       pavucontrol
       wlogout
       hyprpaper
+	  unstable.catnip # <--- use latest
       # xdg-desktop-portal-gtk
     ];
   };
@@ -491,5 +499,8 @@ in
     )
   ];
 
-  system.nixos.label = "Add-gRPC-Tools";
+  #Allow autoclean optimise
+nix.gc = { automatic =true; options = " --delete-older-than 14d"; }; nix.settings.auto-optimise-store = true; nix.optimise = { automatic = false; dates = [ "Weekly" ]; };
+
+  system.nixos.label = "Add-OCaml";
 }
