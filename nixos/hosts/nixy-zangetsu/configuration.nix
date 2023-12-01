@@ -36,7 +36,6 @@
     };
   };
 
-  networking.hostName = "nixy-zangetsu"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   #Nvidia
@@ -77,5 +76,8 @@
     ];
     driSupport = true;
     driSupport32Bit = true;
+    ## Enable nvidia-docker wrapper
   };
+
+  virtualisation.docker.enableNvidia = true;
 }

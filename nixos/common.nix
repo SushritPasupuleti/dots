@@ -18,6 +18,8 @@ in
   # Enable networking
   networking.networkmanager.enable = true;
 
+  networking.hostName = "nixy-zangetsu"; # Define your hostname.
+
   # Select internationalisation properties.
   i18n.defaultLocale = "en_GB.UTF-8";
 
@@ -107,12 +109,14 @@ in
     builtins.elem (lib.getName pkg) [
       "nvidia-x11"
       "nvidia-settings"
+	  "nvidia-persistenced"
       "microsoft-edge-stable"
       "google-chrome"
       "zoom"
       "vscode"
       "android-studio-stable"
       "postman"
+	  "terraform"
     ];
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -262,6 +266,7 @@ in
       terraform-ls
       terraform-docs
       k6
+      # pkg-config
       pkgconfig
       openssl
       libiconv
@@ -289,9 +294,8 @@ in
 	  gnomeExtensions.paperwm
       gnomeExtensions.pop-shell
       gnome.gnome-tweaks
-      gnomeExtensions.clipman
+      # gnomeExtensions.clipman
       gnomeExtensions.blur-my-shell
-      gnomeExtensions.clipman
       gnomeExtensions.pano
       gnomeExtensions.dash-to-panel
       gnomeExtensions.gsconnect
