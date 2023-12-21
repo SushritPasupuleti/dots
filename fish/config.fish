@@ -15,10 +15,12 @@ set PATH $HOME/.cargo/bin $PATH
 set PATH $HOME/.my-scripts $PATH
 set PATH $HOME/.emacs.d/bin: $PATH
 set DENO_INSTALL "/home/sushrit_lawliet/.deno"
+set -gx DOTNET_ROOT $HOME/.dotnet
 set PATH $DENO_INSTALL/bin: $PATH
 set PATH $(which yarn) $PATH
 set PATH $(which arduino-cli) $PATH
 set PATH $HOME/.npm-global $PATH
+set PATH $DOTNET_ROOT/tools $PATH
 
 fish_add_path /opt/homebrew/sbin
 
@@ -82,6 +84,8 @@ zoxide init fish | source
 starship init fish | source
 fnm env --use-on-cd | source
 
+complete -f -c dotnet -a "(dotnet complete (commandline -cp))"
+
 # Enable vi mode
 function fish_user_key_bindings
     # Execute this once per mode that emacs bindings should be used in
@@ -93,3 +97,6 @@ function fish_user_key_bindings
     # The argument specifies the initial mode (insert, "default" or visual).
     fish_vi_key_bindings --no-erase insert
 end
+
+# opam configuration
+source /home/sushrit_lawliet/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
