@@ -36,6 +36,8 @@
     };
   };
 
+  boot.kernelModules = [ "i2c-dev" "i2c-piix4" ];
+
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   #Nvidia

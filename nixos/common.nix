@@ -2,9 +2,12 @@
 { config, pkgs, lib, ... }:
 
 let
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz";
+  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
   unstable = import <unstable> {
     config.allowUnfree = true;
+  };
+  openrgb-rules = builtins.fetchurl {
+    url = "https://gitlab.com/CalcProgrammer1/OpenRGB/-/raw/master/60-openrgb.rules";
   };
 in
 
@@ -37,6 +40,8 @@ in
 
   time.timeZone = "Asia/Kolkata";
 
+  # services.udev.extraRules = builtins.readFile openrgb-rules;
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
@@ -46,6 +51,7 @@ in
   services.xserver.desktopManager.gnome.enable = true;
 
   # Enable QTile as window manager
+  services.xserver.windowManager.qtile.enable = true;
   # services.xserver.windowManager.qtile = {
   #   enable = true;
   #   # package = pkgs.stable.qtile;
@@ -109,15 +115,20 @@ in
     builtins.elem (lib.getName pkg) [
       "nvidia-x11"
       "nvidia-settings"
-	  "nvidia-persistenced"
+      "nvidia-persistenced"
       "microsoft-edge-stable"
       "google-chrome"
       "zoom"
       "vscode"
       "android-studio-stable"
       "postman"
-	  "terraform"
+      "terraform"
+      "etcher"
     ];
+
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-19.1.9"
+  ];
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -129,6 +140,7 @@ in
     extraGroups = [ "networkmanager" "wheel" "adbusers" "libvirtd" "docker" ];
     packages = with pkgs; [
       firefox
+      tor-browser
       git
       unstable.github-desktop # <--- use latest
       vim
@@ -163,7 +175,7 @@ in
       android-studio
       android-tools
       fnm
-      postman
+      # postman
       unstable.bruno
       # microsoft-edge
       unstable.microsoft-edge # <--- use latest
@@ -189,14 +201,18 @@ in
       #langs
       go
       golangci-lint
-      python39
+      wails
+      pipx
+      python3
+      python311Packages.pip
+      python311Packages.jupytext
       nodejs_18
       elixir_1_15
       elixir-ls
-	  ocaml
-	  opam
-	  ocamlPackages.findlib
-	  ocamlformat
+      ocaml
+      opam
+      ocamlPackages.findlib
+      ocamlformat
       kotlin
       kotlin-native
       kotlin-language-server
@@ -213,13 +229,18 @@ in
       nodePackages.tailwindcss
       nodePackages.pnpm
       nodePackages_latest.eslint
+      libtorch-bin
+      # LaTex
+      texliveFull
       # bun
       unstable.bun # <--- use latest
       yarn
       gcc
       rustup
       rust-analyzer
+      sqlx-cli
       lua
+      luajitPackages.luacheck
       stylua
       openjdk17
       podman
@@ -227,16 +248,21 @@ in
       podman-desktop
       #dbs
       postgresql_15
+      osm2pgsql
+      # haskell
+      # unstable.haskellPackages.postgrest
       prometheus
       prometheus-node-exporter
       grafana
       # postgresql15Packages.timescaledb
+      # postgresql15Packages.postgis
       pgadmin4-desktopmode
       #utilties
+      kicad
       lsof
       gum
       glow
-      exa
+      eza
       zoxide
       fzf
       fd
@@ -244,20 +270,29 @@ in
       gnused
       ripgrep
       nixfmt
+      deadnix
+      checkmake
+      shellcheck
+      sqlfluff
+      dotenv-linter
       unzip
       fselect
-	  nixos-generators
+      sioyek
+      nixos-generators
+      etcher
+      wrk2
       # ast-grep
       bat
       btop
       htop
-	  nvitop
+      nvitop
       python310Packages.gpustat
       sqlite
       neofetch
       timg
       appeditor
       git-ignore
+      marp-cli
       #cli
       aws-sam-cli
       awscli2
@@ -266,11 +301,11 @@ in
       terraform-ls
       terraform-docs
       k6
-      # pkg-config
-      pkgconfig
+      pkg-config
+      # pkgconfig
       openssl
       libiconv
-      turbo
+      # turbo
       arduino
       arduino-cli
       #terminal-notifier
@@ -291,7 +326,7 @@ in
       #gnome
       gnome.gnome-boxes
       #gnome-extensions
-	  gnomeExtensions.paperwm
+      gnomeExtensions.paperwm
       gnomeExtensions.pop-shell
       gnome.gnome-tweaks
       # gnomeExtensions.clipman
@@ -303,6 +338,7 @@ in
       gnomeExtensions.space-bar
       gnomeExtensions.vitals
       #themes
+      catppuccin-cursors
       catppuccin-gtk
       thunderbird
       nushell
@@ -314,6 +350,11 @@ in
       pipes-rs
       cbonsai
       cmatrix
+      # wails: 
+      gtk3
+      webkitgtk
+      upx
+      nsis
       # Awesome
       # awesome
       # Gnome+Qtile
@@ -334,10 +375,23 @@ in
       pavucontrol
       wlogout
       hyprpaper
-	  unstable.catnip # <--- use latest
+      unstable.catnip # <--- use latest
       # xdg-desktop-portal-gtk
     ];
   };
+
+  fonts.packages = with pkgs; [
+    monaspace
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
+    liberation_ttf
+    fira-code
+    fira-code-symbols
+    mplus-outline-fonts.githubRelease
+    dina-font
+    proggyfonts
+  ];
 
   home-manager.users.sushrit_lawliet = { pkgs, unstable, ... }: {
     home.packages = [
@@ -373,7 +427,10 @@ in
   services.postgresql = {
     enable = true;
     package = pkgs.postgresql_15;
-    extraPlugins = [ pkgs.postgresql15Packages.timescaledb ];
+    extraPlugins = [
+      pkgs.postgresql15Packages.timescaledb
+      pkgs.postgresql15Packages.postgis
+    ];
     settings.shared_preload_libraries = "timescaledb";
     #dataDir = "/data/postgresql";
     # authentication = pkgs.lib.mkOverride 10 ''
@@ -406,13 +463,21 @@ in
 
   programs.adb.enable = true;
 
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    MOZ_ENABLE_WAYLAND = "1";
+    # QT_QPA_PLATFORM = "wayland";
+    # QT_QPA_PLATFORMTHEME = "gtk2";
+    # SDL_VIDEODRIVER = "wayland";
+    MOZ_DBUS_REMOTE = "1";
+  };
   environment.systemPackages = with pkgs;
     [
       #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
       #  wget
       virt-manager
       # unstable.lazygit
+      qt5.qtwayland
     ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -504,7 +569,9 @@ in
   ];
 
   #Allow autoclean optimise
-nix.gc = { automatic =true; options = " --delete-older-than 14d"; }; nix.settings.auto-optimise-store = true; nix.optimise = { automatic = false; dates = [ "Weekly" ]; };
+  nix.gc = { automatic = true; options = " --delete-older-than 14d"; };
+  nix.settings.auto-optimise-store = true;
+  nix.optimise = { automatic = false; dates = [ "Weekly" ]; };
 
-  system.nixos.label = "Add-OCaml";
+  system.nixos.label = "Add-Pipx";
 }
