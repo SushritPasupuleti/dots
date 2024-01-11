@@ -45,6 +45,10 @@ in
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
+  # Fixes atrocious lag when typing in X11
+  services.xserver.autoRepeatDelay = 250;
+  services.xserver.autoRepeatInterval = 30;
+
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   # disable gnome
@@ -147,6 +151,7 @@ in
       unstable.neovim # <--- use latest
       emacs
       tmux
+	  zellij
       kitty
       wezterm
       ranger

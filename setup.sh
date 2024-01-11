@@ -81,6 +81,32 @@ then
 	rm -rf ~/.config/home-manager
 	ln -s "$(pwd -P)"/home-manager ~/.config/home-manager
 
+	# add .desktop files
+	rm -rf ~/.local/share/applications/desktop-files
+	ln -s "$(pwd -P)"/desktop-files ~/.local/share/applications
+
+	# add rofi config
+	ln -s "$(pwd -P)"/rofi ~/.config/
+
+	# add waybar config
+	ln -s "$(pwd -P)"/waybar ~/.config/
+
+	# add hyprland config
+ 	ln -s "$(pwd -P)"/hypr ~/.config/
+
+	# add halloy config
+	rm -rf ~/.config/halloy
+	ln -s "$(pwd -P)"/halloy ~/.config/
+
+	# add sioyek config
+	rm -rf ~/.config/sioyek
+	ln -s "$(pwd -P)"/sioyek ~/.config/
+
+	# add zellij config
+	mkdir -p ~/.config/zellij
+	rm -rf ~/.config/zellij/config.kdl
+	ln -s "$(pwd -P)"/zellij/config.kdl ~/.config/zellij/config.kdl
+
 	echo $(success "Symlinks created.")
 
 	echo "Fish shell has been setup, make sure you add the exports.fish file to conf.d/ with secrets."

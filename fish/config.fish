@@ -22,6 +22,9 @@ set PATH $(which arduino-cli) $PATH
 set PATH $HOME/.npm-global $PATH
 set PATH $DOTNET_ROOT/tools $PATH
 
+# WAYLAND
+set MOZ_ENABLE_WAYLAND 1
+
 fish_add_path /opt/homebrew/sbin
 
 # OS-specific settings
