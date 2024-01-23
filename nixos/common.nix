@@ -162,6 +162,7 @@ in
       unstable.lazygit # <--- use latest
       lazydocker
       delta
+	  spark
       docker
       # k3s
       ktunnel
@@ -292,6 +293,7 @@ in
       htop
       nvitop
       python310Packages.gpustat
+	  python310Packages.pyspark
       sqlite
       neofetch
       timg
@@ -578,5 +580,5 @@ in
   nix.settings.auto-optimise-store = true;
   nix.optimise = { automatic = false; dates = [ "Weekly" ]; };
 
-  system.nixos.label = "Add-Pipx";
+  system.nixos.label = "Add-Spark";
 }
