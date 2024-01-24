@@ -35,6 +35,7 @@ require("nvim-treesitter.configs").setup({
 		"elixir",
 		"heex",
 		"eex",
+		"ocaml",
 	},
 	ignore_install = {
 "help"

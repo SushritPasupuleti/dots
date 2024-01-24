@@ -28,7 +28,7 @@ vim.g.vsnip_filetypes.typescriptreact = { "typescript" }
 -- 	xmap        S   <Plug>(vsnip-cut-text)
 -- ]])
 
-require("luasnip/loaders/from_vscode").lazy_load({ path = "~/.config/nvim/plugins/snippets" })
+-- require("luasnip/loaders/from_vscode").lazy_load({ path = "~/.config/nvim/plugins/snippets" })
 
 cmp.setup({
     view = {

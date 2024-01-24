@@ -35,6 +35,12 @@ local assets = {
 
 local wpm = require("wpm")
 
+-- local lspsaga = require("lspsaga")
+
+-- local function outlines()
+--     return require(lspsaga.symbol.winbar).get_bar()
+-- end
+
 require("lualine").setup({
 	options = {
 		icons_enabled = true,
@@ -89,6 +95,9 @@ require("lualine").setup({
 					-- "nvim",
 				},
 			},
+			-- function()
+			--     return require("do").view("active")
+			-- end,
 		},
 		lualine_c = {
 			-- "tabs",
@@ -135,9 +144,15 @@ require("lualine").setup({
 	tabline = {
 		lualine_a = {
 			-- "branch",
+			{
+			    "navic",
+			    -- color_correction = "static",
+			    -- color_correction = nil,
+			    navic_opts = { highlight = true },
+			},
 		},
 		lualine_b = {
-			"windows",
+			-- "windows",
 			-- "buffers",
 			-- {
 			-- 	"diff",
@@ -147,7 +162,11 @@ require("lualine").setup({
 			-- },
 			-- "buffers",
 		},
-		lualine_c = {},
+		lualine_c = {
+			function()
+			    return require("do").view("active")
+			end,
+		},
 		lualine_x = {
 			wpm.wpm,
 			wpm.historic_graph,
@@ -160,7 +179,11 @@ require("lualine").setup({
 			},
 		},
 		lualine_y = {
+			-- "windows",
 			"tabs",
+			function()
+				return require("do").view("active")
+			end,
 		},
 		lualine_z = {
 			{
@@ -170,13 +193,31 @@ require("lualine").setup({
 		},
 	},
 	winbar = {
-		lualine_a = {
+		lualine_a = {},
+		lualine_b = {
 			{
 				"filename",
 				path = 1,
 			},
 		},
-		lualine_b = {
+		lualine_c = {
+			-- {
+			-- 	"diagnostics",
+			-- 	sources = {
+			-- 		"nvim_diagnostic",
+			-- 		-- "nvim",
+			-- 	},
+			-- },
+			-- {
+			-- 	"diff",
+			--
+			-- 	symbols = { added = assets.git.added, modified = assets.git.changed, removed = assets.git.removed }, -- Changes the symbols used by the diff.
+			-- 	source = nil,
+			-- },
+			-- "searchcount",
+			-- require(lspsaga.symbol.winbar).get_bar(),
+			-- lspsaga.symbol.get_bar(),
+			-- outlines,
 			{
 				"diagnostics",
 				sources = {
@@ -190,10 +231,19 @@ require("lualine").setup({
 				symbols = { added = assets.git.added, modified = assets.git.changed, removed = assets.git.removed }, -- Changes the symbols used by the diff.
 				source = nil,
 			},
-			"searchcount",
-			-- require(lspsaga.symbol.winbar).get_bar(),
+			{
+				function()
+					return require("copilot_status").status_string()
+				end,
+				cnd = function()
+					return require("copilot_status").enabled()
+				end,
+			},
+			-- "filesize",
+			-- "encoding",
+			-- "fileformat",
+			-- "filetype",
 		},
-		lualine_c = {},
 		lualine_x = {},
 		lualine_y = {},
 		lualine_z = {},
@@ -207,6 +257,14 @@ require("lualine").setup({
 		},
 		lualine_b = {
 			{
+				function()
+					return require("copilot_status").status_string()
+				end,
+				cnd = function()
+					return require("copilot_status").enabled()
+				end,
+			},
+			{
 				"diagnostics",
 				sources = {
 					"nvim_diagnostic",
@@ -219,10 +277,16 @@ require("lualine").setup({
 				symbols = { added = assets.git.added, modified = assets.git.changed, removed = assets.git.removed }, -- Changes the symbols used by the diff.
 				source = nil,
 			},
+			"filesize",
+			"encoding",
+			"fileformat",
+			"filetype",
 			"searchcount",
 			"selectioncount",
 		},
-		lualine_c = {},
+		lualine_c = {
+			require("do").view_inactive,
+		},
 		lualine_x = {},
 		lualine_y = {},
 		lualine_z = {},
@@ -237,6 +301,11 @@ require("lualine").setup({
 		"fzf",
 	},
 })
+
+-- require("lualine").hide({
+-- 	place = { "statusline", "tabline" }, -- The segment this change applies to.
+-- 	unhide = false,                      -- whether to re-enable lualine again/
+-- })
 
 -- local clrs = require("catppuccin.palettes").get_palette()
 -- local ctp_feline = require("catppuccin.groups.integrations.feline")

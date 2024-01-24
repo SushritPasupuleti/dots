@@ -69,6 +69,15 @@ require("catppuccin").setup({
 		},
 		markdown = true,
 		semantic_tokens = true,
+		navic = {
+			enabled = true,
+		},
+		barbecue = {
+			dim_dirname = true, -- directory name is dimmed by default
+			bold_basename = true,
+			dim_context = false,
+			alt_background = false,
+		},
 		-- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
 		native_lsp = {
 			enabled = true,

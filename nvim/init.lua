@@ -83,23 +83,39 @@ require("lazy").setup({
 		"freddiehaddad/feline.nvim",
 		-- version = "1.1.1",
 		branch = "main",
-		event = "VimEnter",
-		lazy = false,
+		-- event = "VimEnter",
+		-- lazy = false,
+		-- opts = {},
 		enabled = false,
 		config = function()
-			-- require("sushrit_lawliet.feline")
-			-- require("feline").setup({})
-			--require('feline').statuscolumn.setup()
+			-- require("feline").setup()
 			-- require("feline").winbar.setup()
-			-- local ctp_feline = require("catppuccin.groups.integrations.feline")
-			--
-			-- ctp_feline.setup()
-			--
-			-- require("feline").setup({
-			-- 	components = ctp_feline.get(),
+			require("sushrit_lawliet.feline")
+			-- 	-- require("feline").setup({})
+			-- 	--require('feline').statuscolumn.setup()
+			-- 	-- require("feline").winbar.setup()
+			-- 	-- local ctp_feline = require("catppuccin.groups.integrations.feline")
+			-- 	--
+			-- 	-- ctp_feline.setup()
+			-- 	--
+			-- 	-- require("feline").setup({
+			-- 	-- 	components = ctp_feline.get(),
 			-- })
 		end,
 	},
+	-- {
+	-- 	"utilyre/barbecue.nvim",
+	-- 	name = "barbecue",
+	-- 	version = "*",
+	-- 	dependencies = {
+	-- 		"SmiteshP/nvim-navic",
+	-- 		"nvim-tree/nvim-web-devicons", -- optional dependency
+	-- 	},
+	-- 	opts = {
+	-- 		-- configurations go here
+	-- 		theme = "catppuccin-mocha", -- catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
+	-- 	},
+	-- },
 	{
 		"jonahgoldwastaken/copilot-status.nvim",
 		dependencies = { "zbirenbaum/copilot.lua" }, -- or "zbirenbaum/copilot.lua"
@@ -145,6 +161,50 @@ require("lazy").setup({
 		end,
 	},
 	{
+		"SmiteshP/nvim-navic",
+		-- name = "navic",
+		dependencies = {
+			"neovim/nvim-lspconfig",
+		},
+		-- enabled = false,
+		config = function()
+			require("nvim-navic").setup({
+				-- your configuration comes here
+				-- or leave it empty to use the default settings
+				-- refer to the configuration section below
+				highlight = true,
+				icons = {
+					File = " ",
+					Module = " ",
+					Namespace = " ",
+					Package = " ",
+					Class = " ",
+					Method = " ",
+					Property = " ",
+					Field = " ",
+					Constructor = " ",
+					Enum = " ",
+					Interface = " ",
+					Function = " ",
+					Variable = " ",
+					Constant = " ",
+					String = " ",
+					Number = " ",
+					Boolean = " ",
+					Array = " ",
+					Object = " ",
+					Key = " ",
+					Null = " ",
+					EnumMember = " ",
+					Struct = " ",
+					Event = " ",
+					Operator = " ",
+					TypeParameter = " ",
+				},
+			})
+		end,
+	},
+	{
 		"JASONews/glow-hover",
 		config = function()
 			require("glow-hover").setup({})
@@ -152,18 +212,28 @@ require("lazy").setup({
 	},
 	{
 		"j-hui/fidget.nvim",
-		-- enabled=false,
+		enabled = false,
 		event = "VimEnter",
 		config = function()
 			require("fidget").setup({
-				text = {
-					spinner = "dots_negative",
+				-- text = {
+				-- 	spinner = "dots_negative",
+				-- },
+				-- window = {
+				-- 	relative = "win", -- where to anchor, either "win" or "editor"
+				-- 	blend = 0,        -- &winblend for the window
+				-- 	zindex = nil,     -- the zindex value for the window
+				-- 	border = "none",  -- style of border for the fidget window
+				-- },
+				notification = {
+					window = {
+						winblend = 0,
+					},
 				},
-				window = {
-					relative = "win", -- where to anchor, either "win" or "editor"
-					blend = 0,        -- &winblend for the window
-					zindex = nil,     -- the zindex value for the window
-					border = "none",  -- style of border for the fidget window
+				display = {
+					progress_icon = {
+						pattern = "dots_negative",
+					},
 				},
 			})
 		end,
@@ -221,6 +291,9 @@ require("lazy").setup({
 					-- show_code_action = false, --true,
 					-- show_source = false, --true,
 					-- jump_num_shortcut = false, --true,
+				},
+				symbol_in_winbar = {
+					enable = false,
 				},
 				-- colors = M.custom_colors(),
 				-- kind = M.custom_kind(),
@@ -379,6 +452,31 @@ require("lazy").setup({
 		name = "ast_grep",
 	},
 	{
+		"FabianWirth/search.nvim",
+		name = "search",
+		dependencies = { "nvim-telescope/telescope.nvim" },
+		event = "VimEnter",
+		config = function()
+			require("search").setup({
+				append_tabs = { -- append_tabs will add the provided tabs to the default ones
+					{
+						name = "Buffers",
+						tele_func = require("telescope.builtin").buffers,
+					},
+				},
+			})
+		end,
+	},
+	{
+		"ibhagwan/fzf-lua",
+		-- optional for icon support
+		enabled = false,
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			require("sushrit_lawliet.fzf")
+		end,
+	},
+	{
 		"petertriho/nvim-scrollbar",
 		event = { "BufRead", "BufNewFile" },
 		opts = {
@@ -486,8 +584,8 @@ require("lazy").setup({
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
-			"L3MON4D3/LuaSnip",
-			"saadparwaiz1/cmp_luasnip",
+			-- "L3MON4D3/LuaSnip",
+			-- "saadparwaiz1/cmp_luasnip",
 			-- Additional Sources:
 			"kdheepak/cmp-latex-symbols",
 			"andersevenrud/cmp-tmux",
@@ -649,7 +747,10 @@ require("lazy").setup({
 		"lewis6991/gitsigns.nvim", -- git signs
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
-			require("gitsigns").setup()
+			require("gitsigns").setup({
+				-- numhl = true,
+				current_line_blame = true,
+			})
 		end,
 	},
 	{
@@ -794,6 +895,13 @@ require("lazy").setup({
 	-- { "GCBallesteros/vim-textobj-hydrogen", dependencies = { "kana/vim-textobj-user", "kana/vim-textobj-line" } },
 	-- "GCBallesteros/jupytext.vim",
 	{
+		"GCBallesteros/jupytext.nvim",
+		config = true,
+		lazy = false,
+		-- Depending on your nvim distro or config you may need to make the loading not lazy
+		-- event = "BufRead filetype=ipynb",
+	},
+	{
 		"linux-cultist/venv-selector.nvim",
 		dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
 		config = true,
@@ -855,7 +963,6 @@ require("lazy").setup({
 	{
 		"goolord/alpha-nvim",
 		name = "alpha",
-		commit = "21a0f2520ad3a7c32c0822f943368dc063a569fb",
 		event = "VimEnter",
 		config = function()
 			require("sushrit_lawliet.dashboard")
@@ -1099,42 +1206,6 @@ require("lazy").setup({
 		end,
 	},
 	{
-		"folke/noice.nvim",
-		event = "VeryLazy",
-		opts = {
-			-- add any options here
-		},
-		dependencies = {
-			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-			"MunifTanjim/nui.nvim",
-			-- OPTIONAL:
-			--   `nvim-notify` is only needed, if you want to use the notification view.
-			--   If not available, we use `mini` as the fallback
-			"rcarriga/nvim-notify",
-		},
-		enabled = false,
-		config = function()
-			require("noice").setup({
-				lsp = {
-					-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-					override = {
-						["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-						["vim.lsp.util.stylize_markdown"] = true,
-						["cmp.entry.get_documentation"] = true,
-					},
-				},
-				-- you can enable a preset for easier configuration
-				presets = {
-					bottom_search = false,        -- use a classic bottom cmdline for search
-					command_palette = false,      -- position the cmdline and popupmenu together
-					long_message_to_split = true, -- long messages will be sent to a split
-					inc_rename = false,           -- enables an input dialog for inc-rename.nvim
-					lsp_doc_border = false,       -- add a border to hover docs and signature help
-				},
-			})
-		end,
-	},
-	{
 		"richardbizik/nvim-toc",
 		event = "filetype markdown",
 		config = function()
@@ -1293,6 +1364,57 @@ require("lazy").setup({
 			"nvim-lua/plenary.nvim",
 			"kkharji/sqlite.lua", -- Optional, sqlite support
 		},
+	},
+	{
+		"jghauser/mkdir.nvim",
+	},
+	{
+		"folke/noice.nvim",
+		enabled = false,
+		event = "VeryLazy",
+		opts = {
+			-- add any options here
+		},
+		dependencies = {
+			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+			"MunifTanjim/nui.nvim",
+			-- OPTIONAL:
+			--   `nvim-notify` is only needed, if you want to use the notification view.
+			--   If not available, we use `mini` as the fallback
+			"rcarriga/nvim-notify",
+		},
+		config = function()
+			require("sushrit_lawliet.noice")
+		end,
+	},
+	{
+		"aznhe21/actions-preview.nvim",
+		event = { "BufRead", "BufNewFile" },
+		-- keys = {
+		-- 	{ "n", "<leader>gf", "<cmd>lua require('actions-preview').code_actions()<cr>" },
+		-- { "v", "<leader>gf", "<cmd>lua require('actions-preview').range_code_actions()<cr>" },
+		-- },
+		config = function() end,
+	},
+	{
+		"https://github.com/nocksock/do.nvim",
+		config = function()
+			require("do").setup({
+				-- winbar = true,
+				store = {
+					auto_create_file = true, -- automatically create a .do_tasks when calling :Do
+					file_name = ".do_tasks",
+				},
+			})
+		end,
+	},
+	{
+		"ray-x/lsp_signature.nvim",
+		event = "VeryLazy",
+		opts = {},
+		config = function(_, opts)
+			require("lsp_signature").setup(opts)
+		end,
 	},
 })
 

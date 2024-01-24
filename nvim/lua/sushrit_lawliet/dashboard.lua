@@ -166,6 +166,7 @@ dashboard.section.buttons.val = {
     dashboard.button( "r", "  > Recent"   , ":Telescope oldfiles<CR>"),
     dashboard.button( "s", "  > Settings" , ":e $MYVIMRC | :cd %:p:h | split . | wincmd k | pwd<CR>"),
     dashboard.button( "q", "  > Quit NVIM", ":qa<CR>"),
+	dashboard.button( "t", "󰅙  > Exit Alpha" , ":Alpha<CR>"),
 }
 --
 -- dashboard.section.footer.opts.hl = "AlphaFooter"

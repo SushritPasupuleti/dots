@@ -23,9 +23,12 @@ vim.keymap.set({ "n", "v" }, "gl", "<End>")
 -- vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- Telescope
+local search = require("search")
 
 vim.keymap.set("n", "<leader>fi", "<cmd>Telescope import<cr>")
-vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
+-- vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
+-- vim.keymap.set("n", "<leader>ff", ":lua require('search').open()<cr>")
+vim.keymap.set("n", "<leader>ff", search.open)
 vim.keymap.set("n", "<leader>fw", "<cmd>Telescope ast_grep<cr>")
 vim.keymap.set("n", "<leader>fc", "<cmd>Telescope current_buffer_fuzzy_find<cr>")
 vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>")
@@ -142,7 +145,7 @@ keymap("n", "<leader>gr", "<cmd>Lspsaga lsp_finder<CR>", { silent = true })
 -- 	action.range_code_action()
 -- end, { silent = true })
 
-keymap({ "n", "v" }, "<leader>ca", "<cmd>Lspsaga code_action<CR>")
+-- keymap({ "n", "v" }, "<leader>ca", "<cmd>Lspsaga code_action<CR>")
 
 -- Rename
 keymap("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", { silent = true })
@@ -232,3 +235,9 @@ vim.keymap.set("n", "gM", "<CMD>Glance implementations<CR>")
 vim.keymap.set("n", "<space>F", "<cmd>Format<CR>", opts)
 vim.keymap.set("n", "<space>l", "<cmd>lua require('lint').try_lint()<CR>", opts)
 vim.api.nvim_set_keymap("n", "<Leader>dd", ":lua require('neogen').generate()<CR>", opts)
+
+-- fzf-lua
+vim.keymap.set("n", "<M-f>f", "<cmd>FzfLua files<cr>")
+
+-- Code Actions
+vim.keymap.set("n", "<leader>ca", require("actions-preview").code_actions)
