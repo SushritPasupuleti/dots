@@ -166,6 +166,8 @@ in
       docker
       # k3s
       ktunnel
+	  # apache-airflow
+	  airlift # local airflow with containers
       datree
       kind # local docker clusters
       kubectl
@@ -236,6 +238,8 @@ in
       nodePackages.pnpm
       nodePackages_latest.eslint
       libtorch-bin
+	  # WASM
+	  binaryen
       # LaTex
       texliveFull
       # bun
@@ -296,6 +300,7 @@ in
 	  python310Packages.pyspark
       sqlite
       neofetch
+	  inxi
       timg
       appeditor
       git-ignore
@@ -501,10 +506,10 @@ in
   # services.openssh.enable = true;
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 6443 ];
+  networking.firewall.enable = true;
+  networking.firewall.allowedTCPPorts = [ 6443 5000 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
