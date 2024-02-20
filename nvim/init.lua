@@ -161,6 +161,11 @@ require("lazy").setup({
 		end,
 	},
 	{
+		"mrcjkb/rustaceanvim",
+		version = "^4", -- Recommended
+		ft = { "rust" },
+	},
+	{
 		"SmiteshP/nvim-navic",
 		-- name = "navic",
 		dependencies = {
