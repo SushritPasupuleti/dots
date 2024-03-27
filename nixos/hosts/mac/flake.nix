@@ -55,6 +55,7 @@
           # dotnet-aspnetcore_7
           # grpc-tools
           grpcurl
+		  evans
           grpcui
           protobuf3_20
           # nodePackages.eas-cli
