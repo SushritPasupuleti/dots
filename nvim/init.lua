@@ -161,6 +161,11 @@ require("lazy").setup({
 		end,
 	},
 	{
+		"mrcjkb/rustaceanvim",
+		version = "^4", -- Recommended
+		ft = { "rust" },
+	},
+	{
 		"SmiteshP/nvim-navic",
 		-- name = "navic",
 		dependencies = {
@@ -1223,6 +1228,11 @@ require("lazy").setup({
 		},
 	},
 	{
+		"luckasRanarison/tailwind-tools.nvim",
+		opts = {}, -- your configuration
+		enabled = false,
+	},
+	{
 		"Velrok/pr_status.nvim",
 		enabled = false,
 		event = "BufRead",
@@ -1414,6 +1424,36 @@ require("lazy").setup({
 		opts = {},
 		config = function(_, opts)
 			require("lsp_signature").setup(opts)
+		end,
+	},
+	{
+		"nvim-neotest/neotest",
+		dependencies = {
+			"nvim-neotest/nvim-nio",
+			"nvim-lua/plenary.nvim",
+			"antoinemadec/FixCursorHold.nvim",
+			"nvim-treesitter/nvim-treesitter",
+			-- adapters
+			"nvim-neotest/neotest-go",
+			"nvim-neotest/neotest-python",
+		},
+		config = function()
+			local neotest_ns = vim.api.nvim_create_namespace("neotest")
+			vim.diagnostic.config({
+				virtual_text = {
+					format = function(diagnostic)
+						local message =
+							diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " "):gsub("^%s+", "")
+						return message
+					end,
+				},
+			}, neotest_ns)
+			require("neotest").setup({
+				require("neotest-go"),
+				require("neotest-python")({
+					dap = { justMyCode = false },
+				}),
+			})
 		end,
 	},
 })

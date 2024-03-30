@@ -47,6 +47,7 @@ local servers = {
 	"awk_ls",
 	"buf",
 	"ocamllsp",
+	"htmx",
 }
 
 local other_servers = {
@@ -133,7 +134,7 @@ for _, lsp in ipairs(servers) do
 	})
 end
 
-local rt = require("rust-tools")
+-- local rt = require("rust-tools")
 
 local extension_path = vim.env.HOME .. "/.vscode/extensions/vadimcn.vscode-lldb-1.9.2/"
 local codelldb_path = extension_path .. "adapter/codelldb"
@@ -149,34 +150,34 @@ else
 	liblldb_path = liblldb_path .. (this_os == "Linux" and ".so" or ".dylib")
 end
 
-rt.setup({
-	server = {
-		on_attach = function(_, bufnr)
-			-- Hover actions
-			vim.keymap.set("n", "<Leader>rch", rt.hover_actions.hover_actions, { buffer = bufnr })
-			-- Code action groups
-			vim.keymap.set("n", "<Leader>rca", rt.code_action_group.code_action_group, { buffer = bufnr })
-		end,
-		capabilities = capabilities,
-		settings = {
-			["rust-analyzer"] = {
-				checkOnSave = {
-					command = "clippy",
-				},
-			},
-		},
-	},
-	tools = {
-		hover_actions = {
-			-- auto_focus = true,
-		},
-	},
-	dap = {
-		adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
-	},
-})
+-- rt.setup({
+-- 	server = {
+-- 		on_attach = function(_, bufnr)
+-- 			-- Hover actions
+-- 			vim.keymap.set("n", "<Leader>rch", rt.hover_actions.hover_actions, { buffer = bufnr })
+-- 			-- Code action groups
+-- 			vim.keymap.set("n", "<Leader>rca", rt.code_action_group.code_action_group, { buffer = bufnr })
+-- 		end,
+-- 		capabilities = capabilities,
+-- 		settings = {
+-- 			["rust-analyzer"] = {
+-- 				checkOnSave = {
+-- 					command = "clippy",
+-- 				},
+-- 			},
+-- 		},
+-- 	},
+-- 	tools = {
+-- 		hover_actions = {
+-- 			-- auto_focus = true,
+-- 		},
+-- 	},
+-- 	dap = {
+-- 		adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
+-- 	},
+-- })
 
-require("rust-tools").inlay_hints.enable()
+-- require("rust-tools").inlay_hints.enable()
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 	border = "single",
