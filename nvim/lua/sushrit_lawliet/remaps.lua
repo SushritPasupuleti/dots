@@ -241,3 +241,6 @@ vim.keymap.set("n", "<M-f>f", "<cmd>FzfLua files<cr>")
 
 -- Code Actions
 vim.keymap.set("n", "<leader>ca", require("actions-preview").code_actions)
+
+-- Copilot
+vim.keymap.set("n", "<leader>cc", "<cmd>CopilotChatToggle<cr>", opts)
