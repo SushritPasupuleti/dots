@@ -133,6 +133,7 @@ in
       "postman"
       "terraform"
       "etcher"
+	  "fabricmanager"
     ];
 
   nixpkgs.config.permittedInsecurePackages = [
@@ -221,6 +222,7 @@ in
       python311Packages.jupytext
 	  python311Packages.psycopg2
 	  python311Packages.bandit
+	  unstable.ollama # <--- use latest
 	  unstable.uv # <--- use latest
 	  ruff
       nodejs_18
@@ -251,6 +253,7 @@ in
       nodePackages.pnpm
       nodePackages_latest.eslint
       libtorch-bin
+	  cudaPackages.fabricmanager
       # WASM
       binaryen
       # LaTex

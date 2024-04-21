@@ -591,3 +591,6 @@ run-shell ~/clone/path/continuum.tmux
 run-shell ~/clone/path/resurrect.tmux
 run-shell ~/target/path/now-playing.tmux
 set -g default-shell /usr/bin/fish
+
+set -g default-terminal "tmux-256color"
+set -ag terminal-overrides ",xterm-256color:RGB"
