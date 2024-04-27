@@ -133,7 +133,7 @@ in
       "postman"
       "terraform"
       "etcher"
-	  "fabricmanager"
+      "fabricmanager"
     ];
 
   nixpkgs.config.permittedInsecurePackages = [
@@ -220,11 +220,11 @@ in
       python3
       python311Packages.pip
       python311Packages.jupytext
-	  python311Packages.psycopg2
-	  python311Packages.bandit
-	  unstable.ollama # <--- use latest
-	  unstable.uv # <--- use latest
-	  ruff
+      python311Packages.psycopg2
+      python311Packages.bandit
+      unstable.ollama # <--- use latest
+      unstable.uv # <--- use latest
+      ruff
       nodejs_18
       elixir_1_15
       elixir-ls
@@ -246,14 +246,14 @@ in
       grpcui
       protobuf3_20
       protoc-gen-rust
-	  protoc-gen-go
-	  protoc-gen-grpc-web
+      protoc-gen-go
+      protoc-gen-grpc-web
       nodePackages.eas-cli
       nodePackages.tailwindcss
       nodePackages.pnpm
       nodePackages_latest.eslint
       libtorch-bin
-	  cudaPackages.fabricmanager
+      cudaPackages.fabricmanager
       # WASM
       binaryen
       # LaTex
@@ -342,7 +342,7 @@ in
       mqttui
       mosquitto
       jq
-	  yq
+      yq
       fx
       cloc
       openrgb-with-all-plugins
@@ -407,7 +407,7 @@ in
       unstable.catnip # <--- use latest
       # xdg-desktop-portal-gtk
 
-	  qmk
+      qmk
     ];
   };
 
@@ -459,6 +459,7 @@ in
     enable = true;
     package = pkgs.postgresql_15;
     extraPlugins = [
+      pkgs.postgresql15Packages.pgvector
       pkgs.postgresql15Packages.timescaledb
       pkgs.postgresql15Packages.postgis
     ];
