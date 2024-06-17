@@ -62,7 +62,97 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
     pfetch
+    git
+    gh
+	glab # <-- Git Lab CLI
+    lazygit
+    delta
+    git-ignore
+    neovim
+    tmux
+    ranger
+    starship
+    #nerdfonts
+    #fira-code
+
+  #tools
+  gnumake
+  fnm
+  transmission
+
+  #langs
+  go
+  golangci-lint
+  pipx
+  poetry
+  python3
+  python311Packages.pip
+  python311Packages.jupytext
+  python311Packages.bandit
+  nodejs_18
+  yarn
+  # grpc-tools
+  grpcurl
+  grpcui
+  protobuf3_20
+  # nodePackages.eas-cli
+  nodePackages.tailwindcss
+  nodePackages.pnpm
+  nodePackages_latest.eslint
+
+  # gcc
+  # gcc-unwrapped
+  rustup
+  sqlx-cli
+  lua
+  luajitPackages.luacheck
+  stylua
+
+  postgresql_15
+  pgadmin4
+
+  #utilities
+  lsof
+  gum
+  glow
+  eza
+  zoxide
+  fzf
+  fd
+  ctags
+  gnused
+  ripgrep
+  nixfmt-classic
+  deadnix
+  checkmake
+  shellcheck
+  sqlfluff
+  dotenv-linter
+  unzip
+  fselect
+  bat
+  btop
+  htop
+  nvitop
+  sqlite
+  neofetch
+  inxi
+  timg
+  wget
+  urlscan
+  jq
+  yq
+  fx
+  cloc
+  # fish
+  fish
+  fishPlugins.done
+  fishPlugins.fzf-fish
+  starship
   ];
+
+  #programs.starship.enable = true;
+  #programs.fish.enable = true;
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
