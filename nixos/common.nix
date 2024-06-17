@@ -2,7 +2,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
+  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
   unstable = import <unstable> {
     config.allowUnfree = true;
   };
@@ -84,8 +84,8 @@ in
 
   # Configure keymap in X11
   services.xserver = {
-    layout = "gb";
-    xkbVariant = "";
+    xkb.layout = "gb";
+    xkb.variant = "";
   };
 
   # Configure console keymap
@@ -132,7 +132,7 @@ in
       "android-studio-stable"
       "postman"
       "terraform"
-      "etcher"
+      # "etcher"
       "fabricmanager"
     ];
 
@@ -217,6 +217,7 @@ in
       golangci-lint
       wails
       pipx
+	  poetry
       python3
       python311Packages.pip
       python311Packages.jupytext
@@ -295,7 +296,7 @@ in
       ctags
       gnused
       ripgrep
-      nixfmt
+      nixfmt-classic
       deadnix
       checkmake
       shellcheck
@@ -305,7 +306,7 @@ in
       fselect
       sioyek
       nixos-generators
-      etcher
+      # etcher
       wrk2
       # ast-grep
       bat
@@ -338,7 +339,7 @@ in
       arduino-cli
       #terminal-notifier
       wget
-      urlview
+      # urlview
       mqttui
       mosquitto
       jq
@@ -363,7 +364,7 @@ in
       gnomeExtensions.pano
       gnomeExtensions.dash-to-panel
       gnomeExtensions.gsconnect
-      gnomeExtensions.one-click-bios
+      # gnomeExtensions.one-click-bios
       gnomeExtensions.space-bar
       gnomeExtensions.vitals
       #themes
@@ -584,7 +585,8 @@ in
   nix.extraOptions = ''
     experimental-features = nix-command flakes
   '';
-  nix.package = pkgs.nixUnstable;
+  # nix.package = pkgs.nixUnstable;
+  nix.package = pkgs.nixVersions.latest;
 
   # pin docker to older nixpkgs: https://github.com/NixOS/nixpkgs/issues/244159
   nixpkgs.overlays = [
