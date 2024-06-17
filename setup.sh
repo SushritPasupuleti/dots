@@ -74,6 +74,7 @@ then
 	#.gitconfig
 	rm ~/.gitconfig
 	ln -s "$(pwd -P)"/.gitconfig ~/.gitconfig
+	ln -s "$(pwd -P)"/.gitconfigs ~/.gitconfigs
 
 	# Home Manager for Nix
 	rm -rf ~/.config/nixpkgs
@@ -104,8 +105,8 @@ then
 
 	# add zellij config
 	mkdir -p ~/.config/zellij
-	rm -rf ~/.config/zellij/config.kdl
-	ln -s "$(pwd -P)"/zellij/config.kdl ~/.config/zellij/config.kdl
+	rm -rf ~/.config/zellij
+	ln -s "$(pwd -P)"/zellij ~/.config/
 
 	echo $(success "Symlinks created.")
 

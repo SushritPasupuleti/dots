@@ -3,9 +3,7 @@
         smudge = git-lfs smudge -- %f
         process = git-lfs filter-process
         required = true
-[user]
-        name = Sushrit_Lawliet
-        email = sushrit.pk21@gmail.com
+
 [core]
     pager = delta
 
@@ -13,6 +11,7 @@
     diffFilter = delta --color-only --features=interactive
 
 [delta]
+	light = false
     ; features = decorations
 	features = Catppuccin-mocha decorations
 	navigate = true
@@ -36,3 +35,12 @@
     hunk-header-file-style = red
     hunk-header-line-number-style = "#067a00"
     hunk-header-style = file line-number syntax
+
+[include]
+	path = ~/.gitconfigs/sushrit-github
+
+[includeIf "hasconfig:remote.*.url:https://github.com/**"]
+	path = ~/.gitconfigs/sushrit-github
+
+; [commit]
+; 	gpgsign = true

@@ -1,0 +1,9 @@
+[user]
+    name = Sushrit_Lawliet
+    email = sushrit.pk21@gmail.com
+[credential "https://github.com"]
+	helper = 
+	helper = !/etc/profiles/per-user/sushrit_lawliet/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/etc/profiles/per-user/sushrit_lawliet/bin/gh auth git-credential
