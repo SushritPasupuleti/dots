@@ -22,6 +22,7 @@
           # general tools
           git
           gh
+		  glab
           neovim
           vim
           tmux
@@ -36,8 +37,12 @@
           # langs
           go
           golangci-lint
+		  air # go live reload
+		  # go-swag
           python311
           python311Packages.pip
+		  pipx
+		  poetry
           nodejs_18
           elixir_1_15
           elixir-ls
@@ -57,7 +62,7 @@
           grpcurl
 		  evans
           grpcui
-          protobuf3_20
+          # protobuf3_20
           # nodePackages.eas-cli
           nodePackages.tailwindcss
           nodePackages.pnpm
@@ -83,7 +88,7 @@
           ctags
           gnused
           ripgrep
-          nixfmt
+          nixfmt-classic
           deadnix
           checkmake
           shellcheck
@@ -109,18 +114,19 @@
           git-ignore
           #cli
           marp-cli
-          aws-sam-cli
+          # aws-sam-cli
           awscli2
           aws-iam-authenticator
-          terraform
-          terraform-ls
-          terraform-docs
+          # terraform
+          # terraform-ls
+          # terraform-docs
           # k6
           pkg-config
           wget
           # urlview
           mqttui
           jq
+          yq
           fx
           cloc
           fish
@@ -146,7 +152,17 @@
           # minikube
           #github-desktop
           gnumake
+		  putty
+		  
+		  # mongodb
+		  mongosh
+		  # mongodb-compass
+		  # postgresql_16
+		  pgcli
+		  pgadmin4
         ];
       };
   };
+
+  # prograns.fish.enable = true;
 }

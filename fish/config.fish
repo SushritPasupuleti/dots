@@ -21,6 +21,8 @@ set PATH $(which yarn) $PATH
 set PATH $(which arduino-cli) $PATH
 set PATH $HOME/.npm-global $PATH
 set PATH $DOTNET_ROOT/tools $PATH
+set -gx GOPATH $HOME/go
+set -gx PATH $PATH $GOPATH/bin
 
 # WAYLAND
 set MOZ_ENABLE_WAYLAND 1
@@ -41,7 +43,9 @@ switch (uname)
 		set -gx PATH "$PIP_HOME" $PATH
 		set -gx GOPATH $HOME/go
 		set -gx PATH $PATH $GOPATH/bin
-		set -gx DOCKER_HOST $HOME/.docker/desktop/docker.sock
+		set -gx DOCKER_HOST $HOME/.docker/desktop/docker.sockur4ltz
+		# set -gx LD_LIBRARY_PATH $(nix --extra-experimental-features nix-command eval --impure --raw --expr 'with import <nixpkgs> {}; zlib')
+		#set -gx MONGODB_CONFIG_OVERRIDE_NOFORK 1
     case Darwin
 		set -Ux ANDROID_HOME $HOME/Library/Android/sdk
     case '*'
@@ -103,3 +107,6 @@ end
 
 # opam configuration
 source /home/sushrit_lawliet/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
+
+# Created by `pipx` on 2024-05-31 08:09:33
+set PATH $PATH /Users/sushritp/.local/bin

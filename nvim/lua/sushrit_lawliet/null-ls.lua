@@ -38,13 +38,13 @@ require("null-ls").setup({
         require("null-ls").builtins.diagnostics.bandit, -- Python
         require("null-ls").builtins.diagnostics.buf, -- Protobufs
         require("null-ls").builtins.diagnostics.checkmake, -- Make
-        require("null-ls").builtins.diagnostics.chktex, -- LaTeX
-        require("null-ls").builtins.diagnostics.curlylint, -- HTML Templating
+        -- require("null-ls").builtins.diagnostics.chktex, -- LaTeX
+        -- require("null-ls").builtins.diagnostics.curlylint, -- HTML Templating
         require("null-ls").builtins.diagnostics.dotenv_linter, -- .env
         require("null-ls").builtins.diagnostics.hadolint, -- Docker
         require("null-ls").builtins.diagnostics.luacheck, -- Lua
         require("null-ls").builtins.diagnostics.markdownlint, -- Markdown
-        require("null-ls").builtins.diagnostics.protoc_gen_lint, -- Protobufs
+        -- require("null-ls").builtins.diagnostics.protoc_gen_lint, -- Protobufs
         require("null-ls").builtins.diagnostics.shellcheck, -- Shell
         -- require("null-ls").builtins.diagnostics.sqlfluff.with({
         -- 	extra_args = { "--dialect", "postgres" },      -- change to your dialect

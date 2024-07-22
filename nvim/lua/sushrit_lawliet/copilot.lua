@@ -31,7 +31,7 @@ require("copilot").setup({
     suggestion = {
         auto_trigger = true,
         keymap = {
-            accept = "<A-Tab>",
+            accept = "<S-Tab>",
             accept_word = false,
             accept_line = "<A-S-Tab>",
             accept_snippet = false,

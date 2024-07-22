@@ -158,13 +158,14 @@ require("catppuccin").setup({
 			-- SagaBorder = { fg = colors.surface2, bg = "NONE" },
 			-- FloatBorder = { fg = colors.surface2, bg = "NONE" },
 			SagaTitle = { fg = colors.mauve, bg = "NONE" },
-			SagaSelect = { fg = C.pink, style = { "bold" } },
-			CodeActionText = { fg = colors.pink },
-			CodeActionNumber = { fg = colors.pink },
-			SagaBorder = { fg = C.surface2, bg = C.mantle },
-			CodeActionBorder = { fg = C.surface2, bg = C.mantle },
+			-- SagaSelect = { fg = C.pink, style = { "bold" } },
+			-- CodeActionText = { fg = colors.pink },
+			-- CodeActionNumber = { fg = colors.pink },
+			-- SagaBorder = { fg = C.surface2, bg = C.mantle },
+			-- CodeActionBorder = { fg = C.surface2, bg = C.mantle },
 		}
 	end,
 })
 
-vim.cmd([[colorscheme catppuccin]])
+-- vim.cmd([[colorscheme catppuccin mocha]])
+vim.cmd.colorscheme "catppuccin"

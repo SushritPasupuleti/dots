@@ -48,7 +48,6 @@ local servers = {
 	-- "buf",
 	"ocamllsp",
 	"htmx",
-	"ruff_lsp",
 }
 
 local other_servers = {
@@ -93,10 +92,6 @@ local nvim_lsp = require("lspconfig")
 -- local servers = { 'tsserver', 'pyright', 'gopls' }
 
 local on_attach = function(client, bufnr)
-	if client.name == "ruff_lsp" then
-		-- Disable hover in favor of Pyright
-		client.server_capabilities.hoverProvider = false
-	end
 	-- Enable completion triggered by <c-x><c-o>
 	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
@@ -130,6 +125,7 @@ capabilities.textDocument.foldingRange = {
 	dynamicRegistration = false,
 	lineFoldingOnly = true,
 }
+
 for _, lsp in ipairs(servers) do
 	nvim_lsp[lsp].setup({
 		on_attach = on_attach,
@@ -137,21 +133,6 @@ for _, lsp in ipairs(servers) do
 		capabilities = capabilities,
 	})
 end
-
-require("lspconfig").pyright.setup({
-	settings = {
-		pyright = {
-			-- Using Ruff's import organizer
-			disableOrganizeImports = true,
-		},
-		python = {
-			analysis = {
-				-- Ignore all files for analysis to exclusively use Ruff for linting
-				ignore = { "*" },
-			},
-		},
-	},
-})
 
 -- local rt = require("rust-tools")
 

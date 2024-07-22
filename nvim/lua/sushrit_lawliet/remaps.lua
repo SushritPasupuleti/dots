@@ -244,3 +244,7 @@ vim.keymap.set("n", "<leader>ca", require("actions-preview").code_actions)
 
 -- Copilot
 vim.keymap.set("n", "<leader>cc", "<cmd>CopilotChatToggle<cr>", opts)
+
+-- Notifications
+vim.keymap.set("n", "<leader>nn", require("notify").dismiss, opts)
+vim.keymap.set("n", ";", require("notify").dismiss, opts)
