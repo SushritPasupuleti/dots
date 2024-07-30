@@ -14,7 +14,6 @@ in
 {
   imports = [
     (import "${home-manager}/nixos")
-    (fetchTarball "https://github.com/nix-community/nixos-vscode-server/tarball/master")
   ];
 
   boot.supportedFilesystems = [ "ntfs" ];
@@ -94,10 +93,6 @@ in
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable QMK
-  hardware.keyboard.qmk.enable = true;
-
-
   # Enable PolKit for Wayland
   security.polkit.enable = true;
 
@@ -157,7 +152,7 @@ in
       unstable.neovim # <--- use latest
       emacs
       tmux
-      zellij
+	  zellij
       kitty
       wezterm
       ranger
@@ -168,12 +163,12 @@ in
       unstable.lazygit # <--- use latest
       lazydocker
       delta
-      spark
+	  spark
       docker
       # k3s
       ktunnel
-      # apache-airflow
-      airlift # local airflow with containers
+	  # apache-airflow
+	  airlift # local airflow with containers
       datree
       kind # local docker clusters
       kubectl
@@ -221,11 +216,6 @@ in
       python3
       python311Packages.pip
       python311Packages.jupytext
-      python311Packages.psycopg2
-      python311Packages.bandit
-      unstable.ollama # <--- use latest
-      unstable.uv # <--- use latest
-      ruff
       nodejs_18
       elixir_1_15
       elixir-ls
@@ -243,20 +233,15 @@ in
       dotnet-aspnetcore_7
       # grpc-tools
       grpcurl
-      evans
       grpcui
       protobuf3_20
-      protoc-gen-rust
-      protoc-gen-go
-      protoc-gen-grpc-web
-      nodePackages.eas-cli
+      # nodePackages.eas-cli
       nodePackages.tailwindcss
       nodePackages.pnpm
       nodePackages_latest.eslint
       libtorch-bin
-      cudaPackages.fabricmanager
-      # WASM
-      binaryen
+	  # WASM
+	  binaryen
       # LaTex
       texliveFull
       # bun
@@ -314,10 +299,10 @@ in
       htop
       nvitop
       python310Packages.gpustat
-      python310Packages.pyspark
+	  python310Packages.pyspark
       sqlite
       neofetch
-      inxi
+	  inxi
       timg
       appeditor
       git-ignore
@@ -343,7 +328,6 @@ in
       mqttui
       mosquitto
       jq
-      yq
       fx
       cloc
       openrgb-with-all-plugins
@@ -407,8 +391,6 @@ in
       hyprpaper
       unstable.catnip # <--- use latest
       # xdg-desktop-portal-gtk
-
-      qmk
     ];
   };
 
@@ -460,7 +442,6 @@ in
     enable = true;
     package = pkgs.postgresql_15;
     extraPlugins = [
-      pkgs.postgresql15Packages.pgvector
       pkgs.postgresql15Packages.timescaledb
       pkgs.postgresql15Packages.postgis
     ];
@@ -576,9 +557,6 @@ in
 
   #Enable unpatched binaries
   programs.nix-ld.enable = true;
-
-  # Enable VSCode Server
-  services.vscode-server.enable = true;
 
   ## Flakes
   # Use edge NixOS.

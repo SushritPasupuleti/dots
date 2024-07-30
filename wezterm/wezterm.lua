@@ -3,8 +3,8 @@ local wezterm = require("wezterm")
 local mux = wezterm.mux
 
 wezterm.on("gui-startup", function()
-  local tab, pane, window = mux.spawn_window{}
-  window:gui_window():maximize()
+	local tab, pane, window = mux.spawn_window({})
+	window:gui_window():maximize()
 end)
 
 return {
@@ -18,7 +18,7 @@ return {
 	warn_about_missing_glyphs = false,
 	underline_position = -4,
 	font = wezterm.font({
-		family = "Monaspace Neon",
+		family = "MonaspiceNe Nerd Font",
 		weight = "Regular",
 		-- harfbuzz_features = { "calt", "liga", "dlig", "ss01", "ss02", "ss03", "ss04", "ss05", "ss06", "ss07", "ss08" },
 	}),
@@ -28,7 +28,7 @@ return {
 			italic = false,
 			font = wezterm.font({
 				-- family = "Fira Code",
-				family = "Monaspace Neon",
+				family = "MonaspiceNe Nerd Font",
 				weight = 500,
 			}),
 		},
@@ -37,7 +37,7 @@ return {
 			italic = true,
 			font = wezterm.font({
 				-- family = "Fira Code",
-				family = "Monaspace Neon",
+				family = "MonaspiceNe Nerd Font",
 				weight = 500,
 				italic = true,
 			}),
@@ -47,7 +47,7 @@ return {
 			italic = false,
 			font = wezterm.font({
 				-- family = "Fira Code",
-				family = "Monaspace Neon",
+				family = "MonaspiceNe Nerd Font",
 				weight = 700,
 			}),
 		},
@@ -56,7 +56,7 @@ return {
 			italic = true,
 			font = wezterm.font({
 				-- family = "Fira Code",
-				family = "Monaspace Neon",
+				family = "MonaspiceNe Nerd Font",
 				weight = 700,
 				italic = true,
 			}),
@@ -66,7 +66,7 @@ return {
 			italic = false,
 			font = wezterm.font({
 				-- family = "Fira Code",
-				family = "Monaspace Neon",
+				family = "MonaspiceNe Nerd Font",
 				weight = 300,
 			}),
 		},
@@ -75,7 +75,7 @@ return {
 			italic = true,
 			font = wezterm.font({
 				-- family = "Fira Code",
-				family = "Monaspace Neon",
+				family = "MonaspiceNe Nerd Font",
 				weight = 300,
 				italic = true,
 			}),
@@ -91,7 +91,7 @@ return {
 	tab_bar_at_bottom = true,
 	tab_max_width = 128,
 	window_background_opacity = 0.85,
-	window_decorations = "NONE",
+	-- window_decorations = "NONE",
 	window_padding = {
 		left = 0,
 		right = 0,
@@ -124,6 +124,15 @@ return {
 			key = "l",
 			mods = "ALT",
 			action = wezterm.action.ShowLauncher,
+		},
+		{
+			key = "w",
+			mods = "SHIFT",
+			action = wezterm.action.DisableDefaultAssignment,
+		},
+		{
+			key = ";",
+			action = wezterm.action.DisableDefaultAssignment,
 		},
 	},
 	launch_menu = {
