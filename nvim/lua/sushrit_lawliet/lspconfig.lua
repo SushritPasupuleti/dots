@@ -37,8 +37,10 @@ local servers = {
     "lua_ls",
     -- "nginx-language-server",
     -- "nextls", -- for elixir
-    -- "nil_ls", -- for nix
-    "rnix",
+    "nil_ls", -- for nix
+    -- "rnix",
+	-- "nil",
+	"nixpkgs-fmt",
     "tailwindcss",
     "terraformls",
     -- "tflint",

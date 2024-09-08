@@ -257,6 +257,8 @@ in
       openjdk17
 	  yaml-language-server
 	  dockerfile-language-server-nodejs
+	  nixpkgs-fmt
+	  nil
       podman
       podman-tui
       podman-desktop
