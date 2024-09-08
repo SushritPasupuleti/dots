@@ -255,6 +255,8 @@ in
       luajitPackages.luacheck
       stylua
       openjdk17
+	  yaml-language-server
+	  dockerfile-language-server-nodejs
       podman
       podman-tui
       podman-desktop

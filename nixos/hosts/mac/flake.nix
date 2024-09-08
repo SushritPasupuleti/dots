@@ -77,6 +77,8 @@
           luajitPackages.luacheck
           stylua
           openjdk17
+		  yaml-language-server
+		  dockerfile-language-server-nodejs
           #utils
           lsof
           gum
@@ -160,9 +162,11 @@
 		  # postgresql_16
 		  pgcli
 		  pgadmin4
+		  kafkactl
         ];
       };
   };
 
   # prograns.fish.enable = true;
+  # programs.java.enable = true;
 }

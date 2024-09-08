@@ -23,7 +23,11 @@ function info {
 	printf "${BLUE}$@${NC}\n"
 }
 
+mkdir -p ~/.config/nix
+
 cp -fr "$(pwd -P)"/nixos/hosts/mac/flake.nix ~/.config/nix/
+# cp -fr "$(pwd -P)"/nixos/hosts/darwin/flake.nix ~/.config/nix/
+# cp -fr "$(pwd -P)"/nixos/hosts/darwin/home.nix ~/.config/nix/
 
 echo $(success "Finished copying flake.nix to ~/.config/nix")
 echo 

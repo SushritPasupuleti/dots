@@ -7,3 +7,4 @@ fish/fish_variables
 scripts/devices.txt
 backup
 tmp
+nixos/hosts/darwin/blank
