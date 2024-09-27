@@ -48,6 +48,7 @@ switch (uname)
 		#set -gx MONGODB_CONFIG_OVERRIDE_NOFORK 1
     case Darwin
 		set -Ux ANDROID_HOME $HOME/Library/Android/sdk
+		set -Ux JAVA_HOME /Users/sushritp/.nix-profile
     case '*'
 	 	echo "Unsupported OS: (uname)" >&2
 		# exit 1

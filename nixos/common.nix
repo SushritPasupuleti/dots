@@ -147,6 +147,7 @@ in
       firefox
       tor-browser
       git
+	  git-credential-manager
       unstable.github-desktop # <--- use latest
       vim
       unstable.neovim # <--- use latest
@@ -213,6 +214,7 @@ in
       wails
       pipx
 	  poetry
+	  pyenv
       python3
       python311Packages.pip
       python311Packages.jupytext
@@ -259,6 +261,7 @@ in
 	  dockerfile-language-server-nodejs
 	  nixpkgs-fmt
 	  nil
+	  htmx-lsp
       podman
       podman-tui
       podman-desktop

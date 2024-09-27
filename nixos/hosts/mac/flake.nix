@@ -21,6 +21,7 @@
         paths = with pkgs; [
           # general tools
           git
+		  git-credential-manager
           gh
 		  glab
           neovim
@@ -39,6 +40,7 @@
           golangci-lint
 		  air # go live reload
 		  # go-swag
+		  pyenv
           python311
           python311Packages.pip
 		  pipx
@@ -81,6 +83,7 @@
 		  dockerfile-language-server-nodejs
 		  nixpkgs-fmt
 		  nil
+		  htmx-lsp
           #utils
           lsof
           gum
