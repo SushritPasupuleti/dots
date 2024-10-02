@@ -21,9 +21,9 @@
         paths = with pkgs; [
           # general tools
           git
-		  git-credential-manager
+          git-credential-manager
           gh
-		  glab
+          glab
           neovim
           vim
           tmux
@@ -38,13 +38,13 @@
           # langs
           go
           golangci-lint
-		  air # go live reload
-		  # go-swag
-		  pyenv
+          air # go live reload
+          # go-swag
+          pyenv
           python311
           python311Packages.pip
-		  pipx
-		  poetry
+          pipx
+          poetry
           nodejs_18
           elixir_1_15
           elixir-ls
@@ -62,7 +62,7 @@
           # dotnet-aspnetcore_7
           # grpc-tools
           grpcurl
-		  evans
+          evans
           grpcui
           # protobuf3_20
           # nodePackages.eas-cli
@@ -79,11 +79,12 @@
           luajitPackages.luacheck
           stylua
           openjdk17
-		  yaml-language-server
-		  dockerfile-language-server-nodejs
-		  nixpkgs-fmt
-		  nil
-		  htmx-lsp
+          yaml-language-server
+          dockerfile-language-server-nodejs
+          nixpkgs-fmt
+          nil
+          htmx-lsp
+          biome # prettierd alternative
           #utils
           lsof
           gum
@@ -115,6 +116,7 @@
           python311Packages.pyspark
           sqlite
           # neofetch
+          fastfetch
           inxi
           timg
           # appeditor
@@ -159,15 +161,15 @@
           # minikube
           #github-desktop
           gnumake
-		  putty
-		  
-		  # mongodb
-		  mongosh
-		  # mongodb-compass
-		  # postgresql_16
-		  pgcli
-		  pgadmin4
-		  kafkactl
+          putty
+
+          # mongodb
+          mongosh
+          # mongodb-compass
+          # postgresql_16
+          pgcli
+          pgadmin4
+          kafkactl
         ];
       };
   };

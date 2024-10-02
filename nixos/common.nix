@@ -2,19 +2,16 @@
 { config, pkgs, lib, ... }:
 
 let
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
-  unstable = import <unstable> {
-    config.allowUnfree = true;
-  };
+  home-manager = builtins.fetchTarball
+    "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
+  unstable = import <unstable> { config.allowUnfree = true; };
   openrgb-rules = builtins.fetchurl {
-    url = "https://gitlab.com/CalcProgrammer1/OpenRGB/-/raw/master/60-openrgb.rules";
+    url =
+      "https://gitlab.com/CalcProgrammer1/OpenRGB/-/raw/master/60-openrgb.rules";
   };
-in
 
-{
-  imports = [
-    (import "${home-manager}/nixos")
-  ];
+in {
+  imports = [ (import "${home-manager}/nixos") ];
 
   boot.supportedFilesystems = [ "ntfs" ];
 
@@ -131,9 +128,7 @@ in
       "fabricmanager"
     ];
 
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-19.1.9"
-  ];
+  nixpkgs.config.permittedInsecurePackages = [ "electron-19.1.9" ];
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -147,13 +142,13 @@ in
       firefox
       tor-browser
       git
-	  git-credential-manager
+      git-credential-manager
       unstable.github-desktop # <--- use latest
       vim
       unstable.neovim # <--- use latest
       emacs
       tmux
-	  zellij
+      zellij
       kitty
       wezterm
       ranger
@@ -164,12 +159,12 @@ in
       unstable.lazygit # <--- use latest
       lazydocker
       delta
-	  spark
+      spark
       docker
       # k3s
       ktunnel
-	  # apache-airflow
-	  airlift # local airflow with containers
+      # apache-airflow
+      airlift # local airflow with containers
       datree
       kind # local docker clusters
       kubectl
@@ -213,8 +208,8 @@ in
       golangci-lint
       wails
       pipx
-	  poetry
-	  pyenv
+      poetry
+      pyenv
       python3
       python311Packages.pip
       python311Packages.jupytext
@@ -242,8 +237,8 @@ in
       nodePackages.pnpm
       nodePackages_latest.eslint
       libtorch-bin
-	  # WASM
-	  binaryen
+      # WASM
+      binaryen
       # LaTex
       texliveFull
       # bun
@@ -257,11 +252,12 @@ in
       luajitPackages.luacheck
       stylua
       openjdk17
-	  yaml-language-server
-	  dockerfile-language-server-nodejs
-	  nixpkgs-fmt
-	  nil
-	  htmx-lsp
+      yaml-language-server
+      dockerfile-language-server-nodejs
+      nixpkgs-fmt
+      nil
+      htmx-lsp
+      biome # prettierd alternative
       podman
       podman-tui
       podman-desktop
@@ -306,10 +302,11 @@ in
       htop
       nvitop
       python310Packages.gpustat
-	  python310Packages.pyspark
+      python310Packages.pyspark
       sqlite
-      neofetch
-	  inxi
+      # neofetch
+      fastfetch
+      inxi
       timg
       appeditor
       git-ignore
@@ -342,7 +339,7 @@ in
       obs-studio
       # obs plugins
       obs-studio-plugins.wlrobs
-      boatswain #Stream Deck support
+      boatswain # Stream Deck support
       ripdrag
       #gnome
       gnome.gnome-boxes
@@ -436,7 +433,8 @@ in
     };
     # chromium.commandLineArgs =
     # "--enable-features=VaapiVideoEncoder,VaapiVideoDecoder";
-    chromium.commandLineArgs = "--enable-features=UseOzonePlatform --ozone-platform=wayland";
+    chromium.commandLineArgs =
+      "--enable-features=UseOzonePlatform --ozone-platform=wayland";
     packageOverrides = pkgs: {
       vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
       # unstable = import unstableTarball {
@@ -492,14 +490,13 @@ in
     # SDL_VIDEODRIVER = "wayland";
     MOZ_DBUS_REMOTE = "1";
   };
-  environment.systemPackages = with pkgs;
-    [
-      #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-      #  wget
-      virt-manager
-      # unstable.lazygit
-      qt5.qtwayland
-    ];
+  environment.systemPackages = with pkgs; [
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
+    virt-manager
+    # unstable.lazygit
+    qt5.qtwayland
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -575,25 +572,26 @@ in
 
   # pin docker to older nixpkgs: https://github.com/NixOS/nixpkgs/issues/244159
   nixpkgs.overlays = [
-    (
-      let
-        pinnedPkgs = import
-          (pkgs.fetchFromGitHub {
-            owner = "NixOS";
-            repo = "nixpkgs";
-            rev = "b6bbc53029a31f788ffed9ea2d459f0bb0f0fbfc";
-            sha256 = "sha256-JVFoTY3rs1uDHbh0llRb1BcTNx26fGSLSiPmjojT+KY=";
-          })
-          { };
-      in
-      final: prev: { docker = pinnedPkgs.docker; }
-    )
+    (let
+      pinnedPkgs = import (pkgs.fetchFromGitHub {
+        owner = "NixOS";
+        repo = "nixpkgs";
+        rev = "b6bbc53029a31f788ffed9ea2d459f0bb0f0fbfc";
+        sha256 = "sha256-JVFoTY3rs1uDHbh0llRb1BcTNx26fGSLSiPmjojT+KY=";
+      }) { };
+    in final: prev: { docker = pinnedPkgs.docker; })
   ];
 
   #Allow autoclean optimise
-  nix.gc = { automatic = true; options = " --delete-older-than 14d"; };
+  nix.gc = {
+    automatic = true;
+    options = " --delete-older-than 14d";
+  };
   nix.settings.auto-optimise-store = true;
-  nix.optimise = { automatic = false; dates = [ "Weekly" ]; };
+  nix.optimise = {
+    automatic = false;
+    dates = [ "Weekly" ];
+  };
 
   system.nixos.label = "Add-Spark";
 }

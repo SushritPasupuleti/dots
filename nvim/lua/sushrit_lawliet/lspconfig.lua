@@ -39,8 +39,8 @@ local servers = {
     -- "nextls", -- for elixir
     "nil_ls", -- for nix
     -- "rnix",
-	-- "nil",
-	"nixpkgs-fmt",
+    -- "nil",
+    "nixpkgs-fmt",
     "tailwindcss",
     "terraformls",
     -- "tflint",
@@ -114,7 +114,8 @@ local on_attach = function(client, bufnr)
     vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, bufopts)
     vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
     vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
-    vim.keymap.set("n", "<space>f", vim.lsp.buf.format, bufopts)
+    -- vim.keymap.set("n", "<space>f", vim.lsp.buf.format, bufopts)
+    vim.keymap.set("n", "<space>f", require("conform").format, bufopts)
     navic.attach(client, bufnr)
     require("lsp_signature").on_attach(signature_setup, bufnr)
 end
@@ -148,14 +149,14 @@ for _, lsp in ipairs(servers) do
                 },
             },
         })
-	if lsp == "yamlls" then
-		nvim_lsp.yamlls.setup({
-			on_attach = on_attach,
-			root_dir = require("lspconfig.util").root_pattern(".git"),
-			capabilities = capabilities,
-			settings = yaml_cfg,
-		})
-	end
+        if lsp == "yamlls" then
+            nvim_lsp.yamlls.setup({
+                on_attach = on_attach,
+                root_dir = require("lspconfig.util").root_pattern(".git"),
+                capabilities = capabilities,
+                settings = yaml_cfg,
+            })
+        end
     else
         nvim_lsp[lsp].setup({
             on_attach = on_attach,
