@@ -162,6 +162,7 @@ in {
       spark
       docker
       # k3s
+	  kompose
       ktunnel
       # apache-airflow
       airlift # local airflow with containers
@@ -274,6 +275,7 @@ in {
       pgadmin4-desktopmode
       #utilties
       kicad
+	  scip
       lsof
       gum
       glow

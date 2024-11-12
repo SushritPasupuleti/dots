@@ -86,6 +86,7 @@
           htmx-lsp
           biome # prettierd alternative
           #utils
+		  scip
           lsof
           gum
           glow
@@ -149,6 +150,7 @@
           # spark
           docker
           # k3s
+		  kompose
           ktunnel
           # apache-airflow
           airlift # local airflow with containers
@@ -166,7 +168,7 @@
           # mongodb
           mongosh
           # mongodb-compass
-          # postgresql_16
+          postgresql_16
           pgcli
           pgadmin4
           kafkactl
