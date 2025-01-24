@@ -2,7 +2,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
+  # home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-24.11.tar.gz";
   unstable = import <unstable> {
     config.allowUnfree = true;
   };
@@ -13,7 +13,7 @@ in
 
 {
   imports = [
-    (import "${home-manager}/nixos")
+    # (import "${home-manager}/nixos")
     (fetchTarball "https://github.com/nix-community/nixos-vscode-server/tarball/master")
   ];
 
@@ -102,7 +102,7 @@ in
   security.polkit.enable = true;
 
   # Enable sound with pipewire.
-  sound.enable = true;
+  # sound.enable = true;
   nixpkgs.config.pulseaudio = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -134,6 +134,8 @@ in
       "terraform"
       # "etcher"
       "fabricmanager"
+	  "timescaledb"
+	  "dotnet-sdk-7.0.410"
     ];
 
   nixpkgs.config.permittedInsecurePackages = [
@@ -162,7 +164,7 @@ in
       wezterm
       ranger
       unstable.starship # <--- use latest
-      unstable.nerdfonts # <--- use latest
+      # unstable.nerdfonts # <--- use latest
       fira-code
       gh
       unstable.lazygit # <--- use latest
@@ -238,14 +240,14 @@ in
       kotlin-language-server
       ktlint
       spring-boot-cli
-      dotnet-sdk_7
-      dotnet-runtime_7
-      dotnet-aspnetcore_7
+      dotnet-sdk
+      dotnet-runtime
+      dotnet-aspnetcore
       # grpc-tools
       grpcurl
       evans
       grpcui
-      protobuf3_20
+      protobuf
       protoc-gen-rust
       protoc-gen-go
       protoc-gen-grpc-web
@@ -254,7 +256,7 @@ in
       nodePackages.pnpm
       nodePackages_latest.eslint
       libtorch-bin
-      cudaPackages.fabricmanager
+      # cudaPackages.fabricmanager
       # WASM
       binaryen
       # LaTex
@@ -388,7 +390,7 @@ in
       # Awesome
       # awesome
       # Gnome+Qtile
-      unstable.qtile
+      # unstable.qtile
       picom
       rofi
       waybar
@@ -415,7 +417,7 @@ in
   fonts.packages = with pkgs; [
     monaspace
     noto-fonts
-    noto-fonts-cjk
+    noto-fonts-cjk-sans
     noto-fonts-emoji
     liberation_ttf
     fira-code
@@ -425,12 +427,12 @@ in
     proggyfonts
   ];
 
-  home-manager.users.sushrit_lawliet = { pkgs, unstable, ... }: {
-    home.packages = [
-      # pkgs.bun
-    ];
-    home.stateVersion = "23.05";
-  };
+  # home-manager.users.sushrit_lawliet = { pkgs, unstable, ... }: {
+  #   home.packages = [
+  #     # pkgs.bun
+  #   ];
+  #   home.stateVersion = "23.05";
+  # };
 
   programs.fish.enable = true;
   users.defaultUserShell = pkgs.fish;
