@@ -76,7 +76,7 @@
       vaapiVdpau
       # libvdpau-va-gl
     ];
-    driSupport = true;
+    # driSupport = true;
     driSupport32Bit = true;
     ## Enable nvidia-docker wrapper
   };
