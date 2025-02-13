@@ -150,6 +150,9 @@ in
       tor-browser
       git
       git-credential-manager
+	  direnv
+	  nix-direnv
+	  llama-cpp
       unstable.github-desktop # <--- use latest
       vim
       unstable.neovim # <--- use latest

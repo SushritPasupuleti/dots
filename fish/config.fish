@@ -111,3 +111,7 @@ source /home/sushrit_lawliet/.opam/opam-init/init.fish > /dev/null 2> /dev/null;
 
 # Created by `pipx` on 2024-05-31 08:09:33
 set PATH $PATH /Users/sushritp/.local/bin
+
+# uv
+fish_add_path "/Users/sushrit/.local/bin"
+direnv hook fish | source

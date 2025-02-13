@@ -22,6 +22,9 @@
           # general tools
           git
           git-credential-manager
+          direnv
+          nix-direnv
+		  llama-cpp
           gh
           glab
           neovim
@@ -86,7 +89,7 @@
           htmx-lsp
           biome # prettierd alternative
           #utils
-		  scip
+          scip
           lsof
           gum
           glow
@@ -112,6 +115,7 @@
           bat
           btop
           htop
+          asitop
           # nvitop
           # python310Packages.gpustat
           python311Packages.pyspark
@@ -127,6 +131,7 @@
           # aws-sam-cli
           awscli2
           aws-iam-authenticator
+          azure-cli
           # terraform
           # terraform-ls
           # terraform-docs
@@ -150,7 +155,7 @@
           # spark
           docker
           # k3s
-		  kompose
+          kompose
           ktunnel
           # apache-airflow
           airlift # local airflow with containers
