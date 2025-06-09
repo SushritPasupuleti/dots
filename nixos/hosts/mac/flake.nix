@@ -32,6 +32,7 @@
           tmux
           zellij
           ranger
+		  superfile
           lazygit
           lazydocker
           delta
@@ -60,13 +61,17 @@
           kotlin-language-server
           ktlint
           spring-boot-cli
-          # dotnet-sdk_7
-          # dotnet-runtime_7
-          # dotnet-aspnetcore_7
+          # dotnet-sdk_9
+          # dotnet-runtime_9
+          # dotnet-aspnetcore_9
           # grpc-tools
+		  omnisharp-roslyn
+		  csharp-ls
+		  roslyn-ls
           grpcurl
           evans
           grpcui
+		  plumber
           # protobuf3_20
           # nodePackages.eas-cli
           nodePackages.tailwindcss
@@ -118,7 +123,7 @@
           asitop
           # nvitop
           # python310Packages.gpustat
-          python311Packages.pyspark
+          # python311Packages.pyspark
           sqlite
           # neofetch
           fastfetch
@@ -152,7 +157,7 @@
           cbonsai
           cmatrix
           # tools
-          # spark
+          spark
           docker
           # k3s
           kompose
@@ -161,6 +166,7 @@
           airlift # local airflow with containers
           datree
           kind # local docker clusters
+		  argocd
           kubectl
           kubectx
           k9s

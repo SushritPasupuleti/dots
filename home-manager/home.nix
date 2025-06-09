@@ -71,6 +71,7 @@
     neovim
     tmux
     ranger
+	superfile
     starship
     #nerdfonts
     #fira-code

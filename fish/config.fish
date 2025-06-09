@@ -23,6 +23,10 @@ set PATH $HOME/.npm-global $PATH
 set PATH $DOTNET_ROOT/tools $PATH
 set -gx GOPATH $HOME/go
 set -gx PATH $PATH $GOPATH/bin
+set -gx PATH /opt/homebrew/opt/dotnet@8/bin $PATH
+# set -gx PATH /opt/homebrew/opt/dotnet@9/bin $PATH
+# set -gx DOTNET_ROOT "/opt/homebrew/opt/dotnet/libexec"
+set -gx DOTNET_ROOT "/opt/homebrew/opt/dotnet@8/libexec"
 
 # WAYLAND
 set MOZ_ENABLE_WAYLAND 1
@@ -48,7 +52,7 @@ switch (uname)
 		#set -gx MONGODB_CONFIG_OVERRIDE_NOFORK 1
     case Darwin
 		set -Ux ANDROID_HOME $HOME/Library/Android/sdk
-		set -Ux JAVA_HOME /Users/sushritp/.nix-profile
+		set -gx JAVA_HOME $HOME/.nix-profile
     case '*'
 	 	echo "Unsupported OS: (uname)" >&2
 		# exit 1
@@ -115,3 +119,6 @@ set PATH $PATH /Users/sushritp/.local/bin
 # uv
 fish_add_path "/Users/sushrit/.local/bin"
 direnv hook fish | source
+
+# Generated for envman. Do not edit.
+test -s ~/.config/envman/load.fish; and source ~/.config/envman/load.fish

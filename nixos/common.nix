@@ -3,19 +3,17 @@
 
 let
   # home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-24.11.tar.gz";
-  unstable = import <unstable> {
-    config.allowUnfree = true;
-  };
+  unstable = import <unstable> { config.allowUnfree = true; };
   openrgb-rules = builtins.fetchurl {
     url =
       "https://gitlab.com/CalcProgrammer1/OpenRGB/-/raw/master/60-openrgb.rules";
   };
-in
 
-{
+in {
   imports = [
     # (import "${home-manager}/nixos")
-    (fetchTarball "https://github.com/nix-community/nixos-vscode-server/tarball/master")
+    (fetchTarball
+      "https://github.com/nix-community/nixos-vscode-server/tarball/master")
   ];
 
   boot.supportedFilesystems = [ "ntfs" ];
@@ -131,8 +129,8 @@ in
       "terraform"
       # "etcher"
       "fabricmanager"
-	  "timescaledb"
-	  "dotnet-sdk-7.0.410"
+      "timescaledb"
+      "dotnet-sdk-7.0.410"
     ];
 
   nixpkgs.config.permittedInsecurePackages = [ "electron-19.1.9" ];
@@ -150,9 +148,9 @@ in
       tor-browser
       git
       git-credential-manager
-	  direnv
-	  nix-direnv
-	  llama-cpp
+      direnv
+      nix-direnv
+      llama-cpp
       unstable.github-desktop # <--- use latest
       vim
       unstable.neovim # <--- use latest
@@ -162,6 +160,7 @@ in
       kitty
       wezterm
       ranger
+      superfile
       unstable.starship # <--- use latest
       # unstable.nerdfonts # <--- use latest
       fira-code
@@ -172,12 +171,13 @@ in
       spark
       docker
       # k3s
-	  kompose
+      kompose
       ktunnel
       # apache-airflow
       airlift # local airflow with containers
       datree
       kind # local docker clusters
+	  argocd
       kubectl
       kubectx
       k9s
@@ -239,6 +239,9 @@ in
       dotnet-sdk
       dotnet-runtime
       dotnet-aspnetcore
+      omnisharp-roslyn
+      csharp-ls
+	  roslyn-ls
       # grpc-tools
       grpcurl
       grpcui
@@ -289,7 +292,7 @@ in
       pgadmin4-desktopmode
       #utilties
       kicad
-	  scip
+      scip
       lsof
       gum
       glow
@@ -347,6 +350,7 @@ in
       # urlview
       mqttui
       mosquitto
+      plumber
       jq
       fx
       cloc
