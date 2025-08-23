@@ -99,7 +99,7 @@ in {
   # Enable sound with pipewire.
   # sound.enable = true;
   nixpkgs.config.pulseaudio = true;
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -131,6 +131,10 @@ in {
       "fabricmanager"
       "timescaledb"
       "dotnet-sdk-7.0.410"
+      "cuda_cudart"
+      "libcublas"
+      "cuda_cccl"
+      "cuda_nvcc"
     ];
 
   nixpkgs.config.permittedInsecurePackages = [ "electron-19.1.9" ];
@@ -201,8 +205,8 @@ in {
       tuir
       jira-cli-go
       pika-backup
-      transmission
-      transmission-gtk
+      transmission_4
+      transmission_4-gtk
       vlc
       libvlc
       mpv
@@ -224,7 +228,8 @@ in {
       python3
       python311Packages.pip
       python311Packages.jupytext
-      nodejs_18
+      # nodejs_18
+      nodejs_20
       elixir_1_15
       elixir-ls
       ocaml
@@ -280,7 +285,7 @@ in {
       podman-tui
       podman-desktop
       #dbs
-      postgresql_15
+      postgresql_16
       osm2pgsql
       # haskell
       # unstable.haskellPackages.postgrest
@@ -364,12 +369,14 @@ in {
       obs-studio-plugins.wlrobs
       boatswain # Stream Deck support
       ripdrag
+      ollama-cuda
+      llama-cpp
       #gnome
-      gnome.gnome-boxes
+      gnome-boxes
       #gnome-extensions
       gnomeExtensions.paperwm
       gnomeExtensions.pop-shell
-      gnome.gnome-tweaks
+      gnome-tweaks
       # gnomeExtensions.clipman
       gnomeExtensions.blur-my-shell
       gnomeExtensions.pano
@@ -409,9 +416,9 @@ in {
       # mandatory 
       xorg.libxcb
       libsForQt5.dolphin
-      gnome.nautilus
-      gnome.sushi
-      gnome.gnome-settings-daemon43
+      nautilus
+      sushi
+      # gnome.gnome-settings-daemon43
       xfce.xfce4-settings
       pavucontrol
       wlogout
@@ -469,7 +476,7 @@ in {
   services.postgresql = {
     enable = true;
     package = pkgs.postgresql_15;
-    extraPlugins = [
+    extensions = [
       pkgs.postgresql15Packages.timescaledb
       pkgs.postgresql15Packages.postgis
     ];
@@ -594,16 +601,16 @@ in {
   nix.package = pkgs.nixVersions.latest;
 
   # pin docker to older nixpkgs: https://github.com/NixOS/nixpkgs/issues/244159
-  nixpkgs.overlays = [
-    (let
-      pinnedPkgs = import (pkgs.fetchFromGitHub {
-        owner = "NixOS";
-        repo = "nixpkgs";
-        rev = "b6bbc53029a31f788ffed9ea2d459f0bb0f0fbfc";
-        sha256 = "sha256-JVFoTY3rs1uDHbh0llRb1BcTNx26fGSLSiPmjojT+KY=";
-      }) { };
-    in final: prev: { docker = pinnedPkgs.docker; })
-  ];
+  # nixpkgs.overlays = [
+  #   (let
+  #     pinnedPkgs = import (pkgs.fetchFromGitHub {
+  #       owner = "NixOS";
+  #       repo = "nixpkgs";
+  #       rev = "b6bbc53029a31f788ffed9ea2d459f0bb0f0fbfc";
+  #       sha256 = "sha256-JVFoTY3rs1uDHbh0llRb1BcTNx26fGSLSiPmjojT+KY=";
+  #     }) { };
+  #   in final: prev: { docker = pinnedPkgs.docker; })
+  # ];
 
   #Allow autoclean optimise
   nix.gc = {

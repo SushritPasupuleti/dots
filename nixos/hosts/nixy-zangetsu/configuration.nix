@@ -16,7 +16,7 @@
     grub = {
       # despite what the configuration.nix manpage seems to indicate,
       # as of release 17.09, setting device to "nodev" will still call
-      # `grub-install` if efiSupport is true
+      # `grub-install` if efiSupport = true
       # (the devices list is not used by the EFI grub install,
       # but must be set to some value in order to pass an assert in grub.nix)
       devices = [ "nodev" ];
@@ -68,17 +68,13 @@
   #boot.kernelParams = [ "module_blacklist=i915" ];
 
   ## Hardware Acceleration for video
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
-      intel-media-driver # LIBVA_DRIVER_NAME=iHD
-      # vaapiIntel # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+      intel-media-driver
       vaapiVdpau
-      # libvdpau-va-gl
     ];
-    # driSupport = true;
-    driSupport32Bit = true;
-    ## Enable nvidia-docker wrapper
+    enable32Bit = true;
   };
 
   # Enable the OpenSSH daemon.
@@ -88,4 +84,5 @@
   };
 
   virtualisation.docker.enableNvidia = true;
+  # hardware.nvidia-container-toolkit.enable = true;
 }
