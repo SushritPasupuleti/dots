@@ -27,6 +27,12 @@ set -gx PATH /opt/homebrew/opt/dotnet@8/bin $PATH
 # set -gx PATH /opt/homebrew/opt/dotnet@9/bin $PATH
 # set -gx DOTNET_ROOT "/opt/homebrew/opt/dotnet/libexec"
 set -gx DOTNET_ROOT "/opt/homebrew/opt/dotnet@8/libexec"
+# export CPATH=/opt/homebrew/include
+# export LIBRARY_PATH=/opt/homebrew/lib
+set -gx CPATH /opt/homebrew/include
+set -gx LIBRARY_PATH /opt/homebrew/lib
+# /opt/homebrew/opt/libiconv/bin:$PATH
+set -gx PATH /opt/homebrew/opt/libiconv/bin $PATH
 
 # WAYLAND
 set MOZ_ENABLE_WAYLAND 1

@@ -24,7 +24,7 @@
           git-credential-manager
           direnv
           nix-direnv
-		  llama-cpp
+          llama-cpp
           gh
           glab
           neovim
@@ -32,7 +32,7 @@
           tmux
           zellij
           ranger
-		  superfile
+          superfile
           lazygit
           lazydocker
           delta
@@ -65,13 +65,13 @@
           # dotnet-runtime_9
           # dotnet-aspnetcore_9
           # grpc-tools
-		  omnisharp-roslyn
-		  csharp-ls
-		  roslyn-ls
+          omnisharp-roslyn
+          csharp-ls
+          roslyn-ls
           grpcurl
           evans
           grpcui
-		  plumber
+          plumber
           # protobuf3_20
           # nodePackages.eas-cli
           nodePackages.tailwindcss
@@ -79,7 +79,8 @@
           nodePackages_latest.eslint
           bun # <--- use latest
           yarn
-          gcc
+          # gcc
+		  zig
           rustup
           # rust-analyzer
           sqlx-cli
@@ -166,7 +167,7 @@
           airlift # local airflow with containers
           datree
           kind # local docker clusters
-		  argocd
+          argocd
           kubectl
           kubectx
           k9s
@@ -183,6 +184,11 @@
           pgcli
           pgadmin4
           kafkactl
+          # rabbitmqadmin-ng
+          plumber
+          rabtap
+          # databricks-cli
+          # databricks-sql-cli
         ];
       };
   };

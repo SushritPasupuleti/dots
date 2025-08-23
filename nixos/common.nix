@@ -177,7 +177,7 @@ in {
       airlift # local airflow with containers
       datree
       kind # local docker clusters
-	  argocd
+      argocd
       kubectl
       kubectx
       k9s
@@ -241,7 +241,7 @@ in {
       dotnet-aspnetcore
       omnisharp-roslyn
       csharp-ls
-	  roslyn-ls
+      roslyn-ls
       # grpc-tools
       grpcurl
       grpcui
@@ -290,6 +290,9 @@ in {
       # postgresql15Packages.timescaledb
       # postgresql15Packages.postgis
       pgadmin4-desktopmode
+      rabbitmqadmin-ng
+      plumber
+      rabtap
       #utilties
       kicad
       scip
