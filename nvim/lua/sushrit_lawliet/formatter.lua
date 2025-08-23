@@ -28,20 +28,26 @@ require("conform").setup({
     formatters_by_ft = {
         lua = { "stylua" },
         -- Conform will run multiple formatters sequentially
-        python = { "ruff", "black" },
+        -- python = { "ruff_format", "black" },
+        python = { "ruff_format" },
+        -- python = { "isort", "black", lsp_format = "fallback" },
         -- You can customize some of the format options for the filetype (:help conform.format)
         rust = { "rustfmt", lsp_format = "fallback" },
         -- Conform will run the first available formatter
-        javascript = { "biome", "prettier", stop_after_first = true },
-        typescript = { "biome", "prettier", stop_after_first = true },
-        typescriptreact = { "biome", "prettier", stop_after_first = true },
-        javascriptreact = { "biome", "prettier", stop_after_first = true },
+        javascript = { "prettier", stop_after_first = true },
+        typescript = { "prettier", stop_after_first = true },
+        typescriptreact = { "prettier", stop_after_first = true },
+        javascriptreact = { "prettier", stop_after_first = true },
+        -- javascript = { "biome", "prettier", stop_after_first = true },
+        -- typescript = { "biome", "prettier", stop_after_first = true },
+        -- typescriptreact = { "biome", "prettier", stop_after_first = true },
+        -- javascriptreact = { "biome", "prettier", stop_after_first = true },
         nix = { "nixfmt" },
         go = { "gofmt" },
         yaml = { "yq" },
         json = { "jq" },
         toml = { "tomllint" },
-		buf = { "buf" },
-		sh = { "shfmt" },
+        buf = { "buf" },
+        sh = { "shfmt" },
     },
 })

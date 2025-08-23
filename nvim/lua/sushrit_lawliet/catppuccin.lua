@@ -5,6 +5,7 @@ require("catppuccin").setup({
 	background = {     -- :h background
 		light = "latte",
 		dark = "mocha",
+		-- dark = "latte",
 	},
 	show_end_of_buffer = true, -- shows the '~' characters after the end of buffers
 	transparent_background = true,

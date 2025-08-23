@@ -8,3 +8,6 @@ scripts/devices.txt
 backup
 tmp
 nixos/hosts/darwin/blank
+nvim/.venv
+fish/fish_plugins
+fish/fishd.tmp.*

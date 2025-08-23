@@ -50,16 +50,41 @@ require("lazy").setup({
         },
     },
     --====Catppuccin
-    --Theme must be loaded first and must never be lazy loaded
+    -- Theme must be loaded first and must never be lazy loaded
     {
         "catppuccin/nvim",
         name = "catppuccin",
         lazy = false,
+        -- enabled = false,
         priority = 1000,
         config = function()
             require("sushrit_lawliet.catppuccin")
         end,
     },
+    "nvim-lua/plenary.nvim",
+    { "nvim-tree/nvim-web-devicons", lazy = true },
+    -- {
+    --     "nvchad/ui",
+    --     config = function()
+    --         require("nvchad")
+    --
+    --         -- local opts = {
+    --         -- 	base64 = {
+    --         -- 		theme = "catppuccin-mocha",
+    --         -- 	},
+    --         -- }
+    --         --
+    --         -- return opts
+    --     end,
+    -- },
+    -- {
+    --     "nvchad/base46",
+    --     lazy = true,
+    --     build = function()
+    --         require("base46").load_all_highlights()
+    --         -- dofile(vim.g.base46_cache .. "base46")
+    --     end,
+    -- },
     {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
@@ -307,8 +332,8 @@ require("lazy").setup({
                 -- colors = M.custom_colors(),
                 -- kind = M.custom_kind(),
                 -- toggle these in the future when the bugs stop
-                colors = require("catppuccin.groups.integrations.lsp_saga").custom_colors(),
-                kind = require("catppuccin.groups.integrations.lsp_saga").custom_kind(),
+                -- colors = require("catppuccin.groups.integrations.lsp_saga").custom_colors(),
+                -- kind = require("catppuccin.groups.integrations.lsp_saga").custom_kind(),
                 breadcrumbs = {
                     enable = false,
                 },
@@ -441,6 +466,7 @@ require("lazy").setup({
             "nvim-telescope/telescope-ui-select.nvim",
         },
         config = function()
+            dofile(vim.g.base46_cache .. "telescope")
             require("sushrit_lawliet.telescope")
         end,
     },
@@ -861,6 +887,18 @@ require("lazy").setup({
         end,
     },
     {
+        "nvzone/floaterm",
+        dependencies = "nvzone/volt",
+        opts = {
+            terminals = {
+                { name = "Terminal" },
+                -- cmd can be function too
+                -- More terminals
+            },
+        },
+        cmd = "FloatermToggle",
+    },
+    {
         "stevearc/dressing.nvim",
         lazy = true,
         init = function()
@@ -939,33 +977,6 @@ require("lazy").setup({
         -- event = "BufRead filetype=ipynb",
     },
     {
-        "linux-cultist/venv-selector.nvim",
-        dependencies = {
-            "neovim/nvim-lspconfig",
-            "mfussenegger/nvim-dap",
-            "mfussenegger/nvim-dap-python", --optional
-            { "nvim-telescope/telescope.nvim", branch = "0.1.x", dependencies = { "nvim-lua/plenary.nvim" } },
-        },
-        lazy = false,
-        branch = "regexp", -- This is the regexp branch, use this for the new version
-        config = function()
-            require("venv-selector").setup()
-        end,
-        keys = {
-            {
-                "<leader>vs",
-                "<cmd>:VenvSelect<cr>",
-                "<leader>vc",
-                "<cmd>:VenvSelectCached<cr>",
-            },
-        },
-        opts = {
-            -- search = false,
-            search_workspace = true,
-            name = { "venv", ".venv" },
-        },
-    },
-    {
         "elihunter173/dirbuf.nvim",
         event = "VeryLazy",
         config = function()
@@ -993,6 +1004,46 @@ require("lazy").setup({
         config = function()
             require("sushrit_lawliet.dap")
         end,
+    },
+    {
+        "linux-cultist/venv-selector.nvim",
+        dependencies = {
+            "neovim/nvim-lspconfig",
+            "mfussenegger/nvim-dap",
+            "mfussenegger/nvim-dap-python", --optional
+            { "nvim-telescope/telescope.nvim", branch = "0.1.x", dependencies = { "nvim-lua/plenary.nvim" } },
+        },
+        lazy = false,
+        branch = "regexp", -- This is the regexp branch, use this for the new version
+        config = function()
+            require("venv-selector").setup()
+        end,
+        keys = {
+            {
+                "<leader>vs",
+                "<cmd>:VenvSelect<cr>",
+                "<leader>vc",
+                "<cmd>:VenvSelectCached<cr>",
+            },
+        },
+        opts = {
+            -- search = false,
+            search_workspace = true,
+            name = { "venv", ".venv" },
+        },
+    },
+    {
+        "rcarriga/nvim-dap-ui",
+        dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+        keys = {
+            {
+                "<leader>du",
+                function()
+                    require("dapui").toggle()
+                end,
+                silent = true,
+            },
+        },
     },
     {
         "axieax/urlview.nvim",
@@ -1568,18 +1619,40 @@ require("lazy").setup({
             })
         end,
     },
-    -- {
-    --     "nvchad/ui",
-    --     config = function()
-    --         require("nvchad")
-    --     end,
-    -- },
-    -- {
-    --     "nvchad/base46",
-    --     lazy = true,
-    --     build = function()
-    --         require("base46").load_all_highlights()
-    --     end,
+    {
+        "folke/snacks.nvim",
+        priority = 1000,
+        lazy = false,
+        opts = {
+            -- your configuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
+            bigfile = { enabled = false },
+            notifier = { enabled = false },
+            quickfile = { enabled = false },
+            statuscolumn = { enabled = false },
+            words = { enabled = false },
+            scratch = { enabled = true },
+        },
+        {
+            "marcussimonsen/let-it-snow.nvim",
+            cmd = "LetItSnow", -- Wait with loading until command is run
+            opts = {},
+        },
+        {
+            "seblyng/roslyn.nvim",
+            ft = "cs",
+            ---@module 'roslyn.config'
+            ---@type RoslynNvimConfig
+            opts = {
+                -- your configuration comes here; leave empty for default settings
+                -- NOTE: You must configure `cmd` in `config.cmd` unless you have installed via mason
+            },
+        },
+    },
+    -- keys = {
+    -- { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
+    -- { "<leader>S",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer"},
     -- },
 })
 
@@ -1588,11 +1661,11 @@ require("sushrit_lawliet.options")
 --remaps
 require("sushrit_lawliet.remaps")
 
---  vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46_cache/"
---
---  -- put this after lazy setup
---  dofile(vim.g.base46_cache .. "defaults")
---  dofile(vim.g.base46_cache .. "statusline")
+-- put this after lazy setup
+-- dofile(vim.g.base46_cache .. "defaults")
+-- dofile(vim.g.base46_cache .. "statusline")
+-- dofile(vim.g.base46_cache .. "dap")
+-- dofile(vim.g.base46_cache .. "hop")
 --
 -- -- To load all integrations at once
 --  for _, v in ipairs(vim.fn.readdir(vim.g.base46_cache)) do

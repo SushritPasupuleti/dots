@@ -25,3 +25,5 @@ function info {
 echo $(info "Installing Go tools...")
 
 go install github.com/cosmtrek/air@latest
+go install github.com/go-delve/delve/cmd/dlv@latest
+go install github.com/TNK-Studio/lazykube@latest

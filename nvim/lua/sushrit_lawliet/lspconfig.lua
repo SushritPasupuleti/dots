@@ -30,8 +30,8 @@ local servers = {
     "kotlin_language_server",
     -- "lua-language-server",
     -- "elixirls",
-    "omnisharp",
-    -- "csharp-language-server",
+    -- "omnisharp",
+    "csharp-language-server",
     -- "rust_analyzer",
     -- "sumneko_lua", --deprecated
     "lua_ls",
@@ -49,8 +49,12 @@ local servers = {
     "awk_ls",
     -- "buf",
     "ocamllsp",
-    "htmx",
+    -- "htmx",
+	"omnisharp",
+	"csharp_ls",
 }
+
+-- vim.lsp.enable('csharp_ls')
 
 local other_servers = {
     -- "eslint",
@@ -64,6 +68,10 @@ local mason_ensure_installed = servers
 
 require("mason").setup({
     PATH = "append",
+	registries = {
+        "github:mason-org/mason-registry",
+        "github:Crashdummyy/mason-registry",
+    },
 })
 require("mason-lspconfig").setup({
     -- ensure_installed = mason_ensure_installed,
@@ -96,6 +104,7 @@ local nvim_lsp = require("lspconfig")
 local on_attach = function(client, bufnr)
     -- Enable completion triggered by <c-x><c-o>
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+	conform = require("conform")
 
     -- Mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -115,7 +124,7 @@ local on_attach = function(client, bufnr)
     vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
     vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
     -- vim.keymap.set("n", "<space>f", vim.lsp.buf.format, bufopts)
-    vim.keymap.set("n", "<space>f", require("conform").format, bufopts)
+    vim.keymap.set("n", "<space>f", conform.format, bufopts)
     navic.attach(client, bufnr)
     require("lsp_signature").on_attach(signature_setup, bufnr)
 end

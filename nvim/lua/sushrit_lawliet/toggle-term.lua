@@ -41,6 +41,6 @@ end
 -------------Key Mappings-----------------
 vim.api.nvim_set_keymap("n", "<leader>gz", "<cmd>lua _czg_toggle()<CR>", {noremap = true, silent = true})
 
-vim.api.nvim_set_keymap("n", "<leader>fT", "<cmd>lua _floating_term_toggle()<CR>", {noremap = true, silent = true})
+-- vim.api.nvim_set_keymap("n", "<leader>fT", "<cmd>lua _floating_term_toggle()<CR>", {noremap = true, silent = true})
 
 vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})

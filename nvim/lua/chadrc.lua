@@ -1,27 +1,28 @@
+---@type ChadrcConfig
 local options = {
 
     base46 = {
-		-- enabled = false,
-        theme = "catppuccin", -- default theme
-        hl_add = {},
-        hl_override = {},
-        integrations = {},
-        changed_themes = {},
-        transparency = true,
-        theme_toggle = { "onedark", "one_light" },
+		theme = "catppuccin", -- default theme
+		hl_add = {},
+		hl_override = {},
+		integrations = { "dap", "telescope", "hop" },
+		changed_themes = {},
+		transparency = true,
+		theme_toggle = { "catppuccin", "catppuccin" },
+        -- enabled = false,
     },
 
     ui = {
         cmp = {
             icons = true,
             lspkind_text = true,
-            style = "default", -- default/flat_light/flat_dark/atom/atom_colored
+            style = "atom_colored", -- default/flat_light/flat_dark/atom/atom_colored
         },
 
         telescope = { style = "bordered" }, -- borderless / bordered
 
         statusline = {
-            theme = "default", -- default/vscode/vscode_colored/minimal
+            theme = "vscode_colored", -- default/vscode/vscode_colored/minimal
             -- default/round/block/arrow separators work only for default statusline theme
             -- round and block will work for minimal theme only
             separator_style = "default",
@@ -41,15 +42,18 @@ local options = {
             load_on_startup = true,
 
             header = {
-                "           ▄ ▄                   ",
-                "       ▄   ▄▄▄     ▄ ▄▄▄ ▄ ▄     ",
-                "       █ ▄ █▄█ ▄▄▄ █ █▄█ █ █     ",
-                "    ▄▄ █▄█▄▄▄█ █▄█▄█▄▄█▄▄█ █     ",
-                "  ▄ █▄▄█ ▄ ▄▄ ▄█ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄  ",
-                "  █▄▄▄▄ ▄▄▄ █ ▄ ▄▄▄ ▄ ▄▄▄ ▄ ▄ █ ▄",
-                "▄ █ █▄█ █▄█ █ █ █▄█ █ █▄█ ▄▄▄ █ █",
-                "█▄█ ▄ █▄▄█▄▄█ █ ▄▄█ █ ▄ █ █▄█▄█ █",
-                "    █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█ █▄█▄▄▄█    ",
+                "                            ",
+                "     ▄▄         ▄ ▄▄▄▄▄▄▄   ",
+                "   ▄▀███▄     ▄██ █████▀    ",
+                "   ██▄▀███▄   ███           ",
+                "   ███  ▀███▄ ███           ",
+                "   ███    ▀██ ███           ",
+                "   ███      ▀ ███           ",
+                "   ▀██ █████▄▀█▀▄██████▄    ",
+                "     ▀ ▀▀▀▀▀▀▀ ▀▀▀▀▀▀▀▀▀▀   ",
+                "                            ",
+                "     Powered By  eovim    ",
+                "                            ",
             },
 
             buttons = {
@@ -79,7 +83,7 @@ local options = {
     lsp = { signature = true },
 
     cheatsheet = {
-        theme = "grid", -- simple/grid
+        theme = "simple", -- simple/grid
         excluded_groups = { "terminal (t)", "autopairs", "Nvim", "Opens" }, -- can add group name or with mode
     },
 
