@@ -174,6 +174,7 @@ in {
       delta
       spark
       docker
+      docker-client
       # k3s
       kompose
       ktunnel
@@ -564,10 +565,12 @@ in {
   virtualisation.docker = {
     enable = true;
     enableOnBoot = true;
-  };
-  virtualisation.docker.rootless = {
-    enable = true;
-    setSocketVariable = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+	enableNvidia = true;
+	# extraOptions = [ "--iptables=false" ];
   };
   # users.extraGroups.docker.members = [ "sushrit_lawliet" ];
 
