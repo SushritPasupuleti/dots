@@ -48,6 +48,7 @@
           python311
           python311Packages.pip
           pipx
+		  uv
           poetry
           nodejs_18
           elixir_1_15

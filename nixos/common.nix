@@ -229,6 +229,7 @@ in {
       python3
       python311Packages.pip
       python311Packages.jupytext
+	  uv
       # nodejs_18
       nodejs_20
       elixir_1_15
