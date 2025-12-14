@@ -3,7 +3,7 @@
 
 let
   # home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-24.11.tar.gz";
-  unstable = import <unstable> { config.allowUnfree = true; };
+  # unstable = import <unstable> { config.allowUnfree = true; };
   openrgb-rules = builtins.fetchurl {
     url =
       "https://gitlab.com/CalcProgrammer1/OpenRGB/-/raw/master/60-openrgb.rules";
@@ -12,8 +12,8 @@ let
 in {
   imports = [
     # (import "${home-manager}/nixos")
-    (fetchTarball
-      "https://github.com/nix-community/nixos-vscode-server/tarball/master")
+    # (fetchTarball
+    #   "https://github.com/nix-community/nixos-vscode-server/tarball/master")
   ];
 
   boot.supportedFilesystems = [ "ntfs" ];
@@ -155,9 +155,9 @@ in {
       direnv
       nix-direnv
       llama-cpp
-      unstable.github-desktop # <--- use latest
+      github-desktop # <--- use latest
       vim
-      unstable.neovim # <--- use latest
+      neovim # <--- use latest
       emacs
       tmux
       zellij
@@ -165,11 +165,11 @@ in {
       wezterm
       ranger
       superfile
-      unstable.starship # <--- use latest
-      # unstable.nerdfonts # <--- use latest
+      starship # <--- use latest
+      # nerdfonts # <--- use latest
       fira-code
       gh
-      unstable.lazygit # <--- use latest
+      lazygit # <--- use latest
       lazydocker
       delta
       spark
@@ -191,17 +191,17 @@ in {
       #github-desktop
       gnumake
       # vscode # <--- use latest
-      unstable.vscode # <--- use latest
+      vscode # <--- use latest
       jetbrains.idea-community
       android-studio
       android-tools
       fnm
       # postman
-      unstable.bruno
+      bruno
       # microsoft-edge
-      unstable.microsoft-edge # <--- use latest
+      microsoft-edge # <--- use latest
       # google-chrome
-      unstable.google-chrome
+      google-chrome
       brave
       tuir
       jira-cli-go
@@ -214,11 +214,11 @@ in {
       ytfzf
       ueberzugpp
       zoom-us
-      rpi-imager
+      # rpi-imager
       libreoffice
       onlyoffice-bin
-      unstable.halloy # <--- use latest
-      unstable.localsend # <--- use latest
+      halloy # <--- use latest
+      localsend # <--- use latest
       #langs
       go
       golangci-lint
@@ -229,7 +229,7 @@ in {
       python3
       python311Packages.pip
       python311Packages.jupytext
-	  uv
+      uv
       # nodejs_18
       nodejs_20
       elixir_1_15
@@ -267,7 +267,7 @@ in {
       # LaTex
       texliveFull
       # bun
-      unstable.bun # <--- use latest
+      bun # <--- use latest
       yarn
       gcc
       rustup
@@ -290,7 +290,7 @@ in {
       postgresql_16
       osm2pgsql
       # haskell
-      # unstable.haskellPackages.postgrest
+      # haskellPackages.postgrest
       prometheus
       prometheus-node-exporter
       grafana
@@ -301,7 +301,7 @@ in {
       plumber
       rabtap
       #utilties
-      kicad
+      # kicad
       scip
       lsof
       gum
@@ -344,8 +344,8 @@ in {
       aws-sam-cli
       awscli2
       aws-iam-authenticator
-      terraform
-      terraform-ls
+      # terraform
+      # terraform-ls
       terraform-docs
       k6
       pkg-config
@@ -408,7 +408,7 @@ in {
       # Awesome
       # awesome
       # Gnome+Qtile
-      # unstable.qtile
+      # qtile
       picom
       rofi
       waybar
@@ -425,7 +425,7 @@ in {
       pavucontrol
       wlogout
       hyprpaper
-      unstable.catnip # <--- use latest
+      catnip # <--- use latest
       # xdg-desktop-portal-gtk
     ];
   };
@@ -454,7 +454,7 @@ in {
   users.defaultUserShell = pkgs.fish;
 
   nixpkgs.config = {
-    # allowUnfree = true;
+    allowUnfree = true;
     microsoft-edge = {
       proprietaryCodecs = true;
       enableWidevine = true;
@@ -570,13 +570,13 @@ in {
       enable = true;
       setSocketVariable = true;
     };
-	enableNvidia = true;
-	# extraOptions = [ "--iptables=false" ];
+    enableNvidia = true;
+    # extraOptions = [ "--iptables=false" ];
   };
   # users.extraGroups.docker.members = [ "sushrit_lawliet" ];
 
   ## Kubernetes
-  services.k3s.enable = true;
+  services.k3s.enable = false;
   services.k3s.role = "server";
   # services.k3s.docker = true;
   services.k3s.extraFlags = toString [

@@ -32,20 +32,24 @@ echo $(info "Backing up current configuration.nix and hardware-configuration.nix
 mkdir -p $(pwd -P)/nixos/backup
 sudo cp /etc/nixos/configuration.nix $(pwd -P)/nixos/backup/configuration.nix
 sudo cp /etc/nixos/hardware-configuration.nix $(pwd -P)/nixos/backup/hardware-configuration.nix
+sudo cp /etc/nixos/common.nix $(pwd -P)/nixos/backup/common.nix
+sudo cp /etc/nixos/flake.nix $(pwd -P)/nixos/backup/flake.nix
 
 echo $(info "Creating Symlinks...")
 
 sudo rm -rf /etc/nixos/configuration.nix
 sudo rm -rf /etc/nixos/hardware-configuration.nix
 sudo rm -rf /etc/nixos/common.nix
+sudo rm -rf /etc/nixos/flake.nix
 
-sudo ln -s "$(pwd -P)"/nixos/hosts/nixy-zangetsu/configuration.nix /etc/nixos/configuration.nix
-sudo ln -s "$(pwd -P)"/nixos/hosts/nixy-zangetsu/hardware-configuration.nix /etc/nixos/hardware-configuration.nix
-sudo ln -s "$(pwd -P)"/nixos/common.nix /etc/nixos/common.nix
+sudo ln -s "$(pwd -P)"/configuration.nix /etc/nixos/configuration.nix
+sudo ln -s "$(pwd -P)"/hardware-configuration.nix /etc/nixos/hardware-configuration.nix
+sudo ln -s "$(pwd -P)"/../../common.nix /etc/nixos/common.nix
+sudo ln -s "$(pwd -P)"/flake.nix /etc/nixos/flake.nix
 
 echo $(success "Done!")
 
 echo $(info "Run sudo nixos-rebuild switch to apply changes")
 
-echo $(info "Installing riff for rust development")
-nix profile install github:DeterminateSystems/riff
+# echo $(info "Installing riff for rust development")
+# nix profile install github:DeterminateSystems/riff

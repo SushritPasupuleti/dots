@@ -1,9 +1,13 @@
-{ config, pkgs, lib, ... }:
+{ inputs, config, pkgs, lib, ... }:
 
 {
   imports = [
     ../../common.nix
     ./hardware-configuration.nix
+	# inputs.niri.nixosModules.niri
+ #    inputs.dankMaterialShell.nixosModules.dankMaterialShell
+ #    inputs.dankMaterialShell.nixosModules.dankMaterialShell.default
+ #    inputs.dankMaterialShell.nixosModules.dankMaterialShell.niri
   ];
 
   #Bootloader
@@ -55,7 +59,7 @@
 
     # Use the open source version of the kernel module
     # Only available on driver 515.43.04+
-    open = false;
+    open = true;
 
     # Enable the nvidia settings menu
     nvidiaSettings = true;
@@ -81,6 +85,38 @@
   services.openssh = {
     enable = true;
     settings.PasswordAuthentication = true;
+  };
+
+  programs.niri = { enable = true; };
+  programs.dankMaterialShell = {
+    enable = true;
+
+    systemd = {
+      enable = true; # Systemd service for auto-start
+      restartIfChanged =
+        true; # Auto-restart dms.service when dankMaterialShell changes
+    };
+
+    # Core features
+    enableSystemMonitoring = true; # System monitoring widgets (dgop)
+    # enableClipboard = true; # Clipboard history manager
+    enableVPN = true; # VPN management widget
+    # enableBrightnessControl = true; # Backlight/brightness controls
+    # enableColorPicker = true; # Color picker tool
+    enableDynamicTheming = true; # Wallpaper-based theming (matugen)
+    enableAudioWavelength = true; # Audio visualizer (cava)
+    enableCalendarEvents = true; # Calendar integration (khal)
+    # enableSystemSound = true; # System sound effects
+    # niri = {
+    #   enableKeybinds = true; # Automatic keybinding configuration
+    #   enableSpawn = true; # Auto-start DMS with niri
+    # };
+	greeter = {
+	  enable = true; # Enable the greeter
+	  compositor.name = "hyprland"; # Compositor name (e.g., "sway", "hyprland", "weston")
+	  # quickshell.package = pkgs.quickshell;
+	};
+	# quickshell.package = pkgs.quickshell;
   };
 
   virtualisation.docker.enableNvidia = true;
