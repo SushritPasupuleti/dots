@@ -4,10 +4,10 @@
   imports = [
     ../../common.nix
     ./hardware-configuration.nix
-	# inputs.niri.nixosModules.niri
- #    inputs.dankMaterialShell.nixosModules.dankMaterialShell
- #    inputs.dankMaterialShell.nixosModules.dankMaterialShell.default
- #    inputs.dankMaterialShell.nixosModules.dankMaterialShell.niri
+    # inputs.niri.nixosModules.niri
+    #    inputs.dankMaterialShell.nixosModules.dankMaterialShell
+    #    inputs.dankMaterialShell.nixosModules.dankMaterialShell.default
+    #    inputs.dankMaterialShell.nixosModules.dankMaterialShell.niri
   ];
 
   #Bootloader
@@ -74,10 +74,7 @@
   ## Hardware Acceleration for video
   hardware.graphics = {
     enable = true;
-    extraPackages = with pkgs; [
-      intel-media-driver
-      vaapiVdpau
-    ];
+    extraPackages = with pkgs; [ intel-media-driver vaapiVdpau ];
     enable32Bit = true;
   };
 
@@ -87,7 +84,10 @@
     settings.PasswordAuthentication = true;
   };
 
-  programs.niri = { enable = true; };
+  programs.niri = {
+    # enable = true;
+    # package = pkgs.niri-stable;
+  };
   programs.dankMaterialShell = {
     enable = true;
 
@@ -111,12 +111,13 @@
     #   enableKeybinds = true; # Automatic keybinding configuration
     #   enableSpawn = true; # Auto-start DMS with niri
     # };
-	greeter = {
-	  enable = true; # Enable the greeter
-	  compositor.name = "hyprland"; # Compositor name (e.g., "sway", "hyprland", "weston")
-	  # quickshell.package = pkgs.quickshell;
-	};
-	# quickshell.package = pkgs.quickshell;
+    greeter = {
+      enable = true; # Enable the greeter
+      compositor.name =
+        "hyprland"; # Compositor name (e.g., "sway", "hyprland", "weston")
+      # quickshell.package = pkgs.quickshell;
+    };
+    # quickshell.package = pkgs.quickshell;
   };
 
   virtualisation.docker.enableNvidia = true;
