@@ -108,6 +108,11 @@ then
 	rm -rf ~/.config/zellij
 	ln -s "$(pwd -P)"/zellij ~/.config/
 
+	# add opencode config
+	mkdir -p ~/.config/opencode
+	rm -rf ~/.config/opencode
+	ln -s "$(pwd -P)"/opencode/opencode.json ~/.config/opencode/opencode.json
+
 	echo $(success "Symlinks created.")
 
 	echo "Fish shell has been setup, make sure you add the exports.fish file to conf.d/ with secrets."
@@ -128,6 +133,9 @@ then
 	then
 		exit 1
 	fi
+
+	echo $(info "Installing native packages")
+	curl -fsSL https://opencode.ai/install | bash
 
 else
 	echo $(error "Unsupported OS. Please use Linux or MacOS.")
