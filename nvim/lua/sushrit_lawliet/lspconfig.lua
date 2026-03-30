@@ -1,4 +1,5 @@
 --- Mason ---
+vim.lsp.set_log_level("WARN") -- set :h set_log_level
 
 -- IMPORTANT: make sure to setup neodev BEFORE lspconfig
 require("neodev").setup({
@@ -100,6 +101,10 @@ local signature_setup = {
 
 local nvim_lsp = require("lspconfig")
 -- local servers = { 'tsserver', 'pyright', 'gopls' }
+require("lspconfig").terraformls.setup {
+    filetypes = { "terraform", },
+    cmd = { 'terraform-ls', 'serve', '-log-file', vim.fs.dirname(require('vim.lsp.log').get_filename()) .. "/terraform-ls.log" },
+}
 
 local on_attach = function(client, bufnr)
     -- Enable completion triggered by <c-x><c-o>

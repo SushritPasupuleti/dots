@@ -2,25 +2,29 @@
 vim.g.base46_cache = vim.fn.stdpath("data") .. "/base46_cache/"
 -- End of Base46 Config
 
+-- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-    vim.fn.system({
-        "git",
-        "clone",
-        "--filter=blob:none",
-        "https://github.com/folke/lazy.nvim.git",
-        "--branch=stable", -- latest stable release
-        lazypath,
-    })
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+    local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+    local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+    if vim.v.shell_error ~= 0 then
+        vim.api.nvim_echo({
+            { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+            { out, "WarningMsg" },
+            { "\nPress any key to exit..." },
+        }, true, {})
+        vim.fn.getchar()
+        os.exit(1)
+    end
 end
 vim.opt.rtp:prepend(lazypath)
 
 vim.g.mapleader = ","
 
 vim.cmd([[
-	set encoding=utf-8
-	au ColorScheme * hi Normal ctermbg=none guibg=none
-]])
+    set encoding=utf-8
+    au ColorScheme * hi Normal ctermbg=none guibg=none
+    ]])
 vim.opt.termguicolors = true
 
 require("lazy").setup({
@@ -1650,10 +1654,93 @@ require("lazy").setup({
             },
         },
     },
+    {
+        "olimorris/codecompanion.nvim",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-treesitter/nvim-treesitter",
+            "ravitemer/mcphub.nvim",
+        },
+        opts = {
+            -- NOTE: The log_level is in `opts.opts`
+            opts = {
+                -- log_level = "DEBUG", -- or "TRACE"
+            },
+        },
+        config = function()
+            require("sushrit_lawliet.agent")
+        end,
+    },
     -- keys = {
     -- { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
     -- { "<leader>S",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer"},
     -- },
+    {
+        "NickvanDyke/opencode.nvim",
+        dependencies = {
+            -- Recommended for `ask()` and `select()`.
+            -- Required for `snacks` provider.
+            ---@module 'snacks' <- Loads `snacks.nvim` types for configuration intellisense.
+            { "folke/snacks.nvim", opts = { input = {}, picker = {}, terminal = {} } },
+        },
+        config = function()
+            ---@type opencode.Opts
+            vim.g.opencode_opts = {
+                provider = {
+                    enabled = "snacks",
+                    snacks = {
+                        -- ...
+                    },
+                },
+            }
+
+            -- Required for `opts.events.reload`.
+            vim.o.autoread = true
+
+            -- Recommended/example keymaps.
+            vim.keymap.set({ "n", "x" }, "<leader>ca", function()
+                require("opencode").ask("@this: ", { submit = true })
+            end, { desc = "Ask opencode…" })
+            vim.keymap.set({ "n", "x" }, "<leader>cp", function()
+                require("opencode").prompt("@this: ", { submit = true })
+            end, { desc = "Prompt opencode…" })
+            vim.keymap.set({ "n", "x" }, "<leader>cx", function()
+                require("opencode").select()
+            end, { desc = "Execute opencode action…" })
+            vim.keymap.set({ "n", "t" }, "<leader>cc", function()
+                require("opencode").toggle()
+            end, { desc = "Toggle opencode" })
+
+            vim.keymap.set({ "n", "x" }, "go", function()
+                return require("opencode").operator("@this ")
+            end, { desc = "Add range to opencode", expr = true })
+            vim.keymap.set("n", "goo", function()
+                return require("opencode").operator("@this ") .. "_"
+            end, { desc = "Add line to opencode", expr = true })
+
+            vim.keymap.set("n", "<S-C-u>", function()
+                require("opencode").command("session.half.page.up")
+            end, { desc = "Scroll opencode up" })
+            vim.keymap.set("n", "<S-C-d>", function()
+                require("opencode").command("session.half.page.down")
+            end, { desc = "Scroll opencode down" })
+
+            -- You may want these if you stick with the opinionated "<C-a>" and "<C-x>" above — otherwise consider "<leader>o…".
+            vim.keymap.set("n", "+", "<C-a>", { desc = "Increment under cursor", noremap = true })
+            vim.keymap.set("n", "-", "<C-x>", { desc = "Decrement under cursor", noremap = true })
+        end,
+    },
+    {
+        "Cannon07/claude-preview.nvim",
+        config = function()
+            require("claude-preview").setup({
+				diff = {
+					layout="inline",
+				}
+			})
+			-- install by running: `:CodePreviewInstallOpenCodeHooks`
+        end,
+    },
 })
 
 --options
