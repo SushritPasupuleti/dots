@@ -27,7 +27,9 @@
           llama-cpp
           gh
           glab
-          neovim
+		  snyk
+          #neovim
+		  tree-sitter
           vim
           tmux
           zellij
@@ -40,7 +42,7 @@
           starship
           nerdfonts
           # langs
-          go
+          # go
           golangci-lint
           air # go live reload
           # go-swag
@@ -48,8 +50,8 @@
           python311
           python311Packages.pip
           pipx
-		  uv
-          poetry
+		  # uv
+          # poetry
           nodejs_18
           elixir_1_15
           elixir-ls
@@ -76,10 +78,10 @@
           # protobuf3_20
           # nodePackages.eas-cli
           nodePackages.tailwindcss
-          nodePackages.pnpm
+          # nodePackages.pnpm
           nodePackages_latest.eslint
           bun # <--- use latest
-          yarn
+          # yarn
           # gcc
 		  zig
           rustup
@@ -117,6 +119,7 @@
           fselect
           sioyek
           nixos-generators
+		  borgbackup
           # etcher
           # wrk2
           bat
@@ -160,7 +163,7 @@
           cmatrix
           # tools
           spark
-          docker
+          # docker
           # k3s
           kompose
           ktunnel
@@ -169,7 +172,7 @@
           datree
           kind # local docker clusters
           argocd
-          kubectl
+          # kubectl
           kubectx
           k9s
           kubernetes-helm
@@ -181,7 +184,7 @@
           # mongodb
           mongosh
           # mongodb-compass
-          postgresql_16
+          # postgresql_16
           pgcli
           pgadmin4
           kafkactl
