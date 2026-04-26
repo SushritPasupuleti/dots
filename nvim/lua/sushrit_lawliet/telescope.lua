@@ -1,3 +1,15 @@
+-- Patch telescope's previewer to use native vim.treesitter instead of the
+-- removed nvim-treesitter.configs/parsers API (broke in nvim-treesitter main / Nvim 0.12)
+local previewers_ok, previewers_utils = pcall(require, "telescope.previewers.utils")
+if previewers_ok then
+	previewers_utils.highlighter = function(bufnr, ft)
+		local ok = pcall(vim.treesitter.start, bufnr)
+		if not ok then
+			pcall(vim.api.nvim_buf_set_option, bufnr, "syntax", ft)
+		end
+	end
+end
+
 require("telescope").setup({
 	pickers = {
 		urlview = {
