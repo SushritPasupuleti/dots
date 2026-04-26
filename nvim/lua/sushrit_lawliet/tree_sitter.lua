@@ -23,7 +23,7 @@ local parsers = {
 	"javascript",
 	"json",
 	"jsonc",
-	-- "latex",
+	"latex",
 	"lua",
 	"markdown",
 	"markdown_inline",
