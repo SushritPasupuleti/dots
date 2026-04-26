@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+set -euo pipefail
+
 # --- Core ---
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -7,138 +9,138 @@ BLUE='\033[0;36m'
 NC='\033[0m' # No Color
 
 function error {
-    printf "${RED}$@${NC}\n"
+    printf "${RED}%s${NC}\n" "$@"
 }
 
 function success {
-    printf "${GREEN}$@${NC}\n"
+    printf "${GREEN}%s${NC}\n" "$@"
 }
 
 function warn {
-    printf "${YELLOW}$@${NC}\n"
+    printf "${YELLOW}%s${NC}\n" "$@"
 }
 
 function info {
-	printf "${BLUE}$@${NC}\n"
+    printf "${BLUE}%s${NC}\n" "$@"
+}
+
+function create_symlink {
+    local src="$1"
+    local dest="$2"
+    if [ -e "$dest" ]; then
+        warn "Removing existing $dest"
+        rm -rf "$dest"
+    fi
+    ln -s "$src" "$dest"
+    success "Created symlink: $dest -> $src"
 }
 
 # --- Script start ---
 
 read -p "Did you perform the prerequisite actions? Refer to the README for context. (y/n): " -n 1 -r
 echo    # (optional) move to a new line
-if [[ ! $REPLY =~ ^[Yy]$ ]]
-then
+if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     exit 1
 fi
 
-if [[ "$OSTYPE" =~ ^darwin ]] || [[ "$OSTYPE" =~ ^linux ]];
-then
+if [[ "$OSTYPE" =~ ^darwin ]] || [[ "$OSTYPE" =~ ^linux ]]; then
 
-	echo $(info "Creating Symlinks...")
+    info "Creating Symlinks..."
 
-	#nvim
-	ln -s "$(pwd -P)"/nvim ~/.config/
-	#fish
-	ln -s "$(pwd -P)"/fish ~/.config/
-	#tmux
-	# ln -s "$(pwd -P)"/.tmux.conf.local ~/.tmux/tmux.conf.local
-	ln -s "$(pwd -P)"/.tmux.conf.local ~/.tmux.conf.local
-	ln -s "$(pwd -P)"/.tmux.conf ~/.tmux.conf
+    # Neovim
+    create_symlink "$(pwd -P)/nvim" ~/.config/
 
-	#kitty
-	ln -s "$(pwd -P)"/kitty ~/.config/
-	#wezterm
-	ln -s "$(pwd -P)"/wezterm ~/.config/
-	#k9s
-	ln -s "$(pwd -P)"/k9s ~/.config/
-	#lazygit
-	# ln -s "$(pwd -P)"/lazygit ~/.config/
-	cp -fr "$(pwd -P)"/lazygit/config.yml ~/Library/'Application Support'/lazygit
-	ln -s "$(pwd -P)"/lazygit/config.yml ~/.config/lazygit/
-	ln -s "$(pwd -P)"/lazygit/config.yml ~/.config/jesseduffield/lazygit/ # For older versions of lazygit
-	# rm ~/Library/Application\ Support/lazygit/config.yml 
-	# ls -s "$(pwd -P)"/lazygit/config.yml ~/Library/"Application\ Support"/lazygit/config.yml
-	#bat
-	ln -s "$(pwd -P)"/bat ~/.config/
+    # Fish
+    create_symlink "$(pwd -P)/fish" ~/.config/
 
-	#yabai
-	ln -s "$(pwd -P)"/yabai ~/.config/
-	#sketchybar
-	ln -s "$(pwd -P)"/sketchybar ~/.config/
+    # Tmux
+    create_symlink "$(pwd -P)/.tmux.conf.local" ~/.tmux.conf.local
+    create_symlink "$(pwd -P)/.tmux.conf" ~/.tmux.conf
 
-	#starship
-	ln -s "$(pwd -P)"/starship.toml ~/.config/
+    # Kitty
+    create_symlink "$(pwd -P)/kitty" ~/.config/
 
-	ln -s "$(pwd -P)"/scripts ~/.my-scripts
+    # Wezterm
+    create_symlink "$(pwd -P)/wezterm" ~/.config/
 
-	#.gitconfig
-	rm ~/.gitconfig
-	ln -s "$(pwd -P)"/.gitconfig ~/.gitconfig
-	ln -s "$(pwd -P)"/.gitconfigs ~/.gitconfigs
+    # K9s
+    create_symlink "$(pwd -P)/k9s" ~/.config/
 
-	# Home Manager for Nix
-	rm -rf ~/.config/nixpkgs
-	ln -s "$(pwd -P)"/nixpkgs ~/.config/nixpkgs
-	rm -rf ~/.config/home-manager
-	ln -s "$(pwd -P)"/home-manager ~/.config/home-manager
+    # Lazygit
+    mkdir -p ~/Library/'Application Support'/lazygit
+    cp -fr "$(pwd -P)/lazygit/config.yml" ~/Library/'Application Support'/lazygit/
+    create_symlink "$(pwd -P)/lazygit/config.yml" ~/.config/lazygit/
+    create_symlink "$(pwd -P)/lazygit/config.yml" ~/.config/jesseduffield/lazygit/
 
-	# add .desktop files
-	rm -rf ~/.local/share/applications/desktop-files
-	ln -s "$(pwd -P)"/desktop-files ~/.local/share/applications
+    # Bat
+    create_symlink "$(pwd -P)/bat" ~/.config/
 
-	# add rofi config
-	ln -s "$(pwd -P)"/rofi ~/.config/
+    # Yabai (macOS specific)
+    if [[ "$OSTYPE" =~ ^darwin ]]; then
+        create_symlink "$(pwd -P)/yabai" ~/.config/
+        create_symlink "$(pwd -P)/sketchybar" ~/.config/
+    fi
 
-	# add waybar config
-	ln -s "$(pwd -P)"/waybar ~/.config/
+    # Starship
+    create_symlink "$(pwd -P)/starship.toml" ~/.config/
 
-	# add hyprland config
- 	ln -s "$(pwd -P)"/hypr ~/.config/
+    # Scripts
+    create_symlink "$(pwd -P)/scripts" ~/.my-scripts
 
-	# add halloy config
-	rm -rf ~/.config/halloy
-	ln -s "$(pwd -P)"/halloy ~/.config/
+    # Git
+    create_symlink "$(pwd -P)/.gitconfig" ~/.gitconfig
+    create_symlink "$(pwd -P)/.gitconfigs" ~/.gitconfigs
 
-	# add sioyek config
-	rm -rf ~/.config/sioyek
-	ln -s "$(pwd -P)"/sioyek ~/.config/
+    # Home Manager for Nix
+    create_symlink "$(pwd -P)/nixpkgs" ~/.config/nixpkgs
+    create_symlink "$(pwd -P)/home-manager" ~/.config/home-manager
 
-	# add zellij config
-	mkdir -p ~/.config/zellij
-	rm -rf ~/.config/zellij
-	ln -s "$(pwd -P)"/zellij ~/.config/
+    # Desktop files
+    create_symlink "$(pwd -P)/desktop-files" ~/.local/share/applications
 
-	# add opencode config
-	mkdir -p ~/.config/opencode
-	rm -rf ~/.config/opencode
-	ln -s "$(pwd -P)"/opencode/opencode.json ~/.config/opencode/opencode.json
+    # Rofi
+    create_symlink "$(pwd -P)/rofi" ~/.config/
 
-	echo $(success "Symlinks created.")
+    # Waybar
+    create_symlink "$(pwd -P)/waybar" ~/.config/
 
-	echo "Fish shell has been setup, make sure you add the exports.fish file to conf.d/ with secrets."
+    # Hyprland
+    create_symlink "$(pwd -P)/hypr" ~/.config/
 
-	echo "Rebuilding bat cache."
+    # Halloy
+    create_symlink "$(pwd -P)/halloy" ~/.config/
 
-	bat cache --build
+    # Sioyek
+    create_symlink "$(pwd -P)/sioyek" ~/.config/
 
-	read -p "Install Doom Emacs? (This will reinstall any existing version) (y/n): " -n 1 -r
+    # Zellij
+    create_symlink "$(pwd -P)/zellij" ~/.config/
 
-	if [[ $REPLY =~ ^[Yy]$ ]]
-	then
-		echo $(info "Installing Doom Emacs...")
-		rm -rf ~/.emacs.d
-		git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.emacs.d
-		~/.emacs.d/bin/doom install
-	elif [[ ! $REPLY =~ ^[Yy]$ ]]
-	then
-		exit 1
-	fi
+    # Opencode
+    mkdir -p ~/.config/opencode
+    create_symlink "$(pwd -P)/opencode/opencode.json" ~/.config/opencode/opencode.json
 
-	echo $(info "Installing native packages")
-	curl -fsSL https://opencode.ai/install | bash
+    success "Symlinks created."
+
+    info "Fish shell has been setup, make sure you add the exports.fish file to conf.d/ with secrets."
+
+    info "Rebuilding bat cache."
+    bat cache --build
+
+    read -p "Install Doom Emacs? (This will reinstall any existing version) (y/n): " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        info "Installing Doom Emacs..."
+        rm -rf ~/.emacs.d
+        git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.emacs.d
+        ~/.emacs.d/bin/doom install
+    fi
+
+    info "Installing native packages"
+    curl -fsSL https://opencode.ai/install | bash
 
 else
-	echo $(error "Unsupported OS. Please use Linux or MacOS.")
-	echo $(error "Note For Windows Users: No Plans to support Windows")
-	exit 1
+    error "Unsupported OS. Please use Linux or MacOS."
+    error "Note For Windows Users: No Plans to support Windows"
+    exit 1
 fi

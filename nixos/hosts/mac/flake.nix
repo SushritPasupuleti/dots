@@ -6,9 +6,10 @@
     nixpkgs.url = "github:NixOS/nixpkgs";
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
+    television.url = "github:alexpasmantier/television";
   };
 
-  outputs = { self, nixpkgs, darwin }: {
+  outputs = { self, nixpkgs, darwin, television }: {
     packages."aarch64-darwin".default =
       # let pkgs = nixpkgs.legacyPackages."aarch64-darwin";
       let
@@ -31,7 +32,9 @@
           #neovim
 		  tree-sitter
           vim
+		  television.packages."aarch64-darwin".default
           tmux
+		  sesh
           zellij
           ranger
           superfile

@@ -557,6 +557,10 @@ set -g @plugin 'tmux-plugins/tmux-urlview'
 set -g @plugin 'joshmedeski/tmux-nerd-font-window-name'
 set -g @plugin 'sainnhe/tmux-fzf'
 set -g @plugin 'mskelton/tmux-last' # <prefix>t
+set -g @plugin 'omerxx/tmux-sessionx'
+
+# -- sessionx
+set -g @sessionx-bind 'o'
 
 # -- custom variables ----------------------------------------------------------
 

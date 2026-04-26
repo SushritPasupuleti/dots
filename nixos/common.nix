@@ -156,10 +156,12 @@ in {
       nix-direnv
       llama-cpp
       github-desktop # <--- use latest
-      vim
-      neovim # <--- use latest
-      emacs
-      tmux
+       vim
+       neovim # <--- use latest
+       emacs
+ 	  # television  # not in nixpkgs yet
+       tmux
+	  sesh
       zellij
       kitty
       wezterm
