@@ -1,5 +1,5 @@
 --- Mason ---
-vim.lsp.set_log_level("WARN") -- set :h set_log_level
+vim.lsp.log.set_level("WARN") -- set :h set_log_level
 
 -- IMPORTANT: make sure to setup neodev BEFORE lspconfig
 require("neodev").setup({
@@ -15,7 +15,7 @@ local servers = {
     -- "eslint",
     "gopls",
     "jsonls",
-    "tsserver",
+    "ts_ls",
     "pyright",
     "vimls",
     "yamlls",
@@ -32,7 +32,7 @@ local servers = {
     -- "lua-language-server",
     -- "elixirls",
     -- "omnisharp",
-    "csharp-language-server",
+    -- "csharp-language-server", -- invalid name, use csharp_ls below
     -- "rust_analyzer",
     -- "sumneko_lua", --deprecated
     "lua_ls",
@@ -41,7 +41,7 @@ local servers = {
     "nil_ls", -- for nix
     -- "rnix",
     -- "nil",
-    "nixpkgs-fmt",
+    -- "nixpkgs-fmt", -- formatter, not an LSP server
     "tailwindcss",
     "terraformls",
     -- "tflint",

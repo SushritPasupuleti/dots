@@ -118,7 +118,7 @@ require("lualine").setup({
                 end,
             },
             {
-                require("opencode").statusline,
+                -- require("opencode").statusline,
             },
         },
         lualine_y = { "progress" },
