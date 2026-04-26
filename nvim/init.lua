@@ -284,10 +284,10 @@ require("lazy").setup({
         dependencies = { "nvim-lua/plenary.nvim" },
         config = function()
             require("crates").setup({
-                null_ls = {
-                    enabled = true,
-                    name = "crates.nvim",
-                },
+                -- null_ls = {
+                --     enabled = true,
+                --     name = "crates.nvim",
+                -- },
             })
         end,
     },
@@ -353,14 +353,7 @@ require("lazy").setup({
             require("sushrit_lawliet.lspkind")
         end,
     },
-    {
-        "nvimtools/none-ls.nvim",
-        event = { "BufReadPre", "BufNewFile" },
-        name = "null-ls",
-        config = function()
-            require("sushrit_lawliet.null-ls")
-        end,
-    },
+    -- none-ls removed: formatters handled by conform.nvim, diagnostics by nvim-lint
     -- {
     --     "folke/which-key.nvim",
     --     config = function()
@@ -820,7 +813,7 @@ require("lazy").setup({
     {
         "CopilotC-Nvim/CopilotChat.nvim",
         -- enabled = false,
-        branch = "canary",
+        branch = "main",
         dependencies = {
             { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
             { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper

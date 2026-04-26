@@ -59,7 +59,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
         vim.keymap.set("n", "<space>f", conform.format, bufopts)
 
-        if client then
+        if client and client.server_capabilities.documentSymbolProvider then
             navic.attach(client, bufnr)
         end
         require("lsp_signature").on_attach(signature_setup, bufnr)
