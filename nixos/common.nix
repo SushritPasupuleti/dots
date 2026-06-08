@@ -1,14 +1,20 @@
 # Declare all settings and configuration options that are to be commonly used by all `hosts`.
-{ config, pkgs, lib, unstable, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  unstable,
+  ...
+}:
 
 let
   # home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-24.11.tar.gz";
   openrgb-rules = builtins.fetchurl {
-    url =
-      "https://gitlab.com/CalcProgrammer1/OpenRGB/-/raw/master/60-openrgb.rules";
+    url = "https://gitlab.com/CalcProgrammer1/OpenRGB/-/raw/master/60-openrgb.rules";
   };
 
-in {
+in
+{
   imports = [
     # (import "${home-manager}/nixos")
     # (fetchTarball
@@ -114,7 +120,8 @@ in {
   };
 
   ## Allow specific unfree packages
-  nixpkgs.config.allowUnfreePredicate = pkg:
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
     builtins.elem (lib.getName pkg) [
       "nvidia-x11"
       "nvidia-settings"
@@ -145,7 +152,13 @@ in {
   users.users.sushrit_lawliet = {
     isNormalUser = true;
     description = "Sushrit Pasupuleti";
-    extraGroups = [ "networkmanager" "wheel" "adbusers" "libvirtd" "docker" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "adbusers"
+      "libvirtd"
+      "docker"
+    ];
     packages = with pkgs; [
       firefox
       tor-browser
@@ -155,12 +168,14 @@ in {
       nix-direnv
       llama-cpp
       github-desktop # <--- use latest
-       vim
+      vim
       unstable.neovim # <--- use latest
-       emacs
- 	  # television  # not in nixpkgs yet
-       tmux
-	  sesh
+      unstable.tree-sitter # <--- use latest
+      unstable.opencode # <--- use latest
+      emacs
+      # television  # not in nixpkgs yet
+      tmux
+      sesh
       zellij
       kitty
       wezterm
@@ -359,7 +374,7 @@ in {
       arduino-cli
       #terminal-notifier
       wget
-	  unixtools.net-tools 
+      unixtools.net-tools
       # urlview
       mqttui
       mosquitto
@@ -403,7 +418,7 @@ in {
       pipes-rs
       cbonsai
       cmatrix
-      # wails: 
+      # wails:
       gtk3
       # webkitgtk
       upx
@@ -418,7 +433,7 @@ in {
       nitrogen
       rofi
       # rofi-wayland
-      # mandatory 
+      # mandatory
       xorg.libxcb
       # libsForQt5.dolphin
       nautilus
@@ -438,7 +453,7 @@ in {
     noto-fonts
     noto-fonts-cjk-sans
     # noto-fonts-emoji
-	noto-fonts-color-emoji
+    noto-fonts-color-emoji
     liberation_ttf
     fira-code
     fira-code-symbols
@@ -469,8 +484,7 @@ in {
     };
     # chromium.commandLineArgs =
     # "--enable-features=VaapiVideoEncoder,VaapiVideoDecoder";
-    chromium.commandLineArgs =
-      "--enable-features=UseOzonePlatform --ozone-platform=wayland";
+    chromium.commandLineArgs = "--enable-features=UseOzonePlatform --ozone-platform=wayland";
     packageOverrides = pkgs: {
       vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
       # unstable = import unstableTarball {
@@ -552,7 +566,10 @@ in {
 
   # Open ports in the firewall.
   networking.firewall.enable = true;
-  networking.firewall.allowedTCPPorts = [ 6443 5000 ];
+  networking.firewall.allowedTCPPorts = [
+    6443
+    5000
+  ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
 

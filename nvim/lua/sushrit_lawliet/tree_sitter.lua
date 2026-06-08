@@ -1,8 +1,5 @@
-require("nvim-treesitter.install").prefer_git = false
-
--- In the new main branch, there is no configs module.
--- Parser installation is triggered via :TSInstall or the install API.
--- Highlighting is handled natively by Neovim's vim.treesitter.
+-- nvim-treesitter main branch: no configs module, no nvim-treesitter.install module.
+-- Parser installation is via the install API; highlighting via Neovim's vim.treesitter.
 
 local parsers = {
 	"bash",
@@ -45,3 +42,10 @@ local parsers = {
 }
 
 require("nvim-treesitter").install(parsers)
+
+-- Enable treesitter highlighting for every buffer (new main branch no longer does this automatically)
+vim.api.nvim_create_autocmd("FileType", {
+	callback = function(args)
+		pcall(vim.treesitter.start, args.buf)
+	end,
+})

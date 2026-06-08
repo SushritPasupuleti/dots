@@ -812,7 +812,7 @@ require("lazy").setup({
     },
     {
         "CopilotC-Nvim/CopilotChat.nvim",
-        -- enabled = false,
+        enabled = false,
         branch = "main",
         dependencies = {
             { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
@@ -1980,7 +1980,6 @@ require("lazy").setup({
             }
 
             vim.o.autoread = true -- Required for `opts.events.reload`
-
             -- Recommended/example keymaps
             vim.keymap.set({ "n", "x" }, "<C-a>", function()
                 require("opencode").ask("@this: ", { submit = true })
