@@ -4,10 +4,6 @@
   imports = [
     ../../common.nix
     ./hardware-configuration.nix
-    # inputs.niri.nixosModules.niri
-    #    inputs.dankMaterialShell.nixosModules.dankMaterialShell
-    #    inputs.dankMaterialShell.nixosModules.dankMaterialShell.default
-    #    inputs.dankMaterialShell.nixosModules.dankMaterialShell.niri
   ];
 
   #Bootloader
@@ -74,7 +70,8 @@
   ## Hardware Acceleration for video
   hardware.graphics = {
     enable = true;
-    extraPackages = with pkgs; [ intel-media-driver vaapiVdpau ];
+    extraPackages = with pkgs; [ intel-media-driver libva-vdpau-driver ];
+    # extraPackages = with pkgs; [ intel-media-driver vaapiVdpau ];
     enable32Bit = true;
   };
 
@@ -83,43 +80,4 @@
     enable = true;
     settings.PasswordAuthentication = true;
   };
-
-  programs.niri = {
-    # enable = true;
-    # package = pkgs.niri-stable;
-  };
-  programs.dankMaterialShell = {
-    enable = true;
-
-    systemd = {
-      enable = true; # Systemd service for auto-start
-      restartIfChanged =
-        true; # Auto-restart dms.service when dankMaterialShell changes
-    };
-
-    # Core features
-    enableSystemMonitoring = true; # System monitoring widgets (dgop)
-    # enableClipboard = true; # Clipboard history manager
-    enableVPN = true; # VPN management widget
-    # enableBrightnessControl = true; # Backlight/brightness controls
-    # enableColorPicker = true; # Color picker tool
-    enableDynamicTheming = true; # Wallpaper-based theming (matugen)
-    enableAudioWavelength = true; # Audio visualizer (cava)
-    enableCalendarEvents = true; # Calendar integration (khal)
-    # enableSystemSound = true; # System sound effects
-    # niri = {
-    #   enableKeybinds = true; # Automatic keybinding configuration
-    #   enableSpawn = true; # Auto-start DMS with niri
-    # };
-    greeter = {
-      enable = true; # Enable the greeter
-      compositor.name =
-        "hyprland"; # Compositor name (e.g., "sway", "hyprland", "weston")
-      # quickshell.package = pkgs.quickshell;
-    };
-    # quickshell.package = pkgs.quickshell;
-  };
-
-  virtualisation.docker.enableNvidia = true;
-  # hardware.nvidia-container-toolkit.enable = true;
 }

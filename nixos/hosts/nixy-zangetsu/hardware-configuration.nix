@@ -38,6 +38,7 @@
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   hardware.nvidia-container-toolkit.enable = true;
+  hardware.nvidia-container-toolkit.mount-nvidia-executables = true;
 
   #NVIDIA Config
     # Make sure opengl is enabled

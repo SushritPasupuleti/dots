@@ -32,14 +32,17 @@ echo $(info "Backing up current configuration.nix and hardware-configuration.nix
 mkdir -p $(pwd -P)/nixos/backup
 sudo cp /etc/nixos/configuration.nix $(pwd -P)/backup/configuration.nix
 sudo cp /etc/nixos/hardware-configuration.nix $(pwd -P)/backup/hardware-configuration.nix
+# sudo cp /etc/nixos/flake.nix $(pwd -P)/backup/flake.nix
 
 echo $(info "Creating Symlinks...")
 
 sudo rm -rf /etc/nixos/configuration.nix
 sudo rm -rf /etc/nixos/hardware-configuration.nix
+# sudo rm -rf /etc/nixos/flake.nix
 
 sudo ln -s "$(pwd -P)"/nixos/configuration.nix /etc/nixos/configuration.nix
 sudo ln -s "$(pwd -P)"/nixos/hardware-configuration.nix /etc/nixos/hardware-configuration.nix
+# sudo ln -s "$(pwd -P)"/nixos/flake.nix /etc/nixos/flake.nix
 
 echo $(success "Done!")
 

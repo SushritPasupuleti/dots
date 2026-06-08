@@ -1,9 +1,8 @@
 # Declare all settings and configuration options that are to be commonly used by all `hosts`.
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, unstable, ... }:
 
 let
   # home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-24.11.tar.gz";
-  # unstable = import <unstable> { config.allowUnfree = true; };
   openrgb-rules = builtins.fetchurl {
     url =
       "https://gitlab.com/CalcProgrammer1/OpenRGB/-/raw/master/60-openrgb.rules";
@@ -50,9 +49,9 @@ in {
   services.xserver.autoRepeatInterval = 30;
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
+  services.displayManager.gdm.enable = true;
   # disable gnome
-  services.xserver.desktopManager.gnome.enable = true;
+  services.desktopManager.gnome.enable = true;
 
   # Enable QTile as window manager
   services.xserver.windowManager.qtile.enable = true;
@@ -157,7 +156,7 @@ in {
       llama-cpp
       github-desktop # <--- use latest
        vim
-       neovim # <--- use latest
+      unstable.neovim # <--- use latest
        emacs
  	  # television  # not in nixpkgs yet
        tmux
@@ -167,11 +166,11 @@ in {
       wezterm
       ranger
       superfile
-      starship # <--- use latest
+      unstable.starship # <--- use latest
       # nerdfonts # <--- use latest
       fira-code
       gh
-      lazygit # <--- use latest
+      unstable.lazygit # <--- use latest
       lazydocker
       delta
       spark
@@ -193,17 +192,17 @@ in {
       #github-desktop
       gnumake
       # vscode # <--- use latest
-      vscode # <--- use latest
-      jetbrains.idea-community
+      unstable.vscode # <--- use latest
+      jetbrains.idea
       android-studio
       android-tools
       fnm
       # postman
       bruno
       # microsoft-edge
-      microsoft-edge # <--- use latest
+      unstable.microsoft-edge # <--- use latest
       # google-chrome
-      google-chrome
+      unstable.google-chrome
       brave
       tuir
       jira-cli-go
@@ -218,24 +217,25 @@ in {
       zoom-us
       # rpi-imager
       libreoffice
-      onlyoffice-bin
-      halloy # <--- use latest
-      localsend # <--- use latest
+      # onlyoffice-bin
+      unstable.halloy # <--- use latest
+      unstable.localsend # <--- use latest
       #langs
       go
       golangci-lint
       wails
-      pipx
+      # pipx
       poetry
       pyenv
-      python3
-      python311Packages.pip
-      python311Packages.jupytext
+      python314
+      python314Packages.pip
+      python314Packages.jupytext
+      # python314Packages.pipx
       uv
       # nodejs_18
-      nodejs_20
-      elixir_1_15
-      elixir-ls
+      nodejs_24
+      #elixir_1_15
+      #elixir-ls
       ocaml
       opam
       ocamlPackages.findlib
@@ -258,10 +258,10 @@ in {
       protoc-gen-rust
       protoc-gen-go
       protoc-gen-grpc-web
-      nodePackages.eas-cli
-      nodePackages.tailwindcss
-      nodePackages.pnpm
-      nodePackages_latest.eslint
+      # nodePackages.eas-cli
+      # nodePackages.tailwindcss
+      # nodePackages.pnpm
+      # nodePackages_latest.eslint
       libtorch-bin
       # cudaPackages.fabricmanager
       # WASM
@@ -269,7 +269,7 @@ in {
       # LaTex
       texliveFull
       # bun
-      bun # <--- use latest
+      unstable.bun # <--- use latest
       yarn
       gcc
       rustup
@@ -280,8 +280,8 @@ in {
       stylua
       openjdk17
       yaml-language-server
-      dockerfile-language-server-nodejs
-      nixpkgs-fmt
+      dockerfile-language-server
+      nixfmt
       nil
       htmx-lsp
       biome # prettierd alternative
@@ -332,8 +332,8 @@ in {
       btop
       htop
       nvitop
-      python310Packages.gpustat
-      python310Packages.pyspark
+      python314Packages.gpustat
+      python314Packages.pyspark
       sqlite
       # neofetch
       fastfetch
@@ -343,7 +343,7 @@ in {
       git-ignore
       marp-cli
       #cli
-      aws-sam-cli
+      # aws-sam-cli
       awscli2
       aws-iam-authenticator
       # terraform
@@ -359,6 +359,7 @@ in {
       arduino-cli
       #terminal-notifier
       wget
+	  unixtools.net-tools 
       # urlview
       mqttui
       mosquitto
@@ -404,7 +405,7 @@ in {
       cmatrix
       # wails: 
       gtk3
-      webkitgtk
+      # webkitgtk
       upx
       nsis
       # Awesome
@@ -419,7 +420,7 @@ in {
       # rofi-wayland
       # mandatory 
       xorg.libxcb
-      libsForQt5.dolphin
+      # libsForQt5.dolphin
       nautilus
       sushi
       # gnome.gnome-settings-daemon43
@@ -427,7 +428,7 @@ in {
       pavucontrol
       wlogout
       hyprpaper
-      catnip # <--- use latest
+      unstable.catnip # <--- use latest
       # xdg-desktop-portal-gtk
     ];
   };
@@ -436,7 +437,8 @@ in {
     monaspace
     noto-fonts
     noto-fonts-cjk-sans
-    noto-fonts-emoji
+    # noto-fonts-emoji
+	noto-fonts-color-emoji
     liberation_ttf
     fira-code
     fira-code-symbols
@@ -511,10 +513,13 @@ in {
         # domain = "your.domain";
         # root_url = "https://your.domain/grafana/"; # Not needed if it is `https://your.domain/`
       };
+      security = {
+        secret_key = "SW2YcwTIb9zpOOhoPsMm";
+      };
     };
   };
 
-  programs.adb.enable = true;
+  # programs.adb.enable = true;
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
@@ -572,8 +577,7 @@ in {
       enable = true;
       setSocketVariable = true;
     };
-    enableNvidia = true;
-    # extraOptions = [ "--iptables=false" ];
+    # enableNvidia is deprecated, use hardware.nvidia-container-toolkit.enable instead
   };
   # users.extraGroups.docker.members = [ "sushrit_lawliet" ];
 
