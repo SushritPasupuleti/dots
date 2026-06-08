@@ -1,205 +1,167 @@
--- Center the cursor on the screen when moving up or down
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
--- same but with search
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
+-- remaps.lua
+-- Keymaps organized with which-key integration
 
--- paste over highlight without losing clipboard
-vim.keymap.set("x", "<leader>p", [["_dP]])
+local wk = require("which-key")
 
--- yank to system clipboard
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
-vim.keymap.set("n", "<leader>Y", [["+Y]])
+-- Register groups not already defined in init.lua's wk.add() call
+wk.add({
+    { "<leader>d", group = "debug" },
+    { "<leader>h", group = "history" },
+    { "<leader>r", group = "rename" },
+    { "<leader>n", group = "notifications" },
+})
 
--- search in selection in visual mode
-vim.keymap.set("v", "<leader>/", "<esc>/\\%V")
+-- ============================================================================
+-- NAVIGATION
+-- ============================================================================
 
--- line navigations
-vim.keymap.set({ "n", "v" }, "gh", "<Home>")
-vim.keymap.set({ "n", "v" }, "gl", "<End>")
+-- Centered scrolling
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll down (centered)" })
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up (centered)" })
 
--- replace current word
--- vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+-- Line start/end
+vim.keymap.set({ "n", "v" }, "gh", "<Home>", { desc = "Go to line start" })
+vim.keymap.set({ "n", "v" }, "gl", "<End>",  { desc = "Go to line end" })
 
--- Telescope
+-- Move lines/blocks (overrides J join-line and K man-lookup)
+local silent = { noremap = true, silent = true }
+vim.keymap.set("n", "J", ":MoveLine(1)<CR>",   silent)
+vim.keymap.set("n", "K", ":MoveLine(-1)<CR>",  silent)
+vim.keymap.set("v", "J", ":MoveBlock(1)<CR>",  silent)
+vim.keymap.set("v", "K", ":MoveBlock(-1)<CR>", silent)
+
+-- ============================================================================
+-- CLIPBOARD
+-- ============================================================================
+
+vim.keymap.set("x",          "<leader>p", [["_dP]],  { desc = "Paste without yanking" })
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]],   { desc = "Yank to system clipboard" })
+vim.keymap.set("n",          "<leader>Y", [["+Y]],   { desc = "Yank line to system clipboard" })
+
+-- ============================================================================
+-- SEARCH  (hlslens enhanced)
+-- ============================================================================
+
+local hlsopts = { noremap = true, silent = true }
+
+vim.keymap.set("n", "n",
+    [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
+    vim.tbl_extend("force", hlsopts, { desc = "Next result" }))
+vim.keymap.set("n", "N",
+    [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
+    vim.tbl_extend("force", hlsopts, { desc = "Prev result" }))
+vim.keymap.set("n", "*",
+    [[*<Cmd>lua require('hlslens').start()<CR>]],
+    vim.tbl_extend("force", hlsopts, { desc = "Search word forward" }))
+vim.keymap.set("n", "#",
+    [[#<Cmd>lua require('hlslens').start()<CR>]],
+    vim.tbl_extend("force", hlsopts, { desc = "Search word backward" }))
+vim.keymap.set("n", "g*",
+    [[g*<Cmd>lua require('hlslens').start()<CR>]],
+    vim.tbl_extend("force", hlsopts, { desc = "Search (no boundary) fwd" }))
+vim.keymap.set("n", "g#",
+    [[g#<Cmd>lua require('hlslens').start()<CR>]],
+    vim.tbl_extend("force", hlsopts, { desc = "Search (no boundary) bwd" }))
+
+vim.keymap.set("n", "<leader>l", "<Cmd>noh<CR>", vim.tbl_extend("force", hlsopts, { desc = "Clear search highlight" }))
+vim.keymap.set("v", "<leader>/", "<esc>/\\%V",   { desc = "Search in selection" })
+
+-- ============================================================================
+-- FILE / FIND  (<leader>f)
+-- ============================================================================
+
 local search = require("search")
 
-vim.keymap.set("n", "<leader>fi", "<cmd>Telescope import<cr>")
--- vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
--- vim.keymap.set("n", "<leader>ff", ":lua require('search').open()<cr>")
-vim.keymap.set("n", "<leader>ff", search.open)
-vim.keymap.set("n", "<leader>fw", "<cmd>Telescope ast_grep<cr>")
-vim.keymap.set("n", "<leader>fy", "<cmd>Telescope yaml_schema<cr>")
-vim.keymap.set("n", "<leader>fc", "<cmd>Telescope current_buffer_fuzzy_find<cr>")
-vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>")
-vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
-vim.keymap.set("n", "<leader>fd", require("telescope.builtin").diagnostics)
-vim.keymap.set("n", "<leader>fD", ":lua require'telescope.builtin'.diagnostics{ bufnr = 0 }<cr>")
--- vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>")
--- vim.keymap.set("n", "<leader>fh", "<cmd>Telescope command_history<cr>")
-vim.keymap.set("n", "<leader>fh", "<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<cr>")
-vim.keymap.set("n", "<leader>fu", "<cmd>UrlView<cr>")
-vim.keymap.set("n", "<leader>fk", "<cmd>command_center<cr>")
-vim.keymap.set("n", "<leader>fs", "<cmd>Autosession search<cr>")
-vim.keymap.set("n", "<leader>fv", "<cmd>Telescope neoclip<cr>")
-vim.keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<cr>")
+vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>",                                                   { desc = "Buffers" })
+vim.keymap.set("n", "<leader>fc", "<cmd>Telescope current_buffer_fuzzy_find<cr>",                                 { desc = "Fuzzy find in buffer" })
+vim.keymap.set("n", "<leader>fd", require("telescope.builtin").diagnostics,                                        { desc = "Workspace diagnostics" })
+vim.keymap.set("n", "<leader>fD", function() require("telescope.builtin").diagnostics({ bufnr = 0 }) end,         { desc = "Buffer diagnostics" })
+vim.keymap.set("n", "<leader>fe", "<cmd>Dirbuf<CR>",                                                              { desc = "File explorer" })
+vim.keymap.set("n", "<leader>ff", search.open,                                                                     { desc = "Find files" })
+vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>",                                                 { desc = "Live grep" })
+vim.keymap.set("n", "<leader>fh", "<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<cr>",      { desc = "Find hidden files" })
+vim.keymap.set("n", "<leader>fi", "<cmd>Telescope import<cr>",                                                    { desc = "Find imports" })
+vim.keymap.set("n", "<leader>fk", "<cmd>command_center<cr>",                                                      { desc = "Command center" })
+vim.keymap.set("n", "<leader>fs", "<cmd>Autosession search<cr>",                                                  { desc = "Search sessions" })
+vim.keymap.set("n", "<leader>fT", "<cmd>FloatermToggle<CR>",                                                      { noremap = true, silent = true, desc = "Toggle floaterm" })
+vim.keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<cr>",                                                       { desc = "TODOs" })
+vim.keymap.set("n", "<leader>fu", "<cmd>UrlView<cr>",                                                             { desc = "View URLs" })
+vim.keymap.set("n", "<leader>fv", "<cmd>Telescope neoclip<cr>",                                                   { desc = "Clipboard history" })
+vim.keymap.set("n", "<leader>fw", "<cmd>Telescope ast_grep<cr>",                                                  { desc = "AST grep" })
+vim.keymap.set("n", "<leader>fy", "<cmd>Telescope yaml_schema<cr>",                                               { desc = "YAML schema" })
 
--- Spectre for Find and Replace
-vim.keymap.set("n", "<leader>S", "<cmd>lua require('spectre').open()<CR>")
-vim.keymap.set("n", "<leader>sw", "<cmd>lua require('spectre').open_visual({select_word=true})<CR>")
-vim.keymap.set({ "n", "v" }, "<leader>s", "<esc>:lua require('spectre').open_visual()<CR>")
--- GLow Preview
-vim.keymap.set("n", "<leader>p", ":Glow<CR>")
+vim.keymap.set("n", "<M-f>f", "<cmd>FzfLua files<cr>", { desc = "fzf: find files" })
 
--- undotree
-vim.keymap.set("n", "<leader>z", ":UndotreeToggle<CR>")
+-- ============================================================================
+-- SEARCH / REPLACE  Spectre  (<leader>s)
+-- ============================================================================
 
--- Zen Mode
-vim.keymap.set("n", "<space>z", ":ZenMode<CR>")
-vim.keymap.set("n", "<space>n", ":NoNeckPain<CR>")
+-- NOTE: <leader>s is the "search" group — avoid binding <leader>s directly
+vim.keymap.set("n",          "<leader>S",  function() require("spectre").open() end,                              { desc = "Spectre: open" })
+vim.keymap.set("n",          "<leader>sw", function() require("spectre").open_visual({ select_word = true }) end, { desc = "Spectre: search word" })
+vim.keymap.set({ "n", "v" }, "<leader>sv", function() require("spectre").open_visual() end,                      { desc = "Spectre: search visual" })
 
--- setup mapping to call :LazyGit
-vim.keymap.set("n", "<silent> <leader>gg", ":LazyGit<CR>")
-vim.keymap.set("n", "<silent> <leader>gf", ":LazyGitFilter<CR>")
-vim.keymap.set("n", "<silent> <leader>gc", ":LazyGitFilterCurrentFile<CR>")
+-- ============================================================================
+-- GIT  (<leader>g)
+-- ============================================================================
 
--- Setup memento
-vim.keymap.set("n", "<leader>hh", "<cmd>lua require('memento').toggle()<CR>")
-vim.keymap.set("n", "<leader>hc", "<cmd>lua require('memento').clear_history()<CR>")
+-- NOTE: fixed — original had "<silent> <leader>gg" with <silent> as part of LHS
+vim.keymap.set("n", "<leader>gg", ":LazyGit<CR>",                  { silent = true, desc = "LazyGit" })
+vim.keymap.set("n", "<leader>gf", ":LazyGitFilter<CR>",            { silent = true, desc = "LazyGit filter" })
+vim.keymap.set("n", "<leader>gc", ":LazyGitFilterCurrentFile<CR>", { silent = true, desc = "LazyGit filter current file" })
 
--- Normal-mode commands
--- vim.keymap.set("n", "<silent> J", ":MoveLine(1)<CR>")
--- vim.keymap.set("n", "<silent> K", ":MoveLine(-1)<CR>")
--- -- nnoremap <silent>  :MoveHChar(1)<CR>
--- -- nnoremap <silent> <A-h> :MoveHChar(-1)<CR>
---
--- -- Visual-mode commands
--- vim.keymap.set({"n", "v"}, "<silent> J", ":MoveBlock(1)<CR>")
--- vim.keymap.set({"n", "v"}, "<silent> K", ":MoveBlock(-1)<CR>")
--- -- vnoremap <silent> <A-l> :MoveHBlock(1)<CR>
--- -- vnoremap <silent> <A-h> :MoveHBlock(-1)<CR>
+-- ============================================================================
+-- HISTORY  (<leader>h, <leader>z)
+-- ============================================================================
 
--- vim.keymap.set("x", "J", ":move '>+1<CR>gv-gv")
--- vim.keymap.set("x", "K", ":move '<-2<CR>gv-gv")
--- vim.keymap.set("x", "<A-j>", ":move '>+1<CR>gv-gv")
--- vim.keymap.set("x", "<A-k>", ":move '<-2<CR>gv-gv")
+vim.keymap.set("n", "<leader>hh", function() require("memento").toggle() end,        { desc = "Memento: toggle" })
+vim.keymap.set("n", "<leader>hc", function() require("memento").clear_history() end, { desc = "Memento: clear history" })
+vim.keymap.set("n", "<leader>z",  ":UndotreeToggle<CR>",                             { desc = "Toggle undotree" })
 
-local opts = { noremap = true, silent = true }
+-- ============================================================================
+-- LSP / CODE  (<leader>c, <leader>r, g-prefixed, bracket jumps)
+-- ============================================================================
 
-vim.keymap.set("n", "J", ":MoveLine(1)<CR>", opts)
-vim.keymap.set("n", "K", ":MoveLine(-1)<CR>", opts)
--- vim.keymap.set('n', '<A-h>', ':MoveHChar(-1)<CR>', opts)
--- vim.keymap.set('n', '<A-l>', ':MoveHChar(1)<CR>', opts)
+-- Lspsaga
+-- NOTE: removed duplicate <leader>gd peek_definition — keeping goto_definition
+vim.keymap.set("n", "<leader>gr", "<cmd>Lspsaga lsp_finder<CR>",      { silent = true, desc = "LSP finder" })
+vim.keymap.set("n", "<leader>gd", "<cmd>Lspsaga goto_definition<CR>", { silent = true, desc = "Goto definition" })
+vim.keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<CR>",          { silent = true, desc = "Rename symbol" })
+vim.keymap.set("n", "<leader>k",  "<cmd>Lspsaga hover_doc<CR>",       { silent = true, desc = "Hover doc" })
+vim.keymap.set("n", "<leader>O",  "<cmd>Lspsaga outline<CR>",                         { desc = "Symbol outline" })
+vim.keymap.set("n", "<leader>ci", "<cmd>Lspsaga incoming_calls<CR>",                  { desc = "Incoming calls" })
+vim.keymap.set("n", "<leader>co", "<cmd>Lspsaga outgoing_calls<CR>",                  { desc = "Outgoing calls" })
 
--- Visual-mode commands
-vim.keymap.set("v", "J", ":MoveBlock(1)<CR>", opts)
-vim.keymap.set("v", "K", ":MoveBlock(-1)<CR>", opts)
--- vim.keymap.set('v', '<A-h>', ':MoveHBlock(-1)<CR>', opts)
--- vim.keymap.set('v', '<A-l>', ':MoveHBlock(1)<CR>', opts)
+-- Code actions
+vim.keymap.set("n", "<leader>ca", require("actions-preview").code_actions, { desc = "Code actions" })
 
--- DAP-UI --
-vim.keymap.set("n", "<leader>cd", ":lua require'dapui'.toggle()<CR>")
+-- Docstring generation (moved from <leader>dd to avoid debug-group confusion)
+vim.keymap.set("n", "<leader>cD", function() require("neogen").generate() end, { noremap = true, silent = true, desc = "Generate docstring" })
 
-vim.keymap.set("n", "<leader>de", ":Dirbuf<CR>")
+-- Diagnostics (show)
+vim.keymap.set("n", "<leader>sl", "<cmd>Lspsaga show_line_diagnostics<CR>",   { silent = true, desc = "Line diagnostics" })
+vim.keymap.set("n", "<leader>sc", "<cmd>Lspsaga show_cursor_diagnostics<CR>", { silent = true, desc = "Cursor diagnostics" })
+vim.keymap.set("n", "<leader>sb", "<cmd>Lspsaga show_buf_diagnostics<CR>",                   { desc = "Buffer diagnostics" })
 
---hlslens
-local kopts = { noremap = true, silent = true }
-
-vim.api.nvim_set_keymap(
-    "n",
-    "n",
-    [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
-    kopts
-)
-vim.api.nvim_set_keymap(
-    "n",
-    "N",
-    [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
-    kopts
-)
-vim.api.nvim_set_keymap("n", "*", [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-vim.api.nvim_set_keymap("n", "#", [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
-vim.api.nvim_set_keymap("n", "g*", [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-vim.api.nvim_set_keymap("n", "g#", [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
-
-vim.api.nvim_set_keymap("n", "<Leader>l", "<Cmd>noh<CR>", kopts)
-
-vim.keymap.set("n", "<Leader>e", "<cmd>IconPickerInsert emoji<cr>", opts)
-
----lspsaga---
-local keymap = vim.keymap.set
-
--- Lsp finder find the symbol definition implement reference
--- if there is no implement it will hide
--- when you use action in finder like open vsplit then you can
--- use <C-t> to jump back
-keymap("n", "<leader>gr", "<cmd>Lspsaga lsp_finder<CR>", { silent = true })
-
--- Code Actions --
--- local action = require("lspsaga.codeaction")
-
--- code action
--- vim.keymap.set("n", "<leader>ca", action.code_action, { silent = true })
--- vim.keymap.set("v", "<leader>ca", function()
--- 	vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-U>", true, false, true))
--- 	action.range_code_action()
--- end, { silent = true })
-
--- keymap({ "n", "v" }, "<leader>ca", "<cmd>Lspsaga code_action<CR>")
-
--- Rename
-keymap("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", { silent = true })
-
--- Peek Definition
--- you can edit the definition file in this flaotwindow
--- also support open/vsplit/etc operation check definition_action_keys
--- support tagstack C-t jump back
-keymap("n", "<leader>gd", "<cmd>Lspsaga peek_definition<CR>", { silent = true })
-keymap("n", "<leader>gd", "<cmd>Lspsaga goto_definition<CR>", { silent = true })
-
--- Show line diagnostics
-keymap("n", "<leader>sl", "<cmd>Lspsaga show_line_diagnostics<CR>", { silent = true })
-
--- Show cursor diagnostic
-keymap("n", "<leader>sc", "<cmd>Lspsaga show_cursor_diagnostics<CR>", { silent = true })
-
--- Show buffer diagnostic
-keymap("n", "<leader>sb", "<cmd>Lspsaga show_buf_diagnostics<CR>")
-
--- Diagnsotic jump can use `<c-o>` to jump back
-keymap("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", { silent = true })
-keymap("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", { silent = true })
-
--- Only jump to error
--- Diagnostic jump with filter like Only jump to error
-keymap("n", "[E", function()
+-- Diagnostic jump
+vim.keymap.set("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", { silent = true, desc = "Prev diagnostic" })
+vim.keymap.set("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", { silent = true, desc = "Next diagnostic" })
+vim.keymap.set("n", "[E", function()
     require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR })
-end)
-keymap("n", "]E", function()
+end, { desc = "Prev error" })
+vim.keymap.set("n", "]E", function()
     require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR })
-end)
+end, { desc = "Next error" })
 
--- Outline
-keymap("n", "<leader>O", "<cmd>Lspsaga outline<CR>")
+-- Glance
+vim.keymap.set("n", "gD", "<CMD>Glance definitions<CR>",      { desc = "Glance definitions" })
+vim.keymap.set("n", "gR", "<CMD>Glance references<CR>",       { desc = "Glance references" })
+vim.keymap.set("n", "gY", "<CMD>Glance type_definitions<CR>", { desc = "Glance type definitions" })
+vim.keymap.set("n", "gM", "<CMD>Glance implementations<CR>",  { desc = "Glance implementations" })
 
--- Hover Doc
-keymap("n", "<leader>k", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
-
--- Callhierarchy
-keymap("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
-keymap("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
-
--- Float terminal
-keymap("n", "<A-d>", "<cmd>Lspsaga open_floaterm<CR>", { silent = true })
--- if you want pass somc cli command into terminal you can do like this
--- open lazygit in lspsaga float terminal
-keymap("n", "<A-d>", "<cmd>Lspsaga open_floaterm lazygit<CR>", { silent = true })
--- close floaterm
-keymap("t", "<A-d>", [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], { silent = true })
-
--- Session Management
-keymap("n", "<C-s>", "<cmd>SessionSave<CR>", { silent = true })
+-- ============================================================================
+-- CRATES (Rust)  (<leader>c)
+-- ============================================================================
 
 local function show_documentation()
     local filetype = vim.bo.filetype
@@ -215,81 +177,102 @@ local function show_documentation()
 end
 
 local crates = require("crates")
-local opts = { silent = true }
+local crate_opts = { silent = true }
 
-vim.keymap.set("n", "<leader>ck", show_documentation, { silent = true })
-vim.keymap.set("n", "<leader>cv", crates.show_versions_popup, opts)
-vim.keymap.set("n", "<leader>cf", crates.show_features_popup, opts)
-vim.keymap.set("n", "<leader>cd", crates.show_dependencies_popup, opts)
-vim.keymap.set("n", "<leader>ct", crates.toggle, opts)
-vim.keymap.set("n", "<leader>cr", crates.reload, opts)
+vim.keymap.set("n", "<leader>ck", show_documentation,             vim.tbl_extend("force", crate_opts, { desc = "Show docs / crate info" }))
+vim.keymap.set("n", "<leader>cv", crates.show_versions_popup,     vim.tbl_extend("force", crate_opts, { desc = "Crate versions" }))
+vim.keymap.set("n", "<leader>cf", crates.show_features_popup,     vim.tbl_extend("force", crate_opts, { desc = "Crate features" }))
+-- NOTE: removed conflicting DAP-UI toggle that was also on <leader>cd
+vim.keymap.set("n", "<leader>cd", crates.show_dependencies_popup, vim.tbl_extend("force", crate_opts, { desc = "Crate dependencies" }))
+vim.keymap.set("n", "<leader>ct", crates.toggle,                  vim.tbl_extend("force", crate_opts, { desc = "Toggle crates" }))
+vim.keymap.set("n", "<leader>cr", crates.reload,                  vim.tbl_extend("force", crate_opts, { desc = "Reload crates" }))
 
-vim.keymap.set("n", "gD", "<CMD>Glance definitions<CR>")
-vim.keymap.set("n", "gR", "<CMD>Glance references<CR>")
-vim.keymap.set("n", "gY", "<CMD>Glance type_definitions<CR>")
-vim.keymap.set("n", "gM", "<CMD>Glance implementations<CR>")
+-- ============================================================================
+-- UI TOGGLES
+-- ============================================================================
 
--- vim.keymap.set("n", "zR", require("ufo").openAllFolds)
--- vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
+vim.keymap.set("n", "<space>z", ":ZenMode<CR>",                                            { desc = "Toggle Zen Mode" })
+vim.keymap.set("n", "<space>n", ":NoNeckPain<CR>",                                         { desc = "Toggle NoNeckPain" })
+vim.keymap.set("n", "<space>F", "<cmd>Format<CR>",                                         { noremap = true, silent = true, desc = "Format file" })
+vim.keymap.set("n", "<space>l", "<cmd>lua require('lint').try_lint()<CR>",                 { noremap = true, silent = true, desc = "Lint file" })
+vim.keymap.set("n", "<leader>p", ":Glow<CR>",                                              { desc = "Markdown preview" })
+vim.keymap.set("n", "<Leader>e", "<cmd>IconPickerInsert emoji<cr>",                        { noremap = true, silent = true, desc = "Insert emoji" })
 
--- vim.keymap.set("n", "<space>f", "<cmd>Format<CR>", opts)
-vim.keymap.set("n", "<space>F", "<cmd>Format<CR>", opts)
-vim.keymap.set("n", "<space>l", "<cmd>lua require('lint').try_lint()<CR>", opts)
-vim.api.nvim_set_keymap("n", "<Leader>dd", ":lua require('neogen').generate()<CR>", opts)
+-- ============================================================================
+-- NOTIFICATIONS  (<leader>n)
+-- ============================================================================
 
--- fzf-lua
-vim.keymap.set("n", "<M-f>f", "<cmd>FzfLua files<cr>")
+vim.keymap.set("n", "<leader>nn", require("notify").dismiss, { noremap = true, silent = true, desc = "Dismiss notifications" })
+vim.keymap.set("n", ";",          require("notify").dismiss, { noremap = true, silent = true, desc = "Dismiss notifications" })
 
--- Code Actions
-vim.keymap.set("n", "<leader>ca", require("actions-preview").code_actions)
+-- ============================================================================
+-- SESSION
+-- ============================================================================
 
--- Copilot
--- vim.keymap.set("n", "<leader>cc", "<cmd>CopilotChatToggle<cr>", opts)
+vim.keymap.set("n", "<C-s>", "<cmd>SessionSave<CR>", { silent = true, desc = "Save session" })
 
--- Notifications
-vim.keymap.set("n", "<leader>nn", require("notify").dismiss, opts)
-vim.keymap.set("n", ";", require("notify").dismiss, opts)
--- Scratch
---
--- local Snacks = require("snacks")
--- vim.keymap.set("n", "<leader>B", Snacks.scratch, opts)
+-- ============================================================================
+-- TERMINAL  (Lspsaga floaterm)
+-- ============================================================================
+
+-- NOTE: removed duplicate <A-d> open_floaterm — keeping lazygit version
+vim.keymap.set("n", "<A-d>", "<cmd>Lspsaga open_floaterm lazygit<CR>",       { silent = true, desc = "Open lazygit floaterm" })
+vim.keymap.set("t", "<A-d>", [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], { silent = true, desc = "Close floaterm" })
+
+-- ============================================================================
+-- DEBUG / DAP  (<leader>d)
+-- ============================================================================
 
 local dap_ok, dap = pcall(require, "dap")
 local dap_ui_ok, ui = pcall(require, "dapui")
- 
-if not (dap_ok and dap_ui_ok) then
-  require("notify")("nvim-dap or dap-ui not installed!", "warning") -- nvim-notify is a separate plugin, I recommend it too!
-  return
-end
- 
-vim.fn.sign_define('DapBreakpoint', { text = '🐞' })
- 
--- Start debugging session
-vim.keymap.set("n", "<leader>ds", function()
-  dap.continue()
-  ui.toggle({})
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>=", false, true, true), "n", false) -- Spaces buffers evenly
-end)
- 
--- Set breakpoints, get variable values, step into/out of functions, etc.
-vim.keymap.set("n", "<leader>dl", require("dap.ui.widgets").hover)
-vim.keymap.set("n", "<leader>dc", dap.continue)
-vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint)
-vim.keymap.set("n", "<leader>dn", dap.step_over)
-vim.keymap.set("n", "<leader>di", dap.step_into)
-vim.keymap.set("n", "<leader>do", dap.step_out)
-vim.keymap.set("n", "<leader>dC", function()
-  dap.clear_breakpoints()
-  require("notify")("Breakpoints cleared", "warn")
-end)
- 
--- Close debugger and clear breakpoints
-vim.keymap.set("n", "<leader>de", function()
-  dap.clear_breakpoints()
-  ui.toggle({})
-  dap.terminate()
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>=", false, true, true), "n", false)
-  require("notify")("Debugger session ended", "warn")
-end)
 
-vim.keymap.set("n", "<leader>fT", "<cmd>FloatermToggle<CR>", opts)
+if not (dap_ok and dap_ui_ok) then
+    require("notify")("nvim-dap or dap-ui not installed!", "warning")
+else
+    vim.fn.sign_define("DapBreakpoint", { text = "🐞" })
+
+    vim.keymap.set("n", "<leader>ds", function()
+        dap.continue()
+        ui.toggle({})
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>=", false, true, true), "n", false)
+    end, { desc = "Start debug session" })
+
+    vim.keymap.set("n", "<leader>dc", dap.continue,                    { desc = "Continue" })
+    vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint,           { desc = "Toggle breakpoint" })
+    vim.keymap.set("n", "<leader>dn", dap.step_over,                   { desc = "Step over" })
+    vim.keymap.set("n", "<leader>di", dap.step_into,                   { desc = "Step into" })
+    vim.keymap.set("n", "<leader>do", dap.step_out,                    { desc = "Step out" })
+    vim.keymap.set("n", "<leader>dl", require("dap.ui.widgets").hover, { desc = "Inspect variable" })
+    vim.keymap.set("n", "<leader>dC", function()
+        dap.clear_breakpoints()
+        require("notify")("Breakpoints cleared", "warn")
+    end, { desc = "Clear breakpoints" })
+    -- NOTE: removed conflicting Dirbuf <leader>de — Dirbuf moved to <leader>fe
+    vim.keymap.set("n", "<leader>de", function()
+        dap.clear_breakpoints()
+        ui.toggle({})
+        dap.terminate()
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>=", false, true, true), "n", false)
+        require("notify")("Debugger session ended", "warn")
+    end, { desc = "End debug session" })
+end
+
+-- ============================================================================
+-- OPENCODE  (<leader>o)
+-- ============================================================================
+
+vim.keymap.set({ "n", "t" }, "<leader>og", function() require("opencode").toggle() end,                          { desc = "Toggle" })
+vim.keymap.set({ "n", "x" }, "<leader>oa", function() require("opencode").ask("@this: ") end,                    { desc = "Ask" })
+vim.keymap.set({ "n", "x" }, "<leader>os", function() require("opencode").select() end,                          { desc = "Select action" })
+vim.keymap.set({ "n", "x" }, "<leader>oo", function() return require("opencode").operator("@this ") end,         { desc = "Add range", expr = true })
+vim.keymap.set("n",          "<leader>ol", function() return require("opencode").operator("@this ") .. "_" end,  { desc = "Add line", expr = true })
+vim.keymap.set("n",          "<leader>on", function() require("opencode").command("session.new") end,            { desc = "New session" })
+vim.keymap.set("n",          "<leader>oS", function() require("opencode").command("session.select") end,         { desc = "Select session" })
+vim.keymap.set("n",          "<leader>oi", function() require("opencode").command("session.interrupt") end,      { desc = "Interrupt" })
+vim.keymap.set("n",          "<leader>oc", function() require("opencode").command("session.compact") end,        { desc = "Compact session" })
+vim.keymap.set("n",          "<leader>ou", function() require("opencode").command("session.half.page.up") end,   { desc = "Scroll up" })
+vim.keymap.set("n",          "<leader>od", function() require("opencode").command("session.half.page.down") end, { desc = "Scroll down" })
+vim.keymap.set("n",          "<leader>oz", function() require("opencode").command("session.undo") end,           { desc = "Undo action" })
+vim.keymap.set("n",          "<leader>or", function() require("opencode").command("session.redo") end,           { desc = "Redo action" })
+vim.keymap.set("n",          "<leader>oA", function() require("opencode").command("agent.cycle") end,            { desc = "Cycle agent" })
+
