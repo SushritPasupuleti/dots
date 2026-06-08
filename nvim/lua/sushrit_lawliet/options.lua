@@ -36,6 +36,12 @@ vim.g.gtm_plugin_status_enabled = 1
 -- Easy Motion
 vim.g.EasyMotion_do_mapping = 0 -- Disable default mappings
 
+-- For AI
+vim.o.autoread = true
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
+  command = "checktime",
+})
+
 if vim.g.neovide then
 	vim.notify("Loading Neovide Settings!", "info")
 	

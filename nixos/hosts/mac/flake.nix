@@ -6,9 +6,10 @@
     nixpkgs.url = "github:NixOS/nixpkgs";
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
+    television.url = "github:alexpasmantier/television";
   };
 
-  outputs = { self, nixpkgs, darwin }: {
+  outputs = { self, nixpkgs, darwin, television }: {
     packages."aarch64-darwin".default =
       # let pkgs = nixpkgs.legacyPackages."aarch64-darwin";
       let
@@ -27,9 +28,13 @@
           llama-cpp
           gh
           glab
-          neovim
+		  snyk
+          #neovim
+		  tree-sitter
           vim
+		  television.packages."aarch64-darwin".default
           tmux
+		  sesh
           zellij
           ranger
           superfile
@@ -40,7 +45,7 @@
           starship
           nerdfonts
           # langs
-          go
+          # go
           golangci-lint
           air # go live reload
           # go-swag
@@ -48,8 +53,8 @@
           python311
           python311Packages.pip
           pipx
-		  uv
-          poetry
+		  # uv
+          # poetry
           nodejs_18
           elixir_1_15
           elixir-ls
@@ -76,10 +81,10 @@
           # protobuf3_20
           # nodePackages.eas-cli
           nodePackages.tailwindcss
-          nodePackages.pnpm
+          # nodePackages.pnpm
           nodePackages_latest.eslint
           bun # <--- use latest
-          yarn
+          # yarn
           # gcc
 		  zig
           rustup
@@ -117,6 +122,7 @@
           fselect
           sioyek
           nixos-generators
+		  borgbackup
           # etcher
           # wrk2
           bat
@@ -160,7 +166,7 @@
           cmatrix
           # tools
           spark
-          docker
+          # docker
           # k3s
           kompose
           ktunnel
@@ -169,7 +175,7 @@
           datree
           kind # local docker clusters
           argocd
-          kubectl
+          # kubectl
           kubectx
           k9s
           kubernetes-helm
@@ -181,7 +187,7 @@
           # mongodb
           mongosh
           # mongodb-compass
-          postgresql_16
+          # postgresql_16
           pgcli
           pgadmin4
           kafkactl

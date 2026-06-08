@@ -181,7 +181,7 @@ keymap("n", "]E", function()
 end)
 
 -- Outline
-keymap("n", "<leader>o", "<cmd>Lspsaga outline<CR>")
+keymap("n", "<leader>O", "<cmd>Lspsaga outline<CR>")
 
 -- Hover Doc
 keymap("n", "<leader>k", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
@@ -244,7 +244,7 @@ vim.keymap.set("n", "<M-f>f", "<cmd>FzfLua files<cr>")
 vim.keymap.set("n", "<leader>ca", require("actions-preview").code_actions)
 
 -- Copilot
-vim.keymap.set("n", "<leader>cc", "<cmd>CopilotChatToggle<cr>", opts)
+-- vim.keymap.set("n", "<leader>cc", "<cmd>CopilotChatToggle<cr>", opts)
 
 -- Notifications
 vim.keymap.set("n", "<leader>nn", require("notify").dismiss, opts)

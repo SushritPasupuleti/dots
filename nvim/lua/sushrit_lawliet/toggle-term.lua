@@ -24,6 +24,9 @@ local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction="float"
 -- General purpose floating terminal
 local floating_term = Terminal:new({hidden=true, direction="float", size=60})
 
+-- OpenCode
+local opencode = Terminal:new({ cmd = "opencode", hidden = true, direction="float" })
+
 -------------Toggle Functions-------------
 function _czg_toggle()
   czg:toggle()
@@ -36,6 +39,10 @@ end
 function _lazygit_toggle()
   lazygit:toggle()
 end
+
+function _opencode_toggle()
+  opencode:toggle()
+end
 ------------------------------------------
 
 -------------Key Mappings-----------------
@@ -44,3 +51,5 @@ vim.api.nvim_set_keymap("n", "<leader>gz", "<cmd>lua _czg_toggle()<CR>", {norema
 -- vim.api.nvim_set_keymap("n", "<leader>fT", "<cmd>lua _floating_term_toggle()<CR>", {noremap = true, silent = true})
 
 vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
+
+vim.api.nvim_set_keymap("n", "<leader>gc", "<cmd>lua _opencode_toggle()<CR>", {noremap = true, silent = true})

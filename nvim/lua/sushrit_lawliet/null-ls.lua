@@ -1,11 +1,7 @@
 require("null-ls").setup({
     sources = {
-        --Formatters Start--
-        require("null-ls").builtins.formatting.stylua,
-        require("null-ls").builtins.formatting.prettier.with({
-            filetypes = { "html", "json", "yaml", "markdown", "go", "python", "toml", "sql", "python" },
-        }),
-        --Formatters End--
+        -- Formatters removed: handled by conform.nvim (stylua, prettier, black)
+        --
         --Diagnotics Start--
         -- require("null-ls").builtins.diagnostics.eslint,
         --Diagnostics End--
@@ -28,7 +24,7 @@ require("null-ls").setup({
         require("null-ls").builtins.diagnostics.golangci_lint,
         -- Go End
         -- Python Start
-        require("null-ls").builtins.formatting.black,
+        -- require("null-ls").builtins.formatting.black, -- handled by conform.nvim
         --- Python End
         -- require("null-ls").builtins.code_actions.refactoring,
         require("null-ls").builtins.code_actions.shellcheck,
