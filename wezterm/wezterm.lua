@@ -94,7 +94,7 @@ return {
 	tab_bar_at_bottom = true,
 	tab_max_width = 128,
 	window_background_opacity = 0.85,
-	-- window_decorations = "NONE",
+	window_decorations = "RESIZE",
 	window_padding = {
 		left = 0,
 		right = 0,

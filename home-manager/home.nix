@@ -108,6 +108,7 @@
   lua
   luajitPackages.luacheck
   stylua
+  tree-sitter
 
   postgresql_15
   pgadmin4

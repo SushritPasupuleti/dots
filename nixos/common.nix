@@ -393,7 +393,8 @@ in
       llama-cpp
       #gnome
       gnome-boxes
-      #gnome-extensions
+	  magnetic-catppuccin-gtk
+      gnomeExtensions.user-themes
       gnomeExtensions.paperwm
       gnomeExtensions.pop-shell
       gnome-tweaks
