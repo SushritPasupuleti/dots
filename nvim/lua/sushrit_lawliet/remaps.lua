@@ -107,6 +107,7 @@ vim.keymap.set({ "n", "v" }, "<leader>sv", function() require("spectre").open_vi
 
 -- NOTE: fixed — original had "<silent> <leader>gg" with <silent> as part of LHS
 vim.keymap.set("n", "<leader>gg", ":LazyGit<CR>",                  { silent = true, desc = "LazyGit" })
+vim.keymap.set("n", "<leader>gt", "<cmd>FloatermNew tuicr<CR>",    { silent = true, desc = "tuicr" })
 vim.keymap.set("n", "<leader>gf", ":LazyGitFilter<CR>",            { silent = true, desc = "LazyGit filter" })
 vim.keymap.set("n", "<leader>gc", ":LazyGitFilterCurrentFile<CR>", { silent = true, desc = "LazyGit filter current file" })
 

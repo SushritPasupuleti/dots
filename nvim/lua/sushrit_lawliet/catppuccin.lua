@@ -36,13 +36,7 @@ require("catppuccin").setup({
     integrations = {
         flash = true,
         fidget = true,
-        cmp = {
-            enabled = true,
-            border = {
-                completion = true,
-                documentation = true,
-            },
-        },
+        blink_cmp = { style = "bordered" },
         alpha = true,
         hop = true,
         gitsigns = true,
@@ -147,51 +141,9 @@ require("catppuccin").setup({
         return {
             -- Comment = { fg = colors.flamingo },
             -- TabLineSel = { bg = colors.pink },
-            CmpBorder = { fg = colors.surface2 },
-            CmpDocBorder = { fg = colors.surface2 },
             PmenuSel = { bg = colors.green, fg = colors.crust },
             Pmenu = { fg = colors.overlay0, bg = colors.crust },
-            CmpPmenu = { fg = colors.overlay0, bg = colors.crust },
-            CmpDoc = { fg = colors.overlay0, bg = colors.mantle },
 
-            CmpItemAbbrDeprecated = { fg = colors.subtext1, bg = "NONE", strikethrough = true },
-            CmpItemAbbrMatch = { fg = colors.blue, bg = "NONE", bold = true },
-            CmpItemAbbrMatchFuzzy = { fg = colors.blue, bg = "NONE", bold = true },
-            CmpItemMenu = { fg = colors.mauve, bg = "NONE", italic = true },
-            --
-            CmpItemKindField = { fg = colors.crust, bg = colors.red },
-            CmpItemKindProperty = { fg = colors.crust, bg = colors.red },
-            CmpItemKindEvent = { fg = colors.crust, bg = colors.red },
-            --
-            CmpItemKindText = { fg = colors.crust, bg = colors.green },
-            CmpItemKindEnum = { fg = colors.crust, bg = colors.green },
-            CmpItemKindKeyword = { fg = colors.crust, bg = colors.green },
-            --
-            CmpItemKindConstant = { fg = colors.crust, bg = colors.yellow },
-            CmpItemKindConstructor = { fg = colors.crust, bg = colors.yellow },
-            CmpItemKindReference = { fg = colors.crust, bg = colors.yellow },
-            --
-            CmpItemKindFunction = { fg = colors.crust, bg = colors.mauve },
-            CmpItemKindStruct = { fg = colors.crust, bg = colors.mauve },
-            CmpItemKindClass = { fg = colors.crust, bg = colors.mauve },
-            CmpItemKindModule = { fg = colors.crust, bg = colors.mauve },
-            CmpItemKindOperator = { fg = colors.crust, bg = colors.mauve },
-            --
-            CmpItemKindVariable = { fg = colors.crust, bg = colors.surface1 },
-            CmpItemKindFile = { fg = colors.crust, bg = colors.surface1 },
-            --
-            CmpItemKindUnit = { fg = colors.crust, bg = colors.flamingo },
-            CmpItemKindSnippet = { fg = colors.crust, bg = colors.flamingo },
-            CmpItemKindFolder = { fg = colors.crust, bg = colors.flamingo },
-            --
-            CmpItemKindMethod = { fg = colors.crust, bg = colors.sapphire },
-            CmpItemKindValue = { fg = colors.crust, bg = colors.sapphire },
-            CmpItemKindEnumMember = { fg = colors.crust, bg = colors.sapphire },
-            --
-            CmpItemKindInterface = { fg = colors.crust, bg = colors.teal },
-            CmpItemKindColor = { fg = colors.crust, bg = colors.teal },
-            CmpItemKindTypeParameter = { fg = colors.crust, bg = colors.teal },
-            --
             -- HoverBorder = { fg = colors.surface2, bg = "NONE" },
             HoverNormal = { fg = colors.surface2, bg = colors.mantle },
             -- ActionPreviewBorder = { fg = colors.crust, bg = colors.mantle },

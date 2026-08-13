@@ -622,55 +622,20 @@ require("lazy").setup({
     },
     {
         -- for auto completion
-        "hrsh7th/nvim-cmp",
-        dependencies = {
-            "hrsh7th/cmp-nvim-lsp",
-            "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-path",
-            "hrsh7th/cmp-cmdline",
-            -- "L3MON4D3/LuaSnip",
-            -- "saadparwaiz1/cmp_luasnip",
-            -- Additional Sources:
-            "kdheepak/cmp-latex-symbols",
-            "andersevenrud/cmp-tmux",
-            "mtoohey31/cmp-fish",
-            "hrsh7th/cmp-nvim-lua",
-            -- opts = {
-            --     window = {
-            --         completion = {
-            --             border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-            --             winhighlight = "Normal:CmpPmenu,FloatBorder:CmpBorder,CursorLine:PmenuSel,Search:None",
-            --         },
-            --         documentation = {
-            --             border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-            --             winhighlight = "Normal:CmpPmenu,FloatBorder:CmpBorder,CursorLine:PmenuSel,Search:None",
-            --         },
-            --     },
-            -- },
-        },
-        event = {
-            "InsertEnter",
-            "BufRead",
-        },
+        "saghen/blink.cmp",
+        version = "1.*",
+        dependencies = { "rafamadriz/friendly-snippets" },
+        event = { "InsertEnter", "CmdlineEnter" },
+        opts_extend = { "sources.default" },
         config = function()
-            require("sushrit_lawliet.snippets")
+            require("sushrit_lawliet.completion")
         end,
     },
     {
-        "zbirenbaum/copilot-cmp",
-        enabled = false,
-        event = { "BufRead" },
-        config = function()
-            require("copilot_cmp").setup()
-        end,
-    },
-    {
-        "David-Kunz/cmp-npm",
-        dependencies = { "nvim-lua/plenary.nvim" },
-        ft = "json",
-        config = function()
-            require("cmp-npm").setup({})
-        end,
+        "saghen/blink.compat",
+        version = "2.*",
+        lazy = true,
+        opts = {},
     },
     -- Yank History
     {
@@ -823,13 +788,6 @@ require("lazy").setup({
             -- See Configuration section for rest
         },
         -- See Commands section for default commands if you want to lazy load on them
-    },
-    {
-        "hrsh7th/vim-vsnip",
-        dependencies = {
-            "hrsh7th/vim-vsnip-integ",
-        },
-        -- enabled = false,
     },
     -- Snippets
     {
@@ -1156,10 +1114,6 @@ require("lazy").setup({
                 },
             })
         end,
-    },
-    {
-        "jose-elias-alvarez/typescript.nvim",
-        event = { "BufRead", "BufNewFile" },
     },
     {
         "wintermute-cell/gitignore.nvim",
@@ -1674,7 +1628,7 @@ require("lazy").setup({
 
     {
         "Cannon07/code-preview.nvim",
-        enabled = false, -- Using opencode.nvim's built-in events.permissions.edits instead
+        enabled = true, -- Using opencode.nvim's built-in events.permissions.edits instead
         -- Setup: Run `:CodePreviewInstallOpenCodeHooks` in project root to install hooks
         -- Requires opencode.json to have "edit": "ask" (already set)
         -- Restart opencode after installing hooks
@@ -1998,7 +1952,10 @@ require("lazy").setup({
             local ok, cfg = pcall(require, "opencode.config")
             if ok then
                 cfg.opts.server.start = function()
-                    vim.notify("No running opencode found. Start one externally with: opencode --port", vim.log.levels.WARN)
+                    vim.notify(
+                        "No running opencode found. Start one externally with: opencode --port",
+                        vim.log.levels.WARN
+                    )
                 end
             end
 
@@ -2017,14 +1974,114 @@ require("lazy").setup({
             })
         end,
     },
+    {
+        "folke/sidekick.nvim",
+        opts = {
+            -- add any options here
+            cli = {
+                mux = {
+                    backend = "tmux",
+                    enabled = true,
+                },
+            },
+        },
+        keys = {
+            {
+                "<tab>",
+                function()
+                    -- if there is a next edit, jump to it, otherwise apply it if any
+                    if not require("sidekick").nes_jump_or_apply() then
+                        return "<Tab>" -- fallback to normal tab
+                    end
+                end,
+                expr = true,
+                desc = "Goto/Apply Next Edit Suggestion",
+            },
+            {
+                "<c-.>", -- CTRL 
+                function()
+                    require("sidekick.cli").focus()
+                end,
+                desc = "Sidekick Focus",
+                mode = { "n", "t", "i", "x" },
+            },
+            {
+                "<leader>aa",
+                function()
+                    require("sidekick.cli").toggle()
+                end,
+                desc = "Sidekick Toggle CLI",
+            },
+            {
+                "<leader>as",
+                function()
+                    require("sidekick.cli").select()
+                end,
+                -- Or to select only installed tools:
+                -- require("sidekick.cli").select({ filter = { installed = true } })
+                desc = "Select CLI",
+            },
+            {
+                "<leader>ad",
+                function()
+                    require("sidekick.cli").close()
+                end,
+                desc = "Detach a CLI Session",
+            },
+            {
+                "<leader>at",
+                function()
+                    require("sidekick.cli").send({ msg = "{this}" })
+                end,
+                mode = { "x", "n" },
+                desc = "Send This",
+            },
+            {
+                "<leader>af",
+                function()
+                    require("sidekick.cli").send({ msg = "{file}" })
+                end,
+                desc = "Send File",
+            },
+            {
+                "<leader>av",
+                function()
+                    require("sidekick.cli").send({ msg = "{selection}" })
+                end,
+                mode = { "x" },
+                desc = "Send Visual Selection",
+            },
+            {
+                "<leader>ap",
+                function()
+                    require("sidekick.cli").prompt()
+                end,
+                mode = { "n", "x" },
+                desc = "Sidekick Select Prompt",
+            },
+            -- Direct toggles for the two CLIs we actually use
+            {
+                "<leader>ac",
+                function()
+                    require("sidekick.cli").toggle({ name = "claude", focus = true })
+                end,
+                desc = "Sidekick Toggle Claude",
+            },
+            {
+                "<leader>ag",
+                function()
+                    require("sidekick.cli").toggle({ name = "copilot", focus = true })
+                end,
+                desc = "Sidekick Toggle Copilot CLI",
+            },
+        },
+    },
 })
 
 --options
 require("sushrit_lawliet.options")
 --remaps
 require("sushrit_lawliet.remaps")
-
-
 
 -- put this after lazy setup
 -- dofile(vim.g.base46_cache .. "defaults")

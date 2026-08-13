@@ -16,6 +16,11 @@ require("mason").setup({
 require("mason-lspconfig").setup({
     -- ensure_installed = ...,
     -- automatic_installation = true,
+    -- copilot.lua starts and owns its own "copilot" LSP client (and force-stops any
+    -- other client with that name on setup); letting mason-lspconfig auto-enable the
+    -- Mason-installed copilot-language-server here fights it for the client and gets
+    -- killed with SIGTERM (exit code 143) every time copilot.lua initializes.
+    automatic_enable = { exclude = { "copilot" } },
 })
 
 --- LSP Config ---
@@ -66,7 +71,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+local capabilities = require("blink.cmp").get_lsp_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.foldingRange = {
     dynamicRegistration = false,

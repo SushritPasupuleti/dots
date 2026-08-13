@@ -19,6 +19,12 @@ vim.opt.wildignore = "*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.x
 
 vim.g.do_filetype_lua = 1
 vim.opt.filetype = "on"
+-- Enable line wrapping
+vim.opt.wrap = true
+vim.opt.showbreak = "↳ "
+
+-- Prevent splitting words in the middle; wrap at word boundaries instead
+vim.opt.linebreak = true
 
 -- vim.api.nvim_set_hl(0, "Normal", { ctermbg = none, guibg = none })
 
