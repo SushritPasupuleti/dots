@@ -13,6 +13,7 @@
   "blink.compat": { "branch": "main", "commit": "2ed6d9a28b07fa6f3bface818470605f8896408c" },
   "browse.nvim": { "branch": "main", "commit": "dab48a9b1f6599d71e10d8cbaceb1a186a04d1c0" },
   "catppuccin": { "branch": "main", "commit": "edefef779ab08ce1a4a404713e3012b0d202bd35" },
+  "claudecode.nvim": { "branch": "main", "commit": "2390c6e45c4789072c293ac69de051d169668b29" },
   "code-preview.nvim": { "branch": "main", "commit": "998deddb57135c4c0634682ca0dd33054bcced59" },
   "codecompanion.nvim": { "branch": "main", "commit": "78203ccaa36469b4a212123c7d532e2367ad9dd4" },
   "codewindow.nvim": { "branch": "master", "commit": "dd7017617962943eb1d152fc58940f11c6775a4a" },

@@ -1628,10 +1628,11 @@ require("lazy").setup({
 
     {
         "Cannon07/code-preview.nvim",
-        enabled = true, -- Using opencode.nvim's built-in events.permissions.edits instead
-        -- Setup: Run `:CodePreviewInstallOpenCodeHooks` in project root to install hooks
-        -- Requires opencode.json to have "edit": "ask" (already set)
-        -- Restart opencode after installing hooks
+        enabled = true,
+        -- Scoped to Copilot CLI only (.github/hooks/code-preview.json). Claude Code and
+        -- OpenCode hooks were uninstalled (:CodePreviewUninstall{ClaudeCode,OpenCode}Hooks)
+        -- in favor of their own native in-Neovim diff review — see claudecode.nvim below
+        -- and opencode.nvim's events.permissions.edits.
         config = function()
             require("code-preview").setup({
                 diff = {
@@ -1639,6 +1640,55 @@ require("lazy").setup({
                 },
             })
         end,
+    },
+    {
+        "coder/claudecode.nvim",
+        dependencies = { "folke/snacks.nvim" },
+        config = true,
+        cmd = {
+            "ClaudeCode",
+            "ClaudeCodeFocus",
+            "ClaudeCodeSelectModel",
+            "ClaudeCodeAdd",
+            "ClaudeCodeSend",
+            "ClaudeCodeTreeAdd",
+            "ClaudeCodeStatus",
+            "ClaudeCodeStart",
+            "ClaudeCodeStop",
+            "ClaudeCodeOpen",
+            "ClaudeCodeClose",
+            "ClaudeCodeDiffAccept",
+            "ClaudeCodeDiffDeny",
+            "ClaudeCodeCloseAllDiffs",
+        },
+        opts = {
+            diff_opts = {
+                layout = "vertical",
+                auto_resize_terminal = true,
+            },
+        },
+        -- <leader>cc* — kept off <leader>a* entirely since sidekick.nvim already owns
+        -- that whole namespace (aa/as/ad/at/af/av/ap/ac/ag below).
+        keys = {
+            { "<leader>cc", nil, desc = "Claude Code" },
+            { "<leader>cct", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude Code" },
+            { "<leader>ccf", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude Code" },
+            { "<leader>ccr", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
+            { "<leader>ccC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
+            { "<leader>ccm", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
+            { "<leader>ccb", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current buffer" },
+            { "<leader>ccs", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send selection to Claude" },
+            {
+                "<leader>ccs",
+                "<cmd>ClaudeCodeTreeAdd<cr>",
+                desc = "Add file (tree)",
+                ft = { "NvimTree", "neo-tree", "oil", "minifiles", "netrw", "snacks_picker_list" },
+            },
+            -- Diff review: :w / :q also accept / reject — these are just quick keys.
+            { "<leader>cca", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
+            { "<leader>ccd", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
+            { "<leader>ccx", "<cmd>ClaudeCodeCloseAllDiffs<cr>", desc = "Close all pending diffs" },
+        },
     },
     -- {
     --     "sudo-tee/opencode.nvim",
@@ -2059,14 +2109,8 @@ require("lazy").setup({
                 mode = { "n", "x" },
                 desc = "Sidekick Select Prompt",
             },
-            -- Direct toggles for the two CLIs we actually use
-            {
-                "<leader>ac",
-                function()
-                    require("sidekick.cli").toggle({ name = "claude", focus = true })
-                end,
-                desc = "Sidekick Toggle Claude",
-            },
+            -- Claude Code now goes through claudecode.nvim (<leader>cc*) for native
+            -- in-Neovim diff review instead of a bare tmux pane — see below.
             {
                 "<leader>ag",
                 function()
