@@ -1,0 +1,113 @@
+# Packages installed on every host, regardless of OS.
+#
+# `unstable` defaults to `pkgs` so this list also works on hosts that don't
+# wire up a separate nixpkgs-unstable input (e.g. hosts/mac's flake, which
+# just does `import ./shared-packages.nix { inherit pkgs; }`). Hosts that do
+# pass a real `unstable` package set (see hosts/nixy-zangetsu/flake.nix) get
+# those packages from the unstable channel instead.
+{ pkgs, unstable ? pkgs }:
+with pkgs; [
+  airlift
+  argocd
+  aws-iam-authenticator
+  awscli2
+  bat
+  biome
+  btop
+  cbonsai
+  checkmake
+  cloc
+  cmatrix
+  csharp-ls
+  ctags
+  datree
+  deadnix
+  delta
+  direnv
+  dotenv-linter
+  eza
+  fastfetch
+  fd
+  fish
+  fishPlugins.done
+  fishPlugins.fzf-fish
+  fselect
+  fx
+  fzf
+  gh
+  git
+  git-credential-manager
+  git-ignore
+  glow
+  gnumake
+  gnused
+  golangci-lint
+  grpcui
+  grpcurl
+  gum
+  htmx-lsp
+  htop
+  inxi
+  jq
+  k9s
+  kind
+  kompose
+  kotlin
+  kotlin-language-server
+  kotlin-native
+  ktlint
+  ktunnel
+  kubectx
+  kubernetes-helm
+  lazydocker
+  llama-cpp
+  lsof
+  lua
+  luajitPackages.luacheck
+  marp-cli
+  mqttui
+  nil
+  nix-direnv
+  nixfmt-classic
+  nixos-generators
+  ocaml
+  ocamlformat
+  ocamlPackages.findlib
+  omnisharp-roslyn
+  opam
+  openjdk17
+  pipes-rs
+  pkg-config
+  plumber
+  pyenv
+  rabtap
+  ranger
+  ripgrep
+  roslyn-ls
+  rustup
+  scip
+  sesh
+  shellcheck
+  sioyek
+  spark
+  spring-boot-cli
+  sqlfluff
+  sqlite
+  sqlx-cli
+  stylua
+  superfile
+  timg
+  tmux
+  unzip
+  vim
+  wget
+  yaml-language-server
+  zellij
+  zoxide
+
+  # tracked on the unstable channel on hosts that provide one
+  unstable.bun
+  unstable.lazygit
+  unstable.starship
+  unstable.tree-sitter
+]
