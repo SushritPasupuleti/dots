@@ -32,5 +32,11 @@ FLAKE_DIR="$(pwd -P)/nixos/hosts/mac"
 
 echo $(info "Flake lives at $FLAKE_DIR (relies on ../../modules alongside it, so it must be run from inside the dots repo)")
 echo
+echo $(info "The flake includes ZSH, Fish, and all shell tools from shared-packages.nix")
+echo
 echo $(info "Run \`nix profile install $FLAKE_DIR\` to install the flake for the first time")
 echo $(info "Run \`nix profile upgrade 0\` to upgrade the existing flake (after pulling changes)")
+echo
+echo $(info "After installation:")
+echo $(info "  - Run ./zsh-tools-setup.sh to check if all tools are present")
+echo $(info "  - Run ./setup.sh to set up ZSH with Oh My Zsh")

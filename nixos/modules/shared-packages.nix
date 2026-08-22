@@ -104,6 +104,11 @@ with pkgs; [
   yaml-language-server
   zellij
   zoxide
+  zsh
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+  zsh-you-should-use
+  oh-my-zsh
 
   # tracked on the unstable channel on hosts that provide one
   unstable.bun

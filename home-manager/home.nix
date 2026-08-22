@@ -150,6 +150,10 @@
   fish
   fishPlugins.done
   fishPlugins.fzf-fish
+  zsh
+  oh-my-zsh
+  zsh-autosuggestions
+  zsh-syntax-highlighting
   starship
   ];
 
@@ -187,4 +191,9 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+  
+  # Enable shells
+  programs.fish.enable = true;
+  programs.zsh.enable = true;
+  programs.starship.enable = true;
 }

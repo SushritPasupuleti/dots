@@ -11,3 +11,7 @@ nixos/hosts/darwin/blank
 nvim/.venv
 fish/fish_plugins
 fish/fishd.tmp.*
+
+# ZSH secrets
+zsh/secrets.zsh
+/fish/completions

@@ -57,6 +57,22 @@ Export Environment Variables in fish by creating a file at: `~/.config/fish/conf
 set -gx ENV_VAR "value"
 ```
 
+### ZSH Setup
+
+ZSH configuration with Oh My Zsh is included. See [zsh/README.md](./zsh/README.md) for detailed setup instructions.
+
+Quick start:
+```bash
+# Check if recommended tools are installed
+./zsh-tools-setup.sh
+
+# Tools are installed via pre-setup.sh (Homebrew/Nix)
+# Oh My Zsh and plugins will be installed via setup.sh
+
+# Switch to ZSH
+chsh -s $(which zsh)
+```
+
 ### Misc Setup
 
 Slack

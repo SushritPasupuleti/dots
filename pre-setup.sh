@@ -46,7 +46,7 @@ then
 
 	echo $(info "On Linux, not all packages may be available. Please check the Brewfile for more info.")
 
-	brew install git gh bat nvm tmux nvim ctags lazygit ranger vifm emacs git-delta starship fish
+	brew install git gh bat nvm tmux nvim ctags lazygit ranger vifm emacs git-delta starship fish zsh
 	brew install --cask iterm2 visual-studio-code keycastr obs kicad
 	brew install fzf czg add-gitignore grex undollar has grip tldr how2 exa fd zoxide get-port epy timg mdlt luarocks jira-cli newman oha gping gnu-sed jq glow fd cmatrix pipes-sh neofetch openjdk ruby terminal-notifier rust rust-analyzer ffmpeg prettier wget shellcheck urlview go gum awscli
 	brew tap jabley/homebrew-wrk2
