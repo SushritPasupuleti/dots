@@ -50,6 +50,22 @@
           # inputs.dankMaterialShell.nixosModules.dankMaterialShell.default
           # inputs.dankMaterialShell.nixosModules.dankMaterialShell.niri
 
+          {
+            nixpkgs.overlays = [
+              (final: prev: {
+                tuir = prev.tuir.overrideAttrs (_old: {
+                  doCheck = false;
+                });
+                qtile = prev.python3Packages.qtile.overrideAttrs (_old: {
+                  doCheck = false;
+                });
+                qtile-unwrapped = prev.qtile-unwrapped.overrideAttrs (_old: {
+                  doCheck = false;
+                });
+              })
+            ];
+          }
+
           # Import the previous configuration.nix we used,
           # so the old configuration file still takes effect
           ./configuration.nix

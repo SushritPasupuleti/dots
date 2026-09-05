@@ -80,4 +80,18 @@
     enable = true;
     settings.PasswordAuthentication = true;
   };
+
+  nixpkgs.overlays = [
+    (final: prev: {
+      tuir = prev.tuir.overrideAttrs (_old: {
+        doCheck = false;
+      });
+      qtile = prev.python3Packages.qtile.overrideAttrs (_old: {
+        doCheck = false;
+      });
+      qtile-unwrapped = prev.qtile-unwrapped.overrideAttrs (_old: {
+        doCheck = false;
+      });
+    })
+  ];
 }

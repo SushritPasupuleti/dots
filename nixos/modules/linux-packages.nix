@@ -63,7 +63,6 @@ with pkgs; [
   nyxt
   obs-studio
   obs-studio-plugins.wlrobs
-  ollama-cuda
   openrgb-with-all-plugins
   openssl
   osm2pgsql
@@ -98,7 +97,8 @@ with pkgs; [
   tor-browser
   transmission_4
   transmission_4-gtk
-  tuir
+  # tuir is intentionally disabled here: upstream test suite fails on Python 3.13
+  # with "decode() argument 'encoding' must be str, not MockStdscr".
   ueberzugpp
   unixtools.net-tools
   upx
@@ -124,4 +124,5 @@ with pkgs; [
   unstable.neovim
   unstable.opencode
   unstable.vscode
+  unstable.ollama-cuda
 ]

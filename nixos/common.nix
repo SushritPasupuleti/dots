@@ -59,8 +59,9 @@ in
   # disable gnome
   services.desktopManager.gnome.enable = true;
 
-  # Enable QTile as window manager
-  services.xserver.windowManager.qtile.enable = true;
+  # Disabled: qtile's upstream test suite is currently failing under this
+  # toolchain, which blocks the full system build.
+  # services.xserver.windowManager.qtile.enable = true;
   # services.xserver.windowManager.qtile = {
   #   enable = true;
   #   # package = pkgs.stable.qtile;
