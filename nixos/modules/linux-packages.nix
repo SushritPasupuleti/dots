@@ -125,4 +125,5 @@ with pkgs; [
   unstable.opencode
   unstable.vscode
   unstable.ollama-cuda
+  unstable.llama-cpp-cuda
 ]

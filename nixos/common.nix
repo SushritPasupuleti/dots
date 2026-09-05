@@ -307,16 +307,18 @@ in
   virtualisation.docker = {
     enable = true;
     enableOnBoot = true;
-    rootless = {
-      enable = true;
-      setSocketVariable = true;
-    };
+    # Rootless Docker is intentionally disabled here so the normal
+    # `sushrit_lawliet` user in the `docker` group can access the daemon
+    # without needing `sudo`.
+    # rootless = {
+    #   enable = true;
+    #   setSocketVariable = true;
+    # };
     # enableNvidia is deprecated, use hardware.nvidia-container-toolkit.enable instead
   };
-  # users.extraGroups.docker.members = [ "sushrit_lawliet" ];
 
   ## Kubernetes
-  services.k3s.enable = false;
+  services.k3s.enable = true;
   services.k3s.role = "server";
   # services.k3s.docker = true;
   services.k3s.extraFlags = toString [
