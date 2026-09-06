@@ -1,20 +1,14 @@
 # Declare all settings and configuration options that are to be commonly used by all `hosts`.
-{
-  config,
-  pkgs,
-  lib,
-  unstable,
-  ...
-}:
+{ config, pkgs, lib, unstable, ... }:
 
 let
   # home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-24.11.tar.gz";
   openrgb-rules = builtins.fetchurl {
-    url = "https://gitlab.com/CalcProgrammer1/OpenRGB/-/raw/master/60-openrgb.rules";
+    url =
+      "https://gitlab.com/CalcProgrammer1/OpenRGB/-/raw/master/60-openrgb.rules";
   };
 
-in
-{
+in {
   imports = [
     # (import "${home-manager}/nixos")
     # (fetchTarball
@@ -27,6 +21,10 @@ in
   networking.networkmanager.enable = true;
 
   networking.hostName = "nixy-zangetsu"; # Define your hostname.
+
+  networking.extraHosts = ''
+    192.168.1.211 dashboard.homelab.home.arpa portainer.homelab.home.arpa stock-ez.homelab.home.arpa homeassistant.homelab.home.arpa ollama.homelab.home.arpa media.homelab.home.arpa plex.homelab.home.arpa netdata.homelab.home.arpa adguard.homelab.home.arpa torrent.homelab.home.arpa files.homelab.home.arpa
+  '';
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_GB.UTF-8";
@@ -121,8 +119,7 @@ in
   };
 
   ## Allow specific unfree packages
-  nixpkgs.config.allowUnfreePredicate =
-    pkg:
+  nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
       "nvidia-x11"
       "nvidia-settings"
@@ -153,15 +150,8 @@ in
   users.users.sushrit_lawliet = {
     isNormalUser = true;
     description = "Sushrit Pasupuleti";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-      "adbusers"
-      "libvirtd"
-      "docker"
-    ];
-    packages =
-      (import ./modules/shared-packages.nix { inherit pkgs unstable; })
+    extraGroups = [ "networkmanager" "wheel" "adbusers" "libvirtd" "docker" ];
+    packages = (import ./modules/shared-packages.nix { inherit pkgs unstable; })
       ++ (import ./modules/linux-packages.nix { inherit pkgs unstable; });
   };
 
@@ -201,7 +191,8 @@ in
     };
     # chromium.commandLineArgs =
     # "--enable-features=VaapiVideoEncoder,VaapiVideoDecoder";
-    chromium.commandLineArgs = "--enable-features=UseOzonePlatform --ozone-platform=wayland";
+    chromium.commandLineArgs =
+      "--enable-features=UseOzonePlatform --ozone-platform=wayland";
     packageOverrides = pkgs: {
       vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
       # unstable = import unstableTarball {
@@ -244,9 +235,7 @@ in
         # domain = "your.domain";
         # root_url = "https://your.domain/grafana/"; # Not needed if it is `https://your.domain/`
       };
-      security = {
-        secret_key = "SW2YcwTIb9zpOOhoPsMm";
-      };
+      security = { secret_key = "SW2YcwTIb9zpOOhoPsMm"; };
     };
   };
 
@@ -264,6 +253,7 @@ in
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
     virt-manager
+    nvidia-container-toolkit
     # unstable.lazygit
     qt5.qtwayland
   ];
@@ -283,10 +273,7 @@ in
 
   # Open ports in the firewall.
   networking.firewall.enable = true;
-  networking.firewall.allowedTCPPorts = [
-    6443
-    5000
-  ];
+  networking.firewall.allowedTCPPorts = [ 6443 5000 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
 
@@ -307,6 +294,9 @@ in
   virtualisation.docker = {
     enable = true;
     enableOnBoot = true;
+    # Explicitly enable the NVIDIA runtime for Docker. This is required for
+    # `docker run --gpus all` and for the CDI/NVIDIA runtime to be generated.
+    enableNvidia = true;
     # Rootless Docker is intentionally disabled here so the normal
     # `sushrit_lawliet` user in the `docker` group can access the daemon
     # without needing `sudo`.
@@ -314,7 +304,6 @@ in
     #   enable = true;
     #   setSocketVariable = true;
     # };
-    # enableNvidia is deprecated, use hardware.nvidia-container-toolkit.enable instead
   };
 
   ## Kubernetes

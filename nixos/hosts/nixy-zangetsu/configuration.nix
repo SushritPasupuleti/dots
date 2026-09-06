@@ -53,8 +53,10 @@
     # Likely to cause problems on laptops and with screen tearing if disabled.
     powerManagement.enable = true;
 
-    # Use the open source version of the kernel module
-    # Only available on driver 515.43.04+
+    # The NVIDIA kernel logs explicitly require the open kernel modules for this
+    # GPU. Using the proprietary module causes the driver to fail with
+    # "requires use of the NVIDIA open kernel modules" and prevents CDI/Docker
+    # GPU injection from working.
     open = true;
 
     # Enable the nvidia settings menu
@@ -63,6 +65,9 @@
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
+
+  hardware.nvidia-container-toolkit.enable = true;
+  virtualisation.containerd.enable = true;
 
   #fix blank screen with intel iGPU
   #boot.kernelParams = [ "module_blacklist=i915" ];
