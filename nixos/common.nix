@@ -23,7 +23,7 @@ in {
   networking.hostName = "nixy-zangetsu"; # Define your hostname.
 
   networking.extraHosts = ''
-    192.168.1.211 dashboard.homelab.home.arpa portainer.homelab.home.arpa stock-ez.homelab.home.arpa homeassistant.homelab.home.arpa ollama.homelab.home.arpa media.homelab.home.arpa plex.homelab.home.arpa netdata.homelab.home.arpa adguard.homelab.home.arpa torrent.homelab.home.arpa files.homelab.home.arpa
+    192.168.1.201 dashboard.homelab.home.arpa portainer.homelab.home.arpa stock-ez.homelab.home.arpa homeassistant.homelab.home.arpa ollama.homelab.home.arpa media.homelab.home.arpa plex.homelab.home.arpa netdata.homelab.home.arpa torrent.homelab.home.arpa files.homelab.home.arpa open-webui.homelab.home.arpa
   '';
 
   # Select internationalisation properties.
@@ -313,6 +313,67 @@ in {
   services.k3s.extraFlags = toString [
     # "--kubelet-arg=v=4" # Optionally add additional args to k3s
   ];
+
+  systemd.services.k3s-fix-stale-endpoint = {
+    description = "Repair stale k3s server endpoint references to the current LAN IP";
+    after = [ "network-online.target" ];
+    wants = [ "network-online.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      ExecStart = pkgs.writeShellScript "k3s-fix-stale-endpoint" ''
+        set -euo pipefail
+
+        K3S_TARGET_IP="$(hostname -I 2>/dev/null | awk '{print $1}' || true)"
+        if [ -z "$K3S_TARGET_IP" ]; then
+          K3S_TARGET_IP="$(ip route get 1.1.1.1 2>/dev/null | awk 'NR==1 {print $NF}' || true)"
+        fi
+
+        if [ -z "$K3S_TARGET_IP" ]; then
+          echo "Unable to detect LAN IP for k3s; skipping endpoint repair." >&2
+          exit 0
+        fi
+
+        K3S_SERVER_URL="https://$K3S_TARGET_IP:6443"
+        K3S_CONFIG_PATH="/etc/rancher/k3s/config.yaml"
+        mkdir -p /etc/rancher/k3s /etc/systemd/system/k3s.service.d
+
+        if [ -f "$K3S_CONFIG_PATH" ]; then
+          awk -v new_url="$K3S_SERVER_URL" '
+            BEGIN { saw_server = 0 }
+            {
+              if ($0 ~ /^server:/) {
+                print "server: " new_url
+                saw_server = 1
+                next
+              }
+              if ($0 ~ /^server =/ || $0 ~ /^K3S_URL=/ || $0 ~ /^K3S_SERVER=/) {
+                print "K3S_URL=" new_url
+                next
+              }
+              print
+            }
+            END {
+              if (!saw_server) {
+                print "server: " new_url
+              }
+            }
+          ' "$K3S_CONFIG_PATH" > "$K3S_CONFIG_PATH.tmp" && mv "$K3S_CONFIG_PATH.tmp" "$K3S_CONFIG_PATH"
+        else
+          printf 'server: %s\n' "$K3S_SERVER_URL" > "$K3S_CONFIG_PATH"
+        fi
+
+        printf '%s\n' '[Service]' "Environment=K3S_URL=$K3S_SERVER_URL" > /etc/systemd/system/k3s.service.d/99-k3s-fix-endpoint.conf
+
+        systemctl daemon-reload 2>/dev/null || true
+
+        if systemctl list-unit-files k3s.service >/dev/null 2>&1; then
+          systemctl restart k3s || systemctl restart k3s.service || true
+        fi
+      '';
+    };
+  };
 
   # Hyprland
   programs.hyprland.enable = true;

@@ -69,6 +69,10 @@
   hardware.nvidia-container-toolkit.enable = true;
   virtualisation.containerd.enable = true;
 
+  # Keep the NixOS module handling the runtime configuration and use a dedicated
+  # script to generate CDI metadata on demand after install/rebuilds. The custom
+  # systemd unit was too brittle in practice and could crash during switch.
+
   #fix blank screen with intel iGPU
   #boot.kernelParams = [ "module_blacklist=i915" ];
 
