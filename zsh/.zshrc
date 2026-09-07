@@ -286,7 +286,8 @@ case "$(uname)" in
         export JAVA_HOME="/run/current-system/sw"
         add_to_path "$HOME/apps"
         add_to_path "$PIP_HOME"
-        export DOCKER_HOST="$HOME/.docker/desktop/docker.sock"
+        # Docker Desktop override intentionally disabled for the NixOS daemon.
+        # export DOCKER_HOST="$HOME/.docker/desktop/docker.sock"
         # export MONGODB_CONFIG_OVERRIDE_NOFORK=1
         ;;
     Darwin)

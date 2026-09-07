@@ -67,11 +67,16 @@
   };
 
   hardware.nvidia-container-toolkit.enable = true;
-  virtualisation.containerd.enable = true;
+  virtualisation.containerd.enable = false;
 
-  # Keep the NixOS module handling the runtime configuration and use a dedicated
-  # script to generate CDI metadata on demand after install/rebuilds. The custom
-  # systemd unit was too brittle in practice and could crash during switch.
+  # Use the standard NixOS Docker runtime path for NVIDIA. The manual
+  # `nvidia-ctk cdi generate` flow is crashing on this host, and the module-managed
+  # setup is the stable default for Docker + NVIDIA on NixOS.
+  virtualisation.docker = {
+    enable = true;
+    enableOnBoot = true;
+    enableNvidia = true;
+  };
 
   #fix blank screen with intel iGPU
   #boot.kernelParams = [ "module_blacklist=i915" ];

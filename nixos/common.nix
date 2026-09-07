@@ -23,7 +23,7 @@ in {
   networking.hostName = "nixy-zangetsu"; # Define your hostname.
 
   networking.extraHosts = ''
-    192.168.1.201 dashboard.homelab.home.arpa portainer.homelab.home.arpa stock-ez.homelab.home.arpa homeassistant.homelab.home.arpa ollama.homelab.home.arpa media.homelab.home.arpa plex.homelab.home.arpa netdata.homelab.home.arpa torrent.homelab.home.arpa files.homelab.home.arpa open-webui.homelab.home.arpa
+    192.168.1.208 dashboard.homelab.home.arpa portainer.homelab.home.arpa stock-ez.homelab.home.arpa homeassistant.homelab.home.arpa open-webui.homelab.home.arpa ollama.homelab.home.arpa media.homelab.home.arpa plex.homelab.home.arpa grafana.homelab.home.arpa prometheus.homelab.home.arpa torrent.homelab.home.arpa files.homelab.home.arpa
   '';
 
   # Select internationalisation properties.
@@ -248,6 +248,9 @@ in {
     # QT_QPA_PLATFORMTHEME = "gtk2";
     # SDL_VIDEODRIVER = "wayland";
     MOZ_DBUS_REMOTE = "1";
+    # Point kubectl at the local k3s API by default instead of the old
+    # localhost:8080 fallback.
+    KUBECONFIG = "/etc/rancher/k3s/k3s.yaml";
   };
   environment.systemPackages = with pkgs; [
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
@@ -294,9 +297,9 @@ in {
   virtualisation.docker = {
     enable = true;
     enableOnBoot = true;
-    # Explicitly enable the NVIDIA runtime for Docker. This is required for
-    # `docker run --gpus all` and for the CDI/NVIDIA runtime to be generated.
-    enableNvidia = true;
+    # NVIDIA runtime is enabled via the dedicated toolkit option below; leave
+    # Docker itself on the standard runtime and do not enable the deprecated
+    # `enableNvidia` flag.
     # Rootless Docker is intentionally disabled here so the normal
     # `sushrit_lawliet` user in the `docker` group can access the daemon
     # without needing `sudo`.
@@ -309,13 +312,38 @@ in {
   ## Kubernetes
   services.k3s.enable = true;
   services.k3s.role = "server";
-  # services.k3s.docker = true;
-  services.k3s.extraFlags = toString [
-    # "--kubelet-arg=v=4" # Optionally add additional args to k3s
+  # Use the Docker backend via the supported k3s CLI flag. The old
+  # `services.k3s.docker` option is no longer supported in current nixpkgs.
+  services.k3s.extraFlags = [
+    "--docker"
   ];
 
+  systemd.services.k3s-fix-kubeconfig-perms = {
+    description = "Repair K3s kubeconfig permissions so kubectl can read it";
+    after = [ "k3s.service" ];
+    wants = [ "k3s.service" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      ExecStart = pkgs.writeShellScript "k3s-fix-kubeconfig-perms" ''
+        set -euo pipefail
+        K3S_KUBECONFIG="/etc/rancher/k3s/k3s.yaml"
+        if [ -f "$K3S_KUBECONFIG" ]; then
+          chown root:wheel "$K3S_KUBECONFIG"
+          chmod 640 "$K3S_KUBECONFIG"
+          echo "Fixed K3s kubeconfig permissions: $K3S_KUBECONFIG"
+        else
+          echo "K3s kubeconfig not found at $K3S_KUBECONFIG" >&2
+          exit 1
+        fi
+      '';
+    };
+  };
+
   systemd.services.k3s-fix-stale-endpoint = {
-    description = "Repair stale k3s server endpoint references to the current LAN IP";
+    description =
+      "Repair stale k3s server endpoint references to the current LAN IP";
     after = [ "network-online.target" ];
     wants = [ "network-online.target" ];
     wantedBy = [ "multi-user.target" ];
