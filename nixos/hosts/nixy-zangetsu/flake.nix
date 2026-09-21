@@ -5,6 +5,9 @@
     # NixOS official package source, using the nixos-26.05 branch here
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    # gotta have my genshin impacted somehow
+    aagl.url = "github:ezKEa/aagl-gtk-on-nix";
+    aagl.inputs.nixpkgs.follows = "nixpkgs";
 
     # niri = {
     #   url = "github:sodiboo/niri-flake";
@@ -28,6 +31,7 @@
       self,
       nixpkgs,
       unstable,
+      aagl,
       ...
     }@inputs:
     let
@@ -38,6 +42,7 @@
       nixosConfigurations.nixy-zangetsu = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
+          inherit inputs;
           unstable = import unstable {
             inherit system;
             config.allowUnfree = true;
