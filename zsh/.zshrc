@@ -526,3 +526,14 @@ weather() {
 
 # Print a welcome message (optional)
 # echo "Welcome to ZSH with Oh My Zsh!"
+
+# herdr-shell-progress
+() {
+  local f=(~/.config/herdr/plugins/github/bayoudhi.shell-progress-*/shell/init.zsh(Nom))
+  (( $#f )) && source $f[1]
+}
+
+# herdr-automatic-rename
+for _f in ${HOME}/.config/herdr/plugins/github/herdr-automatic-rename-*/shell/hook.zsh(N); do
+  source $_f; break
+done

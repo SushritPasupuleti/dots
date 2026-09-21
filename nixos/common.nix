@@ -22,9 +22,10 @@ in {
 
   networking.hostName = "nixy-zangetsu"; # Define your hostname.
 
-  networking.extraHosts = ''
-    192.168.1.208 dashboard.homelab.home.arpa portainer.homelab.home.arpa stock-ez.homelab.home.arpa homeassistant.homelab.home.arpa open-webui.homelab.home.arpa ollama.homelab.home.arpa media.homelab.home.arpa plex.homelab.home.arpa grafana.homelab.home.arpa prometheus.homelab.home.arpa torrent.homelab.home.arpa files.homelab.home.arpa
-  '';
+  # networking.extraHosts = ''
+  #   192.168.1.208 dashboard.homelab.home.arpa portainer.homelab.home.arpa stock-ez.homelab.home.arpa homeassistant.homelab.home.arpa open-webui.homelab.home.arpa openserp.homelab.home.arpa ollama.homelab.home.arpa media.homelab.home.arpa plex.homelab.home.arpa grafana.homelab.home.arpa prometheus.homelab.home.arpa torrent.homelab.home.arpa files.homelab.home.arpa hermes.homelab.home.arpa hermes-dashboard.homelab.home.arpa
+
+  # '';
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_GB.UTF-8";
@@ -176,8 +177,8 @@ in {
   #   home.stateVersion = "23.05";
   # };
 
-  programs.fish.enable = true;
-  users.defaultUserShell = pkgs.fish;
+  programs.zsh.enable = true;
+  users.defaultUserShell = pkgs.zsh;
 
   nixpkgs.config = {
     allowUnfree = true;

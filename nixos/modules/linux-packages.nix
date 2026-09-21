@@ -123,6 +123,9 @@ with pkgs; [
   unstable.microsoft-edge
   unstable.neovim
   unstable.opencode
+  unstable.herdr
+  unstable.pi-coding-agent
+  unstable.github-copilot-cli
   unstable.vscode
   unstable.ollama-cuda
   unstable.llama-cpp-cuda

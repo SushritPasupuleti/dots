@@ -26,4 +26,8 @@ with pkgs; [
   snyk
   yq
   zig
+  herdr
+  pi-coding-agent
+  github-copilot-cli
+  opencode
 ]

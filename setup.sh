@@ -56,7 +56,7 @@ if [[ "$OSTYPE" =~ ^darwin ]] || [[ "$OSTYPE" =~ ^linux ]]; then
 
     info "Creating Symlinks..."
 
-    # Ensure .config directory exists
+    # Ensure config directories exist
     mkdir -p ~/.config
 
     # Neovim
@@ -149,6 +149,9 @@ if [[ "$OSTYPE" =~ ^darwin ]] || [[ "$OSTYPE" =~ ^linux ]]; then
     # Opencode
     mkdir -p ~/.config/opencode
     create_symlink "$(pwd -P)/opencode/opencode.json" ~/.config/opencode/opencode.json
+
+    # Herdr
+    create_symlink "$(pwd -P)/herdr" ~/.config/herdr
 
     success "Symlinks created."
 
