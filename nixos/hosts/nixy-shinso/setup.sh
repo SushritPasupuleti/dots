@@ -36,11 +36,11 @@ sudo cp /etc/nixos/hardware-configuration.nix $(pwd -P)/nixos/backup/hardware-co
 echo $(info "Creating Symlinks...")
 
 sudo rm -rf /etc/nixos/configuration.nix
-sudo rm -rf /etc/nixos/hardware-configuration.nix
+# sudo rm -rf /etc/nixos/hardware-configuration.nix
 sudo rm -rf /etc/nixos/common.nix
 
 sudo ln -s "$(pwd -P)"/nixos/hosts/nixy-shinso/configuration.nix /etc/nixos/configuration.nix
-sudo ln -s "$(pwd -P)"/nixos/hosts/nixy-shinso/hardware-configuration.nix /etc/nixos/hardware-configuration.nix
+# sudo ln -s "$(pwd -P)"/nixos/hosts/nixy-shinso/hardware-configuration.nix /etc/nixos/hardware-configuration.nix
 sudo ln -s "$(pwd -P)"/nixos/common.nix /etc/nixos/common.nix
 
 echo $(success "Done!")
