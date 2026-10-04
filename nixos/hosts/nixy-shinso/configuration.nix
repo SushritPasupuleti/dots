@@ -48,20 +48,29 @@
       fastfetch
       fd
       fzf
+      gping
       gh
       git
       htop
       jq
       lazydocker
+      # lazykube
       lazygit
       neovim
       nixfmt
       ripgrep
       tmux
+      zellij
       tree
       unzip
       vim
       wget
+      go
+      python314
+      python314Packages.pip
+      pipx
+      poetry
+      uv
     ];
   };
 
@@ -72,6 +81,7 @@
     curl
     htop
     btop
+    openssl
   ];
 
   programs.mtr.enable = true;
@@ -113,7 +123,14 @@
         ];
         bootstrap_dns = [ "1.1.1.1" "1.0.0.1" ];
         rewrites = [
+          { domain = "stock-ez.homelab.home.arpa"; answer = "192.168.0.86"; }
           { domain = "dashboard.homelab.home.arpa"; answer = "192.168.0.86"; }
+          { domain = "portainer.homelab.home.arpa"; answer = "192.168.0.86"; }
+          { domain = "homeassistant.homelab.home.arpa"; answer = "192.168.0.86"; }
+          { domain = "open-webui.homelab.home.arpa"; answer = "192.168.0.86"; }
+          { domain = "openserp.homelab.home.arpa"; answer = "192.168.0.86"; }
+          { domain = "hermes.homelab.home.arpa"; answer = "192.168.0.86"; }
+          { domain = "hermes-dashboard.homelab.home.arpa"; answer = "192.168.0.86"; }
           { domain = "unsloth.homelab.home.arpa"; answer = "192.168.0.86"; }
           { domain = "unsloth-studio.homelab.home.arpa"; answer = "192.168.0.86"; }
           { domain = "ollama.homelab.home.arpa"; answer = "192.168.0.86"; }
@@ -121,11 +138,10 @@
           { domain = "native-vllm.homelab.home.arpa"; answer = "192.168.0.86"; }
           { domain = "llama-server.homelab.home.arpa"; answer = "192.168.0.86"; }
           { domain = "llama-server-native.homelab.home.arpa"; answer = "192.168.0.86"; }
-          { domain = "open-webui.homelab.home.arpa"; answer = "192.168.0.86"; }
-          { domain = "openserp.homelab.home.arpa"; answer = "192.168.0.86"; }
-          { domain = "hermes.homelab.home.arpa"; answer = "192.168.0.86"; }
-          { domain = "hermes-dashboard.homelab.home.arpa"; answer = "192.168.0.86"; }
-          { domain = "homeassistant.homelab.home.arpa"; answer = "192.168.0.86"; }
+          { domain = "grafana.homelab.home.arpa"; answer = "192.168.0.86"; }
+          { domain = "prometheus.homelab.home.arpa"; answer = "192.168.0.86"; }
+          { domain = "torrent.homelab.home.arpa"; answer = "192.168.0.86"; }
+          { domain = "files.homelab.home.arpa"; answer = "192.168.0.86"; }
           { domain = "media.homelab.home.arpa"; answer = "192.168.0.86"; }
           { domain = "plex.homelab.home.arpa"; answer = "192.168.0.86"; }
         ];

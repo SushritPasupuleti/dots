@@ -144,7 +144,8 @@ if [[ "$OSTYPE" =~ ^darwin ]] || [[ "$OSTYPE" =~ ^linux ]]; then
     create_symlink "$(pwd -P)/sioyek" ~/.config/sioyek
 
     # Zellij
-    create_symlink "$(pwd -P)/zellij" ~/.config/zellij
+    create_symlink "$(pwd -P)/zellij/config.kdl" ~/.config/zellij/config.kdl
+    create_symlink "$(pwd -P)/zellij/layouts" ~/.config/zellij/layouts
 
     # Opencode
     mkdir -p ~/.config/opencode

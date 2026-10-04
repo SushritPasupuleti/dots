@@ -115,4 +115,5 @@ with pkgs; [
   unstable.lazygit
   unstable.starship
   unstable.tree-sitter
+  lazyworktree
 ]

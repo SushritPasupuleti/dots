@@ -1,0 +1,16 @@
+layout {
+  tab name="dashboard" {
+    pane split_direction="Vertical" {
+      pane split_direction="Horizontal" {
+        pane command="fastfetch"
+        pane command="btop"
+      }
+      pane split_direction="Horizontal" {
+        pane command="gping" {
+          args "google.com"
+        }
+        pane
+      }
+    }
+  }
+}
