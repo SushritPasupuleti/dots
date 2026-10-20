@@ -1,0 +1,14 @@
+layout {
+  tab name="F1" {
+    pane split_direction="Vertical" {
+      pane split_direction="Horizontal" {
+        pane command="undercutf1"
+        pane command="undercutf1"
+      }
+      pane split_direction="Horizontal" {
+        pane command="undercutf1"
+        pane
+      }
+    }
+  }
+}

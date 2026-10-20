@@ -46,6 +46,7 @@
       docker-compose
       eza
       fastfetch
+      starship
       fd
       fzf
       gping
@@ -71,6 +72,7 @@
       pipx
       poetry
       uv
+      undercut-f1
     ];
   };
 
